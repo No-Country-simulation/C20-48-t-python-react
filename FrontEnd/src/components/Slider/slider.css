@@ -1,0 +1,16 @@
+.swiper-pagination-bullet {
+  background-color: #cddc39; /* Color personalizado */
+  opacity: 0.6;
+  transition: opacity 0.3s;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #ffffff; /* Color cuando está activo */
+  opacity: 1;
+}
+
+/* Paginación (bullets) */
+.swiper-pagination {
+  position: relative; /* Para que se posicione en relación con el contenedor */
+  margin-top: 30px; /* Ajusta la distancia del contenedor */
+}
