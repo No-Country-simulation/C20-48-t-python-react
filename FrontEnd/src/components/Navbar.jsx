@@ -13,8 +13,10 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
+import { Link } from "react-router-dom";
+import UserIcon from "./UserIcon";
 
-const pages = ["Home", "Mis recetas", "Favoritos"];
+const menu = ["Home", "Mis recetas", "Favoritos"];
 
 function ResponsiveAppBar({ toggleTheme }) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -34,6 +36,7 @@ function ResponsiveAppBar({ toggleTheme }) {
           <RestaurantMenuIcon
             sx={{ display: { xs: "none", md: "flex", color: "white" }, mr: 1 }}
           />
+            <Link to="/">
           <Typography
             variant="h6"
             noWrap
@@ -51,6 +54,7 @@ function ResponsiveAppBar({ toggleTheme }) {
           >
             RECETAPP
           </Typography>
+            </Link>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
@@ -79,7 +83,7 @@ function ResponsiveAppBar({ toggleTheme }) {
               onClose={handleCloseNavMenu}
               sx={{ display: { xs: "block", md: "none" } }}
             >
-              {pages.map((page) => (
+              {menu.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                   <Typography sx={{ textAlign: "center" }}>{page}</Typography>
                 </MenuItem>
@@ -89,6 +93,7 @@ function ResponsiveAppBar({ toggleTheme }) {
           <RestaurantMenuIcon
             sx={{ display: { xs: "flex", md: "none", color: "white" }, mr: 1 }}
           />
+          <Link to="/">
           <Typography
             variant="h5"
             noWrap
@@ -107,8 +112,9 @@ function ResponsiveAppBar({ toggleTheme }) {
           >
             RECETAPP
           </Typography>
+            </Link>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
+            {menu.map((page) => (
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
@@ -118,6 +124,10 @@ function ResponsiveAppBar({ toggleTheme }) {
               </Button>
             ))}
           </Box>
+
+            <Link to="/login">
+              <UserIcon />
+            </Link>
           <Box
             onClick={toggleTheme}
             sx={{
