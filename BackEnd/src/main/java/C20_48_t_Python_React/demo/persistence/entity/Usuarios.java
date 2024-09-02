@@ -3,8 +3,11 @@ package C20_48_t_Python_React.demo.persistence.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.List;
 
 
@@ -16,7 +19,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "usuarios")
-public class Usuarios {
+public class Usuarios implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -52,4 +55,44 @@ public class Usuarios {
     private List<Comentarios> comentarios;
     //Une los comentarios con el usuario
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "rol", length = 20)
+    private Rol rol;
+
+    //Implementacion de la clase UserDetails de Spring Security
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    @Override
+    public String getPassword() {
+        return null;
+    }
+
+    @Override
+    public String getUsername() {
+        return null;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
+    }
 }
