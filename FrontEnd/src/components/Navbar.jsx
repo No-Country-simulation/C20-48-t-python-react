@@ -93,7 +93,7 @@ function ResponsiveAppBar({ toggleTheme }) {
           <RestaurantMenuIcon
             sx={{ display: { xs: "flex", md: "none", color: "white" }, mr: 1 }}
           />
-          <Link to="/">
+          <Link to="/" style={{ textDecoration: "none" }}>
           <Typography
             variant="h5"
             noWrap
@@ -125,9 +125,8 @@ function ResponsiveAppBar({ toggleTheme }) {
             ))}
           </Box>
 
-            <Link to="/login">
+
               <UserIcon />
-            </Link>
           <Box
             onClick={toggleTheme}
             sx={{
