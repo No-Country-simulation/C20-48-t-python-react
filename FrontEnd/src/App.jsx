@@ -1,16 +1,17 @@
-import Navbar from "./components/Navbar";
-import Container from "@mui/material/Container";
-import SearchBar from "./components/SearchBar";
-import FloatingAB from "./components/FloatingAB";
-import Typography from "@mui/material/Typography";
-import Hero from "./components/Hero";
-import Footer from "./components/Footer";
-import DisplayCategories from "./components/DisplayCategories";
-import Slider from "./components/Slider/Slider";
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { darkTheme, lightTheme } from "./components/UI/theme";
 import { useState } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Home from "./pages/Home";
+import RecipeDetail from "./pages/RecipeDetail";
+import Register from "./pages/Register";
+import Login from "./pages/Login";
+import Profile from "./pages/Profile";
+import RecipeEdit from "./pages/RecipeEdit";
+
+
 
 export default function App() {
   const [theme, setTheme] = useState(darkTheme);
@@ -24,19 +25,17 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Navbar toggleTheme={toggleTheme} />
-      <Hero />
-      <Container maxWidth={"xl"} sx={{ mt: 4 }}>
-        <Typography sx={{ paddingBlock: 2 }} variant="h4">
-          Search for recipes
-        </Typography>
-        <SearchBar />
-        <Slider />
-        <DisplayCategories category="Recetas" />
-        <DisplayCategories category="Fitness" />
-        <FloatingAB></FloatingAB>
-      </Container>
-      <Footer />
+      <BrowserRouter>
+        <Navbar toggleTheme={toggleTheme} />
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route path="/detalle-receta" element={<RecipeDetail />} />
+          <Route path="/editar-receta" element={<RecipeEdit />} />
+          <Route path="/login" element={<Login/>} />
+          <Route path="/registro" element={<Register/>} />
+          <Route path="/perfil" element={<Profile/>} />
+        </Routes>
+      </BrowserRouter>
     </ThemeProvider>
   );
 }
