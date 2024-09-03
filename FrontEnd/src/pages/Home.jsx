@@ -3,7 +3,7 @@ import Typography from "@mui/material/Typography";
 import SearchBar from "../components/SearchBar";
 import FloatingAB from "../components/FloatingAB";
 import Hero from "../components/Hero";
-import { Slider } from "@mui/material";
+import Slider from "../components/Slider/Slider";
 import DisplayCategories from "../components/DisplayCategories";
 import Footer from "../components/Footer";
 

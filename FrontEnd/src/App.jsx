@@ -29,11 +29,11 @@ export default function App() {
         <Navbar toggleTheme={toggleTheme} />
         <Routes>
           <Route exact path="/" element={<Home />} />
-          <Route path="/DetalleReceta" element={<RecipeDetail />} />
-          <Route path="/EditarReceta" element={<RecipeEdit />} />
-          <Route path="/Login" element={<Login/>} />
-          <Route path="/Registro" element={<Register/>} />
-          <Route path="/Perfil" element={<Profile/>} />
+          <Route path="/detalle-receta" element={<RecipeDetail />} />
+          <Route path="/editar-receta" element={<RecipeEdit />} />
+          <Route path="/login" element={<Login/>} />
+          <Route path="/registro" element={<Register/>} />
+          <Route path="/perfil" element={<Profile/>} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

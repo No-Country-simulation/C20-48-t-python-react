@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 function UserIcon() {
   return (
     <>
-      <Link to="/Login">
+      <Link to="/login">
         <AccountCircleIcon
         sx={{
           color:"primary",
