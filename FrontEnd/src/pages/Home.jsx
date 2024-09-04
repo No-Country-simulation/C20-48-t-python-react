@@ -6,6 +6,7 @@ import Hero from "../components/Hero";
 import Slider from "../components/Slider/Slider";
 import DisplayCategories from "../components/DisplayCategories";
 import Footer from "../components/Footer";
+import CategoriesBar from "../components/UI/CategoriesBar";
 
 function Home() {
   return (
@@ -16,6 +17,7 @@ function Home() {
           Search for recipes
         </Typography>
         <SearchBar />
+        <CategoriesBar />
         <Slider />
         <DisplayCategories category="Recetas" />
         <DisplayCategories category="Fitness" />
