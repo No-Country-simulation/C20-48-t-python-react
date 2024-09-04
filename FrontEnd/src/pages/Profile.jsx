@@ -1,18 +1,17 @@
-import { Avatar, TextField, Button, Container, Box } from '@mui/material';
+import { Avatar, TextField, Button, Container, Box, Typography } from '@mui/material';
 function Profile() {
     let userName = "Hola Mundo";
   return (
     <>
      <Container maxWidth="sm">
       <Box display="flex" flexDirection="column" alignItems="center" mt={4}>
+        <Box>
         <Avatar sx={{ width: 100, height: 100 }} />
-        <TextField
-          label={userName || "Nombre de usuario"}
-          variant="outlined"
-          fullWidth
-          margin="normal"
-          disabled
-          />
+        
+        </Box>
+        <Typography variant="h5" sx={{ mt: 2 }}>
+        {userName || "Nombre de usuario"}
+        </Typography>
         <TextField
           label="Cambiar contraseña"
           type="password"
