@@ -36,26 +36,26 @@ function ResponsiveAppBar({ toggleTheme }) {
           <RestaurantMenuIcon
             sx={{ display: { xs: "none", md: "flex", color: "white" }, mr: 1 }}
           />
-            <Link to="/">
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".1rem",
-              color: "white",
-              textDecoration: "none",
-            }}
-          >
-            RECETAPP
-          </Typography>
-            </Link>
-
+          <Link to="/" style={{ textDecoration: "none" }}>
+            <Typography
+              variant="h6"
+              noWrap
+              component="a"
+              href="#app-bar-with-responsive-menu"
+              sx={{
+                mr: 2,
+                display: { xs: "none", md: "flex" },
+                fontFamily: "monospace",
+                fontWeight: 700,
+                letterSpacing: ".1rem",
+                color: "white",
+                textDecoration: "none",
+              }}
+            >
+              RECETAPP
+            </Typography>
+          </Link>
+          {/* Start Mobile Menu */}
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
@@ -90,29 +90,30 @@ function ResponsiveAppBar({ toggleTheme }) {
               ))}
             </Menu>
           </Box>
+          {/* End Mobile Menu */}
           <RestaurantMenuIcon
             sx={{ display: { xs: "flex", md: "none", color: "white" }, mr: 1 }}
           />
           <Link to="/" style={{ textDecoration: "none" }}>
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
-            sx={{
-              mr: 2,
-              display: { xs: "flex", md: "none" },
-              flexGrow: 1,
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".1rem",
-              textDecoration: "none",
-              color: "white",
-            }}
-          >
-            RECETAPP
-          </Typography>
-            </Link>
+            <Typography
+              variant="h5"
+              noWrap
+              component="a"
+              href="#app-bar-with-responsive-menu"
+              sx={{
+                mr: 2,
+                display: { xs: "flex", md: "none" },
+                flexGrow: 1,
+                fontFamily: "monospace",
+                fontWeight: 700,
+                letterSpacing: ".1rem",
+                textDecoration: "none",
+                color: "white",
+              }}
+            >
+              RECETAPP
+            </Typography>
+          </Link>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {menu.map((page) => (
               <Button
@@ -124,9 +125,9 @@ function ResponsiveAppBar({ toggleTheme }) {
               </Button>
             ))}
           </Box>
-
-
-              <UserIcon />
+          <Box>
+            <UserIcon />
+          </Box>
           <Box
             onClick={toggleTheme}
             sx={{

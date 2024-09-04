@@ -1,6 +1,6 @@
 import Chip from "@mui/material/Chip";
 import Container from "@mui/material/Container";
-import DoneIcon from '@mui/icons-material/Done';
+import DoneIcon from "@mui/icons-material/Done";
 import { useState } from "react";
 
 export default function CategoriesBar() {
@@ -31,8 +31,8 @@ export default function CategoriesBar() {
 
   return (
     <Container
-    disableGutters
-    maxWidth={"xl"}
+      disableGutters
+      maxWidth={"xl"}
       sx={{
         display: "flex",
         flexWrap: "nowrap",
@@ -52,10 +52,14 @@ export default function CategoriesBar() {
         <Chip
           label={category}
           key={Math.random()}
-          sx={{ cursor: 'pointer' }}
+          sx={{ cursor: "pointer" }}
           onClick={() => handleClick(category)}
           variant={selectedCategory === category ? "filled" : "outlined"}
-          onDelete={selectedCategory === category ? () => setSelectedCategory(null) : undefined}
+          onDelete={
+            selectedCategory === category
+              ? () => setSelectedCategory(null)
+              : undefined
+          }
           deleteIcon={selectedCategory === category ? <DoneIcon /> : null}
         />
       ))}
