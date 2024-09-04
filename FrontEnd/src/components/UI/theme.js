@@ -35,13 +35,13 @@ export const lightTheme = createTheme({
       light: "#757ce8",
       main: "#2a3635",
       dark: lime[900],
-      contrastText: "white",
+      contrastText: "#ffffff",
     },
     secondary: {
       light: "#ff7961",
       main: "#3d4847",
       dark: "#ba000d",
-      contrastText: "black",
+      contrastText: "#000",
     },
     background: {
       default: "#DBD8B3",
