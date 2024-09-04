@@ -50,4 +50,7 @@ public class Recetas {
 
     @OneToMany(mappedBy = "recetas")
     private List<Comentarios> comentarios;
+    
+    @Transient
+    private Double promedioPuntuacion;
 }
