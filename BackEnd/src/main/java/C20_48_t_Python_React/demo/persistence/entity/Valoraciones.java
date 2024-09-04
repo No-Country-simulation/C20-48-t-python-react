@@ -1,6 +1,8 @@
 package C20_48_t_Python_React.demo.persistence.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -23,6 +25,8 @@ public class Valoraciones {
     private Recetas receta;
 
     @Column(nullable = false)
+    @Min(1)
+    @Max(5)
     private Integer puntuacion;
 
     @Column(name = "fecha_valoracion", nullable = false)
