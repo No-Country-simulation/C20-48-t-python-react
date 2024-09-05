@@ -1,18 +1,36 @@
-import { Link } from "react-router-dom";
-import { TextField } from "@mui/material" 
-import { Button } from "@mui/material"
-import "./Pages.css";
-function Register() {
-return (<>
+import { TextField, Button, Typography, Container, Box} from "@mui/material"
+import "./LoginRegister.css";
+function Register() { return (<>
 
-    <div className="loginRegisterCard">
-    <div><h2>Registrate</h2></div>
-    <div><TextField id="standard-basic" label="Email" variant="standard" /></div>
-    <div><TextField id="standard-basic" label="Contraseña" variant="standard" /></div>
-    <div><Button variant="contained">Registrate</Button></div>
-    </div>
+  <Container maxWidth="sm">
+    <Box display="flex" flexDirection="column" alignItems="center" mt={4}>
+      <Typography variant="h5">Registrarse</Typography>
+        <TextField
+          label="Email"
+          type="password"
+          variant="outlined"
+          fullWidth
+          margin="normal"
+        />
+        <TextField 
+          label="Contraseña"
+          type="password"
+          variant="outlined"
+          fullWidth
+          margin="normal"
+        />
+        <TextField 
+          label="Repitir contraseña"
+          type="password"
+          variant="outlined"
+          fullWidth
+          margin="normal"
+        />
+        <p></p>
+        <Button variant="contained">Registrate</Button>        
+    </Box>
+  </Container>
+    
+</>)}
 
-</>)
-}
-
-export default Register;
+export default Register
