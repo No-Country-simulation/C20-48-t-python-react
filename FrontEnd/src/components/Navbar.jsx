@@ -16,6 +16,7 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import UserIcon from "./UserIcon";
+import LoginBtn from "./LoginBtn.jsx";
 
 const menu = ["Home", "Mis recetas", "Favoritos"];
 
@@ -125,6 +126,9 @@ function ResponsiveAppBar({ toggleTheme, theme }) {
                 {page}
               </Button>
             ))}
+
+            <LoginBtn/> 
+
           </Box>
           <Box>
             <UserIcon />

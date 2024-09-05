@@ -91,6 +91,8 @@ function Register() {
           helperText={confirmPasswordError}
         />
         <p></p>
+        <p>¿Ya tienes una cuenta? <a href="/login">Inicia sesión</a></p>
+        <p></p>
         <Button variant="contained" onClick={handleSubmit}>
           Regístrate
         </Button>

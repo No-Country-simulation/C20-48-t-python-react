@@ -66,6 +66,8 @@ function Login() {
           helperText={passwordError}
         />
         <p></p>
+        <p>¿No tienes una cuenta? <a href="/registro">Registraté</a></p>
+        <p></p>
         <Button variant="contained" onClick={handleSubmit}>
           Inicia sesión
         </Button>
