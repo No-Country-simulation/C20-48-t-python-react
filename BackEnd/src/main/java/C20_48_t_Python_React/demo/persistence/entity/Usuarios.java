@@ -55,9 +55,8 @@ public class Usuarios implements UserDetails {
     private List<Comentarios> comentarios;
     //Une los comentarios con el usuario
 
-    @Enumerated(EnumType.STRING)
     @Column(name = "rol", length = 20)
-    private Rol rol;
+    private String rol;
 
     //Implementacion de la clase UserDetails de Spring Security
 

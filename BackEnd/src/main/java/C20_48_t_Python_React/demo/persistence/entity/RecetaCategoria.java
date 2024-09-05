@@ -8,15 +8,18 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "receta_categorias")
-public class RecetaCategoria {
 
-    @Id
+public class RecetaCategoria  {
+    @EmbeddedId
+    private RecetaCategoriaId id;
+
     @ManyToOne
+    @MapsId("recetaId")
     @JoinColumn(name = "receta_id", nullable = false)
     private Recetas recetas;
 
-    @Id
     @ManyToOne
+    @MapsId("categoriaId")
     @JoinColumn(name = "categoria_id", nullable = false)
     private Categorias categorias;
 }
