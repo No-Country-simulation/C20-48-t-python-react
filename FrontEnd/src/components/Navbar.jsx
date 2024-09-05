@@ -2,6 +2,7 @@ import * as React from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import ContrastIcon from "@mui/icons-material/Contrast";
 import RestaurantMenuIcon from "@mui/icons-material/RestaurantMenu";
+import Brightness6Icon from "@mui/icons-material/Brightness6";
 import {
   AppBar,
   Box,
@@ -18,7 +19,7 @@ import UserIcon from "./UserIcon";
 
 const menu = ["Home", "Mis recetas", "Favoritos"];
 
-function ResponsiveAppBar({ toggleTheme }) {
+function ResponsiveAppBar({ toggleTheme, theme }) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
 
   const handleOpenNavMenu = (event) => {
@@ -139,15 +140,27 @@ function ResponsiveAppBar({ toggleTheme }) {
               cursor: "pointer",
             }}
           >
-            <ContrastIcon
-              sx={{
-                display: "flex",
-                scale: 0.8,
-                alignItems: "center",
-                justifyContent: "center",
-                color: "text.primary",
-              }}
-            />
+            {theme === "darkTheme" ? (
+              <Brightness6Icon
+                sx={{
+                  display: "flex",
+                  scale: 0.8,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "text.primary",
+                }}
+              />
+            ) : (
+              <ContrastIcon
+                sx={{
+                  display: "flex",
+                  scale: 0.8,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: "text.primary",
+                }}
+              />
+            )}
           </Box>
         </Toolbar>
       </Container>

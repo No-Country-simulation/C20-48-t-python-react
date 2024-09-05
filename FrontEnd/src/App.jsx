@@ -24,7 +24,7 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <BrowserRouter>
-        <Navbar toggleTheme={toggleTheme} />
+        <Navbar toggleTheme={toggleTheme}/>
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route path="/detalle-receta" element={<RecipeDetail />} />

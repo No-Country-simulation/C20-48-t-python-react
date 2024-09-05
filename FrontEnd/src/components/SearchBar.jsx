@@ -10,7 +10,7 @@ export default function SearchBar() {
       disableGutters
       sx={{
         display: "flex",
-        flexWrap: "wrap",
+        flexWrap: "nowrap",
         gap: 2,
         margin: 0,
         padding: 0,
@@ -25,7 +25,7 @@ export default function SearchBar() {
             sm: "30%",
           },
         }}
-        placeholder="Search for products"
+        placeholder="Buscar recetas..."
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
@@ -35,8 +35,9 @@ export default function SearchBar() {
         }}
       />
 
-      <AutoCompleteSelection field="Etiqueta" />
+      <AutoCompleteSelection field="Categoria" />
       <AutoCompleteSelection field="Ingrediente" />
+      <AutoCompleteSelection field="Dificultad" />
     </Container>
   );
 }
