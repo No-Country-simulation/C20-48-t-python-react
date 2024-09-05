@@ -11,11 +11,19 @@ export default function SearchBar() {
       disableGutters
       sx={{
         display: "flex",
-        flexWrap: "wrap",
-        gap: 2,
+        flexWrap: {
+          xs: "wrap",
+          sm: "wrap",
+          md: "nowrap",
+        },
+        gap: 1,
         margin: 0,
         padding: 0,
-        justifyContent: "center",
+        justifyContent: {
+          xs: "center",
+          sm: "center",
+          md: "flex-start",
+        },
         alignItems: "center",
       }}
     >
@@ -27,16 +35,24 @@ export default function SearchBar() {
           gap: 1,
           margin: 0,
           padding: 0,
-          justifyContent: "center",
+          justifyContent: {
+            xs: "center",
+            sm: "center",
+            md: "stretch",
+          },
           alignItems: "center",
+          width: {
+            xs: "90%",
+            sm: "80%",
+            md: "60%",
+            lg: "50%",
+            xl: "40%",
+          },
         }}
       >
         <TextField
           sx={{
-            width: {
-              xs: "100%",
-              sm: "30%",
-            },
+            width: "100%",
           }}
           placeholder="Buscar recetas..."
           InputProps={{
@@ -59,8 +75,15 @@ export default function SearchBar() {
           gap: 1,
           margin: 0,
           padding: 0,
-          justifyContent: "center",
+          justifyContent: "space-evenly",
           alignItems: "center",
+          width: {
+            xs: "100%",
+            sm: "80%",
+            md: "60%",
+            lg: "50%",
+            xl: "40%",
+          },
         }}
       >
         <AutoCompleteSelection field="Categoria" />
