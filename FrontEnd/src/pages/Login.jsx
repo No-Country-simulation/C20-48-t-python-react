@@ -1,5 +1,4 @@
 import { TextField, Button, Typography, Container, Box} from "@mui/material"
-import "./LoginRegister.css";
 function Login() { return (<>
 
   <Container maxWidth="sm">
