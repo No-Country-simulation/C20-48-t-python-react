@@ -1,9 +1,11 @@
 import Container from "@mui/material/Container";
 
 export default function Footer() {
+  const currentYear = new Date().getFullYear(); // Obtener el año actual
+
   return (
     <Container
-      maxWidth={"false"}
+      maxWidth={false}
       sx={{
         margin: 0,
         display: "flex",
@@ -12,7 +14,7 @@ export default function Footer() {
         padding: 2,
       }}
     >
-      <p>© 2022 RecetApp</p>
+      <p>© {currentYear} RecetApp</p> {/* Año dinámico */}
     </Container>
   );
 }

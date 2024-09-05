@@ -3,6 +3,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import SearchIcon from "@mui/icons-material/Search";
 import AutoCompleteSelection from "./AutoCompleteSelection";
 import Container from "@mui/material/Container";
+import FilterIcon from "./UI/FilterIcon";
 
 export default function SearchBar() {
   return (
@@ -14,29 +15,58 @@ export default function SearchBar() {
         gap: 2,
         margin: 0,
         padding: 0,
-        justifyContent: "start",
+        justifyContent: "center",
         alignItems: "center",
       }}
     >
-      <TextField
+      <Container
+        disableGutters
         sx={{
-          width: {
-            xs: "100%",
-            sm: "30%",
-          },
+          display: "flex",
+          flexWrap: "nowrap",
+          gap: 1,
+          margin: 0,
+          padding: 0,
+          justifyContent: "center",
+          alignItems: "center",
         }}
-        placeholder="Search for products"
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <SearchIcon />
-            </InputAdornment>
-          ),
-        }}
-      />
+      >
+        <TextField
+          sx={{
+            width: {
+              xs: "100%",
+              sm: "30%",
+            },
+          }}
+          placeholder="Buscar recetas..."
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <SearchIcon />
+              </InputAdornment>
+            ),
+          }}
+        />
 
-      <AutoCompleteSelection field="Etiqueta" />
-      <AutoCompleteSelection field="Ingrediente" />
+        <FilterIcon />
+      </Container>
+
+      <Container
+        disableGutters
+        sx={{
+          display: "flex",
+          flexWrap: "nowrap",
+          gap: 1,
+          margin: 0,
+          padding: 0,
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <AutoCompleteSelection field="Categoria" />
+        <AutoCompleteSelection field="Ingrediente" />
+        <AutoCompleteSelection field="Dificultad" />
+      </Container>
     </Container>
   );
 }

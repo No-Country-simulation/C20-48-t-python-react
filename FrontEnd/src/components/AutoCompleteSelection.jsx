@@ -17,11 +17,9 @@ export default function AutoCompleteSelection({ field }) {
       disablePortal
       options={top100Films}
       sx={{
-        width: {
-          xs: "100%",
+        xs: "100%",
           sm: 200,
           lg: 300,
-        },
       }}
       renderInput={(params) => <TextField {...params} label={field} />}
     />
