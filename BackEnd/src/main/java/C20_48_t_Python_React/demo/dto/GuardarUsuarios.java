@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,6 +17,7 @@ public class GuardarUsuarios implements Serializable {
     private String nombre;
     @Size(min=4)
     private String email;
+    private LocalDateTime fecharegistro;
     @Size(min=8)
     private String contrasena;
     @Size(min=8)
