@@ -18,10 +18,16 @@ const receta = recetas[0];
 
 function RecipeDetail() {
   const [isFavorite, setIsFavorite] = useState(false);
+
   const handleToggleFavorite = () => {
     setIsFavorite(!isFavorite);
   };
 
+  const handleDoneStep = (e, i) => {
+    const el = e.currentTarget;
+    el.style.textDecoration =
+      el.style.textDecoration === "line-through" ? "none" : "line-through";
+  };
 
   return (
     <Container disableGutters maxWidth={"lg"} sx={{ marginBlock: 4 }}>
@@ -47,7 +53,7 @@ function RecipeDetail() {
             sx={{
               flexWrap: "wrap",
               gap: 2,
-    
+
               alignItems: "center",
               justifyContent: "space-between",
             }}
@@ -113,9 +119,9 @@ function RecipeDetail() {
           <Container disableGutters>
             <Box direction="row" sx={{ gap: 2 }}>
               <Typography gutterBottom variant="h4">
-                Preparacion :
+                Preparación :
               </Typography>
-              <Typography variant="body1">
+              <Typography variant="h6" color="success">
                 Dificultad {receta.dificultad}
               </Typography>
             </Box>
@@ -128,7 +134,31 @@ function RecipeDetail() {
                 fontSize: "1.2rem",
               }}
             >
-              {receta.descripcion}
+              {receta.descripcion.map((paso, i) => (
+                <Paper
+                  key={paso}
+                  elevation={2}
+                  sx={{
+                    marginBlock: 2,
+                    display: "flex",
+                    alignItems: "end",
+                    borderRadius: 2,
+                    padding: 2,
+                    cursor: "pointer",
+                    backgroundColor: "background.paper",
+                    transition: "all 0.2s ease-in-out",
+                    "&:hover": {
+                      backgroundColor: "secondary.main",
+                    },
+                  }}
+                  onClick={(e) => handleDoneStep(e, i)}
+                >
+                  <Typography variant="h6" color="success">
+                    {`${i + 1}. `}
+                  </Typography>
+                  <Typography>{paso}</Typography>
+                </Paper>
+              ))}
             </Box>
           </Container>
           <Divider sx={{ marginBlock: 2 }} />
