@@ -12,6 +12,7 @@ import {
   Menu,
   MenuItem,
   Toolbar,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import { Link } from "react-router-dom";
@@ -30,6 +31,9 @@ function ResponsiveAppBar({ toggleTheme, theme }) {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
+
+  //Solo para testear Tooltip
+  let user = "sadsasd"
 
   return (
     <AppBar position="sticky">
@@ -127,12 +131,16 @@ function ResponsiveAppBar({ toggleTheme, theme }) {
               </Button>
             ))}
 
-            <LoginBtn/> 
+            <LoginBtn/>
 
           </Box>
-          <Box>
+
+          <Tooltip title={ user ? "Ver perfil" : "Iniciar sesión"}>
+          <Box sx={{ mx: 1 }}>
             <UserIcon />
           </Box>
+          </Tooltip>
+
           <Box
             onClick={toggleTheme}
             sx={{

@@ -7,6 +7,7 @@ import Slider from "../components/Slider/Slider";
 import DisplayCategories from "../components/DisplayCategories";
 import Footer from "../components/Footer";
 import CategoriesBar from "../components/UI/CategoriesBar";
+import { Link } from "react-router-dom";
 
 function Home() {
   return (
@@ -14,14 +15,16 @@ function Home() {
       <Hero />
       <Container maxWidth={"xl"} sx={{ mt: 4 }}>
         <Typography sx={{ paddingBlock: 2 }} variant="h4">
-          Search for recipes
+          Buscar recetas...
         </Typography>
         <SearchBar />
         <CategoriesBar />
         <Slider />
         <DisplayCategories category="Recetas" />
         <DisplayCategories category="Fitness" />
+        <Link to="/editar-receta" style={{ textDecoration: "none" }}>
         <FloatingAB />
+        </Link>
       </Container>
       <Footer />
     </>
