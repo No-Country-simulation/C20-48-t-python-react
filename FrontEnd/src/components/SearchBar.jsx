@@ -11,6 +11,7 @@ import { useTheme, useMediaQuery } from "@mui/material";
 import { useState, useRef } from "react";
 
 export default function SearchBar() {
+
   const [searchTerm, setSearchTerm] = useState("");
   const [category, setCategory] = useState("");
   const [ingredient, setIngredient] = useState("");

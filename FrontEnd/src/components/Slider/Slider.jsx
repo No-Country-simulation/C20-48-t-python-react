@@ -15,7 +15,7 @@ export default function App() {
         marginBlock: 4,
         padding: 2,
         color: "white",
-        backgroundColor: "secondary.main",
+        backgroundColor: "background.paper",
       }}
     >
       <Swiper
