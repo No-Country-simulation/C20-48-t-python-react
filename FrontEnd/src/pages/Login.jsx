@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { TextField, Button, Typography, Container, Box } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 function Login() {
   // Estado para manejar los valores de los campos y los errores
@@ -66,7 +67,7 @@ function Login() {
           helperText={passwordError}
         />
         <p></p>
-        <p>¿No tienes una cuenta? <a href="/registro">Registraté</a></p>
+        <p>¿No tienes una cuenta? <Link to="/registro">Registraté</Link></p>
         <p></p>
         <Button variant="contained" onClick={handleSubmit}>
           Inicia sesión
