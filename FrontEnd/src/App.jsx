@@ -28,8 +28,9 @@ export default function App() {
       <Box
         sx={
           {
-            // backgroundImage: `url(${fondo})`,
-            // backgroundSize: "contain",
+            // backgroundimage: `url(${fondo})`,
+            // transform: "rotate(0.5turn)",
+            // backgroundsize: "contain",
           }
         }
       >
