@@ -1,35 +1,41 @@
-import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
+import FilterIcon from "./UI/FilterIcon";
 import SearchIcon from "@mui/icons-material/Search";
+import IconButton from "@mui/material/IconButton";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
 import AutoCompleteSelection from "./AutoCompleteSelection";
 import Container from "@mui/material/Container";
-import FilterIcon from "./UI/FilterIcon";
 import Collapse from "@mui/material/Collapse";
-import Fade from "@mui/material/Fade";
-import Stack from "@mui/material/Stack";
-import IconButton from "@mui/material/IconButton";
-import { useState } from "react";
+import { useTheme, useMediaQuery } from "@mui/material";
+import { useState, useRef } from "react";
 
 export default function SearchBar() {
   const [open, setOpen] = useState(false);
+  const ref = useRef();
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
 
   function handleFilterToggle() {
     setOpen(!open);
+    if (ref.current) {
+      ref.current.style.display = open ? "none" : "grid";
+    }
   }
   return (
     <Container
       maxWidth="xl"
       disableGutters
       sx={{
-        width: "100vw",
         paddingBlock: 2,
         display: "grid",
         gap: 2,
         gridTemplateColumns: {
           xs: "1fr",
-          md: "1fr 2fr",
+          lg: "2fr 3fr 1fr",
         },
-        justifyItems: "center",
+        justifyItems: "start",
       }}
     >
       <Container
@@ -53,28 +59,40 @@ export default function SearchBar() {
           <FilterIcon />
         </IconButton>
       </Container>
-      <Container disableGutters sx={{ width: "100%" }}>
-        <Collapse orientation="horizontal" in={open}>
-          <Fade in={open}>
-            <Container
-              disableGutters
-              sx={{
-                display: "grid",
-                width: "100%",
-                gap: 2,
-                gridTemplateColumns: {
-                  xs: "1fr",
-                  md: "repeat(3, 200px)",
-                },
-              }}
-            >
-              <AutoCompleteSelection field="Categoria" />
-              <AutoCompleteSelection field="Ingrediente" />
-              <AutoCompleteSelection field="Dificultad" />
-            </Container>
-          </Fade>
+      <Container
+        disableGutters
+        ref={ref}
+        sx={{ display: "none", width: "100%" }}
+      >
+        <Collapse in={open} orientation={isMobile ? "vertical" : "horizontal"}>
+          <Container
+            disableGutters
+            sx={{
+              display: "grid",
+              gap: 2,
+              gridTemplateColumns: {
+                xs: "1fr",
+                lg: "repeat(3, minmax(170px, 1fr))",
+              },
+            }}
+          >
+            <AutoCompleteSelection field="Categoria" />
+            <AutoCompleteSelection field="Ingrediente" />
+            <AutoCompleteSelection field="Dificultad" />
+          </Container>
         </Collapse>
       </Container>
+      <Button
+        variant="contained"
+        sx={{
+          width: {
+            xs: "100%",
+            lg: "max-content",
+          },
+        }}
+      >
+        Buscar
+      </Button>
     </Container>
   );
 }
