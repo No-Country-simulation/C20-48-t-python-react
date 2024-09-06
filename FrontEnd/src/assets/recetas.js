@@ -18,8 +18,8 @@ export const recetas = [
       "Pastas",
       "jasdlkjdsa",
     ],
-    tiempo_preparacion: "10 min",
-    tiempo_coccion: "20 min",
+    tiempo_preparacion: 10,
+    tiempo_coccion: 20,
     dificultad: "medio",
     descripcion: [
       "Primero se cocina la pasta de carbonara, añadiendo el queso y la sal y cociendo hasta que esté bien cocido.",

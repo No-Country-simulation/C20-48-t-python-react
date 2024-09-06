@@ -4,10 +4,18 @@ import AddCategories from "../components/recipe-edit/AddCategories";
 import AddSteps from "../components/recipe-edit/AddSteps";
 import AddRecipeName from "../components/recipe-edit/AddRecipeName";
 import AddNotes from "../components/recipe-edit/AddNotes";
+import AddImage from "../components/recipe-edit/AddImage";
+import AddTimingsAndDifficulty from "../components/recipe-edit/AddTimingsAndDifficulty";
 import { Alert, Button, Container, Snackbar, Stack } from "@mui/material";
 
 function RecipeSteps() {
   const [error, setErrors] = useState(null);
+  const [image, setImage] = useState("");
+  const [timings, setTimings] = useState({
+    prep: "",
+    cook: "",
+    difficulty: "",
+  });
   const [steps, setSteps] = useState([""]);
   const [name, setName] = useState("");
   const [note, setNote] = useState("");
@@ -23,7 +31,13 @@ function RecipeSteps() {
   const handleNoteChange = (event) => {
     setNote(event.target.value);
   };
+  const handleImageChange = (event) => {
+    setImage(event.target.value);
+  };
 
+  const handleTimingsChange = (field, value) => {
+    setTimings({ ...timings, [field]: value });
+  };
   const handleSteps = {
     handleStepChange: (index, event) => {
       const newSteps = [...steps];
@@ -41,13 +55,19 @@ function RecipeSteps() {
     handleMoveStepUp: (index) => {
       if (index === 0) return;
       const newSteps = [...steps];
-      [newSteps[index - 1], newSteps[index]] = [newSteps[index],newSteps[index - 1]];
+      [newSteps[index - 1], newSteps[index]] = [
+        newSteps[index],
+        newSteps[index - 1],
+      ];
       setSteps(newSteps);
     },
     handleMoveStepDown: (index) => {
       if (index === steps.length - 1) return;
       const newSteps = [...steps];
-      [newSteps[index + 1], newSteps[index]] = [newSteps[index],newSteps[index + 1] ];
+      [newSteps[index + 1], newSteps[index]] = [
+        newSteps[index],
+        newSteps[index + 1],
+      ];
       setSteps(newSteps);
     },
   };
@@ -68,7 +88,7 @@ function RecipeSteps() {
     if (!name || !categories || !ingredients || !steps || !note) {
       setErrors("true");
     }
-    console.log(name, categories, ingredients, steps, note);
+    console.log(name, categories, ingredients, steps, note, timings, image);
   };
 
   return (
@@ -80,6 +100,11 @@ function RecipeSteps() {
             categories={categories}
             handleCategoriesChange={handleCategoriesChange}
           />
+          <AddTimingsAndDifficulty
+            timings={timings}
+            handleTimingsChange={handleTimingsChange}
+          />
+          <AddImage image={image} handleImageChange={handleImageChange} />
           <AddIngredients
             ingredients={ingredients}
             onIngredientsChange={handleIngredientsChange}

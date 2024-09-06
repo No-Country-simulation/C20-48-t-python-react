@@ -21,6 +21,8 @@ public class GlobalExceptionHandler {
         apiError.setMethod(request.getMethod());
         apiError.setTimeStamp(LocalDateTime.now());
         apiError.setMessage("Error interno en el servidor, vuelva mas tarde");
+        int statusCode = HttpStatus.INTERNAL_SERVER_ERROR.value();
+        apiError.setStatusCode(statusCode);
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(apiError);
     }
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -32,6 +34,8 @@ public class GlobalExceptionHandler {
         apiError.setMethod(request.getMethod());
         apiError.setTimeStamp(LocalDateTime.now());
         apiError.setMessage("Error en la peticion enviada.");
+        int statusCode = HttpStatus.INTERNAL_SERVER_ERROR.value();
+        apiError.setStatusCode(statusCode);
         System.out.println(
                 exception.getAllErrors().stream().map(each -> each.getDefaultMessage())
                         .collect(Collectors.toList())

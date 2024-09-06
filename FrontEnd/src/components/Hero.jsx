@@ -6,6 +6,10 @@ export default function Hero() {
     <Container
       maxWidth={"xl"}
       sx={{
+        display: {
+          xs: "none",
+          md: "inherit",
+        },
         borderRadius: 4,
         marginBlock: 4,
         paddingBlock: 2,

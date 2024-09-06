@@ -33,7 +33,7 @@ export default function AddIngredients({ ingredients, onIngredientsChange }) {
 
   return (
     <Container maxWidth="sm" sx={{ mt: 4 }}>
-      <Typography variant="h4" gutterBottom>
+      <Typography variant="h5" gutterBottom>
         Ingredientes
       </Typography>
       <Stack spacing={2}>
@@ -49,10 +49,15 @@ export default function AddIngredients({ ingredients, onIngredientsChange }) {
               }
               variant="outlined"
             />
-            <FormControl variant="outlined" sx={{ minWidth: {
-              xs: "20%", 
-              sm: 120,
-            } }}>
+            <FormControl
+              variant="outlined"
+              sx={{
+                minWidth: {
+                  xs: "20%",
+                  sm: 120,
+                },
+              }}
+            >
               <InputLabel>Unidad</InputLabel>
               <Select
                 value={ingredient.unit}

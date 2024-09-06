@@ -10,6 +10,8 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import RecipeEdit from "./pages/RecipeEdit";
+import Box from "@mui/material/Box";
+import fondo from "./assets/fondoapp.png";
 
 export default function App() {
   const [theme, setTheme] = useState(darkTheme);
@@ -23,17 +25,26 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <BrowserRouter>
-        <Navbar toggleTheme={toggleTheme}/>
-        <Routes>
-          <Route exact path="/" element={<Home />} />
-          <Route path="/detalle-receta" element={<RecipeDetail />} />
-          <Route path="/editar-receta" element={<RecipeEdit />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/registro" element={<Register />} />
-          <Route path="/perfil" element={<Profile />} />
-        </Routes>
-      </BrowserRouter>
+      <Box
+        sx={
+          {
+            // backgroundImage: `url(${fondo})`,
+            // backgroundSize: "contain",
+          }
+        }
+      >
+        <BrowserRouter>
+          <Navbar toggleTheme={toggleTheme} />
+          <Routes>
+            <Route exact path="/" element={<Home />} />
+            <Route path="/detalle-receta" element={<RecipeDetail />} />
+            <Route path="/editar-receta" element={<RecipeEdit />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/registro" element={<Register />} />
+            <Route path="/perfil" element={<Profile />} />
+          </Routes>
+        </BrowserRouter>
+      </Box>
     </ThemeProvider>
   );
 }

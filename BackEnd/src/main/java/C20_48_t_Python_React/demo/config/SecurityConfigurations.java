@@ -25,13 +25,14 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
 @Configuration
 @EnableWebSecurity
-@EnableMethodSecurity
+
 public class SecurityConfigurations {
 
     @Autowired
@@ -48,9 +49,12 @@ public class SecurityConfigurations {
     SecurityFilterChain publicSecurityFilterChain(HttpSecurity http) throws Exception {
      return http
              .securityMatcher("/home", "/login")
+
              .authorizeHttpRequests((authorize -> authorize.anyRequest().permitAll()))
+
              .build();
 }
+/*
 @Bean
     @Order(1)
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
@@ -60,17 +64,46 @@ public class SecurityConfigurations {
                 .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
                 .authorizeHttpRequests(http -> {
                     // Configurar los endpoints públicos primero
-                    http.requestMatchers(HttpMethod.GET, "/auth/get").permitAll();
-                    http.requestMatchers(HttpMethod.GET, "/home").permitAll();
-                    http.requestMatchers(HttpMethod.POST, "/register").permitAll();
-                    http.requestMatchers(HttpMethod.GET, "/user").hasRole("USER");
+                    http.requestMatchers("/auth/get").permitAll();
+                    http.requestMatchers("/home").permitAll();
+                    http.requestMatchers("/login").permitAll();
+
+                    http.requestMatchers("/register").permitAll();
+                    http.requestMatchers("/user").hasRole("USER");
 
 
                     http.anyRequest().authenticated();
                 })
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .permitAll()
+                        .defaultSuccessUrl("/user", true)
+                )
 
                 .build();
     }
+    */
+@Bean
+@Order(1)
+public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+    return httpSecurity
+            .formLogin(httpForm -> {
+                httpForm
+                        .loginPage("/login").permitAll()
+                        .defaultSuccessUrl("/user");
+            })
+            .authorizeHttpRequests(registry -> {
+                registry
+                        .requestMatchers("/home").permitAll()
+                        .requestMatchers("/register").permitAll()
+                        .requestMatchers("/user/**").hasRole("USER")
+                        .anyRequest().authenticated();
+            })
+            .httpBasic(Customizer.withDefaults())//Eliminar cuando haya login
+            .build();
+}
+
+
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
