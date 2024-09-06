@@ -13,7 +13,7 @@ const categoryOptions = [
 export default function AddCategories({ categories, handleCategoriesChange }) {
   return (
     <Container maxWidth="sm" sx={{ mt: 4 }}>
-      <Typography variant="h4" gutterBottom>
+      <Typography variant="h5" gutterBottom>
         Categorías
       </Typography>
       <Autocomplete
