@@ -18,10 +18,11 @@ import { Link } from "react-router-dom";
 import UserIcon from "./UserIcon";
 import LoginBtn from "./LoginBtn.jsx";
 import { useState } from "react";
+import { useTheme } from "@emotion/react";
 
 const menu = ["Home", "Mis recetas", "Favoritos"];
 
-function ResponsiveAppBar({ toggleTheme, theme }) {
+function ResponsiveAppBar({ toggleTheme }) {
   const [anchorElNav, setAnchorElNav] = useState(null);
 
   const handleOpenNavMenu = (event) => {
@@ -35,6 +36,8 @@ function ResponsiveAppBar({ toggleTheme, theme }) {
   //Solo para testear Tooltip
   let user = "";
 
+  // Theme context para cambiar icono
+  const theme = useTheme();
   return (
     <AppBar position="sticky">
       <Container maxWidth="xl">
@@ -151,14 +154,14 @@ function ResponsiveAppBar({ toggleTheme, theme }) {
               cursor: "pointer",
             }}
           >
-            {theme === "dark" ? (
+            {theme.palette.mode === "dark" ? (
               <Brightness6Icon
                 sx={{
                   display: "flex",
                   scale: 0.8,
                   alignItems: "center",
                   justifyContent: "center",
-                  color: "text.primary",
+                  color: "primary.light",
                 }}
               />
             ) : (
@@ -168,7 +171,7 @@ function ResponsiveAppBar({ toggleTheme, theme }) {
                   scale: 0.8,
                   alignItems: "center",
                   justifyContent: "center",
-                  color: "text.primary",
+                  color: "primary.light",
                 }}
               />
             )}
