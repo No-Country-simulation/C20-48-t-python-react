@@ -6,6 +6,32 @@ import Container from "@mui/material/Container";
 import FilterIcon from "./UI/FilterIcon";
 
 export default function SearchBar() {
+
+
+  // Arrays de pruebas para el AutoCompleteSelection
+  const dificuly = ["Facil", "Normal", "Dificil"];
+
+  const categories = [
+    "Cocina",
+    "Cafe",
+    "Cervezas",
+    "Comida",
+    "Vinos",
+    "Pastas",
+    "Desayunos",
+    "Ensaladas",
+    "Hamburguesas",
+    "Carnes",
+    "Pescados",
+    "Entradas",
+    "Sopas",
+    "Postres",
+    "Bebidas",
+    "Snacks",
+  ];
+
+  const ingredients = ["Arroz", "Pollo", "Carne", "Cerdo", "Pescado", "tomate", "pepino", "ajo", "cebolla", "oreganos"];
+  
   return (
     <Container
       disableGutters
@@ -86,9 +112,9 @@ export default function SearchBar() {
           },
         }}
       >
-        <AutoCompleteSelection field="Categoria" />
-        <AutoCompleteSelection field="Ingrediente" />
-        <AutoCompleteSelection field="Dificultad" />
+        <AutoCompleteSelection field="Categoria" options={categories} />
+        <AutoCompleteSelection field="Ingrediente"  options={ingredients}/>
+        <AutoCompleteSelection field="Dificultad" options={dificuly} />
       </Container>
     </Container>
   );
