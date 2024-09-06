@@ -12,6 +12,7 @@ import {
 import UserRating from "../components/UI/UserRaiting";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import IngredientList from "../components/UI/IngredientsList";
+import FloatingAB from "../components/FloatingAB";
 import { useState } from "react";
 
 const receta = recetas[0];
@@ -170,6 +171,8 @@ function RecipeDetail() {
           </Container>
         </Stack>
       </Paper>
+
+      <FloatingAB />
     </Container>
   );
 }
