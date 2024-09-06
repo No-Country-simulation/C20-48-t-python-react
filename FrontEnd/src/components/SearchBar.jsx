@@ -11,6 +11,29 @@ import { useTheme, useMediaQuery } from "@mui/material";
 import { useState, useRef } from "react";
 
 export default function SearchBar() {
+    // Arrays de pruebas para el AutoCompleteSelection
+    const dificulty = ["Facil", "Normal", "Dificil"];
+
+    const categories = [
+      "Cocina",
+      "Cafe",
+      "Cervezas",
+      "Comida",
+      "Vinos",
+      "Pastas",
+      "Desayunos",
+      "Ensaladas",
+      "Hamburguesas",
+      "Carnes",
+      "Pescados",
+      "Entradas",
+      "Sopas",
+      "Postres",
+      "Bebidas",
+      "Snacks",
+    ];
+  
+    const ingredients = ["Arroz", "Pollo", "Carne", "Cerdo", "Pescado", "tomate", "pepino", "ajo", "cebolla", "oreganos"];
 
   const [searchTerm, setSearchTerm] = useState("");
   const [category, setCategory] = useState("");
@@ -108,14 +131,17 @@ export default function SearchBar() {
             >
               <AutoCompleteSelection
                 field="Categoria"
+                options={categories}
                 handler={handleCategory}
               />
               <AutoCompleteSelection
                 field="Ingrediente"
+                options={ingredients}
                 handler={handleIngredient}
               />
               <AutoCompleteSelection
                 field="Dificultad"
+                options={dificulty}
                 handler={handleDifficulty}
               />
             </Container>
