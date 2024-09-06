@@ -6,46 +6,56 @@ export const darkTheme = createTheme({
     mode: "dark",
     primary: {
       light: "#757ce8",
-      main: lime[500],
+      main: "#BA5624",
       dark: lime[900],
-      contrastText: grey[900],
+      contrastText: "#FFFFFF",
     },
     secondary: {
       light: "#ff7961",
-      main: "#3d4847",
+      main: "#BA5624",
       dark: "#35403f",
       contrastText: "#000",
     },
     background: {
-      default: "#2a3635",
-      paper: "#2a3635",
+      default: "#4D2629",
+      paper: "#381D2A",
     },
     text: {
       primary: "#ffffff",
-      secondary: "#b0bec5",
-      disabled: "rgba(255, 255, 255, 0.5)",
+      secondary: "#F5F5F5",
+      disabled: "#757575",
     },
   },
 });
+// Blanco: #FFFFFF
+//  Blanco humo: #F5F5F5
+// Gris: #757575
+// Negro carbón: #1E1E1E
+// Rojo vino: #381D2A
+// Rojo ladrillo: #4D2629
+// Naranja quemado: #BA5624
+// Naranja claro: #E18F65
+// Amarillo pálido: #FCDE9C
+// Amarillo claro: #FDEECD
 
 export const lightTheme = createTheme({
   palette: {
     mode: "light",
     primary: {
       light: "#757ce8",
-      main: "#2a3635",
+      main: "#BA5624",
       dark: lime[900],
       contrastText: "#ffffff",
     },
     secondary: {
       light: "#ff7961",
-      main: "#3d4847",
+      main: "##FCDE9C",
       dark: "#ba000d",
       contrastText: "#000",
     },
     background: {
-      default: "#DBD8B3",
-      paper: "#8E9180",
+      default: "#FCDE9C",
+      paper: "#FDEECD",
     },
     text: {
       primary: "#2a3635",

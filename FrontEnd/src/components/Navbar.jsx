@@ -1,4 +1,3 @@
-import * as React from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import ContrastIcon from "@mui/icons-material/Contrast";
 import RestaurantMenuIcon from "@mui/icons-material/RestaurantMenu";
@@ -18,11 +17,12 @@ import {
 import { Link } from "react-router-dom";
 import UserIcon from "./UserIcon";
 import LoginBtn from "./LoginBtn.jsx";
+import { useState } from "react";
 
 const menu = ["Home", "Mis recetas", "Favoritos"];
 
 function ResponsiveAppBar({ toggleTheme, theme }) {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElNav, setAnchorElNav] = useState(null);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -33,7 +33,7 @@ function ResponsiveAppBar({ toggleTheme, theme }) {
   };
 
   //Solo para testear Tooltip
-  let user = "sadsasd"
+  let user = "";
 
   return (
     <AppBar position="sticky">
@@ -131,14 +131,13 @@ function ResponsiveAppBar({ toggleTheme, theme }) {
               </Button>
             ))}
 
-            <LoginBtn/>
-
+            <LoginBtn />
           </Box>
 
-          <Tooltip title={ user ? "Ver perfil" : "Iniciar sesión"}>
-          <Box sx={{ mx: 1 }}>
-            <UserIcon />
-          </Box>
+          <Tooltip title={user ? "Ver perfil" : "Iniciar sesión"}>
+            <Box sx={{ mx: 1 }}>
+              <UserIcon />
+            </Box>
           </Tooltip>
 
           <Box
@@ -152,7 +151,7 @@ function ResponsiveAppBar({ toggleTheme, theme }) {
               cursor: "pointer",
             }}
           >
-            {theme === "darkTheme" ? (
+            {theme === "dark" ? (
               <Brightness6Icon
                 sx={{
                   display: "flex",
