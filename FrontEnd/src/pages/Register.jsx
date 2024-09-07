@@ -95,7 +95,7 @@ function Register() {
           variant="h5"
           sx={{
             backgroundColor: "background.paper",
-            padding: 1,
+            padding: 0.3,
             borderRadius: 2,
           }}
         >
