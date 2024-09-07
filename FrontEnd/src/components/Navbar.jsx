@@ -1,6 +1,6 @@
 import MenuIcon from "@mui/icons-material/Menu";
 import ContrastIcon from "@mui/icons-material/Contrast";
-import RestaurantMenuIcon from "@mui/icons-material/RestaurantMenu";
+import AppIcon from "./AppIcon";
 import Brightness6Icon from "@mui/icons-material/Brightness6";
 import {
   AppBar,
@@ -42,9 +42,10 @@ function ResponsiveAppBar({ toggleTheme }) {
     <AppBar position="sticky">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <RestaurantMenuIcon
+          <AppIcon/>
+          {/*<RestaurantMenuIcon
             sx={{ display: { xs: "none", md: "flex", color: "white" }, mr: 1 }}
-          />
+          />*/}
           <Link to="/" style={{ textDecoration: "none" }}>
             <Typography
               variant="h6"
@@ -61,8 +62,34 @@ function ResponsiveAppBar({ toggleTheme }) {
                 textDecoration: "none",
               }}
             >
-              RECETAPP
+              RECET<Typography
+              variant="h6"
+              noWrap
+              component="a"
+              href="#app-bar-with-responsive-menu"
+              sx={{
+                mr: 2,
+                display: { xs: "none", md: "flex" },
+                fontFamily: "monospace",
+                fontWeight: 700,
+                letterSpacing: ".1rem",
+                color: "secondary.main",
+                textDecoration: "none",
+              }}
+            >APP</Typography>
             </Typography>
+            <Typography variant="p" sx={{
+                mr: 2,
+                display: { xs: "none", md: "flex" },
+                fontFamily: "Arial",
+                fontWeight: 700,
+                letterSpacing: ".1rem",
+                color: "white",
+                fontSize: "0.5rem",
+                textDecoration: "none",
+              }}>
+                Delicias del mundo
+              </Typography>
           </Link>
           {/* Start Mobile Menu */}
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -99,10 +126,11 @@ function ResponsiveAppBar({ toggleTheme }) {
               ))}
             </Menu>
           </Box>
+
           {/* End Mobile Menu */}
-          <RestaurantMenuIcon
+          {/*<RestaurantMenuIcon
             sx={{ display: { xs: "flex", md: "none", color: "white" }, mr: 1 }}
-          />
+          />*/}
           <Link to="/" style={{ textDecoration: "none" }}>
             <Typography
               variant="h5"

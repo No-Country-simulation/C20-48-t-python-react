@@ -36,7 +36,6 @@ public class UsuariosDetailsService implements UserDetailsService {
     }
 
     private Collection<? extends GrantedAuthority> getAuthorities(String role) {
-        // Convertimos el String a SimpleGrantedAuthority
         return Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + role));
     }
 }

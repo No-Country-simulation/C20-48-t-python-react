@@ -22,10 +22,10 @@ public class AuthenticationService {
         userDto.setUsername(user.getEmail());
         userDto.setRole(user.getRol());
 
-
-
         return userDto;
     }
+
+
     private Map<String, Object> generateExtraClaims(Usuarios user) {
         Map<String, Object> extraClaims = new HashMap<>();
         extraClaims.put("name",user.getEmail());

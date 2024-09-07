@@ -67,7 +67,18 @@ function Login() {
           helperText={passwordError}
         />
         <p></p>
-        <p>¿No tienes una cuenta? <Link to="/registro">Registraté</Link></p>
+
+        <Typography variant="p">¿No tienes una cuenta? <Link to="/registro">
+            <Typography variant="p" sx={{ 
+            color: "primary.main",
+            textDecoration: "none",
+            }}>
+              Registraté
+            </Typography>
+          </Link>
+        </Typography>
+
+
         <p></p>
         <Button variant="contained" onClick={handleSubmit}>
           Inicia sesión
