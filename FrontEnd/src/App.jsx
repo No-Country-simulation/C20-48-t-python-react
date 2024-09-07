@@ -28,13 +28,10 @@ export default function App() {
       <Box
         style={
           {
-<<<<<<< HEAD
             // backgroundimage: `url(${fondo})`,
-=======
             //backgroundColor: "white",
             //backgroundImage: `url(${AppBackground})`,
             // transform: "rotate(0.5turn)",
->>>>>>> edd54fd0e0458e006f832925523cc159c53dd1ad
             // backgroundsize: "contain",
           }
         }
