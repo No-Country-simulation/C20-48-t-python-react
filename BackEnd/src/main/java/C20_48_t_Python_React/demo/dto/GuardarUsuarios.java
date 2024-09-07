@@ -25,6 +25,10 @@ public class GuardarUsuarios implements Serializable {
     private String contrasena;
     @Size(min=8)
     private String repeatcontrasena;
+
+    // Campos para la respuesta del login
+    private int statusCode;
+    private String message;
     private String Rol;
     private String token;
     private String refreshToken;
