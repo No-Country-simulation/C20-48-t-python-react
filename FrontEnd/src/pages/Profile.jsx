@@ -20,61 +20,64 @@ import Hamburguer from "../assets/profile-icons/hamburguer.jpg";
 import { UserContext } from "../Context/UserContext";
 
 function Profile() {
-
-  const [password, setPassword] = useState("");
-  const [passwordError, setPasswordError] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [newPasswordError, setNewPasswordError] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [confirmPasswordError, setConfirmPasswordError] = useState("");
   // Edit Profile
   const [isEditable, setIsEditable] = useState(false);
   // DIalog
   const [open, setOpen] = useState(false);
 
   // Importar el contexto de usuario
-  const { userInfo } = useContext(UserContext);
-
+  const { userInfo, setUserInfo } = useContext(UserContext);
 
   function HandleEditProfile() {
     if (userInfo.name) {
       setIsEditable(!isEditable);
     }
+    // Resetear errores
+    setNewPasswordError("");
+    setConfirmPasswordError("");
   }
 
-  function HandleConfirmChanges() {
-    
-  }
-  
-  /* const handleSubmit = (event) => {
+  /*       function handleEditProfile(event) {
+        if (newPassword !== userInfo.password) {
+          setPasswordError("La contraseña es incorrecta.");
+        }
+      } */
+
+  function HandleConfirmChanges(event) {
     event.preventDefault();
 
     // Resetear errores
-    setEmailError("");
-    setPasswordError("");
+    setNewPasswordError("");
+    setConfirmPasswordError("");
 
     // Validaciones
     let valid = true;
 
-    if (!email) {
-      setEmailError("El correo electrónico es obligatorio.");
-      valid = false;
-    } else if (!/\S+@\S+\.\S+/.test(email)) {
-      setEmailError("El formato del correo electrónico es inválido.");
+    if (!newPassword) {
+      setNewPasswordError("La contraseña es obligatoria.");
       valid = false;
     }
 
-    if (!password) {
-      setPasswordError("La contraseña es obligatoria.");
+    if (!confirmPassword) {
+      setConfirmPasswordError("Debes repetir la contraseña.");
+      valid = false;
+    } else if (confirmPassword !== newPassword) {
+      setConfirmPasswordError("Las contraseñas no coinciden.");
       valid = false;
     }
 
-    if (email !== userInfo.email) {
-      setEmailError("El correo electrónico o usuario es incorrecto.");
-      valid = false;
+    if (valid) {
+      console.log("cambio exitoso");
+      setUserInfo({ ...userInfo, password: newPassword });
+      setNewPassword("");
+      setConfirmPassword("");
+      setIsEditable(false);
     }
-
-    if (password !== userInfo.password) {
-      setPasswordError("La contraseña es incorrecta.");
-      valid = false;
-    }
-  }; */
+  }
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -89,17 +92,19 @@ function Profile() {
 
   function handleAvatarChange(event) {
     setAvatarIcon(event.target.src);
+    setUserInfo({ ...userInfo, avatar: event.target.src });
+    handleClose();
   }
 
   const avatarList = [Cucumber, Muffin, Pizza, Hamburguer];
-  const randomIndex = Math.floor(Math.random() * avatarList.length);
+  // const randomIndex = Math.floor(Math.random() * avatarList.length);
 
   return (
     <>
       <Container maxWidth="sm">
         <Box display="flex" flexDirection="column" alignItems="center" mt={4}>
           <Box position="relative">
-            <Avatar sx={{ width: 100, height: 100 }}  src={avatarIcon}/>
+            <Avatar sx={{ width: 100, height: 100 }} src={avatarIcon} />
             <Fab
               color="primary"
               aria-label="edit"
@@ -123,6 +128,10 @@ function Profile() {
             variant="outlined"
             fullWidth
             margin="normal"
+            value={newPassword}
+            error={!!newPasswordError}
+            helperText={newPasswordError}
+            onChange={(e) => setNewPassword(e.target.value)}
             disabled={!isEditable}
           />
           <TextField
@@ -131,6 +140,10 @@ function Profile() {
             variant="outlined"
             fullWidth
             margin="normal"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            error={!!confirmPasswordError}
+            helperText={confirmPasswordError}
             disabled={!isEditable}
           />
           <Button
@@ -139,7 +152,7 @@ function Profile() {
             sx={{ mt: 2 }}
             onClick={HandleEditProfile}
           >
-            Editar perfil
+            cambiar contraseña
           </Button>
           <Button
             variant="contained"
@@ -156,10 +169,14 @@ function Profile() {
         <DialogTitle>{"Elige tu avatar"}</DialogTitle>
         <DialogContent>
           <Box display="flex" justifyContent="space-around" flexWrap="wrap">
-            <Avatar src={Cucumber} sx={{ width: 60, height: 60, m: 1 }} onClick={handleAvatarChange} />
-            <Avatar src={Muffin} sx={{ width: 60, height: 60, m: 1 }} onClick={handleAvatarChange} />
-            <Avatar src={Pizza} sx={{ width: 60, height: 60, m: 1 }} onClick={handleAvatarChange}/>
-            <Avatar src={Hamburguer} sx={{ width: 60, height: 60, m: 1 }} onClick={handleAvatarChange} />
+            {avatarList.map((avatar, index) => (
+              <Avatar
+                src={avatar}
+                key={index}
+                sx={{ width: 60, height: 60, m: 1 }}
+                onClick={handleAvatarChange}
+              />
+            ))}
           </Box>
         </DialogContent>
         <DialogActions>
