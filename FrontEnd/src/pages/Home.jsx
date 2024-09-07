@@ -14,20 +14,21 @@ function Home() {
     <>
       <Hero />
       <Container maxWidth={"xl"} sx={{ mt: 4 }}>
-        {/* <Container */}
-        {/*   maxWidth={"xl"} */}
-        {/*   sx={{ */}
-        {/*     borderRadius: "10px", */}
-        {/*     boxShadow: " 0 0 6px 5px rgba(0, 0, 0, 0.1)", // Ajusta el box-shadow para el efecto de desvanecimiento */}
-        {/*   }} */}
-        {/* > */}
-        <Typography sx={{ paddingBlock: 2 }} variant="h4">
-          Buscar recetas...
-        </Typography>
-        <SearchBar />
-
-        <CategoriesBar />
-        {/* </Container> */}
+        <Container
+          maxWidth={"xl"}
+          sx={{
+            borderRadius: "10px",
+            boxShadow: " 0 0 6px 5px rgba(0, 0, 0, 0.1)", // Ajusta el box-shadow para el efecto de desvanecimiento
+            backgroundColor: "background.paper",
+          }}
+        >
+          <Typography sx={{ paddingBlock: 2, paddingTop: 4 }} variant="h4">
+            Buscar recetas...
+          </Typography>
+          <SearchBar />
+          <Divider sx={{ marginBlock: 2 }} />
+          <CategoriesBar />
+        </Container>
         <Slider />
         <DisplayCategories category="Recetas" />
         <DisplayCategories category="Fitness" />

@@ -93,7 +93,15 @@ function RecipeSteps() {
 
   return (
     <>
-      <Container maxWidth="sm" sx={{ padding: 2 }}>
+      <Container
+        maxWidth="sm"
+        sx={{
+          padding: 2,
+          marginBlock: 2,
+          backgroundColor: "background.paper",
+          borderRadius: "10px",
+        }}
+      >
         <form onSubmit={handleSubmit}>
           <AddRecipeName name={name} handleNameChange={handleNameChange} />
           <AddCategories

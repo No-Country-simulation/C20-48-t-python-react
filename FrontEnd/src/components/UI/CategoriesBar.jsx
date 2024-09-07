@@ -50,16 +50,14 @@ export default function CategoriesBar() {
 
   return (
     <Box
-      disableGutters
       maxWidth={"xl"}
       sx={{
         paddingBlock: 2,
+        paddingBottom: 4,
         cursor: "grab",
         borderRadius: "100px",
-        boxShadow: " 0 0 6px 5px rgba(0, 0, 0, 0.1)", // Ajusta el box-shadow para el efecto de desvanecimiento
       }}
     >
-      {" "}
       <Swiper
         spaceBetween={10}
         slidesPerView="auto"
@@ -67,7 +65,6 @@ export default function CategoriesBar() {
         loop={true}
         style={{
           borderRadius: "10px",
-          // marginBottom: "10px",
         }}
       >
         {categories.map((category, i) => (
@@ -76,7 +73,7 @@ export default function CategoriesBar() {
             style={{
               width: "min-content", // El ancho se ajusta automáticamente según el contenido
               display: "flex",
-              justifyContent: "center", // Centra los chips
+              justifyContent: "center",
             }}
           >
             <Chip
