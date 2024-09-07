@@ -39,5 +39,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         if(!dto.getContrasena().equals(dto.getRepeatcontrasena())){
             throw new InvalidPasswordException("No coinciden las contraseñas");
         }
+
+
 }
 }
