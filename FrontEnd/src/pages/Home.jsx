@@ -22,7 +22,7 @@ function Home() {
         <Slider />
         <DisplayCategories category="Recetas" />
         <DisplayCategories category="Fitness" />
-        <Link to="/editar-receta" style={{ textDecoration: "none" }}>
+        <Link to="/editar-receta">
         <FloatingAB />
         </Link>
       </Container>

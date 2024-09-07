@@ -14,7 +14,6 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
-import { Link } from "react-router-dom";
 import UserIcon from "./UserIcon";
 import LoginBtn from "./LoginBtn.jsx";
 import { useState } from "react";
@@ -45,7 +44,7 @@ function ResponsiveAppBar({ toggleTheme }) {
           <RestaurantMenuIcon
             sx={{ display: { xs: "none", md: "flex", color: "white" }, mr: 1 }}
           />
-          <Link to="/" style={{ textDecoration: "none" }}>
+
             <Typography
               variant="h6"
               noWrap
@@ -63,7 +62,7 @@ function ResponsiveAppBar({ toggleTheme }) {
             >
               RECETAPP
             </Typography>
-          </Link>
+
           {/* Start Mobile Menu */}
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
@@ -103,7 +102,7 @@ function ResponsiveAppBar({ toggleTheme }) {
           <RestaurantMenuIcon
             sx={{ display: { xs: "flex", md: "none", color: "white" }, mr: 1 }}
           />
-          <Link to="/" style={{ textDecoration: "none" }}>
+
             <Typography
               variant="h5"
               noWrap
@@ -122,7 +121,6 @@ function ResponsiveAppBar({ toggleTheme }) {
             >
               RECETAPP
             </Typography>
-          </Link>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {menu.map((page) => (
               <Button

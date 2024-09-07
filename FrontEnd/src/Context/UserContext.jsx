@@ -1,13 +1,22 @@
-import { createContext } from "react";
+import { createContext, useState } from "react";
 
-let userInfo = {
+const USER_STRUCTURE = {
     name: "",
     email: "",
     password: "",
     avatar: "",
-    token: "",
+  };
+  
+const UserContext = createContext(USER_STRUCTURE);
+
+const UserProvider = ({ children }) => {
+    const [userInfo, setUserInfo] = useState(USER_STRUCTURE);
+
+  return (
+    <UserContext.Provider value={{ userInfo, setUserInfo }}>
+      {children}
+    </UserContext.Provider>
+  );
 };
 
-export const UserContext = createContext(userInfo);
-export const UserProvider = UserContext.Provider;
-export const UserConsumer = UserContext.Consumer;
+export { UserContext, UserProvider };

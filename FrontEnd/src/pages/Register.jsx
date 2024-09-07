@@ -1,8 +1,14 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { UserContext } from '../Context/UserContext';
 import { TextField, Button, Typography, Container, Box } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 function Register() {
+
+  // Importar el contexto de usuario
+
+  const [userInfo, setUserInfo] = useContext(UserContext);
+  
   // Estado para manejar los valores de los campos y los errores
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -49,8 +55,17 @@ function Register() {
 
     // Si todo está bien, puedes manejar el envío del formulario aquí
     if (valid) {
-      console.log('Formulario enviado');
       // Aquí puedes agregar la lógica para enviar los datos del formulario
+      
+      setUserInfo({
+        name: email.split("@")[0],
+        email: email,
+        password: password,
+      });
+      
+      console.log(userInfo);
+
+      // Luego de enviarlos, puedes redireccionar o mostrar un mensaje de éxito
     }
   };
 
@@ -92,7 +107,7 @@ function Register() {
           helperText={confirmPasswordError}
         />
         <p></p>
-        <p>¿Ya tienes una cuenta? <Link to="/login">Inicia sesión</Link></p>
+        <Link to="/login"><p>¿Ya tienes una cuenta? Inicia sesión</p></Link>
         <p></p>
         <Button variant="contained" onClick={handleSubmit}>
           Regístrate

@@ -1,4 +1,5 @@
 import { ThemeProvider } from "@mui/material/styles";
+import { UserProvider } from "./Context/UserContext";
 import CssBaseline from "@mui/material/CssBaseline";
 import { darkTheme, lightTheme } from "./components/UI/theme";
 import { useState } from "react";
@@ -18,7 +19,7 @@ export default function App() {
 
   const toggleTheme = () => {
     setTheme((prevTheme) =>
-      prevTheme === lightTheme ? darkTheme : lightTheme,
+      prevTheme === lightTheme ? darkTheme : lightTheme
     );
   };
 
@@ -28,23 +29,28 @@ export default function App() {
       <Box
         sx={
           {
-            // backgroundimage: `url(${fondo})`,
-            // transform: "rotate(0.5turn)",
-            // backgroundsize: "contain",
+            backgroundImage: `url(${fondo})`,
+            backgroundSize: "contain",
+            backgroundPosition: "repeat",
+            zIndex: -1
           }
         }
       >
-        <BrowserRouter>
-          <Navbar toggleTheme={toggleTheme} />
-          <Routes>
-            <Route exact path="/" element={<Home />} />
-            <Route path="/detalle-receta" element={<RecipeDetail />} />
-            <Route path="/editar-receta" element={<RecipeEdit />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/registro" element={<Register />} />
-            <Route path="/perfil" element={<Profile />} />
-          </Routes>
-        </BrowserRouter>
+          <BrowserRouter>
+
+        <UserProvider>
+            <Navbar toggleTheme={toggleTheme} />
+            <Routes>
+              <Route exact path="/" element={<Home />} />
+              <Route path="/detalle-receta" element={<RecipeDetail />} />
+              <Route path="/editar-receta" element={<RecipeEdit />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/registro" element={<Register />} />
+              <Route path="/perfil" element={<Profile />} />
+            </Routes>
+        </UserProvider>
+
+          </BrowserRouter>
       </Box>
     </ThemeProvider>
   );
