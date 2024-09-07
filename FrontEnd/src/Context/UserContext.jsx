@@ -2,7 +2,7 @@ import { createContext, useEffect, useState } from "react";
 
 const USER_STRUCTURE = {
   id: parseInt(Math.random() * 1000),
-  name: "juan",
+  name: "",
   email: "",
   password: "",
   avatar: "",

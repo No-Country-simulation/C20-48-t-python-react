@@ -12,32 +12,69 @@ import {
   Fab,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Cucumber from "../assets/profile-icons/cucumber.jpg";
 import Muffin from "../assets/profile-icons/muffin.png";
 import Pizza from "../assets/profile-icons/pizza.jpg";
 import Hamburguer from "../assets/profile-icons/hamburguer.jpg";
+import { UserContext } from "../Context/UserContext";
 
 function Profile() {
-  let userName = "asdads";
 
+  const [password, setPassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
   // Edit Profile
   const [isEditable, setIsEditable] = useState(false);
+  // DIalog
+  const [open, setOpen] = useState(false);
+
+  // Importar el contexto de usuario
+  const { userInfo } = useContext(UserContext);
+
 
   function HandleEditProfile() {
-    if (userName) {
+    if (userInfo.name) {
       setIsEditable(!isEditable);
     }
   }
 
   function HandleConfirmChanges() {
-    if (userName) {
-      console.log("Confirmados cambios");
-    }
+    
   }
+  
+  /* const handleSubmit = (event) => {
+    event.preventDefault();
 
-  // DIalog
-  const [open, setOpen] = useState(false);
+    // Resetear errores
+    setEmailError("");
+    setPasswordError("");
+
+    // Validaciones
+    let valid = true;
+
+    if (!email) {
+      setEmailError("El correo electrónico es obligatorio.");
+      valid = false;
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      setEmailError("El formato del correo electrónico es inválido.");
+      valid = false;
+    }
+
+    if (!password) {
+      setPasswordError("La contraseña es obligatoria.");
+      valid = false;
+    }
+
+    if (email !== userInfo.email) {
+      setEmailError("El correo electrónico o usuario es incorrecto.");
+      valid = false;
+    }
+
+    if (password !== userInfo.password) {
+      setPasswordError("La contraseña es incorrecta.");
+      valid = false;
+    }
+  }; */
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -53,6 +90,9 @@ function Profile() {
   function handleAvatarChange(event) {
     setAvatarIcon(event.target.src);
   }
+
+  const avatarList = [Cucumber, Muffin, Pizza, Hamburguer];
+  const randomIndex = Math.floor(Math.random() * avatarList.length);
 
   return (
     <>
@@ -75,7 +115,7 @@ function Profile() {
             </Fab>
           </Box>
           <Typography variant="h5" sx={{ mt: 2 }}>
-            {userName || "Nombre de usuario"}
+            {userInfo.name || "Nombre de usuario"}
           </Typography>
           <TextField
             label="Cambiar contraseña"

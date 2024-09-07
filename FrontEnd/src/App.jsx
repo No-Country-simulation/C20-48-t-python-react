@@ -30,8 +30,9 @@ export default function App() {
         sx={
           {
             backgroundImage: `url(${fondo})`,
-            backgroundSize: "cover",
+            backgroundSize: "fill",
             backgroundPosition: "repeat",
+            minHeight: "100vh",
             zIndex: -1
           }
         }

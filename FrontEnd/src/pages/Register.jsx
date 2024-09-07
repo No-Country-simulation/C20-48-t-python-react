@@ -18,6 +18,11 @@ function Register() {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
+
+  // Luego de registrarse, redireccionar al usuario a la página de inicio de sesión
+  const [isRegistered, setIsRegistered] = useState(false);
+
+  // Función para manejar el envío del formulario
   
   // Importar el contexto de usuario
 
@@ -75,6 +80,7 @@ function Register() {
         password: password,
       };
       setUserInfo(newUserInfo);
+      setIsRegistered(true);
     }
 
     // Luego de enviarlos, puedes redireccionar o mostrar un mensaje de éxito
@@ -158,9 +164,21 @@ function Register() {
           </Link>
         </Typography>
         <p></p>
+        {/* Botón para enviar el formulario */
+        !isRegistered ?
         <Button variant="contained" onClick={handleSubmit}>
           Regístrate
         </Button>
+        :
+        <Button variant="contained">
+          <Link
+            to="/login"
+            style={{ textDecoration: "none", color: "#ffffff" }}
+          >
+            Iniciar sesión
+          </Link>
+        </Button>
+        }
       </Box>
     </Container>
   );
