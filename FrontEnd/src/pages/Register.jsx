@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "../Context/UserContext";
 import {
   TextField,
@@ -11,14 +11,6 @@ import {
 import { Link } from "react-router-dom";
 
 function Register() {
-  // Importar el contexto de usuario
-
-  const { userInfo, setUserInfo } = useContext(UserContext);
-
-  useEffect(() => {
-    console.log(userInfo);
-  }, [userInfo]);
-
   // Estado para manejar los valores de los campos y los errores
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -26,6 +18,10 @@ function Register() {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
+  
+  // Importar el contexto de usuario
+
+  const { userInfo, setUserInfo } = useContext(UserContext);
 
   // Función para manejar el envío del formulario
   const handleSubmit = (event) => {
@@ -72,16 +68,17 @@ function Register() {
     if (valid) {
       // Aquí puedes agregar la lógica para enviar los datos del formulario
 
-      setUserInfo({
+      const newUserInfo = {
+        id: userInfo.id + 1,
         name: email.split("@")[0],
         email: email,
         password: password,
-      });
+      };
+      setUserInfo(newUserInfo);
     }
 
     // Luego de enviarlos, puedes redireccionar o mostrar un mensaje de éxito
   };
-
   return (
     <Container maxWidth="sm">
       <Box
