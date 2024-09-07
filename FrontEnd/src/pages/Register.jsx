@@ -92,7 +92,17 @@ function Register() {
           helperText={confirmPasswordError}
         />
         <p></p>
-        <p>¿Ya tienes una cuenta? <Link to="/login">Inicia sesión</Link></p>
+
+        <Typography variant="p">¿Ya tienes una cuenta? <Link to="/login">
+            <Typography variant="p" sx={{ 
+            color: "primary.main",
+            textDecoration: "none",
+            }}>
+              Inicia sesión
+            </Typography>
+          </Link>
+        </Typography>
+        
         <p></p>
         <Button variant="contained" onClick={handleSubmit}>
           Regístrate

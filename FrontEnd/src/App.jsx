@@ -12,7 +12,7 @@ import Profile from "./pages/Profile";
 import RecipeEdit from "./pages/RecipeEdit";
 import Box from "@mui/material/Box";
 import fondo from "./assets/fondoapp.png";
-
+import AppBackground from "./components/AppBackground";
 export default function App() {
   const [theme, setTheme] = useState(darkTheme);
 
@@ -26,9 +26,10 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Box
-        sx={
+        style={
           {
-            // backgroundimage: `url(${fondo})`,
+            //backgroundColor: "white",
+            //backgroundImage: `url(${AppBackground})`,
             // transform: "rotate(0.5turn)",
             // backgroundsize: "contain",
           }
