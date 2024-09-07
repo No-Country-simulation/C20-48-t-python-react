@@ -1,16 +1,16 @@
 import { createContext, useState } from "react";
 
 const USER_STRUCTURE = {
-    name: "",
-    email: "",
-    password: "",
-    avatar: "",
-  };
-  
-const UserContext = createContext(USER_STRUCTURE);
+  name: "",
+  email: "",
+  password: "",
+  avatar: "",
+};
 
-const UserProvider = ({ children }) => {
-    const [userInfo, setUserInfo] = useState(USER_STRUCTURE);
+export const UserContext = createContext(USER_STRUCTURE);
+
+export const UserProvider = ({ children }) => {
+  const [userInfo, setUserInfo] = useState(USER_STRUCTURE);
 
   return (
     <UserContext.Provider value={{ userInfo, setUserInfo }}>
@@ -18,5 +18,3 @@ const UserProvider = ({ children }) => {
     </UserContext.Provider>
   );
 };
-
-export { UserContext, UserProvider };
