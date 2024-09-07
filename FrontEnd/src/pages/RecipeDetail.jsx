@@ -82,9 +82,9 @@ function RecipeDetail() {
                   margin: 0,
                 }}
               >
-                {receta.categoria.map((categoria) => (
+                {receta.categoria.map((categoria, i) => (
                   <Chip
-                    key={categoria}
+                    key={categoria + i}
                     color="primary"
                     label={categoria}
                     size="medium"
@@ -137,7 +137,7 @@ function RecipeDetail() {
             >
               {receta.descripcion.map((paso, i) => (
                 <Paper
-                  key={paso}
+                  key={paso + i}
                   elevation={2}
                   sx={{
                     marginBlock: 2,

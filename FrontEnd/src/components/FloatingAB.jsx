@@ -21,6 +21,7 @@ export default function FloatingAB() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const navigate = useNavigate();
+
   const handleActionClick = (path) => {
     navigate(path);
     handleClose();
@@ -30,8 +31,15 @@ export default function FloatingAB() {
   // TODO: que el speedDial solo se muestre si la receta es del usuario y si esta logueado!!!!!
 
   const location = useLocation();
-  const actions =
-    location.pathname === "/" ? actionsHome : actionsDetalleReceta;
+  let actions = [];
+  // Verificamos si estamos en la página de inicio
+  if (location.pathname === "/") {
+    actions = actionsHome;
+  }
+  // Verificamos si estamos en la página de detalle de receta (puede incluir un ID en la URL)
+  else if (location.pathname.includes("/detalle-receta")) {
+    actions = actionsDetalleReceta;
+  }
 
   return (
     <Box

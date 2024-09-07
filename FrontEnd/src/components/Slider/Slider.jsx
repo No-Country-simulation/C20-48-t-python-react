@@ -31,6 +31,7 @@ export default function App() {
             slidesPerView: 4,
           },
         }}
+        loop={true}
         centeredSlides={false}
         autoplay={{ delay: 5000, disableOnInteraction: false }}
         spaceBetween={30}

@@ -29,7 +29,6 @@ export default function App() {
         sx={
           {
             // backgroundimage: `url(${fondo})`,
-            // transform: "rotate(0.5turn)",
             // backgroundsize: "contain",
           }
         }

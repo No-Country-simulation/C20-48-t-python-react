@@ -10,7 +10,7 @@ export const recetas = [
       "Pastas",
       "Italia",
       "Tardicionales",
-      "Pastas",
+      "",
       "Tardicionales",
       "Italia",
       "Pastas",
