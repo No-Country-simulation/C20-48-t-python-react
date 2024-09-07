@@ -24,12 +24,12 @@ export default function AddSteps({
 }) {
   return (
     <Container maxWidth="sm" sx={{ mt: 4 }}>
-      <Typography variant="h4" gutterBottom>
+      <Typography variant="h5" gutterBottom>
         Pasos
       </Typography>
       <Stack spacing={2}>
         {steps.map((step, index) => (
-          <Stack key={index} direction="column" alignItems="end" spacing={1} >
+          <Stack key={index} direction="column" alignItems="end" spacing={1}>
             <TextField
               fullWidth
               multiline
@@ -38,7 +38,10 @@ export default function AddSteps({
               onChange={(event) => handleStepChange(index, event)}
               variant="outlined"
             />
-            <Stack direction="row" sx={{ display: "flex", justifyContent: "end"}} >
+            <Stack
+              direction="row"
+              sx={{ display: "flex", justifyContent: "end" }}
+            >
               <IconButton
                 color="primary"
                 disabled={index === 0}

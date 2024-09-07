@@ -4,7 +4,6 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { lime } from "@mui/material/colors";
 
 export default function MediaCard({ color }) {
   return (
@@ -13,11 +12,12 @@ export default function MediaCard({ color }) {
         maxWidth: 345,
         backgroundColor: color,
         borderRadius: 4,
-        border: `1px solid ${lime[700]}`,
+        border: `1px solid `,
+        borderColor: "primary.main",
         paddingBottom: 1,
         transition: "all 0.2s ease-in-out",
         ":hover": {
-          boxShadow: "4px 4px 0px 4px  #2a3635",
+          boxShadow: "4px 4px 0px 4px  #1E1E1E",
           scale: 1.02,
         },
       }}

@@ -7,7 +7,7 @@ export default function AddSteps({ name, handleNameChange }) {
       <Typography variant="h3" gutterBottom>
         Crear Receta
       </Typography>
-      <Typography variant="h4" gutterBottom>
+      <Typography variant="h5" gutterBottom>
         Nombre
       </Typography>
       <TextField

@@ -12,6 +12,7 @@ import {
 import UserRating from "../components/UI/UserRaiting";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import IngredientList from "../components/UI/IngredientsList";
+import FloatingAB from "../components/FloatingAB";
 import { useState } from "react";
 
 const receta = recetas[0];
@@ -39,7 +40,7 @@ function RecipeDetail() {
           </Typography>
           <Divider sx={{ marginBottom: 2 }} />
           <img
-            src="https://www.semana.com/resizer/v2/CBUJV763ORE2VENVF5HWJYWPQA.jpg?auth=282369669486f101ef91c99b4fb3cebcca0cc5a01d54a1baec7230089b2e7945&smart=true&quality=75&width=1280&height=720"
+            src={receta.imagen}
             style={{
               width: "90%",
               height: "auto",
@@ -170,6 +171,8 @@ function RecipeDetail() {
           </Container>
         </Stack>
       </Paper>
+
+      <FloatingAB />
     </Container>
   );
 }

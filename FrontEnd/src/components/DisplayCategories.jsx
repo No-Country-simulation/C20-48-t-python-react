@@ -17,7 +17,6 @@ export default function DisplayCategories({ category }) {
           },
           borderRadius: 4,
           marginBlock: 4,
-          backgroundColor: "",
         }}
       >
         <Container

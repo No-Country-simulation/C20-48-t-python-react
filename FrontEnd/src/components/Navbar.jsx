@@ -1,7 +1,6 @@
-import * as React from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import ContrastIcon from "@mui/icons-material/Contrast";
-import RestaurantMenuIcon from "@mui/icons-material/RestaurantMenu";
+import AppIcon from "./AppIcon";
 import Brightness6Icon from "@mui/icons-material/Brightness6";
 import {
   AppBar,
@@ -12,16 +11,19 @@ import {
   Menu,
   MenuItem,
   Toolbar,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import UserIcon from "./UserIcon";
 import LoginBtn from "./LoginBtn.jsx";
+import { useState } from "react";
+import { useTheme } from "@emotion/react";
 
 const menu = ["Home", "Mis recetas", "Favoritos"];
 
-function ResponsiveAppBar({ toggleTheme, theme }) {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
+function ResponsiveAppBar({ toggleTheme }) {
+  const [anchorElNav, setAnchorElNav] = useState(null);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -31,13 +33,19 @@ function ResponsiveAppBar({ toggleTheme, theme }) {
     setAnchorElNav(null);
   };
 
+  //Solo para testear Tooltip
+  let user = "";
+
+  // Theme context para cambiar icono
+  const theme = useTheme();
   return (
     <AppBar position="sticky">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <RestaurantMenuIcon
+          <AppIcon/>
+          {/*<RestaurantMenuIcon
             sx={{ display: { xs: "none", md: "flex", color: "white" }, mr: 1 }}
-          />
+          />*/}
           <Link to="/" style={{ textDecoration: "none" }}>
             <Typography
               variant="h6"
@@ -54,8 +62,34 @@ function ResponsiveAppBar({ toggleTheme, theme }) {
                 textDecoration: "none",
               }}
             >
-              RECETAPP
+              RECET<Typography
+              variant="h6"
+              noWrap
+              component="a"
+              href="#app-bar-with-responsive-menu"
+              sx={{
+                mr: 2,
+                display: { xs: "none", md: "flex" },
+                fontFamily: "monospace",
+                fontWeight: 700,
+                letterSpacing: ".1rem",
+                color: "secondary.main",
+                textDecoration: "none",
+              }}
+            >APP</Typography>
             </Typography>
+            <Typography variant="p" sx={{
+                mr: 2,
+                display: { xs: "none", md: "flex" },
+                fontFamily: "Arial",
+                fontWeight: 700,
+                letterSpacing: ".1rem",
+                color: "white",
+                fontSize: "0.5rem",
+                textDecoration: "none",
+              }}>
+                Delicias del mundo
+              </Typography>
           </Link>
           {/* Start Mobile Menu */}
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -92,10 +126,11 @@ function ResponsiveAppBar({ toggleTheme, theme }) {
               ))}
             </Menu>
           </Box>
+
           {/* End Mobile Menu */}
-          <RestaurantMenuIcon
+          {/*<RestaurantMenuIcon
             sx={{ display: { xs: "flex", md: "none", color: "white" }, mr: 1 }}
-          />
+          />*/}
           <Link to="/" style={{ textDecoration: "none" }}>
             <Typography
               variant="h5"
@@ -127,12 +162,15 @@ function ResponsiveAppBar({ toggleTheme, theme }) {
               </Button>
             ))}
 
-            <LoginBtn/> 
+            <LoginBtn />
+          </Box>
 
-          </Box>
-          <Box>
-            <UserIcon />
-          </Box>
+          <Tooltip title={user ? "Ver perfil" : "Iniciar sesión"}>
+            <Box sx={{ mx: 1 }}>
+              <UserIcon />
+            </Box>
+          </Tooltip>
+
           <Box
             onClick={toggleTheme}
             sx={{
@@ -144,14 +182,14 @@ function ResponsiveAppBar({ toggleTheme, theme }) {
               cursor: "pointer",
             }}
           >
-            {theme === "darkTheme" ? (
+            {theme.palette.mode === "dark" ? (
               <Brightness6Icon
                 sx={{
                   display: "flex",
                   scale: 0.8,
                   alignItems: "center",
                   justifyContent: "center",
-                  color: "text.primary",
+                  color: "primary.light",
                 }}
               />
             ) : (
@@ -161,7 +199,7 @@ function ResponsiveAppBar({ toggleTheme, theme }) {
                   scale: 0.8,
                   alignItems: "center",
                   justifyContent: "center",
-                  color: "text.primary",
+                  color: "primary.light",
                 }}
               />
             )}

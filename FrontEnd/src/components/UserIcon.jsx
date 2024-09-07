@@ -19,7 +19,7 @@ function UserIcon() {
           <Avatar
             sx={{
               cursor: "pointer",
-              color: "primary.main",
+              color: "primary.light",
               display: "flex",
               scale: 0.8,
               alignItems: "center",

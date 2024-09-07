@@ -1,20 +1,20 @@
 /* eslint-disable react/prop-types */
 import { Container, Stack, TextField, Typography } from "@mui/material";
 
-export default function AddNotes({ note, handleNoteChange }) {
+export default function AddImage({ note, handleImageChange }) {
   return (
     <Container maxWidth="sm" sx={{ mt: 4 }}>
       <Stack spacing={2}>
         <Typography variant="h5" gutterBottom>
-          Notas
+          Imagen
         </Typography>
 
         <TextField
           fullWidth
           multiline
-          label="Notas"
+          label="URL de la imagen"
           value={note}
-          onChange={(event) => handleNoteChange(event)}
+          onChange={(event) => handleImageChange(event)}
           variant="outlined"
         />
       </Stack>
