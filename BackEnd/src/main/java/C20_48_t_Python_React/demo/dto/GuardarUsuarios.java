@@ -26,9 +26,6 @@ public class GuardarUsuarios implements Serializable {
     @Size(min=8)
     private String repeatcontrasena;
     private String Rol;
-    private int statusCode;
-    private String error;
-    private String message;
     private String token;
     private String refreshToken;
     private String expirationTime;
