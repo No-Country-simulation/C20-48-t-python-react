@@ -12,6 +12,7 @@ import Profile from "./pages/Profile";
 import RecipeEdit from "./pages/RecipeEdit";
 import Box from "@mui/material/Box";
 import fondo from "./assets/fondoapp.png";
+
 export default function App() {
   const [theme, setTheme] = useState(darkTheme);
 

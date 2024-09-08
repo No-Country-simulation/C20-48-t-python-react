@@ -23,6 +23,7 @@ export default function Hero() {
         sx={{
           padding: 2,
           backgroundColor: "#4d2629B8",
+          color: "white",
         }}
       >
         <h1>Receta destacada</h1>

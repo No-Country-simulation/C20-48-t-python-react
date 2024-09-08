@@ -45,7 +45,6 @@ export default function App({ category }) {
             },
           }}
           loop={true}
-          centeredSlides={false}
           autoplay={{ delay: 5000, disableOnInteraction: false }}
           spaceBetween={30}
           grabCursor={true}
