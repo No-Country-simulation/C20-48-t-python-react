@@ -76,7 +76,6 @@ function RecipeSteps() {
     setCategories(value);
   };
 
-  // Función para recibir la información de los ingredientes
   const handleIngredientsChange = (newIngredients) => {
     setIngredients(newIngredients);
   };

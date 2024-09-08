@@ -8,12 +8,16 @@ import DisplayCategories from "../components/DisplayCategories";
 import Footer from "../components/Footer";
 import CategoriesBar from "../components/UI/CategoriesBar";
 import Divider from "@mui/material/Divider";
+import RamenDiningIcon from "@mui/icons-material/RamenDining";
+import { useState } from "react";
 
 function Home() {
+  const [selectedCategory, setSelectedCategory] = useState("all");
+
   return (
     <>
-      <Hero />
       <Container maxWidth={"xl"} sx={{ mt: 4 }}>
+        <Hero />
         <Container
           maxWidth={"xl"}
           sx={{
@@ -22,16 +26,36 @@ function Home() {
             backgroundColor: "background.paper",
           }}
         >
-          <Typography sx={{ paddingBlock: 2, paddingTop: 4 }} variant="h4">
-            Buscar recetas...
+          <Typography
+            sx={{
+              paddingBlock: 2,
+              paddingTop: 4,
+              width: "100%",
+              display: "inline-flex",
+              alignItems: "center",
+            }}
+            variant="h4"
+          >
+            Buscar recetas
+            <RamenDiningIcon fontSize="large" sx={{ ml: 3 }} />
           </Typography>
           <SearchBar />
           <Divider sx={{ marginBlock: 2 }} />
-          <CategoriesBar />
+          <CategoriesBar
+            selectedCategory={selectedCategory}
+            setSelectedCategory={setSelectedCategory}
+          />
         </Container>
-        <Slider />
-        <DisplayCategories category="Recetas" />
-        <DisplayCategories category="Fitness" />
+        {selectedCategory !== "all" ? (
+          <DisplayCategories category={selectedCategory} />
+        ) : (
+          <>
+            <Slider category="Fitness" />
+            <Slider category="Desayunos" />
+            <Slider category="China" />
+            <Slider category="Mexicana" />
+          </>
+        )}
         <FloatingAB />
       </Container>
       <Footer />

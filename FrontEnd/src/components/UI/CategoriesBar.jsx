@@ -6,7 +6,10 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { useState } from "react";
 
-export default function CategoriesBar() {
+export default function CategoriesBar({
+  selectedCategory,
+  setSelectedCategory,
+}) {
   const categories = [
     "Cocina",
     "Cafe",
@@ -41,8 +44,6 @@ export default function CategoriesBar() {
     "Bebidas",
     "Snacks",
   ];
-
-  const [selectedCategory, setSelectedCategory] = useState(null);
 
   function handleClick(category) {
     setSelectedCategory(category);
@@ -89,7 +90,7 @@ export default function CategoriesBar() {
               variant={selectedCategory === category ? "filled" : "outlined"}
               onDelete={
                 selectedCategory === category
-                  ? () => setSelectedCategory(null)
+                  ? () => setSelectedCategory("all")
                   : undefined
               }
               deleteIcon={selectedCategory === category ? <DoneIcon /> : null}
