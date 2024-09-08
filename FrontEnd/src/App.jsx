@@ -28,8 +28,8 @@ export default function App() {
       <Box
         sx={{
           backgroundImage: `url(${fondo})`,
-          backgroundSize: "fill",
-          backgroundPosition: "repeat",
+          backgroundSize: "cover",
+          backgroundAttachment: "fixed",
           minHeight: "100vh",
           zIndex: -1,
         }}

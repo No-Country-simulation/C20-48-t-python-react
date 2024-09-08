@@ -17,6 +17,7 @@ export default function App({ category }) {
           paddingLeft: 4,
           borderRadius: 4,
           backgroundColor: "background.paper",
+          boxShadow: 2,
         }}
       >
         {category}
@@ -29,6 +30,7 @@ export default function App({ category }) {
           padding: 2,
           color: "white",
           backgroundColor: "background.paper",
+          boxShadow: 2,
         }}
       >
         <Swiper
