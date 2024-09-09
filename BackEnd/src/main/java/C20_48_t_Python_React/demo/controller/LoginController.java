@@ -1,15 +1,31 @@
 package C20_48_t_Python_React.demo.controller;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import C20_48_t_Python_React.demo.dto.GuardarUsuarios;
+import C20_48_t_Python_React.demo.dto.auth.LoginRequest;
+import C20_48_t_Python_React.demo.dto.auth.LoginResponse;
+import C20_48_t_Python_React.demo.service.auth.AuthenticationService;
+import C20_48_t_Python_React.demo.service.impl.UsuarioServiceImpl;
+import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/login")
 public class LoginController {
-    @GetMapping()
-   public String login() {
-        return "Hellow word login";
+    @Autowired
+    private AuthenticationService authenticationService;
+
+    @PostMapping()
+    public  ResponseEntity<LoginResponse> authenticate(
+            @RequestBody @Valid LoginRequest loginRequest){
+
+        LoginResponse rsp = authenticationService.login(loginRequest);
+        return ResponseEntity.ok(rsp);
+    }
+    @GetMapping("/validate-token")
+    public ResponseEntity<Boolean> validate(@RequestParam String jwt){
+        boolean isTokenValid = authenticationService.validateToken(jwt);
+        return ResponseEntity.ok(isTokenValid);
     }
 }
