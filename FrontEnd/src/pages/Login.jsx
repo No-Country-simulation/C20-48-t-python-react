@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import {
   TextField,
   Button,
@@ -12,18 +12,17 @@ import { UserContext } from "../Context/UserContext";
 
 function Login() {
   // Importar el contexto de usuario
-  const { userInfo } = useContext(UserContext);
+  const { userInfo, setUserInfo, userList } = useContext(UserContext);
 
-  useEffect(() => {
-    console.log(userInfo);
-  }, [userInfo]);
+  console.log(userList.map(user => user));
+  console.log(userInfo);
+  
 
   // Estado para manejar los valores de los campos y los errores
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
-  const [isLogin, setIsLogin] = useState(false);
 
   // Función para manejar el envío del formulario
   const handleSubmit = (event) => {
@@ -49,20 +48,21 @@ function Login() {
       valid = false;
     }
 
-    if (email !== userInfo.email) {
-      setEmailError("El correo electrónico o usuario es incorrecto.");
-      valid = false;
-    }
+    if (email && password) {
+      const user = userList.filter((user) => {
+        return user.email === email && user.password === password;
+      });
+  
+      if (user.length === 0) {
+        setEmailError("El correo electrónico es incorrecto.");
+        setPasswordError("La contraseña es incorrecta.");
+        valid = false;
+      }
 
-    if (password !== userInfo.password) {
-      setPasswordError("La contraseña es incorrecta.");
-      valid = false;
-    }
-
-    // Si todo está bien, puedes manejar el envío del formulario aquí
-    if (valid) {
-      console.log("Formulario enviado");
-      setIsLogin(true);
+      if (valid) {
+        setUserInfo(user[0]);
+/*         setIsLogin(true);
+ */      }
     }
   };
 
@@ -131,7 +131,7 @@ function Login() {
         </Typography>
         <p></p>
         {
-          !isLogin ?
+          !userInfo.name ?
           <Button variant="contained" onClick={handleSubmit}>
           Inicia sesión
         </Button>

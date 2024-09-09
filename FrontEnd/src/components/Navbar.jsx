@@ -16,13 +16,17 @@ import {
 } from "@mui/material";
 import UserIcon from "./UserIcon";
 import LoginBtn from "./LoginBtn.jsx";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useTheme } from "@emotion/react";
+import { UserContext } from "../Context/UserContext.jsx";
 
 const menu = ["Home", "Mis recetas", "Favoritos"];
 
 function ResponsiveAppBar({ toggleTheme }) {
   const [anchorElNav, setAnchorElNav] = useState(null);
+  const {userInfo} = useContext(UserContext);
+
+
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -33,7 +37,7 @@ function ResponsiveAppBar({ toggleTheme }) {
   };
 
   //Solo para testear Tooltip
-  let user = "";
+  let user = userInfo.name;
 
   // Theme context para cambiar icono
   const theme = useTheme();

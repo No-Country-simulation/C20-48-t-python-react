@@ -26,7 +26,7 @@ function Register() {
   
   // Importar el contexto de usuario
 
-  const { userInfo, setUserInfo } = useContext(UserContext);
+  const { userInfo, saveUserInfo , userList} = useContext(UserContext);
 
   // Función para manejar el envío del formulario
   const handleSubmit = (event) => {
@@ -48,7 +48,7 @@ function Register() {
     } else if (email.split("@")[0].length < 3) {
       setEmailError("El email debe tener al menos 3 caracteres.");
       valid = false;
-    } else if (email.split("@")[0] === userInfo.email.split("@")[0]) {
+    } else if (email.split("@")[0] === userList.map(user => user.email.split("@")[0])) {
       setEmailError("El email ya existe.");
       valid = false;
     }
@@ -79,7 +79,9 @@ function Register() {
         email: email,
         password: password,
       };
-      setUserInfo(newUserInfo);
+      console.log(newUserInfo);
+      
+      saveUserInfo(newUserInfo);
       setIsRegistered(true);
     }
 
