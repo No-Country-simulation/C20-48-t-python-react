@@ -1,10 +1,14 @@
 package C20_48_t_Python_React.demo.persistence.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -14,6 +18,7 @@ import java.util.List;
 public class Recetas {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonProperty(access = Access.READ_ONLY)
     private Long id;
 
     @Column(nullable = false)
@@ -28,27 +33,32 @@ public class Recetas {
 
     @Column(name = "imagen_url", columnDefinition = "TEXT")
     private String imagenUrl;
-
+    @Column(name = "tips", columnDefinition = "TEXT")
+    private String tips;
     @ManyToOne
     @JoinColumn(name = "usuario_id", nullable = false)
+    @JsonProperty(access = Access.READ_ONLY)
     private Usuarios usuarios;
 
     @Column(name = "fecha_creacion", nullable = false)
+    @JsonProperty(access = Access.READ_ONLY)
     private LocalDateTime fechaCreacion;
 
-    @OneToMany(mappedBy = "recetas")
-    private List<RecetaCategoria> recetaCategorias;
-
-    @OneToMany(mappedBy = "recetas")
-    private List<Pasos> pasos;
+    @OneToMany(mappedBy = "recetas", cascade = CascadeType.ALL)
+    private List<RecetaCategoria> recetaCategorias = new ArrayList<>();
 
     @OneToMany(mappedBy = "recetas")
     private List<Likes> likes;
 
-    @OneToMany(mappedBy = "recetas")
-    private List<Ingredientes> ingredientes;
+    @OneToMany(mappedBy = "recetas", cascade = CascadeType.ALL)
+    private List<Ingredientes> ingredientes = new ArrayList<>();
+
+    @OneToMany(mappedBy = "recetas", cascade = CascadeType.ALL)
+    private List<Pasos> pasos = new ArrayList<>();
+
 
     @OneToMany(mappedBy = "recetas")
+
     private List<Comentarios> comentarios;
 
     @Transient

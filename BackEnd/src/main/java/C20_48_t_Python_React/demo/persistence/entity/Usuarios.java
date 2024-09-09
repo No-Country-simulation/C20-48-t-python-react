@@ -1,12 +1,16 @@
 package C20_48_t_Python_React.demo.persistence.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
@@ -23,6 +27,7 @@ import java.util.List;
 public class Usuarios implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonProperty(access = Access.READ_ONLY)
     private Long id;
 
     @Column(name = "nombre_usuario", nullable = false, unique = true)
@@ -36,6 +41,7 @@ public class Usuarios implements UserDetails {
     private String contrasena;
 
     @Column(name = "fecha_registro", nullable = false)
+    @JsonProperty(access = Access.READ_ONLY)
     private LocalDateTime fechaRegistro;
 
     @Column(name = "intentos_fallidos")
@@ -46,6 +52,7 @@ public class Usuarios implements UserDetails {
 
     @OneToMany(mappedBy = "usuarios")
     private List<Recetas> recetas;
+
     //Une las recetas del usuario mediante el id
 
     @OneToMany(mappedBy = "usuarios")
