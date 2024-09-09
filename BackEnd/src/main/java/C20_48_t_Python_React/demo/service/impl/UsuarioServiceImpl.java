@@ -1,10 +1,10 @@
 package C20_48_t_Python_React.demo.service.impl;
 
 import C20_48_t_Python_React.demo.dto.GuardarUsuarios;
+import C20_48_t_Python_React.demo.dto.auth.LoginResponse;
 import C20_48_t_Python_React.demo.exeption.InvalidPasswordException;
 import C20_48_t_Python_React.demo.persistence.entity.Usuarios;
 import C20_48_t_Python_React.demo.persistence.repository.UsuariosRepository;
-import C20_48_t_Python_React.demo.service.JWTUtils;
 import C20_48_t_Python_React.demo.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
+import java.util.Optional;
 
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
@@ -23,56 +23,23 @@ public class UsuarioServiceImpl implements UsuarioService {
     private UsuariosRepository userRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
-    @Autowired
-    private JWTUtils jwtUtils;
-    @Autowired
-    private AuthenticationManager authenticationManager;
     @Override
     public Usuarios registerOneCustomer(GuardarUsuarios newUser) {
         validatePassword(newUser);
 
-
         Usuarios user = new Usuarios();
+        user.setEmail(newUser.getEmail());
         user.setNombreUsuario(newUser.getNombre());
         user.setContrasena(passwordEncoder.encode(newUser.getContrasena()));
-        user.setEmail(newUser.getEmail());
         user.setFechaRegistro(LocalDateTime.now());
         user.setRol("USER");
 
         return userRepository.save(user);
     }
-    public GuardarUsuarios login(GuardarUsuarios loginRequest) {
-        GuardarUsuarios response = new GuardarUsuarios();
-        try {
-            authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(
-                            loginRequest.getEmail(),
-                            loginRequest.getContrasena()
-                    )
-            );
-
-            var user = userRepository.findByEmail(loginRequest.getEmail())
-                    .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado"));
-
-            // Generar token JWT y refresh token
-            var jwt = jwtUtils.generateToken(user);
-            var refreshToken = jwtUtils.generateRefreshToken(new HashMap<>(), user);
-
-            response.setStatusCode(200);
-            response.setToken(jwt);
-            response.setRol(user.getRol());
-            response.setRefreshToken(refreshToken);
-            response.setExpirationTime("24Hrs");
-            response.setMessage("Successfully Logged In");
-
-        } catch (Exception e) {
-            response.setStatusCode(500);
-            response.setMessage("Login failed: " + e.getMessage());
-        }
-
-        return response;
+    @Override
+    public Optional<Usuarios> findOneByUsername(String username) {
+        return userRepository.findByEmail(username);
     }
-
     private void validatePassword(GuardarUsuarios dto) {
         if(!StringUtils.hasText(dto.getContrasena())|| !StringUtils.hasText(dto.getRepeatcontrasena())){
             throw new InvalidPasswordException("No coinciden las contraseñas");
