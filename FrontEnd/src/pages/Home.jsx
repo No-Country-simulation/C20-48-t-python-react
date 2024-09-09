@@ -22,7 +22,7 @@ function Home() {
           maxWidth={"xl"}
           sx={{
             borderRadius: "10px",
-            boxShadow: " 0 0 6px 5px rgba(0, 0, 0, 0.1)", // Ajusta el box-shadow para el efecto de desvanecimiento
+            // boxShadow: " 0 0 6px 5px rgba(0, 0, 0, 0.1)", // Ajusta el box-shadow para el efecto de desvanecimiento
             boxShadow: 2,
             backgroundColor: "background.paper",
           }}
