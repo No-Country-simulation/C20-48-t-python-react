@@ -15,19 +15,18 @@ export default function Hero() {
         paddingBlock: 2,
         backgroundImage: `url("https://www.semana.com/resizer/v2/CBUJV763ORE2VENVF5HWJYWPQA.jpg?auth=282369669486f101ef91c99b4fb3cebcca0cc5a01d54a1baec7230089b2e7945&smart=true&quality=75&width=1280&height=720")`,
         backgroundSize: "cover",
-        width: "90%",
         color: "white",
+        boxShadow: 4,
       }}
     >
-      <h1>Receta destacada</h1>
       <Card
         sx={{
-          boxShadow: 24,
           padding: 2,
-          backgroundColor: "#2a3635B8",
+          backgroundColor: "#4d2629B8",
           color: "white",
         }}
       >
+        <h1>Receta destacada</h1>
         <h2>Lasagna</h2>
         <h5>por: Carlos</h5>
         <p>

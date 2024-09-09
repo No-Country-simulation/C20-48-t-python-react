@@ -38,7 +38,16 @@ export default function AddIngredients({ ingredients, onIngredientsChange }) {
       </Typography>
       <Stack spacing={2}>
         {ingredients.map((ingredient, index) => (
-          <Stack key={index} direction="row" alignItems="center" spacing={2}>
+          <Stack
+            key={index}
+            direction="row"
+            alignItems="center"
+            spacing={2}
+            sx={{
+              display: "grid",
+              gridTemplateColumns: "2fr 3fr 2fr 40px",
+            }}
+          >
             <TextField
               fullWidth
               label="Ingrediente"
@@ -49,15 +58,7 @@ export default function AddIngredients({ ingredients, onIngredientsChange }) {
               }
               variant="outlined"
             />
-            <FormControl
-              variant="outlined"
-              sx={{
-                minWidth: {
-                  xs: "20%",
-                  sm: 120,
-                },
-              }}
-            >
+            <FormControl variant="outlined">
               <InputLabel>Unidad</InputLabel>
               <Select
                 value={ingredient.unit}
@@ -100,14 +101,16 @@ export default function AddIngredients({ ingredients, onIngredientsChange }) {
             )}
           </Stack>
         ))}
-        <Button
-          variant="contained"
-          startIcon={<AddIcon />}
-          onClick={handleAddIngredient}
-        >
-          Agregar Ingrediente
-        </Button>
       </Stack>
+      <Button
+        fullWidth
+        sx={{ mt: 2 }}
+        variant="contained"
+        startIcon={<AddIcon />}
+        onClick={handleAddIngredient}
+      >
+        Agregar Ingrediente
+      </Button>
     </Container>
   );
 }

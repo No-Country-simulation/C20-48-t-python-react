@@ -11,8 +11,6 @@ import {
   FormControl,
   InputLabel,
 } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
-import DeleteIcon from "@mui/icons-material/Delete";
 
 export default function AddTimingsAndDifficulty({
   timings,
@@ -24,16 +22,19 @@ export default function AddTimingsAndDifficulty({
         Tiempos y Dificultad (min)
       </Typography>
       <Stack spacing={2}>
-        <Stack direction="row" alignItems="center" spacing={2}>
-          <FormControl
-            variant="outlined"
-            sx={{
-              minWidth: {
-                xs: "20%",
-                sm: 120,
-              },
-            }}
-          >
+        <Stack
+          sx={{
+            display: "grid",
+            gridTemplateColumns: {
+              xs: "1fr",
+              sm: "1fr 1fr 1fr",
+            },
+          }}
+          useFlexGap
+          alignItems="center"
+          spacing={2}
+        >
+          <FormControl variant="outlined">
             <InputLabel>Dificultad</InputLabel>
             <Select
               value={timings.difficulty}
