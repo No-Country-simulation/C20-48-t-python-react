@@ -11,6 +11,9 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import RecipeEdit from "./pages/RecipeEdit";
+import Favourites from "./pages/Favourites";
+import About from "./pages/About";
+import MyRecipes from "./pages/MyRecipes";
 import Box from "@mui/material/Box";
 import fondo from "./assets/fondoapp.png";
 
@@ -19,7 +22,7 @@ export default function App() {
 
   const toggleTheme = () => {
     setTheme((prevTheme) =>
-      prevTheme === lightTheme ? darkTheme : lightTheme
+      prevTheme === lightTheme ? darkTheme : lightTheme,
     );
   };
 
@@ -35,9 +38,8 @@ export default function App() {
           zIndex: -1,
         }}
       >
-          <BrowserRouter>
-
-        <UserProvider>
+        <BrowserRouter>
+          <UserProvider>
             <Navbar toggleTheme={toggleTheme} />
             <Routes>
               <Route exact path="/" element={<Home />} />
@@ -46,10 +48,12 @@ export default function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/registro" element={<Register />} />
               <Route path="/perfil" element={<Profile />} />
+              <Route path="/mis-recetas" element={<MyRecipes />} />
+              <Route path="/favoritos" element={<Favourites />} />
+              <Route path="/about" element={<About />} />
             </Routes>
-        </UserProvider>
-
-          </BrowserRouter>
+          </UserProvider>
+        </BrowserRouter>
       </Box>
     </ThemeProvider>
   );
