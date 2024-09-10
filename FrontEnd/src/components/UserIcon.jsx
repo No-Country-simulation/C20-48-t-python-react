@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { UserContext } from "../Context/UserContext";
 
 function UserIcon() {
-  const { isLogin } = useContext(UserContext);
+  const { isLogin, userInfo } = useContext(UserContext);
 
   return (
     <>
@@ -21,6 +21,7 @@ function UserIcon() {
       >
         <Link to={isLogin ? "/perfil" : "/login"} style={{ textDecoration: "none" }}>
           <Avatar
+          src={isLogin ? userInfo.avatar : ""}
             sx={{
               cursor: "pointer",
               color: "primary.light",
