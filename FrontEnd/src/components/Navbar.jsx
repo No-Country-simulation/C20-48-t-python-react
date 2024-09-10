@@ -18,13 +18,22 @@ import {
 } from "@mui/material";
 import Drawer from "@mui/material/Drawer";
 import LoginBtn from "./LoginBtn.jsx";
-import { useState } from "react";
+import LinkUnstyled from "./UI/LinkUnstyled";
+import { useContext, useState } from "react";
 import { useTheme } from "@emotion/react";
+import { UserContext } from "../Context/UserContext.jsx";
 
-const menu = ["Home", "Mis recetas", "Favoritos"];
+// const menu = ["Home", "Mis recetas", "Favoritos"];
+const menu = [
+  { name: "Home", path: "/" },
+  { name: "Mis recetas", path: "/mis-recetas" },
+  { name: "Favoritos", path: "/favoritos" },
+  { name: "About", path: "/about" },
+];
 
 function ResponsiveAppBar({ toggleTheme }) {
   const [anchorElNav, setAnchorElNav] = useState(null);
+  const { userInfo } = useContext(UserContext);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -35,7 +44,7 @@ function ResponsiveAppBar({ toggleTheme }) {
   };
 
   //Solo para testear Tooltip
-  let user = "";
+  let user = userInfo.name;
 
   // Theme context para cambiar icono
   const theme = useTheme();
@@ -66,7 +75,10 @@ function ResponsiveAppBar({ toggleTheme }) {
               direction="row"
               alignItems="center"
               gap={2}
-              sx={{ alignItems: "center", justifyContent: "center" }}
+              sx={{
+                alignItems: "center",
+                justifyContent: "center",
+              }}
             >
               <AppIcon scale={0.7} />
               <RecetAppLogoTextLink />
@@ -90,16 +102,21 @@ function ResponsiveAppBar({ toggleTheme }) {
                 <Stack
                   direction="row"
                   alignItems="center"
-                  sx={{ marginBlock: 2, gap: 2, justifyContent: "center" }}
+                  sx={{
+                    marginBlock: 2,
+                    gap: 2,
+                    paddingBlock: 2,
+                    borderRadius: "10px",
+                    justifyContent: "center",
+                    backgroundColor: "#00000066",
+                  }}
                 >
                   <AppIcon />
                   <RecetAppLogoTextLink />
                 </Stack>
                 {menu.map((page) => (
-                  <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Typography sx={{ textAlign: "center", marginTop: 2 }}>
-                      {page}
-                    </Typography>
+                  <MenuItem key={page.name} onClick={handleCloseNavMenu}>
+                    <LinkUnstyled to={page.path}>{page.name}</LinkUnstyled>
                   </MenuItem>
                 ))}
                 <Typography
@@ -116,7 +133,6 @@ function ResponsiveAppBar({ toggleTheme }) {
             </Drawer>
           </Box>
           {/* End Mobile Menu */}
-
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             <Stack direction="row" alignItems="center" gap={2}>
               <AppIcon />
@@ -125,14 +141,14 @@ function ResponsiveAppBar({ toggleTheme }) {
             <Stack direction="row" ml={4} alignItems="center" gap={2}>
               {menu.map((page) => (
                 <Button
-                  key={page}
+                  key={page.name}
                   onClick={handleCloseNavMenu}
                   sx={{
                     color: "white",
                     display: "block",
                   }}
                 >
-                  {page}
+                  <LinkUnstyled to={page.path}>{page.name}</LinkUnstyled>
                 </Button>
               ))}
             </Stack>
