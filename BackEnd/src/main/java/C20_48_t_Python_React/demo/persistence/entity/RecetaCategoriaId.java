@@ -13,7 +13,6 @@ import java.util.Objects;
 @NoArgsConstructor
 @Embeddable
 public class RecetaCategoriaId implements Serializable {
-
     private Long recetaId;
     private Long categoriaId;
     @Override

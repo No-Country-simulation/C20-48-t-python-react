@@ -1,12 +1,28 @@
 import Paper from "@mui/material/Paper";
 import Container from "@mui/material/Container";
 import Card from "./Card";
-
+import Typography from "@mui/material/Typography";
 export default function DisplayCategories({ category }) {
   return (
-    <>
-      <h1>{category}</h1>
+    <Container sx={{ marginTop: 4 }} maxWidth={"xl"} disableGutters>
+      <Typography
+        variant="h5"
+        sx={{
+          padding: 2,
+          paddingLeft: 4,
+          borderRadius: 4,
+          backgroundColor: "background.paper",
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        Recetas de
+        <Typography variant="h5" sx={{ ml: 1, color: "primary.main" }}>
+          "{category}"
+        </Typography>
+      </Typography>
       <Paper
+        elevation={0}
         sx={{
           padding: {
             xs: 1,
@@ -31,7 +47,8 @@ export default function DisplayCategories({ category }) {
             padding: 0,
           }}
         >
-          <Card color="red" />
+          <Card />
+          <Card />
           <Card />
           <Card />
           <Card />
@@ -39,6 +56,6 @@ export default function DisplayCategories({ category }) {
           <Card />
         </Container>
       </Paper>
-    </>
+    </Container>
   );
 }

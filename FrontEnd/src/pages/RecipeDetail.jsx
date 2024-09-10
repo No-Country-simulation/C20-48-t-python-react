@@ -82,9 +82,9 @@ function RecipeDetail() {
                   margin: 0,
                 }}
               >
-                {receta.categoria.map((categoria) => (
+                {receta.categoria.map((categoria, i) => (
                   <Chip
-                    key={categoria}
+                    key={categoria + i}
                     color="primary"
                     label={categoria}
                     size="medium"
@@ -118,14 +118,31 @@ function RecipeDetail() {
           <IngredientList ingredients={receta.ingredientes} />
           <Divider sx={{ marginBlock: 2 }} />
           <Container disableGutters>
-            <Box direction="row" sx={{ gap: 2 }}>
-              <Typography gutterBottom variant="h4">
+            <Stack
+              sx={{
+                flexDirection: {
+                  xs: "column",
+                  sm: "row",
+                },
+                gap: 2,
+                padding: 2,
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
+              <Typography gutterBottom variant="h4" m={0}>
                 Preparación :
               </Typography>
               <Typography variant="h6" color="success">
-                Dificultad {receta.dificultad}
+                Dificultad: {receta.dificultad}
               </Typography>
-            </Box>
+              <Typography variant="h6" color="success">
+                Preparación: {receta.tiempo_preparacion} min
+              </Typography>
+              <Typography variant="h6" color="success">
+                Cocción: {receta.tiempo_coccion} min
+              </Typography>
+            </Stack>
             <Box
               sx={{
                 whiteSpace: "pre-wrap",
@@ -137,7 +154,7 @@ function RecipeDetail() {
             >
               {receta.descripcion.map((paso, i) => (
                 <Paper
-                  key={paso}
+                  key={paso + i}
                   elevation={2}
                   sx={{
                     marginBlock: 2,

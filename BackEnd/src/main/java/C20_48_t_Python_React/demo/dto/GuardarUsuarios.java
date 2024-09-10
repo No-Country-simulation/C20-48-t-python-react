@@ -1,4 +1,6 @@
 package C20_48_t_Python_React.demo.dto;
+import C20_48_t_Python_React.demo.persistence.entity.Recetas;
+import C20_48_t_Python_React.demo.persistence.entity.Likes;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -22,6 +25,8 @@ public class GuardarUsuarios implements Serializable {
     private String contrasena;
     @Size(min=8)
     private String repeatcontrasena;
+
+
 
 
     public String getRepeatcontrasena() {

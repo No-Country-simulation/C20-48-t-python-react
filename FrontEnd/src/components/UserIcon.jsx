@@ -5,17 +5,17 @@ import { Link } from "react-router-dom";
 function UserIcon() {
   return (
     <>
-      <Link to="/perfil" style={{ textDecoration: "none" }}>
-        <Box
-          sx={{
-            flexGrow: 0,
-            margin: 0,
-            padding: 0.7,
-            borderRadius: "100%",
-            backgroundColor: "background.paper",
-            cursor: "pointer",
-          }}
-        >
+      <Box
+        sx={{
+          flexGrow: 0,
+          margin: 0,
+          padding: 0.7,
+          borderRadius: "100%",
+          backgroundColor: "background.default",
+          cursor: "pointer",
+        }}
+      >
+        <Link to="/perfil" style={{ textDecoration: "none" }}>
           <Avatar
             sx={{
               cursor: "pointer",
@@ -26,8 +26,8 @@ function UserIcon() {
               justifyContent: "center",
             }}
           />
-        </Box>
-      </Link>
+        </Link>
+      </Box>
     </>
   );
 }

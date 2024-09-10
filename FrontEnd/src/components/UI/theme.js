@@ -17,7 +17,8 @@ export const darkTheme = createTheme({
       contrastText: "#000",
     },
     background: {
-      default: "#4D2629",
+      // default: "#4D2629",
+      default: "#513e47",
       paper: "#381D2A",
     },
     text: {
@@ -43,19 +44,22 @@ export const lightTheme = createTheme({
     mode: "light",
     primary: {
       light: "#ff7961",
-      main: "#BA5624",
+      // main: "#BA5624",
+      main: "#475f55",
       dark: lime[900],
       contrastText: "black",
     },
     secondary: {
-      light: "#ff7961",
-      main: "##FCDE9C",
+      light: "##FCDE9C",
+      main: "#ff7961",
       dark: "#ba000d",
       contrastText: "#000",
     },
     background: {
-      default: "#FDEECD",
-      paper: "#FCDE9C",
+      // default: "#FDEECD",
+      // paper: "#FCDE9C",
+      default: "#ffffff",
+      paper: "#ffffff",
     },
     text: {
       primary: "#1E1E1E",

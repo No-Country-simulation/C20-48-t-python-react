@@ -27,15 +27,13 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Box
-        sx={
-          {
-            backgroundImage: `url(${fondo})`,
-            backgroundSize: "fill",
-            backgroundPosition: "repeat",
-            minHeight: "100vh",
-            zIndex: -1
-          }
-        }
+        sx={{
+          backgroundImage: `url(${fondo})`,
+          backgroundSize: "cover",
+          backgroundAttachment: "fixed",
+          minHeight: "100vh",
+          zIndex: -1,
+        }}
       >
           <BrowserRouter>
 

@@ -11,29 +11,40 @@ import { useTheme, useMediaQuery } from "@mui/material";
 import { useState, useRef } from "react";
 
 export default function SearchBar() {
-    // Arrays de pruebas para el AutoCompleteSelection
-    const dificulty = ["Facil", "Normal", "Dificil"];
+  // Arrays de pruebas para el AutoCompleteSelection
+  const dificulty = ["Facil", "Normal", "Dificil"];
 
-    const categories = [
-      "Cocina",
-      "Cafe",
-      "Cervezas",
-      "Comida",
-      "Vinos",
-      "Pastas",
-      "Desayunos",
-      "Ensaladas",
-      "Hamburguesas",
-      "Carnes",
-      "Pescados",
-      "Entradas",
-      "Sopas",
-      "Postres",
-      "Bebidas",
-      "Snacks",
-    ];
-  
-    const ingredients = ["Arroz", "Pollo", "Carne", "Cerdo", "Pescado", "tomate", "pepino", "ajo", "cebolla", "oreganos"];
+  const categories = [
+    "Cocina",
+    "Cafe",
+    "Cervezas",
+    "Comida",
+    "Vinos",
+    "Pastas",
+    "Desayunos",
+    "Ensaladas",
+    "Hamburguesas",
+    "Carnes",
+    "Pescados",
+    "Entradas",
+    "Sopas",
+    "Postres",
+    "Bebidas",
+    "Snacks",
+  ];
+
+  const ingredients = [
+    "Arroz",
+    "Pollo",
+    "Carne",
+    "Cerdo",
+    "Pescado",
+    "tomate",
+    "pepino",
+    "ajo",
+    "cebolla",
+    "oreganos",
+  ];
 
   const [searchTerm, setSearchTerm] = useState("");
   const [category, setCategory] = useState("");

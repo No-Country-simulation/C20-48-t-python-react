@@ -165,6 +165,7 @@ function Register() {
             Inicia sesión
           </Link>
         </Typography>
+
         <p></p>
         {/* Botón para enviar el formulario */
         !isRegistered ?

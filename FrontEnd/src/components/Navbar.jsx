@@ -1,20 +1,22 @@
 import MenuIcon from "@mui/icons-material/Menu";
 import ContrastIcon from "@mui/icons-material/Contrast";
-import RestaurantMenuIcon from "@mui/icons-material/RestaurantMenu";
+import UserIcon from "./UserIcon";
+import AppIcon from "./AppIcon";
 import Brightness6Icon from "@mui/icons-material/Brightness6";
+import RecetAppLogoTextLink from "./UI/RecetAppLogoTextLink";
 import {
   AppBar,
   Box,
   Button,
   Container,
   IconButton,
-  Menu,
+  Stack,
   MenuItem,
   Toolbar,
   Tooltip,
   Typography,
 } from "@mui/material";
-import UserIcon from "./UserIcon";
+import Drawer from "@mui/material/Drawer";
 import LoginBtn from "./LoginBtn.jsx";
 import { useContext, useState } from "react";
 import { useTheme } from "@emotion/react";
@@ -41,34 +43,18 @@ function ResponsiveAppBar({ toggleTheme }) {
 
   // Theme context para cambiar icono
   const theme = useTheme();
+
   return (
-    <AppBar position="sticky">
-      <Container maxWidth="xl">
+    <AppBar position="sticky" elevation={0}>
+      <Container maxWidth="full" sx={{ margin: 0 }}>
         <Toolbar disableGutters>
-          <RestaurantMenuIcon
-            sx={{ display: { xs: "none", md: "flex", color: "white" }, mr: 1 }}
-          />
-
-            <Typography
-              variant="h6"
-              noWrap
-              component="a"
-              href="#app-bar-with-responsive-menu"
-              sx={{
-                mr: 2,
-                display: { xs: "none", md: "flex" },
-                fontFamily: "monospace",
-                fontWeight: 700,
-                letterSpacing: ".1rem",
-                color: "white",
-                textDecoration: "none",
-              }}
-            >
-              RECETAPP
-            </Typography>
-
           {/* Start Mobile Menu */}
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: { xs: "flex", md: "none" },
+            }}
+          >
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -79,63 +65,80 @@ function ResponsiveAppBar({ toggleTheme }) {
             >
               <MenuIcon sx={{ color: "white" }} />
             </IconButton>
-            <Menu
+
+            <Stack
+              direction="row"
+              alignItems="center"
+              gap={2}
+              sx={{ alignItems: "center", justifyContent: "center" }}
+            >
+              <AppIcon scale={0.7} />
+              <RecetAppLogoTextLink />
+            </Stack>
+            <Drawer
+              maxWidth="md"
               id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
+              anchor="left"
+              elevation={0}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
-              sx={{ display: { xs: "block", md: "none" } }}
             >
-              {menu.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography sx={{ textAlign: "center" }}>{page}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
+              <Container
+                sx={{
+                  paddingBlock: 4,
+                  display: "flex",
+                  flexDirection: "column",
+                  width: "250px",
+                }}
+              >
+                <Stack
+                  direction="row"
+                  alignItems="center"
+                  sx={{ marginBlock: 2, gap: 2, justifyContent: "center" }}
+                >
+                  <AppIcon />
+                  <RecetAppLogoTextLink />
+                </Stack>
+                {menu.map((page) => (
+                  <MenuItem key={page} onClick={handleCloseNavMenu}>
+                    <Typography sx={{ textAlign: "center", marginTop: 2 }}>
+                      {page}
+                    </Typography>
+                  </MenuItem>
+                ))}
+                <Typography
+                  variant="body2"
+                  sx={{
+                    textAlign: "center",
+                    color: "text.disabled",
+                    marginTop: 10,
+                  }}
+                >
+                  © {new Date().getFullYear()} RecetApp
+                </Typography>
+              </Container>
+            </Drawer>
           </Box>
           {/* End Mobile Menu */}
-          <RestaurantMenuIcon
-            sx={{ display: { xs: "flex", md: "none", color: "white" }, mr: 1 }}
-          />
-
-            <Typography
-              variant="h5"
-              noWrap
-              component="a"
-              href="#app-bar-with-responsive-menu"
-              sx={{
-                mr: 2,
-                display: { xs: "flex", md: "none" },
-                flexGrow: 1,
-                fontFamily: "monospace",
-                fontWeight: 700,
-                letterSpacing: ".1rem",
-                textDecoration: "none",
-                color: "white",
-              }}
-            >
-              RECETAPP
-            </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {menu.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                {page}
-              </Button>
-            ))}
-
+            <Stack direction="row" alignItems="center" gap={2}>
+              <AppIcon />
+              <RecetAppLogoTextLink />
+            </Stack>
+            <Stack direction="row" ml={4} alignItems="center" gap={2}>
+              {menu.map((page) => (
+                <Button
+                  key={page}
+                  onClick={handleCloseNavMenu}
+                  sx={{
+                    color: "white",
+                    display: "block",
+                  }}
+                >
+                  {page}
+                </Button>
+              ))}
+            </Stack>
             <LoginBtn />
           </Box>
 
@@ -152,7 +155,7 @@ function ResponsiveAppBar({ toggleTheme }) {
               margin: 0,
               padding: 0.7,
               borderRadius: "100%",
-              backgroundColor: "background.paper",
+              backgroundColor: "background.default",
               cursor: "pointer",
             }}
           >
