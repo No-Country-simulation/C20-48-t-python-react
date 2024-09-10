@@ -9,10 +9,13 @@ import Footer from "../components/Footer";
 import CategoriesBar from "../components/UI/CategoriesBar";
 import Divider from "@mui/material/Divider";
 import RamenDiningIcon from "@mui/icons-material/RamenDining";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { UserContext } from "../Context/UserContext";
 
 function Home() {
   const [selectedCategory, setSelectedCategory] = useState("all");
+  const {userInfo} = useContext(UserContext);
+  
 
   return (
     <>

@@ -15,6 +15,7 @@ import {
   Toolbar,
   Tooltip,
   Typography,
+  Fade,
 } from "@mui/material";
 import Drawer from "@mui/material/Drawer";
 import LoginBtn from "./LoginBtn.jsx";
@@ -33,7 +34,7 @@ const menu = [
 
 function ResponsiveAppBar({ toggleTheme }) {
   const [anchorElNav, setAnchorElNav] = useState(null);
-  const { userInfo } = useContext(UserContext);
+  const { isLogin } = useContext(UserContext);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -42,9 +43,6 @@ function ResponsiveAppBar({ toggleTheme }) {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
-
-  //Solo para testear Tooltip
-  let user = userInfo.name;
 
   // Theme context para cambiar icono
   const theme = useTheme();
@@ -155,7 +153,11 @@ function ResponsiveAppBar({ toggleTheme }) {
             <LoginBtn />
           </Box>
 
-          <Tooltip title={user ? "Ver perfil" : "Iniciar sesión"}>
+          <Tooltip title={isLogin ? "Ver perfil" : "Iniciar sesión"}
+                  TransitionComponent={Fade}
+                  TransitionProps={{ timeout: 600 }}
+                  sx={{bgcolor: 'background.paper'}}
+          >
             <Box sx={{ mx: 1 }}>
               <UserIcon />
             </Box>

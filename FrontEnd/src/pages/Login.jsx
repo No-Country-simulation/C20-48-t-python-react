@@ -12,7 +12,7 @@ import { UserContext } from "../Context/UserContext";
 
 function Login() {
   // Importar el contexto de usuario
-  const { userInfo, setUserInfo, userList } = useContext(UserContext);
+  const { userInfo, setUserInfo, userList, isLogin, setIsLogin } = useContext(UserContext);
 
   console.log(userList);
   console.log(userInfo);
@@ -61,8 +61,8 @@ function Login() {
 
       if (valid) {
         setUserInfo(user[0]);
-/*         setIsLogin(true);
- */      }
+        setIsLogin(true);
+      }
     }
   };
 

@@ -34,7 +34,7 @@ function Profile() {
   const [avatarIcon, setAvatarIcon] = useState("");
 
   // Importar el contexto de usuario
-  const { userInfo, setUserInfo, userList, setUserList } =
+  const { userInfo, setUserInfo, userList, setUserList , isLogin, setIsLogin} =
     useContext(UserContext);
   console.log(userList);
 
@@ -126,7 +126,8 @@ function Profile() {
   const avatarList = [cucumber, lemon, radish, pepper];
 
   function handleLogout() {
-    setUserInfo("");
+    setUserInfo({ ...userInfo, name: "", email: "", password: "", avatar: "" , id: ""});
+    setIsLogin(false);
     setIsEditable(false);
     console.log(userInfo);
     
