@@ -19,6 +19,8 @@ export const UserProvider = ({ children }) => {
     const localUserInfo = Object.keys(localStorage).filter(key => key.includes("userInfo"));
     if (localUserInfo.length > 0) {
       setUserList(localUserInfo.map(key => JSON.parse(localStorage.getItem(key))));
+      console.log(userList);
+      
     }
   }, []);
 

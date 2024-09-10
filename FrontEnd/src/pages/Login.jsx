@@ -14,7 +14,7 @@ function Login() {
   // Importar el contexto de usuario
   const { userInfo, setUserInfo, userList } = useContext(UserContext);
 
-  console.log(userList.map(user => user));
+  console.log(userList);
   console.log(userInfo);
   
 
