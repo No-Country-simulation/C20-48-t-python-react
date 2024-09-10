@@ -30,13 +30,13 @@ function Profile() {
   const [isEditable, setIsEditable] = useState(false);
   // DIalog
   const [open, setOpen] = useState(false);
-  
+
   const [avatarIcon, setAvatarIcon] = useState("");
 
   // Importar el contexto de usuario
   const { userInfo, setUserInfo, userList, setUserList } =
     useContext(UserContext);
-    console.log(userList);
+  console.log(userList);
 
   function HandleEditProfile() {
     if (userInfo.name) {
@@ -100,12 +100,12 @@ function Profile() {
 
   // funcion editar nombre
   function handleUserNameEdit() {
-    if ( editName.length > 2) {
+    if (editName.length > 2) {
       setEditName(editName);
       setUserInfo({ ...userInfo, name: editName });
       console.log("editName:", editName);
       console.log(userInfo);
-      
+
       setUserList(
         userList.map((user) =>
           user.email === userInfo.email ? { ...user, name: editName } : user
@@ -125,10 +125,17 @@ function Profile() {
 
   const avatarList = [cucumber, lemon, radish, pepper];
 
+  function handleLogout() {
+    setUserInfo("");
+    setIsEditable(false);
+    console.log(userInfo);
+    
+  }
+
   return (
     <>
       <Container maxWidth="sm">
-        <Box display="flex" flexDirection="column" alignItems="center" mt={4}>
+        <Box display="flex" flexDirection="column" alignItems="center" mt={2}>
           <Box position="relative">
             <Avatar
               sx={{ width: 100, height: 100 }}
@@ -159,12 +166,12 @@ function Profile() {
             flexDirection="row"
             alignItems="center"
             justifyContent="space-between"
-            my={1}
+            mt={1}
             px={2}
             sx={{ borderRadius: 2 }}
           >
             {!isEditable ? (
-              <Typography variant="h5" sx={{ m: 2 }}>
+              <Typography variant="h5" sx={{ m: 1 }}>
                 {userInfo.name || "Nombre de usuario"}
               </Typography>
             ) : (
@@ -196,7 +203,7 @@ function Profile() {
             </Fab>
           </Box>
 
-          <Paper elevation={0} sx={{ padding: 1, borderRadius: 2, mt: 2 }}>
+          <Paper elevation={0} sx={{ padding: 1, borderRadius: 2, mt: 1 }}>
             <TextField
               label="Cambiar contraseña"
               type="password"
@@ -240,6 +247,14 @@ function Profile() {
               Guardar cambios
             </Button>
           )}
+          <Button
+            variant="contained"
+            color="primary"
+            sx={{ mt: 1 }}
+            onClick={handleLogout}
+          >
+            cerrar sesion
+          </Button>
         </Box>
       </Container>
 
