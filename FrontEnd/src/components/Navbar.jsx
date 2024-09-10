@@ -18,13 +18,17 @@ import {
 } from "@mui/material";
 import Drawer from "@mui/material/Drawer";
 import LoginBtn from "./LoginBtn.jsx";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useTheme } from "@emotion/react";
+import { UserContext } from "../Context/UserContext.jsx";
 
 const menu = ["Home", "Mis recetas", "Favoritos"];
 
 function ResponsiveAppBar({ toggleTheme }) {
   const [anchorElNav, setAnchorElNav] = useState(null);
+  const {userInfo} = useContext(UserContext);
+
+
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -35,7 +39,7 @@ function ResponsiveAppBar({ toggleTheme }) {
   };
 
   //Solo para testear Tooltip
-  let user = "";
+  let user = userInfo.name;
 
   // Theme context para cambiar icono
   const theme = useTheme();
@@ -116,7 +120,6 @@ function ResponsiveAppBar({ toggleTheme }) {
             </Drawer>
           </Box>
           {/* End Mobile Menu */}
-
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             <Stack direction="row" alignItems="center" gap={2}>
               <AppIcon />

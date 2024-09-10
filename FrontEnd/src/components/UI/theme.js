@@ -47,7 +47,7 @@ export const lightTheme = createTheme({
       // main: "#BA5624",
       main: "#475f55",
       dark: lime[900],
-      contrastText: "#ffffff",
+      contrastText: "black",
     },
     secondary: {
       light: "##FCDE9C",
@@ -62,9 +62,9 @@ export const lightTheme = createTheme({
       paper: "#ffffff",
     },
     text: {
-      primary: "#2a3635",
+      primary: "#1E1E1E",
       secondary: "#2a3635",
-      disabled: "rgba(255, 255, 255, 0.5)",
+      disabled: "#757575",
     },
   },
 });
