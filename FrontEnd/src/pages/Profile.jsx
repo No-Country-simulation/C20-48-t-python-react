@@ -39,7 +39,7 @@ function Profile() {
   console.log(userList);
 
   function HandleEditProfile() {
-    if (userInfo.name) {
+    if (isLogin) {
       setIsEditable(!isEditable);
     }
     // Resetear errores
