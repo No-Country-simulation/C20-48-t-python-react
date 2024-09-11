@@ -37,6 +37,7 @@ export default function MediaCard({ receta }) {
           height: 140,
           minWidth: 284,
           objectFit: "cover",
+          boxShadow: "0px 1px 10px 0px #1E1E1E",
         }}
         image={receta.imagen}
         title="Food"
@@ -63,8 +64,18 @@ export default function MediaCard({ receta }) {
         >
           {receta.nombre}
         </Typography>
-        <Divider sx={{ marginTop: 1, marginBottom: 1 }} />
-        <Stack spacing={1}>
+        <Divider sx={{ marginTop: 1, marginBottom: 2, marginInline: -1 }} />
+        <Stack
+          spacing={1}
+          sx={{
+            backgroundColor: "rgba(100, 100, 100, 0.10)",
+            padding: 1,
+            margin: -1,
+            borderRadius: 1,
+            border: `1px solid  `,
+            borderColor: "rgba(100, 100, 100, 0.40)",
+          }}
+        >
           <Typography variant="subtitle2" sx={{ color: "primary.main" }}>
             por {receta.nombre_usuario}
           </Typography>
