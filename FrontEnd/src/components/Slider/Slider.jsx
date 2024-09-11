@@ -7,7 +7,7 @@ import "swiper/css/pagination";
 import "./slider.css";
 import { Pagination, Autoplay } from "swiper/modules";
 
-export default function App({ category }) {
+export default function Slider({ category, recetas }) {
   return (
     <Container sx={{ marginTop: 4 }} maxWidth={"xl"} disableGutters>
       <Typography
@@ -55,24 +55,11 @@ export default function App({ category }) {
           }}
           modules={[Pagination, Autoplay]}
         >
-          <SwiperSlide>
-            <Card />
-          </SwiperSlide>
-          <SwiperSlide>
-            <Card />
-          </SwiperSlide>
-          <SwiperSlide>
-            <Card />
-          </SwiperSlide>
-          <SwiperSlide>
-            <Card />
-          </SwiperSlide>
-          <SwiperSlide>
-            <Card />
-          </SwiperSlide>
-          <SwiperSlide>
-            <Card />
-          </SwiperSlide>
+          {recetas.map((receta) => (
+            <SwiperSlide key={receta.id}>
+              <Card receta={receta} />
+            </SwiperSlide>
+          ))}
         </Swiper>
       </Container>
     </Container>

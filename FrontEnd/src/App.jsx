@@ -51,6 +51,7 @@ export default function App() {
               <Route path="/mis-recetas" element={<MyRecipes />} />
               <Route path="/favoritos" element={<Favourites />} />
               <Route path="/about" element={<About />} />
+              <Route path="/detalle-receta/:id" element={<RecipeDetail />} />
             </Routes>
           </UserProvider>
         </BrowserRouter>
