@@ -2,7 +2,8 @@ import Paper from "@mui/material/Paper";
 import Container from "@mui/material/Container";
 import Card from "./Card";
 import Typography from "@mui/material/Typography";
-export default function DisplayCategories({ category }) {
+
+export default function DisplayCategories({ category, recetas }) {
   return (
     <Container sx={{ marginTop: 4 }} maxWidth={"xl"} disableGutters>
       <Typography
@@ -25,8 +26,8 @@ export default function DisplayCategories({ category }) {
         elevation={0}
         sx={{
           padding: {
-            xs: 1,
-            sm: 1,
+            xs: 2,
+            sm: 2,
             md: 4,
             lg: 4,
             xl: 4,
@@ -47,13 +48,9 @@ export default function DisplayCategories({ category }) {
             padding: 0,
           }}
         >
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
+          {recetas.map((receta) => (
+            <Card key={receta.id} receta={receta} />
+          ))}
         </Container>
       </Paper>
     </Container>

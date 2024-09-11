@@ -10,6 +10,8 @@ import CategoriesBar from "../components/UI/CategoriesBar";
 import Divider from "@mui/material/Divider";
 import RamenDiningIcon from "@mui/icons-material/RamenDining";
 import { useContext, useState } from "react";
+import { recetas } from "../assets/recetas";
+
 function Home() {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const {recipes, setRecipes} = useContext(RecipeListContext);
@@ -49,13 +51,13 @@ function Home() {
           />
         </Container>
         {selectedCategory !== "all" ? (
-          <DisplayCategories category={selectedCategory} />
+          <DisplayCategories recetas={recetas} category={selectedCategory} />
         ) : (
           <>
-            <Slider category="Fitness" />
-            <Slider category="Desayunos" />
-            <Slider category="China" />
-            <Slider category="Mexicana" />
+            <Slider category="Fitness" recetas={recetas} />
+            <Slider category="Desayunos" recetas={recetas} />
+            <Slider category="China" recetas={recetas} />
+            <Slider category="Mexicana" recetas={recetas} />
           </>
         )}
         <FloatingAB />

@@ -40,6 +40,126 @@ export const recetas = [
     notas: "Esta receta es muy buena",
   },
   {
+    id: 10,
+    id_usuario: 3,
+    nombre_usuario: "Michael Schumacher Fangio",
+    imagen:
+      "https://cdn.britannica.com/36/123536-050-95CB0C6E/Variety-fruits-vegetables.jpg?w=400&h=300&c=crop",
+    nombre: "Verduras al plato",
+    categoria: ["Italia", "Tardicionales"],
+    tiempo_preparacion: 10,
+    tiempo_coccion: 20,
+    dificultad: "medio",
+    descripcion: [
+      "Primero se corta la verdura y se la pica en trozos pequeños.",
+      "Se corta la cebolla y se la pica en trozos pequeños.",
+      "Se corta la tomate y se la pica en trozos pequeños.",
+      "Se corta la cebolla y se la pica en trozos pequeños.",
+      "Se corta la tomate y se la pica en trozos pequeños.",
+    ],
+    ingredientes: [
+      {
+        nombre: "tomate",
+        cantidad: 1,
+        medida: "unidad",
+      },
+      {
+        nombre: "cebolla",
+        cantidad: 1,
+        medida: "unidad",
+      },
+      {
+        nombre: "verdura",
+        cantidad: 1,
+        medida: "unidad",
+      },
+    ],
+    rating: 2,
+    favoritos: 34,
+    notas: "Esta receta la puede hacer un mono ciego",
+  },
+  {
+    id: 11,
+    id_usuario: 3,
+    nombre_usuario: "Max Verstappen",
+    imagen:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlMyzfmXp2bWMGCMLw2JC4uXpXR1qEGTCBvw&s",
+    nombre: "Haburguesas tapa arterias",
+    categoria: ["Rapidas", "Pan"],
+    tiempo_preparacion: 20,
+    tiempo_coccion: 30,
+    dificultad: "medio",
+    descripcion: [
+      "Primero se cocina la cebolla, añadiendo el aceite y la sal y cociendo hasta que esté bien cocido.",
+      "Se preparan las haburguesas, añadiendo el aceite y la sal y cociendo hasta que esté bien cocido.",
+      "Esperar",
+    ],
+    ingredientes: [
+      {
+        nombre: "tomate",
+        cantidad: 1,
+        medida: "unidad",
+      },
+      {
+        nombre: "cebolla",
+        cantidad: 1,
+        medida: "unidad",
+      },
+      {
+        nombre: "Carne picada",
+        cantidad: 1,
+        medida: "unidad",
+      },
+    ],
+    rating: 2,
+    favoritos: 34,
+    notas: "La carne picada no tiene punto blue, a menos que te quieras morir",
+  },
+  {
+    id: 12,
+    id_usuario: 1,
+    nombre_usuario: "Juan Manuel Fangio",
+    imagen:
+      "https://www.semana.com/resizer/v2/CBUJV763ORE2VENVF5HWJYWPQA.jpg?auth=282369669486f101ef91c99b4fb3cebcca0cc5a01d54a1baec7230089b2e7945&smart=true&quality=75&width=1280&height=720",
+    nombre: "Lasagna a la carbonara, la mejor de todas",
+    categoria: [
+      "Pastas",
+      "Italia",
+      "Tardicionales",
+    ],
+    tiempo_preparacion: 10,
+    tiempo_coccion: 20,
+    dificultad: "medio",
+    descripcion: [
+      "Primero se cocina la pasta de carbonara, añadiendo el queso y la sal y cociendo hasta que esté bien cocido.",
+      "Luego se cocina la pasta de lasagna, añadiendo el queso y la sal y cociendo hasta que esté bien cocido.",
+      "Se deja cocinar la pasta de lasagna, añadiendo la harina de trigo y la cebolla.",
+      "Se preparan unos mateicos",
+      "Se va a comprar unas facturas",
+      "Se le entra como lima vieja",
+    ],
+    ingredientes: [
+      {
+        nombre: "harina",
+        cantidad: 1,
+        medida: "taza",
+      },
+      {
+        nombre: "queso",
+        cantidad: 2,
+        medida: "taza",
+      },
+      {
+        nombre: "cebolla",
+        cantidad: 1,
+        medida: "taza",
+      },
+    ],
+    rating: 4,
+    favoritos: 10,
+    notas: "Esta receta es muy buena",
+  },
+  {
     id: 1,
     nombre: "Spaghetti a la Bolognesa",
     categoria: ["Pastas", "Tradicionales"],
@@ -260,6 +380,80 @@ export const recetas = [
     favoritos: 15,
     notas: "Un clásico de la cocina mexicana.",
   },
-
-  
+  {
+    id: 13,
+    id_usuario: 3,
+    nombre_usuario: "Michael Schumacher Fangio",
+    imagen:
+      "https://cdn.britannica.com/36/123536-050-95CB0C6E/Variety-fruits-vegetables.jpg?w=400&h=300&c=crop",
+    nombre: "Verduras al plato",
+    categoria: ["Italia", "Tardicionales"],
+    tiempo_preparacion: 10,
+    tiempo_coccion: 20,
+    dificultad: "medio",
+    descripcion: [
+      "Primero se corta la verdura y se la pica en trozos pequeños.",
+      "Se corta la cebolla y se la pica en trozos pequeños.",
+      "Se corta la tomate y se la pica en trozos pequeños.",
+      "Se corta la cebolla y se la pica en trozos pequeños.",
+      "Se corta la tomate y se la pica en trozos pequeños.",
+    ],
+    ingredientes: [
+      {
+        nombre: "tomate",
+        cantidad: 1,
+        medida: "unidad",
+      },
+      {
+        nombre: "cebolla",
+        cantidad: 1,
+        medida: "unidad",
+      },
+      {
+        nombre: "verdura",
+        cantidad: 1,
+        medida: "unidad",
+      },
+    ],
+    rating: 2,
+    favoritos: 34,
+    notas: "Esta receta la puede hacer un mono ciego",
+  },
+  {
+    id: 14,
+    id_usuario: 3,
+    nombre_usuario: "Max Verstappen",
+    imagen:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlMyzfmXp2bWMGCMLw2JC4uXpXR1qEGTCBvw&s",
+    nombre: "Haburguesas tapa arterias",
+    categoria: ["Rapidas", "Pan"],
+    tiempo_preparacion: 20,
+    tiempo_coccion: 30,
+    dificultad: "medio",
+    descripcion: [
+      "Primero se cocina la cebolla, añadiendo el aceite y la sal y cociendo hasta que esté bien cocido.",
+      "Se preparan las haburguesas, añadiendo el aceite y la sal y cociendo hasta que esté bien cocido.",
+      "Esperar",
+    ],
+    ingredientes: [
+      {
+        nombre: "tomate",
+        cantidad: 1,
+        medida: "unidad",
+      },
+      {
+        nombre: "cebolla",
+        cantidad: 1,
+        medida: "unidad",
+      },
+      {
+        nombre: "Carne picada",
+        cantidad: 1,
+        medida: "unidad",
+      },
+    ],
+    rating: 2,
+    favoritos: 34,
+    notas: "La carne picada no tiene punto blue, a menos que te quieras morir",
+  },
 ];
