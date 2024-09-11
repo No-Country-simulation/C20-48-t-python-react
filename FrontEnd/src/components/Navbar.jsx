@@ -153,16 +153,16 @@ function ResponsiveAppBar({ toggleTheme }) {
             <LoginBtn />
           </Box>
 
-          <Tooltip title={isLogin ? "Ver perfil" : "Iniciar sesión"}
-                  TransitionComponent={Fade}
-                  TransitionProps={{ timeout: 600 }}
-                  sx={{bgcolor: 'background.paper'}}
+          <Tooltip
+            title={isLogin ? "Ver perfil" : "Iniciar sesión"}
+            TransitionComponent={Fade}
+            TransitionProps={{ timeout: 600 }}
+            sx={{ bgcolor: "background.paper" }}
           >
             <Box sx={{ mx: 1 }}>
               <UserIcon />
             </Box>
           </Tooltip>
-
           <Box
             onClick={toggleTheme}
             sx={{
