@@ -6,7 +6,6 @@ import { UserContext } from "../Context/UserContext";
 
 function UserIcon() {
   const { isLogin, userInfo } = useContext(UserContext);
-
   return (
     <>
       <Box
@@ -19,9 +18,12 @@ function UserIcon() {
           cursor: "pointer",
         }}
       >
-        <Link to={isLogin ? "/perfil" : "/login"} style={{ textDecoration: "none" }}>
+        <Link
+          to={isLogin ? "/perfil" : "/login"}
+          style={{ textDecoration: "none" }}
+        >
           <Avatar
-          src={isLogin ? userInfo.avatar : ""}
+            src={isLogin ? userInfo.avatar : ""}
             sx={{
               cursor: "pointer",
               color: "primary.light",

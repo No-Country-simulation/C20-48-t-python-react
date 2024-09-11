@@ -10,12 +10,12 @@ import CategoriesBar from "../components/UI/CategoriesBar";
 import Divider from "@mui/material/Divider";
 import RamenDiningIcon from "@mui/icons-material/RamenDining";
 import { useContext, useState } from "react";
+import { RecipeListContext } from "../Context/RecipeContext";
 import { recetas } from "../assets/recetas";
 
 function Home() {
   const [selectedCategory, setSelectedCategory] = useState("all");
-  const {recipes, setRecipes} = useContext(RecipeListContext);
-
+  const { recipes, setRecipes } = useContext(RecipeListContext);
 
   return (
     <>

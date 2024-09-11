@@ -1,4 +1,3 @@
-import { recetas } from "../assets/recetas";
 import {
   Container,
   Paper,

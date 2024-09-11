@@ -122,11 +122,7 @@ export const recetas = [
     imagen:
       "https://www.semana.com/resizer/v2/CBUJV763ORE2VENVF5HWJYWPQA.jpg?auth=282369669486f101ef91c99b4fb3cebcca0cc5a01d54a1baec7230089b2e7945&smart=true&quality=75&width=1280&height=720",
     nombre: "Lasagna a la carbonara, la mejor de todas",
-    categoria: [
-      "Pastas",
-      "Italia",
-      "Tardicionales",
-    ],
+    categoria: ["Pastas", "Italia", "Tardicionales"],
     tiempo_preparacion: 10,
     tiempo_coccion: 20,
     dificultad: "medio",

@@ -19,7 +19,7 @@ import lemon from "../assets/profile-icons/lemon-avatar.svg";
 import radish from "../assets/profile-icons/radish-avatar.svg";
 import pepper from "../assets/profile-icons/pepper-avatar.svg";
 import { UserContext } from "../Context/UserContext";
-
+import { useEffect } from "react";
 function Profile() {
   const [editName, setEditName] = useState("");
   const [newPassword, setNewPassword] = useState("");
@@ -34,9 +34,12 @@ function Profile() {
   const [avatarIcon, setAvatarIcon] = useState("");
 
   // Importar el contexto de usuario
-  const { userInfo, setUserInfo, userList, setUserList , isLogin, setIsLogin} =
+  const { userInfo, setUserInfo, userList, setUserList, isLogin, setIsLogin } =
     useContext(UserContext);
-  console.log(userList);
+
+  useEffect(() => {
+    console.log(userInfo);
+  }, [userList]);
 
   function HandleEditProfile() {
     if (isLogin) {
@@ -80,8 +83,8 @@ function Profile() {
         userList.map((user) =>
           user.email === userInfo.email
             ? { ...user, password: newPassword }
-            : user
-        )
+            : user,
+        ),
       );
       setNewPassword("");
       setConfirmPassword("");
@@ -108,9 +111,10 @@ function Profile() {
 
       setUserList(
         userList.map((user) =>
-          user.email === userInfo.email ? { ...user, name: editName } : user
-        )
+          user.email === userInfo.email ? { ...user, name: editName } : user,
+        ),
       );
+
       setIsEditable(false);
     }
   }
@@ -126,11 +130,17 @@ function Profile() {
   const avatarList = [cucumber, lemon, radish, pepper];
 
   function handleLogout() {
-    setUserInfo({ ...userInfo, name: "", email: "", password: "", avatar: "" , id: ""});
+    setUserInfo({
+      ...userInfo,
+      name: "",
+      email: "",
+      password: "",
+      avatar: "",
+      id: "",
+    });
     setIsLogin(false);
     setIsEditable(false);
     console.log(userInfo);
-    
   }
 
   return (

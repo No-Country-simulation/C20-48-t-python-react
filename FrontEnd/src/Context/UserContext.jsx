@@ -16,24 +16,31 @@ export const UserProvider = ({ children }) => {
   const [userList, setUserList] = useState([]);
 
   useEffect(() => {
-    const localUserInfo = Object.keys(localStorage).filter(key => key.includes("userInfo"));
+    const localUserInfo = Object.keys(localStorage).filter((key) =>
+      key.includes("userInfo"),
+    );
     if (localUserInfo.length > 0) {
-      setUserList(localUserInfo.map(key => JSON.parse(localStorage.getItem(key))));
+      setUserList(
+        localUserInfo.map((key) => JSON.parse(localStorage.getItem(key))),
+      );
       console.log(userList);
     }
   }, []);
 
-/*   useEffect(() => {
+  /*   useEffect(() => {
     userList.forEach((user) => {
       localStorage.setItem("userInfo" + user.id, JSON.stringify(user));
     })
     
   }, [userList]); */
 
-  function saveUserInfo (newUserInfo) {
+  function saveUserInfo(newUserInfo) {
     setUserInfo(newUserInfo);
-    localStorage.setItem("userInfo" + newUserInfo.id, JSON.stringify(newUserInfo));
-  };
+    localStorage.setItem(
+      "userInfo" + newUserInfo.id,
+      JSON.stringify(newUserInfo),
+    );
+  }
 
   return (
     <UserContext.Provider
@@ -43,6 +50,7 @@ export const UserProvider = ({ children }) => {
         isLogin,
         setIsLogin,
         userList,
+        setUserList,
         saveUserInfo,
       }}
     >
@@ -50,3 +58,4 @@ export const UserProvider = ({ children }) => {
     </UserContext.Provider>
   );
 };
+
