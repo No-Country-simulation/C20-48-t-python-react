@@ -63,4 +63,11 @@ public class Recetas {
 
     @Transient
     private Double promedioPuntuacion;
+
+    @Transient
+    private Long totalLikes;
+
+    public Long getTotalLikes() {
+        return (long) this.likes.size();  // Si tienes la relación bidireccional con la entidad Likes
+    }
 }

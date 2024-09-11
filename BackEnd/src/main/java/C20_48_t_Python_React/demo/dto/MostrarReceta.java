@@ -1,6 +1,8 @@
 package C20_48_t_Python_React.demo.dto;
 
 import C20_48_t_Python_React.demo.persistence.entity.Recetas;
+import C20_48_t_Python_React.demo.persistence.repository.LikesRepository;
+import C20_48_t_Python_React.demo.persistence.repository.ValoracionRepository;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -29,10 +31,11 @@ public class MostrarReceta {
     private List<IngredientesDTO> ingredientes;
     private List<ComentariosDTO> comentarios;
     private Double promedioPuntuacion;
+    private Long cantidadLikes;
 
     // Getters y Setters
 
-    public static MostrarReceta fromEntity(Recetas receta) {
+    public static MostrarReceta fromEntity(Recetas receta, ValoracionRepository valoracionRepository, LikesRepository likesRepository) {
         MostrarReceta dto = new MostrarReceta();
         dto.setId(receta.getId());
         dto.setTitulo(receta.getTitulo());
@@ -55,7 +58,11 @@ public class MostrarReceta {
         dto.setComentarios(receta.getComentarios().stream()
                 .map(ComentariosDTO::fromEntity)
                 .collect(Collectors.toList()));
-        dto.setPromedioPuntuacion(receta.getPromedioPuntuacion());
+        long cantidadLikes = likesRepository.countByRecetas_Id(receta.getId());
+        dto.setCantidadLikes(cantidadLikes);
+
+        Double promedioPuntuacion = valoracionRepository.calcularPromedioPorReceta(receta.getId());
+        dto.setPromedioPuntuacion(promedioPuntuacion);
         return dto;
     }
 }

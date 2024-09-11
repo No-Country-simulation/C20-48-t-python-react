@@ -31,6 +31,8 @@ public class RecetaService {
     private IngredientesRepository ingredientesRepository;
     @Autowired
     private PasosRepository pasosRepository;
+    @Autowired
+    private LikesRepository likesRepository;
 
     public RecetaDTO crearReceta(RecetaDTO recetaDTO, Long usuarioId) {
         Usuarios usuario = usuariosRepository.findById(usuarioId)
@@ -70,7 +72,7 @@ public class RecetaService {
 
         categoriaRepository.saveAll(recetaCategorias);
 
-        // Agregar los ingredientes a la receta
+        // Agrega los ingredientes a la receta
         List<Ingredientes> ingredientes = recetaDTO.getIngredientes().stream()
                 .map(ingredienteDTO -> {
                     Ingredientes ingrediente = new Ingredientes();
@@ -144,4 +146,8 @@ public class RecetaService {
     public List<Recetas> obtenerRecetasPorUsuario(Long usuarioId) {
         return recetasRepository.findByUsuariosId(usuarioId);
     }
+    public List<Recetas> obtenerRecetasFavoritasPorUsuario(Long usuarioId) {
+        return likesRepository.findRecetasFavoritasPorUsuario(usuarioId);
+    }
+
 }
