@@ -12,7 +12,7 @@ import { UserContext } from "../Context/UserContext";
 
 function Login() {
   // Importar el contexto de usuario
-  const { userInfo, setUserInfo, userList, isLogin, setIsLogin } = useContext(UserContext);
+  const { userInfo, setUserInfo, userList, setIsLogin } = useContext(UserContext);
 
   console.log(userList);
   console.log(userInfo);
