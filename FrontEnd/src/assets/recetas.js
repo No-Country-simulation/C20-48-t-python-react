@@ -157,6 +157,7 @@ export const recetas = [
   },
   {
     id: 1,
+    nombre_usuario: "Juan Manuel Fangio",
     nombre: "Spaghetti a la Bolognesa",
     categoria: ["Pastas", "Tradicionales"],
     imagen:
@@ -185,6 +186,7 @@ export const recetas = [
   },
   {
     id: 2,
+    nombre_usuario: "Lewis Hamilton",
     nombre: "Fettuccine Alfredo",
     categoria: ["Pastas"],
     imagen:
@@ -211,6 +213,7 @@ export const recetas = [
   {
     id: 3,
     nombre: "Penne al Pesto",
+    nombre_usuario: "Lewis Hamilton",
     categoria: ["Pastas"],
     imagen:
       "https://images.unsplash.com/photo-1703849062114-1b08bb62b150?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -237,6 +240,7 @@ export const recetas = [
   {
     id: 4,
     nombre: "Lasagna de Espinacas",
+    nombre_usuario: "Ayrton Senna",
     categoria: ["Pastas", "Tradicionales"],
     imagen:
       "https://images.unsplash.com/photo-1703848851026-29a91acc2440?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -263,6 +267,7 @@ export const recetas = [
   {
     id: 5,
     nombre: "Macarrones con Queso",
+    nombre_usuario: "Ayrton Senna",
     categoria: ["Pastas"],
     imagen:
       "https://plus.unsplash.com/premium_photo-1675252369719-dd52bc69c3df?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -290,6 +295,7 @@ export const recetas = [
   {
     id: 6,
     nombre: "Tortilla de Harina",
+    nombre_usuario: "Niki Lauda",
     categoria: ["Mexicanas"],
     imagen:
       "https://images.unsplash.com/photo-1432139509613-5c4255815697?q=80&w=1970&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -317,6 +323,7 @@ export const recetas = [
   {
     id: 7,
     nombre: "Ceviche de Camaron",
+    nombre_usuario: "Niki Lauda",
     categoria: ["Mexicanas"],
     imagen:
       "https://plus.unsplash.com/premium_photo-1673809798970-30c14cfd0ab6?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -344,6 +351,7 @@ export const recetas = [
   {
     id: 8,
     nombre: "Tacos a la Plancha",
+    nombre_usuario: "Alain Prost",
     categoria: ["Mexicanas"],
     imagen:
       "https://plus.unsplash.com/premium_photo-1663858367001-89e5c92d1e0e?q=80&w=2030&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -371,6 +379,7 @@ export const recetas = [
   {
     id: 9,
     nombre: "Enchiladas de Pollo",
+    nombre_usuario: "Alain Prost",
     categoria: ["Mexicanas"],
     imagen:
       "https://images.unsplash.com/photo-1487790343276-2fe56a7d9439?q=80&w=2067&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
