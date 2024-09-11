@@ -19,6 +19,7 @@ export default function MediaCard({ receta }) {
   return (
     <Card
       sx={{
+        minHeight: "100%",
         maxWidth: 345,
         borderRadius: 4,
         border: `1px solid `,
@@ -34,7 +35,7 @@ export default function MediaCard({ receta }) {
       <CardMedia
         sx={{
           height: 140,
-          width: 284,
+          minWidth: 284,
           objectFit: "cover",
         }}
         image={receta.imagen}
