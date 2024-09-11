@@ -14,10 +14,10 @@ import {
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import { useContext, useState } from "react";
-import Cucumber from "../assets/profile-icons/cucumber.jpg";
-import Muffin from "../assets/profile-icons/muffin.png";
-import Pizza from "../assets/profile-icons/pizza.jpg";
-import Hamburguer from "../assets/profile-icons/hamburguer.jpg";
+import cucumber from "../assets/profile-icons/cucumber-avatar.svg";
+import lemon from "../assets/profile-icons/lemon-avatar.svg";
+import radish from "../assets/profile-icons/radish-avatar.svg";
+import pepper from "../assets/profile-icons/pepper-avatar.svg";
 import { UserContext } from "../Context/UserContext";
 
 function Profile() {
@@ -31,13 +31,15 @@ function Profile() {
   // DIalog
   const [open, setOpen] = useState(false);
 
+  const [avatarIcon, setAvatarIcon] = useState("");
+
   // Importar el contexto de usuario
-  const { userInfo, setUserInfo, userList, setUserList } =
+  const { userInfo, setUserInfo, userList, setUserList , isLogin, setIsLogin} =
     useContext(UserContext);
-  console.log(userInfo);
+  console.log(userList);
 
   function HandleEditProfile() {
-    if (userInfo.name) {
+    if (isLogin) {
       setIsEditable(!isEditable);
     }
     // Resetear errores
@@ -97,24 +99,23 @@ function Profile() {
   };
 
   // funcion editar nombre
-  function handleUserNameEdit(editName) {
-    console.log("editName:", editName);
-    if (isEditable && editName.length > 2) {
-      setUserInfo({ ...userInfo, name: editName });
+  function handleUserNameEdit() {
+    if (editName.length > 2) {
       setEditName(editName);
+      setUserInfo({ ...userInfo, name: editName });
+      console.log("editName:", editName);
+      console.log(userInfo);
+
       setUserList(
         userList.map((user) =>
-          user.email === userInfo.email
-            ? { ...user, name: editName }
-            : user
+          user.email === userInfo.email ? { ...user, name: editName } : user
         )
-      )
+      );
       setIsEditable(false);
     }
   }
 
-  // Estado Iconos avatars
-  const [avatarIcon, setAvatarIcon] = useState("");
+  // funcion cambiar avatars
 
   function handleAvatarChange(event) {
     setAvatarIcon(event.target.src);
@@ -122,13 +123,20 @@ function Profile() {
     handleClose();
   }
 
-  const avatarList = [Cucumber, Muffin, Pizza, Hamburguer];
-  // const randomIndex = Math.floor(Math.random() * avatarList.length);
+  const avatarList = [cucumber, lemon, radish, pepper];
+
+  function handleLogout() {
+    setUserInfo({ ...userInfo, name: "", email: "", password: "", avatar: "" , id: ""});
+    setIsLogin(false);
+    setIsEditable(false);
+    console.log(userInfo);
+    
+  }
 
   return (
     <>
       <Container maxWidth="sm">
-        <Box display="flex" flexDirection="column" alignItems="center" mt={4}>
+        <Box display="flex" flexDirection="column" alignItems="center" mt={2}>
           <Box position="relative">
             <Avatar
               sx={{ width: 100, height: 100 }}
@@ -159,12 +167,12 @@ function Profile() {
             flexDirection="row"
             alignItems="center"
             justifyContent="space-between"
-            my={1}
+            mt={1}
             px={2}
             sx={{ borderRadius: 2 }}
           >
             {!isEditable ? (
-              <Typography variant="h5" sx={{ mt: 2 }}>
+              <Typography variant="h5" sx={{ m: 1 }}>
                 {userInfo.name || "Nombre de usuario"}
               </Typography>
             ) : (
@@ -189,14 +197,14 @@ function Profile() {
                 height: 40,
                 cursor: "pointer",
               }}
-              onClick={handleUserNameEdit(editName)}
+              onClick={handleUserNameEdit}
               disabled={!isEditable}
             >
               <EditIcon sx={{ fontSize: 30 }} />
             </Fab>
           </Box>
 
-          <Paper elevation={0} sx={{ padding: 1, borderRadius: 2, mt: 2 }}>
+          <Paper elevation={0} sx={{ padding: 1, borderRadius: 2, mt: 1 }}>
             <TextField
               label="Cambiar contraseña"
               type="password"
@@ -235,11 +243,19 @@ function Profile() {
               variant="contained"
               color="primary"
               sx={{ mt: 2 }}
-              onClick={HandleConfirmChanges || handleUserNameEdit}
+              onClick={HandleConfirmChanges}
             >
               Guardar cambios
             </Button>
           )}
+          <Button
+            variant="contained"
+            color="primary"
+            sx={{ mt: 1 }}
+            onClick={handleLogout}
+          >
+            cerrar sesion
+          </Button>
         </Box>
       </Container>
 

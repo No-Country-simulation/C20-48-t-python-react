@@ -9,11 +9,13 @@ import Footer from "../components/Footer";
 import CategoriesBar from "../components/UI/CategoriesBar";
 import Divider from "@mui/material/Divider";
 import RamenDiningIcon from "@mui/icons-material/RamenDining";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { recetas } from "../assets/recetas";
 
 function Home() {
   const [selectedCategory, setSelectedCategory] = useState("all");
+  const {recipes, setRecipes} = useContext(RecipeListContext);
+
 
   return (
     <>
