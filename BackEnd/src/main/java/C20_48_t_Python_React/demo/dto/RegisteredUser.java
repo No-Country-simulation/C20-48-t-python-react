@@ -16,4 +16,5 @@ public class RegisteredUser implements Serializable {
     private String name;
     private String contrasena;
     private String role;
+    private String avatar;
 }
