@@ -18,7 +18,6 @@ import {
   Fade,
 } from "@mui/material";
 import Drawer from "@mui/material/Drawer";
-import LoginBtn from "./LoginBtn.jsx";
 import LinkUnstyled from "./UI/LinkUnstyled";
 import { useContext, useState } from "react";
 import { useTheme } from "@emotion/react";
@@ -150,7 +149,6 @@ function ResponsiveAppBar({ toggleTheme }) {
                 </Button>
               ))}
             </Stack>
-            <LoginBtn />
           </Box>
 
           <Tooltip

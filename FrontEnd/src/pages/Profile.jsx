@@ -13,6 +13,9 @@ import {
   Typography,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
+import SaveIcon from "@mui/icons-material/Save";
+import CancelIcon from "@mui/icons-material/Cancel";
+
 import { useContext, useState } from "react";
 import cucumber from "../assets/profile-icons/cucumber-avatar.svg";
 import lemon from "../assets/profile-icons/lemon-avatar.svg";
@@ -34,8 +37,14 @@ function Profile() {
   const [avatarIcon, setAvatarIcon] = useState("");
 
   // Importar el contexto de usuario
-  const { userInfo, setUserInfo, userList, setUserList, isLogin, setIsLogin } =
-    useContext(UserContext);
+  const {
+    userInfo,
+    setUserInfo,
+    userList,
+    setUserList,
+    isLogin,
+    setIsLogin,
+  } = useContext(UserContext);
 
   useEffect(() => {
     console.log(userInfo);
@@ -83,8 +92,8 @@ function Profile() {
         userList.map((user) =>
           user.email === userInfo.email
             ? { ...user, password: newPassword }
-            : user,
-        ),
+            : user
+        )
       );
       setNewPassword("");
       setConfirmPassword("");
@@ -111,8 +120,8 @@ function Profile() {
 
       setUserList(
         userList.map((user) =>
-          user.email === userInfo.email ? { ...user, name: editName } : user,
-        ),
+          user.email === userInfo.email ? { ...user, name: editName } : user
+        )
       );
 
       setIsEditable(false);
@@ -140,13 +149,26 @@ function Profile() {
     });
     setIsLogin(false);
     setIsEditable(false);
+    // Redirigir al usuario a /login
+    navigate("/login");
     console.log(userInfo);
   }
 
   return (
     <>
       <Container maxWidth="sm">
-        <Box display="flex" flexDirection="column" alignItems="center" mt={2}>
+        <Box
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+          mt={4}
+          sx={{
+            backgroundColor: "background.paper",
+            padding: 3.3,
+            borderRadius: "1rem",
+            gap: 1,
+          }}
+        >
           <Box position="relative">
             <Avatar
               sx={{ width: 100, height: 100 }}
@@ -197,7 +219,6 @@ function Profile() {
                 disabled={!isEditable}
               />
             )}
-
             <Fab
               color="primary"
               aria-label="edit"
@@ -218,7 +239,7 @@ function Profile() {
             <TextField
               label="Cambiar contraseña"
               type="password"
-              variant="outlined"
+              variant="filled"
               fullWidth
               margin="normal"
               value={newPassword}
@@ -230,7 +251,7 @@ function Profile() {
             <TextField
               label="Repetir contraseña"
               type="password"
-              variant="outlined"
+              variant="filled"
               fullWidth
               margin="normal"
               value={confirmPassword}
@@ -240,31 +261,49 @@ function Profile() {
               disabled={!isEditable}
             />
           </Paper>
-          <Button
-            variant="contained"
-            color="primary"
-            sx={{ mt: 2 }}
-            onClick={HandleEditProfile}
-          >
-            editar perfil
-          </Button>
-          {isEditable && (
-            <Button
-              variant="contained"
-              color="primary"
-              sx={{ mt: 2 }}
-              onClick={HandleConfirmChanges}
-            >
-              Guardar cambios
-            </Button>
-          )}
+
+          <Box>
+            {isEditable ? (
+              <Button
+                variant="contained"
+                startIcon={<CancelIcon />}
+                color="primary"
+                sx={{ mt: 1 }}
+                onClick={HandleEditProfile}
+              >
+                Cancelar
+              </Button>
+            ) : (
+              <Button
+                variant="contained"
+                startIcon={<EditIcon />}
+                color="primary"
+                sx={{ mt: 1 }}
+                onClick={HandleEditProfile}
+              >
+                Editar
+              </Button>
+            )}
+
+            {isEditable && (
+              <Button
+                variant="contained"
+                startIcon={<SaveIcon />}
+                color="primary"
+                sx={{ mt: 1 }}
+                onClick={HandleConfirmChanges}
+              >
+                Guardar
+              </Button>
+            )}
+          </Box>
           <Button
             variant="contained"
             color="primary"
             sx={{ mt: 1 }}
             onClick={handleLogout}
           >
-            cerrar sesion
+            Cerrar sesion
           </Button>
         </Box>
       </Container>

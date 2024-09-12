@@ -12,11 +12,12 @@ import { UserContext } from "../Context/UserContext";
 
 function Login() {
   // Importar el contexto de usuario
-  const { userInfo, setUserInfo, userList, setIsLogin } = useContext(UserContext);
+  const { userInfo, setUserInfo, userList, setIsLogin } = useContext(
+    UserContext
+  );
 
   console.log(userList);
   console.log(userInfo);
-  
 
   // Estado para manejar los valores de los campos y los errores
   const [email, setEmail] = useState("");
@@ -52,7 +53,7 @@ function Login() {
       const user = userList.filter((user) => {
         return user.email === email && user.password === password;
       });
-  
+
       if (user.length === 0) {
         setEmailError("El correo electrónico es incorrecto.");
         setPasswordError("La contraseña es incorrecta.");
@@ -69,7 +70,17 @@ function Login() {
   // Aquí puedes agregar la lógica para enviar los datos del formulario
   return (
     <Container maxWidth="sm">
-      <Box display="flex" flexDirection="column" alignItems="center" mt={4}>
+      <Box
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+        mt={4}
+        sx={{
+          backgroundColor: "background.paper",
+          padding: 3.3,
+          borderRadius: "1rem",
+        }}
+      >
         <Typography
           variant="h5"
           sx={{
@@ -78,9 +89,8 @@ function Login() {
             borderRadius: 2,
           }}
         >
-          Iniciar sesión
+          INICIAR SESIÓN
         </Typography>
-
         <Paper
           sx={{
             backgroundColor: "background.paper",
@@ -92,18 +102,21 @@ function Login() {
           <TextField
             label="Email"
             type="email" // Cambié el tipo a "email" para validación automática del formato
-            variant="outlined"
+            variant="filled"
             fullWidth
             margin="normal"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             error={!!emailError}
             helperText={emailError}
+            sx={{
+              borderRadius: "15rem",
+            }}
           />
           <TextField
             label="Contraseña"
             type="password"
-            variant="outlined"
+            variant="filled"
             fullWidth
             margin="normal"
             value={password}
@@ -129,23 +142,18 @@ function Login() {
             Registráte
           </Link>
         </Typography>
-
         <p></p>
-        {
-          !userInfo.name ?
+        {!userInfo.name ? (
           <Button variant="contained" onClick={handleSubmit}>
-          Inicia sesión
-        </Button>
-        :
-        <Button variant="contained">
-        <Link
-        to="/"
-            style={{ textDecoration: "none", color: "white" }}
-        >
-          Ir a la página principal
-        </Link>
-        </Button>
-        }
+            Inicia sesión
+          </Button>
+        ) : (
+          <Button variant="contained">
+            <Link to="/" style={{ textDecoration: "none", color: "white" }}>
+              Ir a la página principal
+            </Link>
+          </Button>
+        )}
       </Box>
     </Container>
   );
