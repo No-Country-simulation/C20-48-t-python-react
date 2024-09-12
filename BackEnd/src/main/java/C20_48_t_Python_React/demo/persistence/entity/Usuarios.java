@@ -39,6 +39,7 @@ public class Usuarios implements UserDetails {
 
     @Column(nullable = false)
     private String contrasena;
+    private String avatar;
 
     @Column(name = "fecha_registro", nullable = false)
     @JsonProperty(access = Access.READ_ONLY)
@@ -52,6 +53,7 @@ public class Usuarios implements UserDetails {
 
     @OneToMany(mappedBy = "usuarios")
     private List<Recetas> recetas;
+
 
     //Une las recetas del usuario mediante el id
 

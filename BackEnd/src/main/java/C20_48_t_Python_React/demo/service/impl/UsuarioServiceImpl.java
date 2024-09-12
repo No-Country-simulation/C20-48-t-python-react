@@ -32,6 +32,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         user.setNombreUsuario(newUser.getNombre());
         user.setContrasena(passwordEncoder.encode(newUser.getContrasena()));
         user.setFechaRegistro(LocalDateTime.now());
+        user.setAvatar(newUser.getAvatar());
         user.setRol("USER");
 
         return userRepository.save(user);
