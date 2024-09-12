@@ -23,7 +23,14 @@ function RecipeDetail() {
   const receta = location.state || {};
 
   const handleToggleFavorite = () => {
-    setUserInfo({ ...userInfo, favorites: [...userInfo.favorites, receta.id] });
+    const exists = userInfo.favorites.some(id => id === receta.id);
+    if (exists) {
+      userInfo.favorites = userInfo.favorites.filter(id => id !== receta.id);
+    } else {
+      userInfo.favorites.push(receta.id);
+    }
+    setUserInfo({ ...userInfo });
+    // setUserInfo({ ...userInfo, favorites: [...userInfo.favorites, receta.id] });
     setIsFavorite(!isFavorite);
     if (isFavorite) {
       receta.favoritos++;
@@ -203,6 +210,7 @@ function RecipeDetail() {
       </Paper>
 
       { (isLogin && (userInfo.id === receta.id_usuario)) && <FloatingAB /> }
+      
     </Container>
   );
 }

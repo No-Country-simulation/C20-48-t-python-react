@@ -1,7 +1,7 @@
 export const recetas = [
   {
-    id: 0,
-    id_usuario: 0,
+    id: 435,
+    id_usuario: 1112,
     nombre_usuario: "Juan Manuel Fangio",
     imagen:
       "https://www.semana.com/resizer/v2/CBUJV763ORE2VENVF5HWJYWPQA.jpg?auth=282369669486f101ef91c99b4fb3cebcca0cc5a01d54a1baec7230089b2e7945&smart=true&quality=75&width=1280&height=720",
@@ -41,8 +41,8 @@ export const recetas = [
   },
   {
     id: 10,
-    id_usuario: 177,
-    nombre_usuario: "Goku-UI-666",
+    id_usuario: 525,
+    nombre_usuario: "Isa-UI-666",
     imagen:
       "https://cdn.britannica.com/36/123536-050-95CB0C6E/Variety-fruits-vegetables.jpg?w=400&h=300&c=crop",
     nombre: "Verduras al plato",
@@ -79,9 +79,9 @@ export const recetas = [
     notas: "Esta receta la puede hacer un mono ciego",
   },
   {
-    id: 11,
-    id_usuario: 721,
-    nombre_usuario: "Jotaro696",
+    id: 1461,
+    id_usuario: 11,
+    nombre_usuario: "Vergil696",
     imagen:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlMyzfmXp2bWMGCMLw2JC4uXpXR1qEGTCBvw&s",
     nombre: "Haburguesas tapa arterias",
