@@ -12,10 +12,12 @@ import UserRating from "../components/UI/UserRaiting";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import IngredientList from "../components/UI/IngredientsList";
 import FloatingAB from "../components/FloatingAB";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { UserContext } from "../Context/UserContext";
 
 function RecipeDetail() {
+  const {userInfo, isLogin} = useContext(UserContext)
   const [isFavorite, setIsFavorite] = useState(false);
   const location = useLocation();
   const receta = location.state || {};
@@ -199,7 +201,7 @@ function RecipeDetail() {
         </Stack>
       </Paper>
 
-      <FloatingAB />
+      { (isLogin && (userInfo.id === receta.id_usuario)) && <FloatingAB /> }
     </Container>
   );
 }
