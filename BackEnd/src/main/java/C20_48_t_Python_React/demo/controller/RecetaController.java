@@ -56,6 +56,16 @@ public class RecetaController {
         // Devolver solo el mensaje de éxito
         return ResponseEntity.ok(new RecetaResponse("La receta ha sido creada exitosamente"));
     }
+    @GetMapping("/{id}")
+    public ResponseEntity<MostrarReceta> obtenerRecetaPorId(@PathVariable Long id) {
+        Recetas receta = recetaService.obtenerRecetaPorId(id);
+        if (receta == null) {
+            return ResponseEntity.notFound().build();
+        }
+        MostrarReceta recetaDTO = MostrarReceta.fromEntity(receta, valoracionRepository, likesRepository);
+        return ResponseEntity.ok(recetaDTO);
+    }
+
     @PostMapping("/{recetaId}")
     public ResponseEntity<RecetaResponse> valorarReceta(
             @PathVariable Long recetaId,
@@ -103,14 +113,11 @@ public class RecetaController {
 
         return ResponseEntity.ok(recetaDTOs);
     }
-    @GetMapping("/{id}")
-    public ResponseEntity<MostrarReceta> obtenerRecetaPorId(@PathVariable Long id) {
-        Recetas receta = recetaService.obtenerRecetaPorId(id);
-        if (receta == null) {
-            return ResponseEntity.notFound().build();
-        }
-        MostrarReceta recetaDTO = MostrarReceta.fromEntity(receta, valoracionRepository, likesRepository);
-        return ResponseEntity.ok(recetaDTO);
+    @PutMapping("/{recetaId}")
+    public ResponseEntity<RecetaDTO> editarReceta(@PathVariable Long recetaId, @RequestBody RecetaDTO recetaDTO, @RequestHeader("Authorization") String token) {
+        Long usuarioId = jwtService.extractUserId(token.replace("Bearer ", ""));
+        RecetaDTO recetaActualizada = recetaService.editarReceta(recetaId, recetaDTO, usuarioId);
+        return ResponseEntity.ok(recetaActualizada);
     }
 
 }
