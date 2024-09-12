@@ -38,10 +38,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
 
         String jwt = authorizationHeader.split(" ")[1];
-        System.out.println("JWT: " + jwt); // Depuración
+        System.out.println("JWT: " + jwt);
 
         String username = jwtService.extractUsername(jwt);
-        System.out.println("Username extracted: " + username); // Depuración
+        System.out.println("Username extracted: " + username);
 
         Long userId = jwtService.extractUserId(jwt);
         System.out.println("User ID extracted: " + userId);
