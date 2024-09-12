@@ -4,12 +4,10 @@ import C20_48_t_Python_React.demo.dto.IngredientesDTO;
 import C20_48_t_Python_React.demo.dto.PasosDTO;
 import C20_48_t_Python_React.demo.dto.RecetaCategoriaDTO;
 import C20_48_t_Python_React.demo.dto.RecetaDTO;
-import C20_48_t_Python_React.demo.exeption.ResourceNotFoundException;
 import C20_48_t_Python_React.demo.persistence.entity.*;
 import C20_48_t_Python_React.demo.persistence.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -164,27 +162,39 @@ public class RecetaService {
         return recetasRepository.findByCategoriaIdsIn(categoriaIds, categoriaCount, pageable);
     }
 
-    public Page<Recetas> buscarRecetas(String titulo, String descripcion, String ingrediente, Pageable pageable) {
-        if (titulo != null && descripcion != null && ingrediente != null) {
-            return recetasRepository.findByTituloContainingAndDescripcionContainingAndIngredientesNombreContaining(titulo, descripcion, ingrediente, pageable);
+    public Page<Recetas> buscarRecetas(String titulo, String descripcion, String ingrediente, String dificultad, Pageable pageable) {
+        if (titulo != null && descripcion != null && ingrediente != null && dificultad != null) {
+            return recetasRepository.findByTituloContainingAndDescripcionContainingAndIngredientesNombreContainingAndDificultad(titulo, descripcion, ingrediente, dificultad, pageable);
+        } else if (titulo != null && descripcion != null && dificultad != null) {
+            return recetasRepository.findByTituloContainingAndDescripcionContainingAndDificultad(titulo, descripcion, dificultad, pageable);
+        } else if (titulo != null && ingrediente != null && dificultad != null) {
+            return recetasRepository.findByTituloContainingAndIngredientesNombreContainingAndDificultad(titulo, ingrediente, dificultad, pageable);
         } else if (titulo != null && descripcion != null) {
             return recetasRepository.findByTituloContainingAndDescripcionContaining(titulo, descripcion, pageable);
         } else if (titulo != null && ingrediente != null) {
             return recetasRepository.findByTituloContainingAndIngredientesNombreContaining(titulo, ingrediente, pageable);
+        } else if (titulo != null && dificultad != null) {
+            return recetasRepository.findByTituloContainingAndDificultad(titulo, dificultad, pageable);
         } else if (descripcion != null && ingrediente != null) {
             return recetasRepository.findByDescripcionContainingAndIngredientesNombreContaining(descripcion, ingrediente, pageable);
+        } else if (descripcion != null && dificultad != null) {
+            return recetasRepository.findByDescripcionContainingAndDificultad(descripcion, dificultad, pageable);
+        } else if (ingrediente != null && dificultad != null) {
+            return recetasRepository.findByIngredientesNombreContainingAndDificultad(ingrediente, dificultad, pageable);
         } else if (titulo != null) {
             return recetasRepository.findByTituloContaining(titulo, pageable);
         } else if (descripcion != null) {
             return recetasRepository.findByDescripcionContaining(descripcion, pageable);
         } else if (ingrediente != null) {
             return recetasRepository.findByIngredientesNombreContaining(ingrediente, pageable);
+        } else if (dificultad != null) {
+            return recetasRepository.findByDificultad(dificultad, pageable);
         } else {
             return recetasRepository.findAll(pageable);
         }
-    }
 
-    public Recetas obtenerRecetaPorId(Long id) {
+    }
+    public Recetas obtenerRecetaPorId(Long id){
         return recetasRepository.findById(id).orElse(null);
     }
 }
