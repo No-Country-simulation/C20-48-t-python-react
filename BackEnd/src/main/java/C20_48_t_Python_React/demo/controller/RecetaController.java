@@ -83,11 +83,12 @@ public class RecetaController {
             @RequestParam(required = false) String titulo,
             @RequestParam(required = false) String descripcion,
             @RequestParam(required = false) String ingrediente,
+            @RequestParam(required = false) String dificultad,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
 
         Pageable pageable = PageRequest.of(page, size);
-        Page<Recetas> recetas = recetaService.buscarRecetas(titulo, descripcion, ingrediente, pageable);
+        Page<Recetas> recetas = recetaService.buscarRecetas(titulo, descripcion, ingrediente, dificultad, pageable);
         Page<MostrarReceta> recetaDTOs = recetas.map(receta -> MostrarReceta.fromEntity(receta, valoracionRepository, likesRepository));
 
         return ResponseEntity.ok(recetaDTOs);
