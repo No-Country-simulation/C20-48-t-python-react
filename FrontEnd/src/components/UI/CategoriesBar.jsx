@@ -46,7 +46,7 @@ export default function CategoriesBar({
   ];
 
   function handleClick(category) {
-    setSelectedCategory(category);
+    setSelectedCategory({ ...selectedCategory, category: category });
   }
 
   return (
@@ -87,13 +87,23 @@ export default function CategoriesBar({
                 boxShadow: "2px, 2px, 2px, 0px rgba(0, 0, 0, 0.1)",
               }} // Ajuste mínimo para evitar chips muy pequeños
               onClick={() => handleClick(category)}
-              variant={selectedCategory === category ? "filled" : "outlined"}
+              variant={
+                selectedCategory.category === category ? "filled" : "outlined"
+              }
               onDelete={
-                selectedCategory === category
-                  ? () => setSelectedCategory("all")
+                selectedCategory.category === category
+                  ? () =>
+                      setSelectedCategory({
+                        ...selectedCategory,
+                        category: null,
+                      })
                   : undefined
               }
-              deleteIcon={selectedCategory === category ? <DoneIcon /> : null}
+              deleteIcon={
+                selectedCategory.category === category ? (
+                  <DoneIcon />
+                ) : undefined
+              }
             />
           </SwiperSlide>
         ))}

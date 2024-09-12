@@ -1,8 +1,11 @@
 import Avatar from "@mui/icons-material/AccountCircle";
 import { Box } from "@mui/material";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { UserContext } from "../Context/UserContext";
 
 function UserIcon() {
+  const { isLogin, userInfo } = useContext(UserContext);
   return (
     <>
       <Box
@@ -15,8 +18,12 @@ function UserIcon() {
           cursor: "pointer",
         }}
       >
-        <Link to="/perfil" style={{ textDecoration: "none" }}>
+        <Link
+          to={isLogin ? "/perfil" : "/login"}
+          style={{ textDecoration: "none" }}
+        >
           <Avatar
+            src={isLogin ? userInfo.avatar : ""}
             sx={{
               cursor: "pointer",
               color: "primary.light",

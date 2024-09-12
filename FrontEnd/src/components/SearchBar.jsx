@@ -10,67 +10,72 @@ import Collapse from "@mui/material/Collapse";
 import { useTheme, useMediaQuery } from "@mui/material";
 import { useState, useRef } from "react";
 
-export default function SearchBar() {
-  // Arrays de pruebas para el AutoCompleteSelection
-  const dificulty = ["Facil", "Normal", "Dificil"];
+const dificulty = ["Facil", "Normal", "Dificil"];
 
-  const categories = [
-    "Cocina",
-    "Cafe",
-    "Cervezas",
-    "Comida",
-    "Vinos",
-    "Pastas",
-    "Desayunos",
-    "Ensaladas",
-    "Hamburguesas",
-    "Carnes",
-    "Pescados",
-    "Entradas",
-    "Sopas",
-    "Postres",
-    "Bebidas",
-    "Snacks",
-  ];
+const categories = [
+  "Cocina",
+  "Cafe",
+  "Cervezas",
+  "Comida",
+  "Vinos",
+  "Pastas",
+  "Desayunos",
+  "Ensaladas",
+  "Hamburguesas",
+  "Carnes",
+  "Pescados",
+  "Entradas",
+  "Sopas",
+  "Postres",
+  "Bebidas",
+  "Snacks",
+];
 
-  const ingredients = [
-    "Arroz",
-    "Pollo",
-    "Carne",
-    "Cerdo",
-    "Pescado",
-    "tomate",
-    "pepino",
-    "ajo",
-    "cebolla",
-    "oreganos",
-  ];
+const ingredients = [
+  "Arroz",
+  "Pollo",
+  "Carne",
+  "Cerdo",
+  "Pescado",
+  "tomate",
+  "pepino",
+  "ajo",
+  "cebolla",
+  "oreganos",
+];
 
-  const [searchTerm, setSearchTerm] = useState("");
-  const [category, setCategory] = useState("");
-  const [ingredient, setIngredient] = useState("");
-  const [difficulty, setDifficulty] = useState("");
+export default function SearchBar({ query, setQuery }) {
   const [open, setOpen] = useState(false);
   const ref = useRef();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log({ searchTerm, category, ingredient, difficulty });
+    setQuery({
+      searchTerm: null,
+      category: null,
+      difficulty: null,
+      ingredient: null,
+    });
+    console.log({ query });
   };
   const handleSearch = (e) => {
-    setSearchTerm(e.target.value);
+    if (e.target.value === "") {
+      setQuery({ ...query, searchTerm: null });
+      return;
+    }
+    setQuery({ ...query, searchTerm: e.target.value });
   };
 
   const handleCategory = (value) => {
-    setCategory(value);
+    setQuery({ ...query, category: value });
   };
 
   const handleIngredient = (value) => {
-    setIngredient(value);
+    setQuery({ ...query, ingredient: value });
   };
 
   const handleDifficulty = (value) => {
-    setDifficulty(value);
+    setQuery({ ...query, difficulty: value });
   };
 
   const theme = useTheme();
@@ -136,41 +141,44 @@ export default function SearchBar() {
                 gap: 2,
                 gridTemplateColumns: {
                   xs: "1fr",
-                  lg: "repeat(3, minmax(170px, 1fr))",
+                  lg: "repeat(4, minmax(200px, 1fr))",
                 },
               }}
             >
               <AutoCompleteSelection
                 field="Categoria"
                 options={categories}
+                value={query.category}
                 handler={handleCategory}
               />
               <AutoCompleteSelection
                 field="Ingrediente"
+                value={query.ingredient}
                 options={ingredients}
                 handler={handleIngredient}
               />
               <AutoCompleteSelection
                 field="Dificultad"
+                value={query.difficulty}
                 options={dificulty}
                 handler={handleDifficulty}
               />
+              <Button
+                variant="contained"
+                size="large"
+                type="submit"
+                sx={{
+                  width: {
+                    xs: "100%",
+                    lg: "max-content",
+                  },
+                }}
+              >
+                Limpiar
+              </Button>
             </Container>
           </Collapse>
         </Container>
-        <Button
-          variant="contained"
-          size="large"
-          type="submit"
-          sx={{
-            width: {
-              xs: "100%",
-              lg: "max-content",
-            },
-          }}
-        >
-          Buscar
-        </Button>
       </Container>
     </form>
   );

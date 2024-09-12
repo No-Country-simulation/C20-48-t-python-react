@@ -9,20 +9,34 @@ import Footer from "../components/Footer";
 import CategoriesBar from "../components/UI/CategoriesBar";
 import Divider from "@mui/material/Divider";
 import RamenDiningIcon from "@mui/icons-material/RamenDining";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { RecipeListContext } from "../Context/RecipeContext";
+import useDebouncedFetch from "../hooks/useDebouncedFetch";
+import queryToString from "../utils/queryToString";
+import { recetas } from "../assets/recetas";
+import { UserContext } from "../Context/UserContext";
 
 function Home() {
-  const [selectedCategory, setSelectedCategory] = useState("all");
+  // const [selectedCategory, setSelectedCategory] = useState(null);
+  const [query, setQuery] = useState({
+    searchTerm: null,
+    category: null,
+    difficulty: null,
+    ingredient: null,
+  });
+  const { recipes, setRecipes } = useContext(RecipeListContext);
+  const { isLogin } = useContext(UserContext);
+
+  const debouncedFetch = useDebouncedFetch(queryToString(query), 500);
 
   return (
     <>
       <Container maxWidth={"xl"} sx={{ mt: 4 }}>
-        <Hero />
+        {/* <Hero /> */}
         <Container
           maxWidth={"xl"}
           sx={{
             borderRadius: "10px",
-            // boxShadow: " 0 0 6px 5px rgba(0, 0, 0, 0.1)", // Ajusta el box-shadow para el efecto de desvanecimiento
             boxShadow: 2,
             backgroundColor: "background.paper",
           }}
@@ -40,24 +54,26 @@ function Home() {
             Buscar recetas
             <RamenDiningIcon fontSize="large" sx={{ ml: 3 }} />
           </Typography>
-          <SearchBar />
+          <SearchBar query={query} setQuery={setQuery} />
           <Divider sx={{ marginBlock: 2 }} />
           <CategoriesBar
-            selectedCategory={selectedCategory}
-            setSelectedCategory={setSelectedCategory}
+            // selectedCategory={selectedCategory}
+            // setSelectedCategory={setSelectedCategory}
+            selectedCategory={query}
+            setSelectedCategory={setQuery}
           />
         </Container>
-        {selectedCategory !== "all" ? (
-          <DisplayCategories category={selectedCategory} />
-        ) : (
+        {Object.values(query).every((value) => value === null) ? (
           <>
-            <Slider category="Fitness" />
-            <Slider category="Desayunos" />
-            <Slider category="China" />
-            <Slider category="Mexicana" />
+            <Slider category="Fitness" recetas={recipes} />
+            <Slider category="Desayunos" recetas={recipes} />
+            <Slider category="China" recetas={recipes} />
+            <Slider category="Mexicana" recetas={recipes} />
           </>
+        ) : (
+          <DisplayCategories recetas={recipes} category={query} />
         )}
-        <FloatingAB />
+        {isLogin && <FloatingAB />}
       </Container>
       <Footer />
     </>

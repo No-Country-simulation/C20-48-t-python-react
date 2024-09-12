@@ -1,4 +1,3 @@
-import { recetas } from "../assets/recetas";
 import {
   Container,
   Paper,
@@ -13,15 +12,23 @@ import UserRating from "../components/UI/UserRaiting";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import IngredientList from "../components/UI/IngredientsList";
 import FloatingAB from "../components/FloatingAB";
-import { useState } from "react";
-
-const receta = recetas[0];
+import { useContext, useState } from "react";
+import { useLocation } from "react-router-dom";
+import { UserContext } from "../Context/UserContext";
 
 function RecipeDetail() {
+  const {userInfo, isLogin} = useContext(UserContext)
   const [isFavorite, setIsFavorite] = useState(false);
+  const location = useLocation();
+  const receta = location.state || {};
 
   const handleToggleFavorite = () => {
     setIsFavorite(!isFavorite);
+    if (isFavorite) {
+      receta.favoritos++;
+    } else {
+      receta.favoritos--;
+    }
   };
 
   const handleDoneStep = (e, i) => {
@@ -85,9 +92,14 @@ function RecipeDetail() {
                 {receta.categoria.map((categoria, i) => (
                   <Chip
                     key={categoria + i}
-                    color="primary"
                     label={categoria}
-                    size="medium"
+                    variant="outlined"
+                    sx={{
+                      minWidth: "80px",
+                      backgroundColor: "background.paper",
+                      borderColor: "primary.main",
+                      boxShadow: "2px, 2px, 2px, 0px rgba(0, 0, 0, 0.1)",
+                    }}
                   />
                 ))}
               </Container>
@@ -189,7 +201,7 @@ function RecipeDetail() {
         </Stack>
       </Paper>
 
-      <FloatingAB />
+      { (isLogin && (userInfo.id === receta.id_usuario)) && <FloatingAB /> }
     </Container>
   );
 }
