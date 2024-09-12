@@ -27,13 +27,19 @@ export const UserProvider = ({ children }) => {
       console.log(userList);
     }
   }, []);
-
-  /*   useEffect(() => {
-    userList.forEach((user) => {
-      localStorage.setItem("userInfo" + user.id, JSON.stringify(user));
-    })
-    
-  }, [userList]); */
+  
+  useEffect(() => {
+    if (userInfo.id) {
+      const existingUserIndex = userList.findIndex((user) => user.id === userInfo.id);
+      if (existingUserIndex !== -1) {
+        const updatedUserList = [...userList];
+        updatedUserList[existingUserIndex] = userInfo;
+        setUserList(updatedUserList);
+      } else {
+        setUserList([...userList, userInfo]);
+      }
+    }
+  }, [userInfo]);
 
   function saveUserInfo(newUserInfo) {
     setUserInfo(newUserInfo);

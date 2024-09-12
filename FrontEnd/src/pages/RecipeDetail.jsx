@@ -31,12 +31,19 @@ function RecipeDetail() {
     }
     setUserInfo({ ...userInfo });
     // setUserInfo({ ...userInfo, favorites: [...userInfo.favorites, receta.id] });
-    setIsFavorite(!isFavorite);
+/*     setIsFavorite(!isFavorite);
     if (isFavorite) {
       receta.favoritos++;
     } else {
       receta.favoritos--;
-    }
+    } */
+      const newIsFavorite = !isFavorite;
+      setIsFavorite(newIsFavorite);
+      if (newIsFavorite) {
+        receta.favoritos++;
+      } else {
+        receta.favoritos--;
+      }
   };
 
   const handleDoneStep = (e, i) => {
