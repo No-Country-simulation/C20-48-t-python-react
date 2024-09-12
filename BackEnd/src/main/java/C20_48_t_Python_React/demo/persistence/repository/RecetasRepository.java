@@ -21,8 +21,6 @@ public interface RecetasRepository extends JpaRepository<Recetas, Long> {
     @Query("SELECT r FROM Recetas r JOIN r.recetaCategorias rc WHERE rc.categorias.id IN :categoriaIds GROUP BY r.id HAVING COUNT(DISTINCT rc.categorias.id) = :categoriaCount")
     Page<Recetas> findByCategoriaIdsIn(@Param("categoriaIds") List<Long> categoriaIds, @Param("categoriaCount") long categoriaCount, Pageable pageable);
 
-    Page<Recetas> findByTituloContainingAndDescripcionContainingAndIngredientesNombreContaining(String titulo, String descripcion, String ingrediente, Pageable pageable);
-
     Page<Recetas> findByTituloContainingAndDescripcionContaining(String titulo, String descripcion, Pageable pageable);
 
     Page<Recetas> findByDescripcionContainingAndIngredientesNombreContaining(String descripcion, String ingrediente, Pageable pageable);
@@ -35,4 +33,17 @@ public interface RecetasRepository extends JpaRepository<Recetas, Long> {
 
     Page<Recetas> findByIngredientesNombreContaining(String ingrediente, Pageable pageable);
     Optional<Recetas> findById(Long id);
+    Page<Recetas> findByDificultad(String dificultad, Pageable pageable);
+
+    Page<Recetas> findByTituloContainingAndDescripcionContainingAndIngredientesNombreContainingAndDificultad(String titulo, String descripcion, String ingrediente, String dificultad, Pageable pageable);
+
+    Page<Recetas> findByTituloContainingAndDescripcionContainingAndDificultad(String titulo, String descripcion, String dificultad, Pageable pageable);
+
+    Page<Recetas> findByTituloContainingAndIngredientesNombreContainingAndDificultad(String titulo, String ingrediente, String dificultad, Pageable pageable);
+
+    Page<Recetas> findByTituloContainingAndDificultad(String titulo, String dificultad, Pageable pageable);
+
+    Page<Recetas> findByDescripcionContainingAndDificultad(String descripcion, String dificultad, Pageable pageable);
+
+    Page<Recetas> findByIngredientesNombreContainingAndDificultad(String ingrediente, String dificultad, Pageable pageable);
 }
