@@ -12,10 +12,12 @@ import RamenDiningIcon from "@mui/icons-material/RamenDining";
 import { useContext, useState } from "react";
 import { RecipeListContext } from "../Context/RecipeContext";
 import { recetas } from "../assets/recetas";
+import { UserContext } from "../Context/UserContext";
 
 function Home() {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const { recipes, setRecipes } = useContext(RecipeListContext);
+  const {isLogin} = useContext(UserContext);
 
   return (
     <>
@@ -59,7 +61,7 @@ function Home() {
             <Slider category="Mexicana" recetas={recetas} />
           </>
         )}
-        <FloatingAB />
+        {isLogin && <FloatingAB />}
       </Container>
       <Footer />
     </>
