@@ -14,7 +14,15 @@ export const UserContext = createContext({ userInfo: USER_STRUCTURE });
 export const UserProvider = ({ children }) => {
   const [userInfo, setUserInfo] = useState(USER_STRUCTURE);
   const [isLogin, setIsLogin] = useState(false);
-  const [userList, setUserList] = useState([]);
+  const [userList, setUserList] = useState(() => {
+    const localUserInfo = Object.keys(localStorage).filter((key) =>
+      key.includes("userInfo")
+    );
+    return localUserInfo.length > 0
+      ? localUserInfo.map((key) => JSON.parse(localStorage.getItem(key)))
+      : [];
+  });
+
 
   useEffect(() => {
     const localUserInfo = Object.keys(localStorage).filter((key) =>
@@ -28,7 +36,7 @@ export const UserProvider = ({ children }) => {
     }
   }, []);
   
-  useEffect(() => {
+/*   useEffect(() => {
     if (userInfo.id) {
       const existingUserIndex = userList.findIndex((user) => user.id === userInfo.id);
       if (existingUserIndex !== -1) {
@@ -39,7 +47,7 @@ export const UserProvider = ({ children }) => {
         setUserList([...userList, userInfo]);
       }
     }
-  }, [userInfo]);
+  }, [userInfo]); */
 
   function saveUserInfo(newUserInfo) {
     setUserInfo(newUserInfo);

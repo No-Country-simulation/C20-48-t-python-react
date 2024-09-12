@@ -83,7 +83,6 @@ function Register() {
         avatar: "",
         favorites: [],
       };
-      console.log(newUserInfo);
 
       saveUserInfo(newUserInfo);
       setIsRegistered(true);
