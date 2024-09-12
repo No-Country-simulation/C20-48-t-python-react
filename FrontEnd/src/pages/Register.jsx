@@ -23,10 +23,10 @@ function Register() {
   const [isRegistered, setIsRegistered] = useState(false);
 
   // Función para manejar el envío del formulario
-  
+
   // Importar el contexto de usuario
 
-  const { userInfo, saveUserInfo , userList} = useContext(UserContext);
+  const { userInfo, saveUserInfo, userList } = useContext(UserContext);
 
   // Función para manejar el envío del formulario
   const handleSubmit = (event) => {
@@ -48,7 +48,9 @@ function Register() {
     } else if (email.split("@")[0].length < 3) {
       setEmailError("El email debe tener al menos 3 caracteres.");
       valid = false;
-    } else if (email.split("@")[0] === userList.map(user => user.email.split("@")[0])) {
+    } else if (
+      email.split("@")[0] === userList.map((user) => user.email.split("@")[0])
+    ) {
       setEmailError("El email ya existe.");
       valid = false;
     }
@@ -80,7 +82,7 @@ function Register() {
         password: password,
       };
       console.log(newUserInfo);
-      
+
       saveUserInfo(newUserInfo);
       setIsRegistered(true);
     }
@@ -94,7 +96,12 @@ function Register() {
         flexDirection="column"
         alignItems="center"
         mt={4}
-        sx={{ gap: 1 }}
+        sx={{
+          backgroundColor: "background.paper",
+          padding: 3.3,
+          borderRadius: "1rem",
+          gap: 1,
+        }}
       >
         <Typography
           variant="h5"
@@ -104,7 +111,7 @@ function Register() {
             borderRadius: 2,
           }}
         >
-          Registrarse
+          REGISTRARSE
         </Typography>
         <Paper
           sx={{
@@ -116,7 +123,7 @@ function Register() {
           <TextField
             label="Email"
             type="email" // Cambié el tipo a "email" para validación automática del formato
-            variant="outlined"
+            variant="filled"
             fullWidth
             margin="normal"
             value={email}
@@ -127,7 +134,7 @@ function Register() {
           <TextField
             label="Contraseña"
             type="password"
-            variant="outlined"
+            variant="filled"
             fullWidth
             margin="normal"
             value={password}
@@ -138,7 +145,7 @@ function Register() {
           <TextField
             label="Repetir contraseña"
             type="password"
-            variant="outlined"
+            variant="filled"
             fullWidth
             margin="normal"
             value={confirmPassword}
@@ -167,20 +174,22 @@ function Register() {
         </Typography>
 
         <p></p>
-        {/* Botón para enviar el formulario */
-        !isRegistered ?
-        <Button variant="contained" onClick={handleSubmit}>
-          Regístrate
-        </Button>
-        :
-        <Button variant="contained">
-          <Link
-            to="/login"
-            style={{ textDecoration: "none", color: "#ffffff" }}
-          >
-            Iniciar sesión
-          </Link>
-        </Button>
+        {
+          /* Botón para enviar el formulario */
+          !isRegistered ? (
+            <Button variant="contained" onClick={handleSubmit}>
+              Regístrate
+            </Button>
+          ) : (
+            <Button variant="contained">
+              <Link
+                to="/login"
+                style={{ textDecoration: "none", color: "#ffffff" }}
+              >
+                Iniciar sesión
+              </Link>
+            </Button>
+          )
         }
       </Box>
     </Container>
