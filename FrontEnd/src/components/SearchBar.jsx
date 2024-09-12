@@ -108,7 +108,7 @@ export default function SearchBar({ query, setQuery }) {
           sx={{ display: "flex", flexDirection: "row", gap: 2 }}
         >
           <TextField
-            j
+            autoFocus
             sx={{
               width: "100%",
             }}
