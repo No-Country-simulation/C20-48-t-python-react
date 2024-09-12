@@ -18,4 +18,7 @@ public class ApiError implements Serializable {
     private String method;
     private LocalDateTime timeStamp;
     private int statusCode;
+
+    public ApiError(String s, String message) {
+    }
 }
