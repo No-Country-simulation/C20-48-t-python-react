@@ -45,11 +45,12 @@ function Profile() {
     setUserList,
     isLogin,
     setIsLogin,
+    changesUserInfo,
   } = useContext(UserContext);
 
   useEffect(() => {
-    console.log(userInfo);
-  }, [userList]);
+    changesUserInfo(userInfo);
+  }, [userInfo]);
 
   function HandleEditProfile() {
     if (isLogin) {
