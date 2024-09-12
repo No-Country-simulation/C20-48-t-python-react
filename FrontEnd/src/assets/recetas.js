@@ -80,8 +80,8 @@ export const recetas = [
   },
   {
     id: 1461,
-    id_usuario: 11,
-    nombre_usuario: "Vergil696",
+    id_usuario: 114,
+    nombre_usuario: "Isa6-UI-666",
     imagen:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlMyzfmXp2bWMGCMLw2JC4uXpXR1qEGTCBvw&s",
     nombre: "Haburguesas tapa arterias",
