@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PasosRepository extends JpaRepository<Pasos, Long> {
 
+    void deleteByRecetasId(Long recetaId);
 }
