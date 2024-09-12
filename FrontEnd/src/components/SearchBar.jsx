@@ -98,7 +98,7 @@ export default function SearchBar({ query, setQuery }) {
           gap: 2,
           gridTemplateColumns: {
             xs: "1fr",
-            lg: "2fr 3fr 1fr",
+            lg: "2fr 3fr ",
           },
           justifyItems: "start",
         }}
@@ -108,6 +108,7 @@ export default function SearchBar({ query, setQuery }) {
           sx={{ display: "flex", flexDirection: "row", gap: 2 }}
         >
           <TextField
+            j
             sx={{
               width: "100%",
             }}
@@ -141,7 +142,7 @@ export default function SearchBar({ query, setQuery }) {
                 gap: 2,
                 gridTemplateColumns: {
                   xs: "1fr",
-                  lg: "repeat(4, minmax(200px, 1fr))",
+                  lg: "repeat(3, minmax(165px,1fr)) 50px",
                 },
               }}
             >

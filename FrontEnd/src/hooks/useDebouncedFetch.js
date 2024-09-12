@@ -3,14 +3,14 @@ import useDebounce from "./useDebounce"; // tu hook de debounce
 import useFetch from "./useFetch"; // tu hook de fetch
 import { recetas } from "../assets/recetas";
 
-function useDebouncedFetch(query, delay) {
-  const deb = useDebounce(query, delay);
-  return recetas;
+function useDebouncedFetch(query, options = {}, delay = 500) {
+  // const deb = useDebounce(query);
+  // return recetas;
 
   const [url, setUrl] = useState(null);
 
   // Debouncing the query to avoid unnecessary requests
-  const debouncedQuery = useDebounce(query, delay);
+  const debouncedQuery = useDebounce(query, delay); // deb
 
   // Adjust the URL based on the debounced query
   useEffect(() => {
@@ -22,7 +22,7 @@ function useDebouncedFetch(query, delay) {
   }, [debouncedQuery]);
 
   // Use the custom useFetch hook to get the data
-  const { data, error, isLoading } = useFetch(url);
+  const { data, error, isLoading } = useFetch(url, options);
 
   return { data, error, isLoading };
 }
