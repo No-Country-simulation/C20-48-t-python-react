@@ -41,7 +41,7 @@ export const recetas = [
   },
   {
     id: 10,
-    id_usuario: 525,
+    id_usuario: 114,
     nombre_usuario: "Isa-UI-666",
     imagen:
       "https://cdn.britannica.com/36/123536-050-95CB0C6E/Variety-fruits-vegetables.jpg?w=400&h=300&c=crop",

@@ -36,7 +36,7 @@ export const UserProvider = ({ children }) => {
     }
   }, []);
   
-/*   useEffect(() => {
+  useEffect(() => {
     if (userInfo.id) {
       const existingUserIndex = userList.findIndex((user) => user.id === userInfo.id);
       if (existingUserIndex !== -1) {
@@ -47,7 +47,7 @@ export const UserProvider = ({ children }) => {
         setUserList([...userList, userInfo]);
       }
     }
-  }, [userInfo]); */
+  }, [userInfo]);
 
   function saveUserInfo(newUserInfo) {
     setUserInfo(newUserInfo);
