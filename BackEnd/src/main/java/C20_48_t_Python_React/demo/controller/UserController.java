@@ -41,9 +41,8 @@ public class UserController {
         this.likesRepository = likesRepository;
     }
 
-    @GetMapping()
+    @GetMapping("/misrecetas")
     public ResponseEntity<List<MostrarReceta>> obtenerRecetasUsuario() {
-        // Obtener el usuario autenticado desde el contexto de seguridad
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null || !authentication.isAuthenticated()) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
