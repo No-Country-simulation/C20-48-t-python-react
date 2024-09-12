@@ -8,6 +8,9 @@ import C20_48_t_Python_React.demo.exeption.ResourceNotFoundException;
 import C20_48_t_Python_React.demo.persistence.entity.*;
 import C20_48_t_Python_React.demo.persistence.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -33,6 +36,7 @@ public class RecetaService {
     private PasosRepository pasosRepository;
     @Autowired
     private LikesRepository likesRepository;
+
 
     public RecetaDTO crearReceta(RecetaDTO recetaDTO, Long usuarioId) {
         Usuarios usuario = usuariosRepository.findById(usuarioId)
@@ -146,8 +150,41 @@ public class RecetaService {
     public List<Recetas> obtenerRecetasPorUsuario(Long usuarioId) {
         return recetasRepository.findByUsuariosId(usuarioId);
     }
+
     public List<Recetas> obtenerRecetasFavoritasPorUsuario(Long usuarioId) {
         return likesRepository.findRecetasFavoritasPorUsuario(usuarioId);
     }
 
+    public Page<Recetas> obtenerRecetasPorCategoria(Long categoriaId, Pageable pageable) {
+        return recetasRepository.findByCategoriaId(categoriaId, pageable);
+    }
+
+    public Page<Recetas> obtenerRecetasEnComun(List<Long> categoriaIds, Pageable pageable) {
+        long categoriaCount = categoriaIds.size();
+        return recetasRepository.findByCategoriaIdsIn(categoriaIds, categoriaCount, pageable);
+    }
+
+    public Page<Recetas> buscarRecetas(String titulo, String descripcion, String ingrediente, Pageable pageable) {
+        if (titulo != null && descripcion != null && ingrediente != null) {
+            return recetasRepository.findByTituloContainingAndDescripcionContainingAndIngredientesNombreContaining(titulo, descripcion, ingrediente, pageable);
+        } else if (titulo != null && descripcion != null) {
+            return recetasRepository.findByTituloContainingAndDescripcionContaining(titulo, descripcion, pageable);
+        } else if (titulo != null && ingrediente != null) {
+            return recetasRepository.findByTituloContainingAndIngredientesNombreContaining(titulo, ingrediente, pageable);
+        } else if (descripcion != null && ingrediente != null) {
+            return recetasRepository.findByDescripcionContainingAndIngredientesNombreContaining(descripcion, ingrediente, pageable);
+        } else if (titulo != null) {
+            return recetasRepository.findByTituloContaining(titulo, pageable);
+        } else if (descripcion != null) {
+            return recetasRepository.findByDescripcionContaining(descripcion, pageable);
+        } else if (ingrediente != null) {
+            return recetasRepository.findByIngredientesNombreContaining(ingrediente, pageable);
+        } else {
+            return recetasRepository.findAll(pageable);
+        }
+    }
+
+    public Recetas obtenerRecetaPorId(Long id) {
+        return recetasRepository.findById(id).orElse(null);
+    }
 }
