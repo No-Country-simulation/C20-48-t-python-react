@@ -27,7 +27,7 @@ function Home() {
   const { recipes } = useContext(RecipeListContext);
   const { isLogin } = useContext(UserContext);
 
-  const debouncedFetch = useDebouncedFetch(queryToString(query), 500);
+  const debouncedFetch = useDebouncedFetch(queryToString(query));
 
   return (
     <>

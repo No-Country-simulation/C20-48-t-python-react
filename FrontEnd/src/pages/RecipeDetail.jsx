@@ -18,6 +18,7 @@ import { UserContext } from "../Context/UserContext";
 
 function RecipeDetail() {
   const {userInfo, setUserInfo, isLogin} = useContext(UserContext)
+
   const [isFavorite, setIsFavorite] = useState(false);
   const location = useLocation();
   const receta = location.state || {};
@@ -53,8 +54,8 @@ function RecipeDetail() {
   };
 
   return (
-    <Container disableGutters maxWidth={"lg"} sx={{ marginBlock: 4 }}>
-      <Paper sx={{ padding: 2 }}>
+    <Container disableGutters maxWidth={"lg"}>
+      <Paper sx={{ padding: "50px 15px 150px 15px" }}>
         <Stack sx={{ padding: { xs: 0, sm: 2 }, gap: 2 }} direction="column">
           <Typography variant="h3">{receta.nombre}</Typography>
           <Typography color="success" variant="body1">
@@ -130,10 +131,13 @@ function RecipeDetail() {
             >
               <UserRating />
               <Typography variant="h5">{receta.rating}</Typography>
-              <IconButton aria-label="fingerprint" color="secondary">
+              <IconButton
+                aria-label="fingerprint"
+                color="secondary"
+                onClick={handleToggleFavorite}
+              >
                 <FavoriteIcon
                   color={isFavorite ? "primary" : "default"}
-                  onClick={handleToggleFavorite}
                   sx={{ transition: "all 0.2s ease-in-out" }}
                 />
               </IconButton>
@@ -186,7 +190,8 @@ function RecipeDetail() {
                   sx={{
                     marginBlock: 2,
                     display: "flex",
-                    alignItems: "end",
+                    gap: 2,
+                    alignItems: "center",
                     borderRadius: 2,
                     padding: 2,
                     cursor: "pointer",

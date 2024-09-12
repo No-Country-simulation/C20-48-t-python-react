@@ -25,9 +25,16 @@ export default function DisplayCategories({ category, recetas }) {
         }}
       >
         Recetas de
-        <Typography variant="h5" sx={{ color: "primary.main" }}>
+        <Typography
+          variant="h5"
+          borderRadius={1}
+          sx={{
+            color: "primary.main",
+            backgroundColor: "background.default",
+            paddingInline: 2,
+          }}
+        >
           {filters}
-          {/* "{category?.searchTerm}"  */}
         </Typography>
       </Typography>
       <Paper
