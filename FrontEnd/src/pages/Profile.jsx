@@ -23,6 +23,7 @@ import radish from "../assets/profile-icons/radish-avatar.svg";
 import pepper from "../assets/profile-icons/pepper-avatar.svg";
 import { UserContext } from "../Context/UserContext";
 import { useEffect } from "react";
+import { Navigate } from "react-router-dom";
 function Profile() {
   const [editName, setEditName] = useState("");
   const [newPassword, setNewPassword] = useState("");
@@ -44,11 +45,12 @@ function Profile() {
     setUserList,
     isLogin,
     setIsLogin,
+    changesUserInfo,
   } = useContext(UserContext);
 
   useEffect(() => {
-    console.log(userInfo);
-  }, [userList]);
+    changesUserInfo(userInfo);
+  }, [userInfo]);
 
   function HandleEditProfile() {
     if (isLogin) {
@@ -135,7 +137,7 @@ function Profile() {
     setUserInfo({ ...userInfo, avatar: event.target.src });
     handleClose();
   }
-
+// Array avatares
   const avatarList = [cucumber, lemon, radish, pepper];
 
   function handleLogout() {
@@ -146,11 +148,12 @@ function Profile() {
       password: "",
       avatar: "",
       id: "",
+      favorites: [],
     });
     setIsLogin(false);
     setIsEditable(false);
     // Redirigir al usuario a /login
-    navigate("/login");
+    Navigate("/login");
     console.log(userInfo);
   }
 

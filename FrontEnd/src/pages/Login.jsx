@@ -12,12 +12,9 @@ import { UserContext } from "../Context/UserContext";
 
 function Login() {
   // Importar el contexto de usuario
-  const { userInfo, setUserInfo, userList, setIsLogin } = useContext(
+  const { userInfo, setUserInfo, userList, isLogin, setIsLogin } = useContext(
     UserContext
   );
-
-  console.log(userList);
-  console.log(userInfo);
 
   // Estado para manejar los valores de los campos y los errores
   const [email, setEmail] = useState("");
@@ -143,7 +140,7 @@ function Login() {
           </Link>
         </Typography>
         <p></p>
-        {!userInfo.name ? (
+        {!isLogin ? (
           <Button variant="contained" onClick={handleSubmit}>
             Inicia sesión
           </Button>

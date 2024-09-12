@@ -17,18 +17,34 @@ import { useLocation } from "react-router-dom";
 import { UserContext } from "../Context/UserContext";
 
 function RecipeDetail() {
-  const { userInfo, isLogin } = useContext(UserContext);
+  const {userInfo, setUserInfo, isLogin} = useContext(UserContext)
+
   const [isFavorite, setIsFavorite] = useState(false);
   const location = useLocation();
   const receta = location.state || {};
 
   const handleToggleFavorite = () => {
-    setIsFavorite(!isFavorite);
+    const exists = userInfo.favorites.some(id => id === receta.id);
+    if (exists) {
+      userInfo.favorites = userInfo.favorites.filter(id => id !== receta.id);
+    } else {
+      userInfo.favorites.push(receta.id);
+    }
+    setUserInfo({ ...userInfo });
+    // setUserInfo({ ...userInfo, favorites: [...userInfo.favorites, receta.id] });
+/*     setIsFavorite(!isFavorite);
     if (isFavorite) {
       receta.favoritos++;
     } else {
       receta.favoritos--;
-    }
+    } */
+      const newIsFavorite = !isFavorite;
+      setIsFavorite(newIsFavorite);
+      if (newIsFavorite) {
+        receta.favoritos++;
+      } else {
+        receta.favoritos--;
+      }
   };
 
   const handleDoneStep = (e, i) => {
@@ -205,7 +221,8 @@ function RecipeDetail() {
         </Stack>
       </Paper>
 
-      {isLogin && userInfo.id === receta.id_usuario && <FloatingAB />}
+      { (isLogin && (userInfo.id === receta.id_usuario)) && <FloatingAB /> }
+      
     </Container>
   );
 }
