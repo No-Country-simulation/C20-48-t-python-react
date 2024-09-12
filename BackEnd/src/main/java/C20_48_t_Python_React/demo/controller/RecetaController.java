@@ -57,7 +57,7 @@ public class RecetaController {
         return ResponseEntity.ok(new RecetaResponse("La receta ha sido creada exitosamente"));
     }
     @PostMapping("/{recetaId}")
-    public ResponseEntity<String> valorarReceta(
+    public ResponseEntity<RecetaResponse> valorarReceta(
             @PathVariable Long recetaId,
             @RequestParam Integer puntuacion,
             @RequestHeader("Authorization") String token) {
@@ -66,17 +66,17 @@ public class RecetaController {
         Long usuarioId = jwtService.extractUserId(jwt);
 
         valoracionService.valorarReceta(recetaId, puntuacion, usuarioId);
-        return ResponseEntity.ok("La receta ha sido valorada exitosamente.");
+        return ResponseEntity.ok(new RecetaResponse("La receta ha sido valorada exitosamente."));
     }
     @PostMapping("/{recetaId}/like")
-    public ResponseEntity<String> agregarLike(@PathVariable Long recetaId, @RequestHeader("Authorization") String token) {
+    public ResponseEntity<RecetaResponse> agregarLike(@PathVariable Long recetaId, @RequestHeader("Authorization") String token) {
         // Extraer el ID del usuario autenticado desde el JWT
         Long usuarioId = jwtService.extractUserId(token.replace("Bearer ", ""));
 
         // Llamar al servicio para agregar el like
         likesService.agregarLike(recetaId, usuarioId);
 
-        return ResponseEntity.ok("Like agregado exitosamente");
+        return ResponseEntity.ok(new RecetaResponse("La receta ha sido valorada exitosamente."));
     }
     @GetMapping("/busqueda")
     public ResponseEntity<Page<MostrarReceta>> buscarRecetas(
