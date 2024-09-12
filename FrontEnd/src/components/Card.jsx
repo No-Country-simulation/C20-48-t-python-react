@@ -9,6 +9,7 @@ import Stack from "@mui/material/Stack";
 import UserRating from "./UI/UserRaiting";
 import Divider from "@mui/material/Divider";
 import { useNavigate } from "react-router-dom";
+import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 
 export default function MediaCard({ receta }) {
   const navigate = useNavigate();
@@ -76,28 +77,47 @@ export default function MediaCard({ receta }) {
             borderColor: "rgba(100, 100, 100, 0.40)",
           }}
         >
-          <Typography variant="subtitle2" sx={{ color: "primary.main" }}>
+          <Typography
+            variant="subtitle2"
+            sx={{
+              color: "primary.main",
+              textOverflow: "ellipsis",
+              whiteSpace: "nowrap",
+              overflow: "hidden",
+            }}
+          >
             por {receta.nombre_usuario}
           </Typography>
-          <Stack direction="row" spacing={1}>
+          <Stack
+            direction="row"
+            spacing={1}
+            sx={{ alignItems: "start", justifyContent: "start" }}
+          >
             <Typography variant="subtitle2" color="success">
-              Dif: {receta.dificultad}
+              Dif:
             </Typography>
+            {receta.dificultad === "fácil" ? (
+              <FiberManualRecordIcon color="success" fontSize="small" />
+            ) : receta.dificultad === "medio" ? (
+              <FiberManualRecordIcon color="warning" fontSize="small" />
+            ) : (
+              <FiberManualRecordIcon color="error" fontSize="small" />
+            )}
 
             <Typography variant="subtitle2" color="success">
-              prep: {receta.tiempo_preparacion} min
+              Prep: {receta.tiempo_preparacion} &prime;
             </Typography>
             <Typography variant="subtitle2" color="success">
-              Cook: {receta.tiempo_coccion} min
+              Cook: {receta.tiempo_coccion} &prime;
             </Typography>
           </Stack>
           <Typography variant="subtitle2">
-            Categoria principal:
+            Categoria:
             <Chip
               label={receta.categoria[0]}
               sx={{
                 marginLeft: 1,
-                cursor: "pointer",
+                cursor: "default",
                 backgroundColor: "background.paper",
                 borderColor: "primary.main",
               }}
@@ -113,12 +133,14 @@ export default function MediaCard({ receta }) {
         direction="row"
         spacing={1}
         sx={{
-          marginTop: 1,
+          // marginTop: 1,
           alignItems: "center",
           justifyContent: "space-between",
         }}
       >
-        <CardActions sx={{ paddingTop: 0, paddingInline: 2, display: "flex" }}>
+        <CardActions
+          sx={{ paddingBlock: 1, paddingInline: 1, display: "flex" }}
+        >
           <Button
             variant="contained"
             size="small"
