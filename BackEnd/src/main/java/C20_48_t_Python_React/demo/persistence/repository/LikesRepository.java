@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface LikesRepository extends JpaRepository<Likes, Long> {
@@ -20,4 +21,6 @@ public interface LikesRepository extends JpaRepository<Likes, Long> {
     List<Recetas> findRecetasFavoritasPorUsuario(@Param("usuarioId") Long usuarioId);
 
     long countByRecetas_Id(Long id);
+
+    Optional<Object> findByRecetasAndUsuarios(Recetas receta, Usuarios usuario);
 }
