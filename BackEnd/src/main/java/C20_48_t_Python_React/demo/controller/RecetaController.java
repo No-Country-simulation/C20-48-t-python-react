@@ -1,18 +1,20 @@
 package C20_48_t_Python_React.demo.controller;
 
+import C20_48_t_Python_React.demo.dto.MostrarReceta;
 import C20_48_t_Python_React.demo.dto.RecetaDTO;
 import C20_48_t_Python_React.demo.dto.RecetaResponse;
-import C20_48_t_Python_React.demo.dto.auth.LoginResponse;
 import C20_48_t_Python_React.demo.persistence.entity.Recetas;
+import C20_48_t_Python_React.demo.persistence.repository.LikesRepository;
+import C20_48_t_Python_React.demo.persistence.repository.ValoracionRepository;
 import C20_48_t_Python_React.demo.service.LikesService;
 import C20_48_t_Python_React.demo.service.RecetaService;
 import C20_48_t_Python_React.demo.service.ValoracionService;
 import C20_48_t_Python_React.demo.service.auth.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -25,12 +27,19 @@ public class RecetaController {
     private RecetaService recetaService;
     @Autowired
     private final JwtService jwtService;
+
+    @Autowired
+    private final ValoracionRepository valoracionRepository;
+    @Autowired
+    private final LikesRepository likesRepository;
     @Autowired
     private LikesService likesService;
 
-    public RecetaController(RecetaService recetaService, JwtService jwtService) {
+    public RecetaController(RecetaService recetaService, JwtService jwtService, ValoracionRepository valoracionRepository, LikesRepository likesRepository) {
         this.recetaService = recetaService;
         this.jwtService = jwtService;
+        this.valoracionRepository = valoracionRepository;
+        this.likesRepository = likesRepository;
     }
     @PostMapping
     public ResponseEntity<RecetaResponse> crearReceta(@RequestBody RecetaDTO recetaDTO,
@@ -68,6 +77,29 @@ public class RecetaController {
         likesService.agregarLike(recetaId, usuarioId);
 
         return ResponseEntity.ok("Like agregado exitosamente");
+    }
+    @GetMapping("/busqueda")
+    public ResponseEntity<Page<MostrarReceta>> buscarRecetas(
+            @RequestParam(required = false) String titulo,
+            @RequestParam(required = false) String descripcion,
+            @RequestParam(required = false) String ingrediente,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Recetas> recetas = recetaService.buscarRecetas(titulo, descripcion, ingrediente, pageable);
+        Page<MostrarReceta> recetaDTOs = recetas.map(receta -> MostrarReceta.fromEntity(receta, valoracionRepository, likesRepository));
+
+        return ResponseEntity.ok(recetaDTOs);
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<MostrarReceta> obtenerRecetaPorId(@PathVariable Long id) {
+        Recetas receta = recetaService.obtenerRecetaPorId(id);
+        if (receta == null) {
+            return ResponseEntity.notFound().build();
+        }
+        MostrarReceta recetaDTO = MostrarReceta.fromEntity(receta, valoracionRepository, likesRepository);
+        return ResponseEntity.ok(recetaDTO);
     }
 
 }
