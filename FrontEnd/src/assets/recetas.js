@@ -41,8 +41,8 @@ export const recetas = [
   },
   {
     id: 10,
-    id_usuario: 3,
-    nombre_usuario: "Michael Schumacher Fangio",
+    id_usuario: 177,
+    nombre_usuario: "Goku-UI-666",
     imagen:
       "https://cdn.britannica.com/36/123536-050-95CB0C6E/Variety-fruits-vegetables.jpg?w=400&h=300&c=crop",
     nombre: "Verduras al plato",
@@ -80,8 +80,8 @@ export const recetas = [
   },
   {
     id: 11,
-    id_usuario: 3,
-    nombre_usuario: "Max Verstappen",
+    id_usuario: 721,
+    nombre_usuario: "Jotaro696",
     imagen:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlMyzfmXp2bWMGCMLw2JC4uXpXR1qEGTCBvw&s",
     nombre: "Haburguesas tapa arterias",

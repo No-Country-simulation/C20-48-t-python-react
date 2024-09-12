@@ -11,9 +11,14 @@ import Divider from "@mui/material/Divider";
 import RamenDiningIcon from "@mui/icons-material/RamenDining";
 import { useContext, useState } from "react";
 import { RecipeListContext } from "../Context/RecipeContext";
+<<<<<<< HEAD
 // import { recetas } from "../assets/recetas";
 import useDebouncedFetch from "../hooks/useDebouncedFetch";
 import queryToString from "../utils/queryToString";
+=======
+import { recetas } from "../assets/recetas";
+import { UserContext } from "../Context/UserContext";
+>>>>>>> main
 
 function Home() {
   // const [selectedCategory, setSelectedCategory] = useState(null);
@@ -24,6 +29,7 @@ function Home() {
     ingredient: null,
   });
   const { recipes, setRecipes } = useContext(RecipeListContext);
+  const {isLogin} = useContext(UserContext);
 
   const debouncedFetch = useDebouncedFetch(queryToString(query), 500);
 
@@ -71,7 +77,7 @@ function Home() {
         ) : (
           <DisplayCategories recetas={recipes} category={query} />
         )}
-        <FloatingAB />
+        {isLogin && <FloatingAB />}
       </Container>
       <Footer />
     </>

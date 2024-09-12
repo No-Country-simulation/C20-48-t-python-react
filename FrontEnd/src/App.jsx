@@ -16,7 +16,12 @@ import Favourites from "./pages/Favourites";
 import About from "./pages/About";
 import MyRecipes from "./pages/MyRecipes";
 import Box from "@mui/material/Box";
+<<<<<<< HEAD
 import fondo from "./assets/background.svg";
+=======
+import fondo from "./assets/fondoapp.png";
+import fondo2 from "./assets/fondoapp2.png";
+>>>>>>> main
 
 export default function App() {
   const [theme, setTheme] = useState(darkTheme);
@@ -32,7 +37,7 @@ export default function App() {
       <CssBaseline />
       <Box
         sx={{
-          backgroundImage: `url(${fondo})`,
+          backgroundImage: theme.palette.mode === 'light' ? `url(${fondo})` : `url(${fondo2})`,
           backgroundSize: "cover",
           backgroundAttachment: "fixed",
           minHeight: "100vh",
