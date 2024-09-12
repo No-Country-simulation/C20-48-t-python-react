@@ -11,11 +11,21 @@ import Divider from "@mui/material/Divider";
 import RamenDiningIcon from "@mui/icons-material/RamenDining";
 import { useContext, useState } from "react";
 import { RecipeListContext } from "../Context/RecipeContext";
-import { recetas } from "../assets/recetas";
+// import { recetas } from "../assets/recetas";
+import useDebouncedFetch from "../hooks/useDebouncedFetch";
+import queryToString from "../utils/queryToString";
 
 function Home() {
-  const [selectedCategory, setSelectedCategory] = useState("all");
+  // const [selectedCategory, setSelectedCategory] = useState(null);
+  const [query, setQuery] = useState({
+    searchTerm: null,
+    category: null,
+    difficulty: null,
+    ingredient: null,
+  });
   const { recipes, setRecipes } = useContext(RecipeListContext);
+
+  const debouncedFetch = useDebouncedFetch(queryToString(query), 500);
 
   return (
     <>
@@ -42,22 +52,24 @@ function Home() {
             Buscar recetas
             <RamenDiningIcon fontSize="large" sx={{ ml: 3 }} />
           </Typography>
-          <SearchBar />
+          <SearchBar query={query} setQuery={setQuery} />
           <Divider sx={{ marginBlock: 2 }} />
           <CategoriesBar
-            selectedCategory={selectedCategory}
-            setSelectedCategory={setSelectedCategory}
+            // selectedCategory={selectedCategory}
+            // setSelectedCategory={setSelectedCategory}
+            selectedCategory={query}
+            setSelectedCategory={setQuery}
           />
         </Container>
-        {selectedCategory !== "all" ? (
-          <DisplayCategories recetas={recetas} category={selectedCategory} />
-        ) : (
+        {Object.values(query).every((value) => value === null) ? (
           <>
-            <Slider category="Fitness" recetas={recetas} />
-            <Slider category="Desayunos" recetas={recetas} />
-            <Slider category="China" recetas={recetas} />
-            <Slider category="Mexicana" recetas={recetas} />
+            <Slider category="Fitness" recetas={recipes} />
+            <Slider category="Desayunos" recetas={recipes} />
+            <Slider category="China" recetas={recipes} />
+            <Slider category="Mexicana" recetas={recipes} />
           </>
+        ) : (
+          <DisplayCategories recetas={recipes} category={query} />
         )}
         <FloatingAB />
       </Container>

@@ -6,6 +6,7 @@ import { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
+import NotFound from "./pages/NotFound";
 import RecipeDetail from "./pages/RecipeDetail";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
@@ -15,7 +16,7 @@ import Favourites from "./pages/Favourites";
 import About from "./pages/About";
 import MyRecipes from "./pages/MyRecipes";
 import Box from "@mui/material/Box";
-import fondo from "./assets/fondoapp.png";
+import fondo from "./assets/background.svg";
 
 export default function App() {
   const [theme, setTheme] = useState(darkTheme);
@@ -52,6 +53,7 @@ export default function App() {
               <Route path="/favoritos" element={<Favourites />} />
               <Route path="/about" element={<About />} />
               <Route path="/detalle-receta/:id" element={<RecipeDetail />} />
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </UserProvider>
         </BrowserRouter>

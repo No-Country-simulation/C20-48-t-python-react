@@ -37,7 +37,7 @@ export default function MediaCard({ receta }) {
           height: 140,
           minWidth: 284,
           objectFit: "cover",
-          boxShadow: "0px 1px 10px 0px #1E1E1E",
+          boxShadow: "0px 1px 6px 0px #1E1E1E",
         }}
         image={receta.imagen}
         title="Food"

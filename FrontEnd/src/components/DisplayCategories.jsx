@@ -2,8 +2,13 @@ import Paper from "@mui/material/Paper";
 import Container from "@mui/material/Container";
 import Card from "./Card";
 import Typography from "@mui/material/Typography";
+import { Suspense } from "react";
+import LoadingSkeleton from "./skeletons/LoadingSkeleton";
+import filtersToString from "../utils/filtersToString";
 
 export default function DisplayCategories({ category, recetas }) {
+  const filters = filtersToString(category);
+
   return (
     <Container sx={{ marginTop: 4 }} maxWidth={"xl"} disableGutters>
       <Typography
@@ -15,11 +20,14 @@ export default function DisplayCategories({ category, recetas }) {
           backgroundColor: "background.paper",
           display: "flex",
           alignItems: "center",
+          gap: 1,
+          flexWrap: "wrap",
         }}
       >
         Recetas de
-        <Typography variant="h5" sx={{ ml: 1, color: "primary.main" }}>
-          "{category}"
+        <Typography variant="h5" sx={{ color: "primary.main" }}>
+          {filters}
+          {/* "{category?.searchTerm}"  */}
         </Typography>
       </Typography>
       <Paper
@@ -36,22 +44,23 @@ export default function DisplayCategories({ category, recetas }) {
           marginBlock: 4,
         }}
       >
-        <Container
-          disableGutters
-          maxWidth={"xl"}
-          sx={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-            justifyItems: "center",
-            gap: 4,
-            margin: 0,
-            padding: 0,
-          }}
-        >
-          {recetas.map((receta) => (
-            <Card key={receta.id} receta={receta} />
-          ))}
-        </Container>
+        <Suspense fallback={<LoadingSkeleton />}>
+          <Container
+            disableGutters
+            maxWidth={"xl"}
+            sx={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+              gap: 4,
+              margin: 0,
+              padding: 0,
+            }}
+          >
+            {recetas.map((receta) => (
+              <Card key={receta.id} receta={receta} />
+            ))}
+          </Container>
+        </Suspense>
       </Paper>
     </Container>
   );
