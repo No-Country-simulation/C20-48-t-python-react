@@ -6,6 +6,7 @@ const USER_STRUCTURE = {
   email: "",
   password: "",
   avatar: "",
+  favorites: [],
 };
 
 export const UserContext = createContext({ userInfo: USER_STRUCTURE });

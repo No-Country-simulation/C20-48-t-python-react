@@ -80,6 +80,8 @@ function Register() {
         name: email.split("@")[0],
         email: email,
         password: password,
+        avatar: "",
+        favorites: [],
       };
       console.log(newUserInfo);
 

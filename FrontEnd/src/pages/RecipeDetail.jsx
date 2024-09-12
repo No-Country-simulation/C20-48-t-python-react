@@ -17,12 +17,13 @@ import { useLocation } from "react-router-dom";
 import { UserContext } from "../Context/UserContext";
 
 function RecipeDetail() {
-  const {userInfo, isLogin} = useContext(UserContext)
+  const {userInfo, setUserInfo, isLogin} = useContext(UserContext)
   const [isFavorite, setIsFavorite] = useState(false);
   const location = useLocation();
   const receta = location.state || {};
 
   const handleToggleFavorite = () => {
+    setUserInfo({ ...userInfo, favorites: [...userInfo.favorites, receta.id] });
     setIsFavorite(!isFavorite);
     if (isFavorite) {
       receta.favoritos++;
