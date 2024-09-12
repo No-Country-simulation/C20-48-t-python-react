@@ -76,8 +76,18 @@ public class RecetaController {
         // Llamar al servicio para agregar el like
         likesService.agregarLike(recetaId, usuarioId);
 
-        return ResponseEntity.ok(new RecetaResponse("La receta ha sido valorada exitosamente."));
+        return ResponseEntity.ok(new RecetaResponse("Like"));
     }
+
+    @DeleteMapping("/{recetaId}/like")
+    public ResponseEntity<RecetaResponse> quitarLike(@PathVariable Long recetaId, @RequestHeader("Authorization") String token) {
+
+        Long usuarioId = jwtService.extractUserId(token.replace("Bearer ", ""));
+        likesService.quitarLike(recetaId, usuarioId);
+        return ResponseEntity.ok(new RecetaResponse("Deslike."));
+    }
+
+
     @GetMapping("/busqueda")
     public ResponseEntity<Page<MostrarReceta>> buscarRecetas(
             @RequestParam(required = false) String titulo,
