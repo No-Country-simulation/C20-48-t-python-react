@@ -141,7 +141,7 @@ export default function SearchBar({ query, setQuery }) {
                 gap: 2,
                 gridTemplateColumns: {
                   xs: "1fr",
-                  lg: "repeat(3, minmax(170px, 1fr))",
+                  lg: "repeat(4, minmax(200px, 1fr))",
                 },
               }}
             >
@@ -163,22 +163,22 @@ export default function SearchBar({ query, setQuery }) {
                 options={dificulty}
                 handler={handleDifficulty}
               />
+              <Button
+                variant="contained"
+                size="large"
+                type="submit"
+                sx={{
+                  width: {
+                    xs: "100%",
+                    lg: "max-content",
+                  },
+                }}
+              >
+                Limpiar
+              </Button>
             </Container>
           </Collapse>
         </Container>
-        <Button
-          variant="contained"
-          size="large"
-          type="submit"
-          sx={{
-            width: {
-              xs: "100%",
-              lg: "max-content",
-            },
-          }}
-        >
-          Limpiar
-        </Button>
       </Container>
     </form>
   );
