@@ -42,4 +42,20 @@ public class LikesService {
         // Guardar el like
         likesRepository.save(like);
     }
+    public void quitarLike(Long recetaId, Long usuarioId) {
+        // Buscar la receta por ID
+        Recetas receta = recetasRepository.findById(recetaId)
+                .orElseThrow(() -> new RuntimeException("Receta no encontrada"));
+
+        // Buscar el usuario por ID
+        Usuarios usuario = usuariosRepository.findById(usuarioId)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        // Buscar el "like" que corresponde a la receta y el usuario
+        Likes like = (Likes) likesRepository.findByRecetasAndUsuarios(receta, usuario)
+                .orElseThrow(() -> new RuntimeException("No has marcado esta receta como favorita."));
+
+        // Eliminar el "like"
+        likesRepository.delete(like);
+    }
 }
