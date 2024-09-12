@@ -45,6 +45,7 @@ export default function App() {
             <Routes>
               <Route exact path="/" element={<Home />} />
               <Route path="/detalle-receta" element={<RecipeDetail />} />
+              <Route path="/detalle-receta/:id" element={<RecipeDetail />} />
               <Route path="/editar-receta" element={<RecipeEdit />} />
               <Route path="/login" element={<Login />} />
               <Route path="/registro" element={<Register />} />
@@ -52,7 +53,6 @@ export default function App() {
               <Route path="/mis-recetas" element={<MyRecipes />} />
               <Route path="/favoritos" element={<Favourites />} />
               <Route path="/about" element={<About />} />
-              <Route path="/detalle-receta/:id" element={<RecipeDetail />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </UserProvider>
