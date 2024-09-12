@@ -35,6 +35,7 @@ public class HttpSecurityConfig {
 
                     authReqConfig.requestMatchers(HttpMethod.POST, "/login").permitAll();
                     authReqConfig.requestMatchers(HttpMethod.POST, "/home").permitAll();
+                    authReqConfig.requestMatchers(HttpMethod.POST, "/register").permitAll();
 
 
                     authReqConfig.anyRequest().authenticated();
