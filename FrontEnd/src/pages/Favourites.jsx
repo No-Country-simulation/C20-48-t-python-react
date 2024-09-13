@@ -14,7 +14,7 @@ export default function Favourites() {
 
   return (
     <>
-      <DisplayCategories recetas={recetasFavoritas} category={"Favouritos"} />;
+      <DisplayCategories recetas={recetasFavoritas} category={"Favoritos"} />;
     </>
   );
 }

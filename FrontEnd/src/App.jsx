@@ -2,7 +2,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import { UserProvider } from "./Context/UserContext";
 import CssBaseline from "@mui/material/CssBaseline";
 import { darkTheme, lightTheme } from "./components/UI/theme";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
@@ -22,10 +22,21 @@ import fondo2 from "./assets/fondoapp2.png";
 export default function App() {
   const [theme, setTheme] = useState(darkTheme);
 
+  useEffect(() => {
+    const localTheme = localStorage.getItem("theme");
+    if (localTheme === "light") {
+      setTheme(lightTheme);
+    } else {
+      setTheme(darkTheme);
+    }
+  }, []);
+
   const toggleTheme = () => {
-    setTheme((prevTheme) =>
-      prevTheme === lightTheme ? darkTheme : lightTheme,
-    );
+    setTheme((prevTheme) => {
+      const newTheme = prevTheme === lightTheme ? darkTheme : lightTheme;
+      localStorage.setItem("theme", newTheme.palette.mode);
+      return newTheme;
+    });
   };
 
   return (

@@ -10,12 +10,12 @@ export default function DisplayCategories({ category, recetas }) {
   const filters = filtersToString(category);
 
   return (
-    <Container sx={{ marginBlock: 4 }} maxWidth={"xl"}>
+    <Container sx={{ marginBlock: 4 }} maxWidth={"xl"} disableGutters>
       <Typography
         variant="h5"
         sx={{
           padding: 2,
-          paddingInline: 4,
+          paddingInline: 5,
           borderRadius: 4,
           backgroundColor: "background.paper",
           display: "flex",
