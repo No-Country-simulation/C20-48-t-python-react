@@ -7,12 +7,14 @@ import C20_48_t_Python_React.demo.persistence.repository.ValoracionRepository;
 import C20_48_t_Python_React.demo.service.RecetaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/categorias")
@@ -33,10 +35,22 @@ public class CategoriasController {
             @RequestParam(defaultValue = "10") int size) {
 
         Pageable pageable = PageRequest.of(page, size);
-        Page<Recetas> recetas = recetaService.obtenerRecetasPorCategoria(categoriaId, pageable);
-        Page<MostrarReceta> recetaDTOs = recetas.map(receta -> MostrarReceta.fromEntity(receta, valoracionRepository, likesRepository));
+        Page<Recetas> recetasPage = recetaService.obtenerRecetasPorCategoria(categoriaId, pageable);
 
-        return ResponseEntity.ok(recetaDTOs);
+        // Filtrar las recetas activas
+        List<Recetas> recetasActivas = recetasPage.getContent().stream()
+                .filter(Recetas::isActivo)  // Filtrar solo recetas activas
+                .collect(Collectors.toList());
+
+        // Convertir las recetas activas a DTOs
+        List<MostrarReceta> recetaDTOs = recetasActivas.stream()
+                .map(receta -> MostrarReceta.fromEntity(receta, valoracionRepository, likesRepository))
+                .collect(Collectors.toList());
+
+        // Crear una página de DTOs con la información de la página original
+        Page<MostrarReceta> recetaDTOsPage = new PageImpl<>(recetaDTOs, pageable, recetasPage.getTotalElements());
+
+        return ResponseEntity.ok(recetaDTOsPage);
     }
     @GetMapping("/busqueda")
     public ResponseEntity<Page<MostrarReceta>> obtenerRecetasEnComun(
@@ -45,9 +59,21 @@ public class CategoriasController {
             @RequestParam(defaultValue = "10") int size) {
 
         Pageable pageable = PageRequest.of(page, size);
-        Page<Recetas> recetas = recetaService.obtenerRecetasEnComun(categoriaIds, pageable);
-        Page<MostrarReceta> recetaDTOs = recetas.map(receta -> MostrarReceta.fromEntity(receta, valoracionRepository, likesRepository));
+        Page<Recetas> recetasPage = recetaService.obtenerRecetasEnComun(categoriaIds, pageable);
 
-        return ResponseEntity.ok(recetaDTOs);
+        // Filtrar las recetas activas
+        List<Recetas> recetasActivas = recetasPage.getContent().stream()
+                .filter(Recetas::isActivo)
+                .collect(Collectors.toList());
+
+        // Convertir las recetas activas a DTOs
+        List<MostrarReceta> recetaDTOs = recetasActivas.stream()
+                .map(receta -> MostrarReceta.fromEntity(receta, valoracionRepository, likesRepository))
+                .collect(Collectors.toList());
+
+        // Crear una página de DTOs con la información de la página original
+        Page<MostrarReceta> recetaDTOsPage = new PageImpl<>(recetaDTOs, pageable, recetasPage.getTotalElements());
+
+        return ResponseEntity.ok(recetaDTOsPage);
     }
 }

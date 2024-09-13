@@ -1,11 +1,13 @@
 package C20_48_t_Python_React.demo.service.impl;
 
 import C20_48_t_Python_React.demo.dto.GuardarUsuarios;
+import C20_48_t_Python_React.demo.dto.UsuarioDto;
 import C20_48_t_Python_React.demo.dto.auth.LoginResponse;
 import C20_48_t_Python_React.demo.exeption.InvalidPasswordException;
 import C20_48_t_Python_React.demo.persistence.entity.Usuarios;
 import C20_48_t_Python_React.demo.persistence.repository.UsuariosRepository;
 import C20_48_t_Python_React.demo.service.UsuarioService;
+import C20_48_t_Python_React.demo.service.auth.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -23,6 +25,9 @@ public class UsuarioServiceImpl implements UsuarioService {
     private UsuariosRepository userRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private JwtService jwtService;
     @Override
     public Usuarios registerOneCustomer(GuardarUsuarios newUser) {
         validatePassword(newUser);
@@ -32,6 +37,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         user.setNombreUsuario(newUser.getNombre());
         user.setContrasena(passwordEncoder.encode(newUser.getContrasena()));
         user.setFechaRegistro(LocalDateTime.now());
+        user.setAvatar(newUser.getAvatar());
         user.setRol("USER");
 
         return userRepository.save(user);
@@ -49,6 +55,23 @@ public class UsuarioServiceImpl implements UsuarioService {
         }
 
         }
+
+    public UsuarioDto obtenerUsuarioPorToken(String token) {
+        // Extraer el email del JWT
+        String jwt = token.replace("Bearer ", "");
+        String email = jwtService.extractUsername(jwt);
+
+        // Buscar el usuario en la base de datos
+        Usuarios usuario = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        // Mapear a DTO
+        UsuarioDto usuarioDto = new UsuarioDto();
+        usuarioDto.setAvatar(usuario.getAvatar());
+        usuarioDto.setNombreusuario(usuario.getNombreUsuario());
+
+        return usuarioDto;
+    }
 
 }
 

@@ -46,4 +46,5 @@ public interface RecetasRepository extends JpaRepository<Recetas, Long> {
     Page<Recetas> findByDescripcionContainingAndDificultad(String descripcion, String dificultad, Pageable pageable);
 
     Page<Recetas> findByIngredientesNombreContainingAndDificultad(String ingrediente, String dificultad, Pageable pageable);
+
 }

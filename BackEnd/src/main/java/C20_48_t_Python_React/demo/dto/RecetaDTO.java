@@ -33,6 +33,7 @@ public class RecetaDTO {
     private List<Likes> likes;
     private List<IngredientesDTO> ingredientes;
     private List<ComentariosDTO> comentarios;
+
     public static RecetaDTO fromEntity(Recetas receta) {
         RecetaDTO dto = new RecetaDTO();
         dto.setId(receta.getId());

@@ -17,8 +17,8 @@ public class Comentarios {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(columnDefinition = "TEXT", nullable = false)
-    private String contenido;
+    @Column(name ="contenido", columnDefinition = "TEXT", nullable = false)
+    private String comentario;
 
     @ManyToOne
     @JoinColumn(name = "usuario_id", nullable = false)
@@ -30,4 +30,7 @@ public class Comentarios {
 
     @Column(name = "fecha_comentario", nullable = false)
     private LocalDateTime fechaComentario;
+
+    @Column(nullable = false)
+    private boolean activo = true;
 };

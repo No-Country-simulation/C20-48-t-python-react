@@ -35,6 +35,9 @@ public class Recetas {
     private String imagenUrl;
     @Column(name = "tips", columnDefinition = "TEXT")
     private String tips;
+    @Column(nullable = false)
+    private boolean activo = true;
+
     @ManyToOne
     @JoinColumn(name = "usuario_id", nullable = false)
     @JsonProperty(access = Access.READ_ONLY)
@@ -49,6 +52,7 @@ public class Recetas {
 
     @OneToMany(mappedBy = "recetas")
     private List<Likes> likes;
+
 
     @OneToMany(mappedBy = "recetas", cascade = CascadeType.ALL)
     private List<Ingredientes> ingredientes = new ArrayList<>();

@@ -1,7 +1,9 @@
 package C20_48_t_Python_React.demo.exeption;
 
 import C20_48_t_Python_React.demo.dto.ApiError;
+import C20_48_t_Python_React.demo.dto.RegisterError;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -42,5 +44,18 @@ public class GlobalExceptionHandler {
         );
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiError);
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<RegisterError> handleDataIntegrityViolationException(DataIntegrityViolationException ex) {
+        RegisterError registerError;
+
+        if (ex.getMessage().contains("usuarios.email")) {
+            registerError = new RegisterError("Error: El email ya está asociado a un usuario", ex.getMostSpecificCause().getMessage());
+        } else {
+            registerError = new RegisterError("Error: Violación de integridad de datos", ex.getMostSpecificCause().getMessage());
+        }
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(registerError);
     }
 }

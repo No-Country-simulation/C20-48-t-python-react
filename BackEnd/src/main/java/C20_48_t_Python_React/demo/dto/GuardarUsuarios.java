@@ -20,6 +20,7 @@ public class GuardarUsuarios implements Serializable {
     private String nombre;
     @Size(min=4)
     private String email;
+    private String avatar;
     private LocalDateTime fecharegistro;
     @Size(min=8)
     private String contrasena;
