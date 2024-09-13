@@ -2,7 +2,7 @@ import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import SearchBar from "../components/SearchBar";
 import FloatingAB from "../components/FloatingAB";
-import Hero from "../components/Hero";
+// import Hero from "../components/Hero";
 import Slider from "../components/Slider/Slider";
 import DisplayCategories from "../components/DisplayCategories";
 import Footer from "../components/Footer";
@@ -13,7 +13,7 @@ import { useContext, useState } from "react";
 import { RecipeListContext } from "../Context/RecipeContext";
 import useDebouncedFetch from "../hooks/useDebouncedFetch";
 import queryToString from "../utils/queryToString";
-import { recetas } from "../assets/recetas";
+// import { recetas } from "../assets/recetas";
 import { UserContext } from "../Context/UserContext";
 
 function Home() {
@@ -24,10 +24,10 @@ function Home() {
     difficulty: null,
     ingredient: null,
   });
-  const { recipes, setRecipes } = useContext(RecipeListContext);
+  const { recipes } = useContext(RecipeListContext);
   const { isLogin } = useContext(UserContext);
 
-  const debouncedFetch = useDebouncedFetch(queryToString(query), 500);
+  const debouncedFetch = useDebouncedFetch(queryToString(query));
 
   return (
     <>

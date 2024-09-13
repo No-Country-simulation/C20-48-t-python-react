@@ -6,6 +6,7 @@ const USER_STRUCTURE = {
   email: "",
   password: "",
   avatar: "",
+  favorites: [],
 };
 
 export const UserContext = createContext({ userInfo: USER_STRUCTURE });
@@ -13,7 +14,15 @@ export const UserContext = createContext({ userInfo: USER_STRUCTURE });
 export const UserProvider = ({ children }) => {
   const [userInfo, setUserInfo] = useState(USER_STRUCTURE);
   const [isLogin, setIsLogin] = useState(false);
-  const [userList, setUserList] = useState([]);
+  const [userList, setUserList] = useState(() => {
+    const localUserInfo = Object.keys(localStorage).filter((key) =>
+      key.includes("userInfo")
+    );
+    return localUserInfo.length > 0
+      ? localUserInfo.map((key) => JSON.parse(localStorage.getItem(key)))
+      : [];
+  });
+
 
   useEffect(() => {
     const localUserInfo = Object.keys(localStorage).filter((key) =>
@@ -26,13 +35,19 @@ export const UserProvider = ({ children }) => {
       console.log(userList);
     }
   }, []);
-
-  /*   useEffect(() => {
-    userList.forEach((user) => {
-      localStorage.setItem("userInfo" + user.id, JSON.stringify(user));
-    })
-    
-  }, [userList]); */
+  
+function changesUserInfo(userInfo) {
+    if (userInfo.id) {
+      const existingUserIndex = userList.findIndex((user) => user.id === userInfo.id);
+      if (existingUserIndex !== -1) {
+        const updatedUserList = [...userList];
+        updatedUserList[existingUserIndex] = userInfo;
+        setUserList(updatedUserList);
+      } else {
+        setUserList([...userList, userInfo]);
+      }
+    }
+  }
 
   function saveUserInfo(newUserInfo) {
     setUserInfo(newUserInfo);
@@ -52,6 +67,7 @@ export const UserProvider = ({ children }) => {
         userList,
         setUserList,
         saveUserInfo,
+        changesUserInfo
       }}
     >
       {children}
