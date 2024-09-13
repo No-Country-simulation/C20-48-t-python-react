@@ -32,10 +32,11 @@ public class MostrarReceta {
     private List<ComentariosDTO> comentarios;
     private Double promedioPuntuacion;
     private Long cantidadLikes;
-
+    private boolean activo;
     // Getters y Setters
 
     public static MostrarReceta fromEntity(Recetas receta, ValoracionRepository valoracionRepository, LikesRepository likesRepository) {
+
         MostrarReceta dto = new MostrarReceta();
         dto.setId(receta.getId());
         dto.setTitulo(receta.getTitulo());
@@ -56,13 +57,15 @@ public class MostrarReceta {
                 .map(IngredientesDTO::fromEntity)
                 .collect(Collectors.toList()));
         dto.setComentarios(receta.getComentarios().stream()
+                .filter(Comentario -> Comentario.isActivo())
                 .map(ComentariosDTO::fromEntity)
                 .collect(Collectors.toList()));
         long cantidadLikes = likesRepository.countByRecetas_Id(receta.getId());
         dto.setCantidadLikes(cantidadLikes);
-
+        dto.setActivo(receta.isActivo());
         Double promedioPuntuacion = valoracionRepository.calcularPromedioPorReceta(receta.getId());
         dto.setPromedioPuntuacion(promedioPuntuacion);
+        
         return dto;
     }
 }
