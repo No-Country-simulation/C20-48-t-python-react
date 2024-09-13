@@ -5,14 +5,16 @@ import { UserContext } from "../Context/UserContext";
 // import Container from "@mui/material/Container";
 
 export default function Favourites() {
-  const {recipes} = useContext(RecipeListContext)
-  const {userInfo} = useContext(UserContext)
+  const { recipes } = useContext(RecipeListContext);
+  const { userInfo } = useContext(UserContext);
 
-  const recetasFavoritas = recipes.filter((receta) => userInfo.favorites.includes(receta.id));
+  const recetasFavoritas = recipes.filter((receta) =>
+    userInfo.favorites.includes(receta.id),
+  );
 
   return (
     <>
-    <DisplayCategories recetas={recetasFavoritas} category={"Favouritos"} />;
+      <DisplayCategories recetas={recetasFavoritas} category={"Favouritos"} />;
     </>
-  )
+  );
 }
