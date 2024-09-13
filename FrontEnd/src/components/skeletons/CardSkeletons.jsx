@@ -17,11 +17,15 @@ export default function CardSkeletons() {
           item
           key={index}
           sx={{
-            minWidth: { xs: "330px", sm: "50%", md: "25%" }, // Ancho mínimo en pantallas pequeñas y porcentajes en pantallas más grandes
+            minWidth: { xs: "330px", sm: "50%", md: "33%", lg: "25%" }, // Ancho mínimo en pantallas pequeñas y porcentajes en pantallas más grandes
             flexGrow: 1,
           }}
         >
-          <Skeleton variant="rectangular" height={330} />
+          <Skeleton
+            variant="rectangular"
+            height={330}
+            sx={{ borderRadius: 2 }}
+          />
           <Box sx={{ pt: 0.5 }}>
             <Skeleton />
             <Skeleton width="60%" />
