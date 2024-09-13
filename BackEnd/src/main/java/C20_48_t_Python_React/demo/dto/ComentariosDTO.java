@@ -14,14 +14,17 @@ import java.time.LocalDateTime;
 public class ComentariosDTO {
     private Long id;
     private String comentario;
-    private Long usuarioId;
+    private String   usuarioemail;
     private LocalDateTime fechaComentario;
+    private boolean activo;
 
     public static ComentariosDTO fromEntity(Comentarios comentario) {
         ComentariosDTO dto = new ComentariosDTO();
         dto.setId(comentario.getId());
-        dto.setComentario(comentario.getContenido());
+        dto.setComentario(comentario.getComentario());
+        dto.setUsuarioemail(comentario.getUsuarios().getEmail());
         dto.setFechaComentario(comentario.getFechaComentario());
+        dto.setActivo(comentario.isActivo());
         return dto;
     }
 }
