@@ -1,11 +1,11 @@
 package C20_48_t_Python_React.demo.controller;
 
-import C20_48_t_Python_React.demo.dto.MostrarReceta;
-import C20_48_t_Python_React.demo.dto.RecetaDTO;
-import C20_48_t_Python_React.demo.dto.RecetaResponse;
+import C20_48_t_Python_React.demo.dto.*;
+import C20_48_t_Python_React.demo.persistence.entity.Comentarios;
 import C20_48_t_Python_React.demo.persistence.entity.Recetas;
-import C20_48_t_Python_React.demo.persistence.repository.LikesRepository;
-import C20_48_t_Python_React.demo.persistence.repository.ValoracionRepository;
+import C20_48_t_Python_React.demo.persistence.entity.Usuarios;
+import C20_48_t_Python_React.demo.persistence.repository.*;
+import C20_48_t_Python_React.demo.service.ComentarioService;
 import C20_48_t_Python_React.demo.service.LikesService;
 import C20_48_t_Python_React.demo.service.RecetaService;
 import C20_48_t_Python_React.demo.service.ValoracionService;
@@ -14,8 +14,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping("/recetas")
@@ -34,6 +37,8 @@ public class RecetaController {
     private final LikesRepository likesRepository;
     @Autowired
     private LikesService likesService;
+    @Autowired
+    private ComentarioService comentarioService;
 
     public RecetaController(RecetaService recetaService, JwtService jwtService, ValoracionRepository valoracionRepository, LikesRepository likesRepository) {
         this.recetaService = recetaService;
@@ -119,5 +124,42 @@ public class RecetaController {
         RecetaDTO recetaActualizada = recetaService.editarReceta(recetaId, recetaDTO, usuarioId);
         return ResponseEntity.ok(recetaActualizada);
     }
+
+    @PostMapping("/{recetaId}/comentarios")
+    public ResponseEntity<RecetaResponse> agregarComentario(
+            @PathVariable Long recetaId,
+            @RequestBody ComentariosDTO comentarioDTO,
+            @RequestHeader("Authorization") String token) {
+
+        comentarioService.agregarComentario(recetaId, comentarioDTO, token);
+        return ResponseEntity.ok(new RecetaResponse("El comentario fue creado con exito"));
+    }
+
+
+    @PutMapping("/comentario/{comentarioId}")
+    public ResponseEntity<RecetaResponse> actualizarComentario(
+            @PathVariable Long comentarioId,
+            @RequestBody ComentariosDTO comentarioDTO,
+            @RequestHeader("Authorization") String token) {
+        try {
+            comentarioService.actualizarComentario(comentarioId, comentarioDTO, token);
+            return ResponseEntity.ok(new RecetaResponse("Fue editado con exito."));
+        } catch (RuntimeException e) {
+            return ResponseEntity.ok(new RecetaResponse("Lo sentimos ha ocurrido un error inesperado."));
+        }
+    }
+
+    @PutMapping("/comentario/{comentarioId}/delete")
+    public ResponseEntity<RecetaResponse> deleteComentario(
+            @PathVariable Long comentarioId,
+            @RequestHeader("Authorization") String token) {
+        try {
+            comentarioService.deleteComentario(comentarioId, token);
+            return ResponseEntity.ok(new RecetaResponse("Fue Eliminado con exito"));
+        } catch (RuntimeException e) {
+            return ResponseEntity.ok(new RecetaResponse("Lo sentimos ha ocurrido un error inesperado."));
+        }
+    }
+
 
 }
