@@ -32,13 +32,13 @@ public class HttpSecurityConfig {
                 .authenticationProvider(daoAuthProvider)
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests( authReqConfig -> {
+                    authReqConfig.requestMatchers(HttpMethod.PUT, "/recetas/**").authenticated();
+                    authReqConfig.requestMatchers(HttpMethod.POST, "/recetas/**").authenticated();
+                    authReqConfig.requestMatchers(HttpMethod.GET, "/user/**").authenticated();
+                    authReqConfig.requestMatchers(HttpMethod.POST, "/user/**").authenticated();
 
-                    authReqConfig.requestMatchers(HttpMethod.POST, "/login").permitAll();
-                    authReqConfig.requestMatchers(HttpMethod.POST, "/home").permitAll();
-                    authReqConfig.requestMatchers(HttpMethod.POST, "/register").permitAll();
 
-
-                    authReqConfig.anyRequest().authenticated();
+                    authReqConfig.anyRequest().permitAll();
                 } )
                 .build();
 
