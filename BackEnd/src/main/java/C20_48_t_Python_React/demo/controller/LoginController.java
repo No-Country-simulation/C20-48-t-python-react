@@ -23,9 +23,4 @@ public class LoginController {
         LoginResponse rsp = authenticationService.login(loginRequest);
         return ResponseEntity.ok(rsp);
     }
-    @GetMapping("/validate-token")
-    public ResponseEntity<Boolean> validate(@RequestParam String jwt){
-        boolean isTokenValid = authenticationService.validateToken(jwt);
-        return ResponseEntity.ok(isTokenValid);
-    }
 }
