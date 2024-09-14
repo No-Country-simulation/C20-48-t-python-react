@@ -160,6 +160,16 @@ public class RecetaController {
             return ResponseEntity.ok(new RecetaResponse("Lo sentimos ha ocurrido un error inesperado."));
         }
     }
+    @PutMapping("/{recetaId}/eliminar")
+    public ResponseEntity<RecetaResponse> actualizarEstadoReceta(
+            @PathVariable Long recetaId) {
 
+        try {
+            recetaService.DisabledReceta(recetaId);
+            return ResponseEntity.ok(new RecetaResponse("Fue Eliminado con exito"));
+        } catch (RuntimeException e) {
+            return ResponseEntity.ok(new RecetaResponse("Lo sentimos ha ocurrido un error inesperado."));
+        }
+    }
 
 }
