@@ -3,19 +3,19 @@ import Container from "@mui/material/Container";
 import Card from "./Card";
 import Typography from "@mui/material/Typography";
 import { Suspense } from "react";
-import LoadingSkeleton from "./skeletons/LoadingSkeleton";
+import CardSkeletons from "./skeletons/CardSkeletons";
 import filtersToString from "../utils/filtersToString";
 
 export default function DisplayCategories({ category, recetas }) {
   const filters = filtersToString(category);
 
   return (
-    <Container sx={{ marginTop: 4 }} maxWidth={"xl"} disableGutters>
+    <Container sx={{ marginBlock: 4 }} maxWidth={"xl"} disableGutters>
       <Typography
         variant="h5"
         sx={{
           padding: 2,
-          paddingLeft: 4,
+          paddingInline: 5,
           borderRadius: 4,
           backgroundColor: "background.paper",
           display: "flex",
@@ -32,6 +32,8 @@ export default function DisplayCategories({ category, recetas }) {
             color: "primary.main",
             backgroundColor: "background.default",
             paddingInline: 2,
+            lineBreak: "word",
+            wordBreak: "break-word",
           }}
         >
           {filters}
@@ -51,7 +53,18 @@ export default function DisplayCategories({ category, recetas }) {
           marginBlock: 4,
         }}
       >
-        <Suspense fallback={<LoadingSkeleton />}>
+        <Suspense fallback={<CardSkeletons />}>
+          {
+            // Si no hay recetas, mostrar mensaje de no hay nada
+            recetas.length === 0 && (
+              <Typography
+                variant="h6"
+                sx={{ textAlign: "center", minHeight: "50vh", paddingTop: 4 }}
+              >
+                Aún no hay ninguna receta aqúi
+              </Typography>
+            )
+          }
           <Container
             disableGutters
             maxWidth={"xl"}

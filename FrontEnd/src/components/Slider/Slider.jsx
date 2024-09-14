@@ -7,6 +7,7 @@ import "swiper/css/pagination";
 import "./slider.css";
 import { Pagination, Autoplay } from "swiper/modules";
 import { Suspense } from "react";
+import CardSkeletons from "../skeletons/CardSkeletons";
 
 export default function Slider({ category, recetas }) {
   return (
@@ -23,6 +24,7 @@ export default function Slider({ category, recetas }) {
       >
         {category}
       </Typography>
+
       <Container
         maxWidth={"xl"}
         sx={{
@@ -34,17 +36,23 @@ export default function Slider({ category, recetas }) {
           boxShadow: 2,
         }}
       >
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<CardSkeletons />}>
           <Swiper
             style={{ padding: "10px" }}
             breakpoints={{
-              640: {
+              0: {
                 slidesPerView: 1,
               },
-              768: {
+              450: {
+                slidesPerView: 1.5,
+              },
+              750: {
                 slidesPerView: 2,
               },
               1024: {
+                slidesPerView: 3,
+              },
+              1280: {
                 slidesPerView: 4,
               },
             }}

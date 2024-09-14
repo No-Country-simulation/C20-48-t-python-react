@@ -15,36 +15,37 @@ import FloatingAB from "../components/FloatingAB";
 import { useContext, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { UserContext } from "../Context/UserContext";
+import CommentSection from "../components/CommentSection";
 
 function RecipeDetail() {
-  const {userInfo, setUserInfo, isLogin} = useContext(UserContext)
+  const { userInfo, setUserInfo, isLogin } = useContext(UserContext);
 
   const [isFavorite, setIsFavorite] = useState(false);
   const location = useLocation();
   const receta = location.state || {};
 
   const handleToggleFavorite = () => {
-    const exists = userInfo.favorites.some(id => id === receta.id);
+    const exists = userInfo.favorites.some((id) => id === receta.id);
     if (exists) {
-      userInfo.favorites = userInfo.favorites.filter(id => id !== receta.id);
+      userInfo.favorites = userInfo.favorites.filter((id) => id !== receta.id);
     } else {
       userInfo.favorites.push(receta.id);
     }
     setUserInfo({ ...userInfo });
     // setUserInfo({ ...userInfo, favorites: [...userInfo.favorites, receta.id] });
-/*     setIsFavorite(!isFavorite);
+    /*     setIsFavorite(!isFavorite);
     if (isFavorite) {
       receta.favoritos++;
     } else {
       receta.favoritos--;
     } */
-      const newIsFavorite = !isFavorite;
-      setIsFavorite(newIsFavorite);
-      if (newIsFavorite) {
-        receta.favoritos++;
-      } else {
-        receta.favoritos--;
-      }
+    const newIsFavorite = !isFavorite;
+    setIsFavorite(newIsFavorite);
+    if (newIsFavorite) {
+      receta.favoritos++;
+    } else {
+      receta.favoritos--;
+    }
   };
 
   const handleDoneStep = (e, i) => {
@@ -212,17 +213,24 @@ function RecipeDetail() {
             </Box>
           </Container>
           <Divider sx={{ marginBlock: 2 }} />
-          <Container disableGutters>
+          <Container
+            disableGutters
+            sx={{
+              backgroundColor: "background.paper",
+              padding: 4,
+              borderRadius: 4,
+            }}
+          >
             <Typography gutterBottom variant="h4">
               Notas
             </Typography>
             <Typography variant="body1">{receta.notas}</Typography>
           </Container>
+          <CommentSection />
         </Stack>
       </Paper>
 
-      { (isLogin && (userInfo.id === receta.id_usuario)) && <FloatingAB /> }
-      
+      {isLogin && userInfo.id === receta.id_usuario && <FloatingAB />}
     </Container>
   );
 }
