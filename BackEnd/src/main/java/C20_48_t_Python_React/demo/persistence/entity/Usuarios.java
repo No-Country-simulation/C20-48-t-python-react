@@ -30,11 +30,11 @@ public class Usuarios implements UserDetails {
     @JsonProperty(access = Access.READ_ONLY)
     private Long id;
 
-    @Column(name = "nombre_usuario", nullable = false, unique = true)
+    @Column(name = "nombre_usuario", nullable = false, unique = true, length = 100)
     private String nombreUsuario;
     //@Column(name=) Se usa para declarar la columna con un nombre mas facil de usar.
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true, length = 100)
     private String email;
 
     @Column(nullable = false)
