@@ -310,4 +310,14 @@ public class RecetaService {
 
         return responseDTO;
     }
+
+    public void DisabledReceta(Long recetaId) {
+        Recetas receta = recetasRepository.findById(recetaId)
+                .orElseThrow(() -> new RuntimeException("Receta no encontrada"));
+
+        // Cambiar el estado de 'activo' a 'false'
+        receta.setActivo(false);
+
+        recetasRepository.save(receta); // Guardar los cambios
+    }
 }
