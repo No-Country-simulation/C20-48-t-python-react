@@ -32,7 +32,9 @@ public interface RecetasRepository extends JpaRepository<Recetas, Long> {
     Page<Recetas> findByDescripcionContaining(String descripcion, Pageable pageable);
 
     Page<Recetas> findByIngredientesNombreContaining(String ingrediente, Pageable pageable);
+
     Optional<Recetas> findById(Long id);
+
     Page<Recetas> findByDificultad(String dificultad, Pageable pageable);
 
     Page<Recetas> findByTituloContainingAndDescripcionContainingAndIngredientesNombreContainingAndDificultad(String titulo, String descripcion, String ingrediente, String dificultad, Pageable pageable);
@@ -46,5 +48,29 @@ public interface RecetasRepository extends JpaRepository<Recetas, Long> {
     Page<Recetas> findByDescripcionContainingAndDificultad(String descripcion, String dificultad, Pageable pageable);
 
     Page<Recetas> findByIngredientesNombreContainingAndDificultad(String ingrediente, String dificultad, Pageable pageable);
+    @Query("SELECT r FROM Recetas r JOIN r.recetaCategorias rc WHERE rc.categorias.id IN :categoriaIds AND LOWER(r.titulo) LIKE LOWER(CONCAT('%', :titulo, '%')) GROUP BY r.id HAVING COUNT(DISTINCT rc.categorias.id) = :categoriaCount")
+    Page<Recetas> findByCategoriaIdsInAndTituloContaining(@Param("categoriaIds") List<Long> categoriaIds, @Param("categoriaCount") long categoriaCount, @Param("titulo") String titulo, Pageable pageable);
 
-}
+    @Query("SELECT r FROM Recetas r JOIN r.recetaCategorias rc WHERE rc.categorias.id IN :categoriaIds AND r.titulo LIKE %:titulo% GROUP BY r.id HAVING COUNT(DISTINCT rc.categorias.id) = :categoriaCount")
+    Page<Recetas> findByCategoriaIdsInAndTituloContaining(@Param("titulo") String titulo, @Param("categoriaIds") List<Long> categoriaIds, @Param("categoriaCount") long categoriaCount, Pageable pageable);
+
+    @Query("SELECT DISTINCT r FROM Recetas r "
+                  + "LEFT JOIN r.recetaCategorias rc "
+                  + "LEFT JOIN rc.categorias c "
+                  + "LEFT JOIN r.ingredientes i "
+                  + "WHERE (:titulo IS NULL OR LOWER(r.titulo) LIKE LOWER(CONCAT('%', :titulo, '%'))) "
+                  + "AND (:descripcion IS NULL OR LOWER(r.descripcion) LIKE LOWER(CONCAT('%', :descripcion, '%'))) "
+                  + "AND (:ingrediente IS NULL OR LOWER(i.nombre) LIKE LOWER(CONCAT('%', :ingrediente, '%'))) "
+                  + "AND (:dificultad IS NULL OR r.dificultad = :dificultad) "
+                  + "AND (:categoriaIds IS NULL OR c.id IN :categoriaIds) "
+                  + "AND r.activo = true "
+                  + "GROUP BY r.id")
+    Page<Recetas> buscarRecetasPorParametros(
+            @Param("titulo") String titulo,
+            @Param("descripcion") String descripcion,
+            @Param("ingrediente") String ingrediente,
+            @Param("dificultad") String dificultad,
+            @Param("categoriaIds") List<Long> categoriaIds,
+            Pageable pageable);
+
+  }
