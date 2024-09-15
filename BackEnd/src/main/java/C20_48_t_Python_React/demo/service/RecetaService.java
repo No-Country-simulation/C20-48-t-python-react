@@ -160,6 +160,7 @@ public class RecetaService {
     public Page<Recetas> obtenerRecetasEnComun(List<Long> categoriaIds, Pageable pageable) {
         long categoriaCount = categoriaIds.size();
         return recetasRepository.findByCategoriaIdsIn(categoriaIds, categoriaCount, pageable);
+
     }
 
     public Page<Recetas> buscarRecetas(String titulo, String descripcion, String ingrediente, String dificultad, Pageable pageable) {
@@ -319,5 +320,27 @@ public class RecetaService {
         receta.setActivo(false);
 
         recetasRepository.save(receta); // Guardar los cambios
+    }
+
+    public Page<Recetas> buscarRecetasPorCategoriasYTitulo(List<Long> categoriaIds, String titulo, Pageable pageable) {
+        // Se pasa la lista de categorías y el título al repositorio
+        long categoriaCount = categoriaIds.size();  // Para la cantidad de categorías
+        return recetasRepository.findByCategoriaIdsInAndTituloContaining(categoriaIds, categoriaCount, titulo, pageable);
+    }
+
+    public Page<Recetas> buscarRecetas(String titulo, String descripcion, String ingrediente, String dificultad, List<Long> categoriaIds, Pageable pageable) {
+        // Verifica qué parámetros están presentes y llama al repositorio correspondiente
+        if (categoriaIds != null && !categoriaIds.isEmpty()) {
+            long categoriaCount = categoriaIds.size();
+            return recetasRepository.findByCategoriaIdsInAndTituloContaining(titulo, categoriaIds, categoriaCount, pageable);
+        } else if (titulo != null || descripcion != null || ingrediente != null || dificultad != null) {
+            return null;
+        } else {
+            return recetasRepository.findAll(pageable);
+        }
+
+    }
+    public Page<Recetas> buscarRecetasPorParametros(String titulo, String descripcion, String ingrediente, String dificultad, List<Long> categoriaIds, Pageable pageable) {
+        return recetasRepository.buscarRecetasPorParametros(titulo, descripcion, ingrediente, dificultad, categoriaIds, pageable);
     }
 }
