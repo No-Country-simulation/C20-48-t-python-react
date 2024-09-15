@@ -1,9 +1,11 @@
 package C20_48_t_Python_React.demo.controller;
 
+import C20_48_t_Python_React.demo.dto.CategoriasDTO;
 import C20_48_t_Python_React.demo.dto.MostrarReceta;
 import C20_48_t_Python_React.demo.persistence.entity.Recetas;
 import C20_48_t_Python_React.demo.persistence.repository.LikesRepository;
 import C20_48_t_Python_React.demo.persistence.repository.ValoracionRepository;
+import C20_48_t_Python_React.demo.service.CategoriaService;
 import C20_48_t_Python_React.demo.service.RecetaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -27,6 +29,14 @@ public class CategoriasController {
 
     @Autowired
     private LikesRepository likesRepository;
+    @Autowired
+    private CategoriaService categoriaService;
+
+    @GetMapping
+    public ResponseEntity<List<CategoriasDTO>> obtenerTodasCategorias() {
+        List<CategoriasDTO> categorias = categoriaService.obtenerTodasCategorias();
+        return ResponseEntity.ok(categorias);
+    }
 
     @GetMapping("/{categoriaId}")
     public ResponseEntity<Page<MostrarReceta>> obtenerRecetasPorCategoria(
