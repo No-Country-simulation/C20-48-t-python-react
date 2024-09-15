@@ -101,23 +101,7 @@ public class RecetaController {
         likesService.quitarLike(recetaId, usuarioId);
         return ResponseEntity.ok(new RecetaResponse("Deslike."));
     }
-
-
-    @GetMapping("/busqueda")
-    public ResponseEntity<Page<MostrarReceta>> buscarRecetas(
-            @RequestParam(required = false) String titulo,
-            @RequestParam(required = false) String descripcion,
-            @RequestParam(required = false) String ingrediente,
-            @RequestParam(required = false) String dificultad,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size) {
-
-        Pageable pageable = PageRequest.of(page, size);
-        Page<Recetas> recetas = recetaService.buscarRecetas(titulo, descripcion, ingrediente, dificultad, pageable);
-        Page<MostrarReceta> recetaDTOs = recetas.map(receta -> MostrarReceta.fromEntity(receta, valoracionRepository, likesRepository));
-
-        return ResponseEntity.ok(recetaDTOs);
-    }
+    
     @PutMapping("/{recetaId}")
     public ResponseEntity<RecetaDTO> editarReceta(@PathVariable Long recetaId, @RequestBody RecetaDTO recetaDTO, @RequestHeader("Authorization") String token) {
         Long usuarioId = jwtService.extractUserId(token.replace("Bearer ", ""));
