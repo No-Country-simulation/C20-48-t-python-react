@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @Repository
 public interface RecetasRepository extends JpaRepository<Recetas, Long> {
-    List<Recetas> findByUsuariosId(Long usuarioId);
+    List<Recetas> findByUsuariosId(Long usuarioId, Pageable pageable);
 
     @Query("SELECT r FROM Recetas r JOIN r.recetaCategorias rc WHERE rc.categorias.id = :categoriaId")
     Page<Recetas> findByCategoriaId(@Param("categoriaId") Long categoriaId, Pageable pageable);
