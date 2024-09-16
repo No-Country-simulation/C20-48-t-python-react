@@ -11,14 +11,13 @@ import C20_48_t_Python_React.demo.service.UsuarioService;
 import C20_48_t_Python_React.demo.service.auth.JwtService;
 import C20_48_t_Python_React.demo.service.impl.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -50,8 +49,10 @@ public class UserController {
         return ResponseEntity.ok(usuarioDto);
     }
 
-    @GetMapping("/misrecetas")
-    public ResponseEntity<List<MostrarReceta>> obtenerRecetasUsuario() {
+    @GetMapping("/mis-recetas")
+    public ResponseEntity<List<MostrarReceta>> obtenerRecetasUsuario(
+                                                                     @RequestParam(defaultValue = "0") int page,
+                                                                     @RequestParam(defaultValue = "10") int size) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null || !authentication.isAuthenticated()) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -60,9 +61,9 @@ public class UserController {
         String username = authentication.getName();
         Usuarios usuario = usuarioService.findOneByUsername(username)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
-
+        Pageable pageable = PageRequest.of(page, size);
         // Obtener recetas del usuario
-        List<Recetas> recetas = recetaService.obtenerRecetasPorUsuario(usuario.getId());
+        List<Recetas> recetas = recetaService.obtenerRecetasPorUsuario(usuario.getId(), pageable);
 
         // Filtrar recetas activas y convertirlas a DTO
         List<MostrarReceta> recetaResponseDTOs = recetas.stream()
@@ -74,9 +75,12 @@ public class UserController {
     }
 
     @GetMapping("/mis-favoritos")
-    public ResponseEntity<List<MostrarReceta>> obtenerFavoritos(@RequestHeader("Authorization") String token) {
+    public ResponseEntity<List<MostrarReceta>> obtenerFavoritos(@RequestHeader("Authorization") String token, @RequestParam(defaultValue = "0") int page,
+                                                                @RequestParam(defaultValue = "10") int size) {
         Long usuarioId = jwtService.extractUserId(token.replace("Bearer ", ""));
-        List<Recetas> favoritas = recetaService.obtenerRecetasFavoritasPorUsuario(usuarioId);
+        Pageable pageable = PageRequest.of(page, size);
+        List<Recetas> favoritas = recetaService.obtenerRecetasFavoritasPorUsuario(usuarioId, pageable);
+
 
         List<MostrarReceta> recetaDTOs = favoritas.stream()
                 .filter(Recetas::isActivo)

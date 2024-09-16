@@ -89,19 +89,11 @@ public class RecetaController {
         Long usuarioId = jwtService.extractUserId(token.replace("Bearer ", ""));
 
         // Llamar al servicio para agregar el like
-        likesService.agregarLike(recetaId, usuarioId);
+        String mensaje = likesService.agregarLike(recetaId, usuarioId);
 
-        return ResponseEntity.ok(new RecetaResponse("Like"));
+        return ResponseEntity.ok(new RecetaResponse(mensaje));
     }
 
-    @DeleteMapping("/{recetaId}/like")
-    public ResponseEntity<RecetaResponse> quitarLike(@PathVariable Long recetaId, @RequestHeader("Authorization") String token) {
-
-        Long usuarioId = jwtService.extractUserId(token.replace("Bearer ", ""));
-        likesService.quitarLike(recetaId, usuarioId);
-        return ResponseEntity.ok(new RecetaResponse("Deslike."));
-    }
-    
     @PutMapping("/{recetaId}")
     public ResponseEntity<RecetaDTO> editarReceta(@PathVariable Long recetaId, @RequestBody RecetaDTO recetaDTO, @RequestHeader("Authorization") String token) {
         Long usuarioId = jwtService.extractUserId(token.replace("Bearer ", ""));
@@ -109,7 +101,7 @@ public class RecetaController {
         return ResponseEntity.ok(recetaActualizada);
     }
 
-    @PostMapping("/{recetaId}/comentarios")
+    @PostMapping("/{recetaId}/comentario")
     public ResponseEntity<RecetaResponse> agregarComentario(
             @PathVariable Long recetaId,
             @RequestBody ComentariosDTO comentarioDTO,
@@ -120,7 +112,7 @@ public class RecetaController {
     }
 
 
-    @PutMapping("/comentario/{comentarioId}")
+    @PutMapping("/{comentarioId}")
     public ResponseEntity<RecetaResponse> actualizarComentario(
             @PathVariable Long comentarioId,
             @RequestBody ComentariosDTO comentarioDTO,
@@ -133,7 +125,7 @@ public class RecetaController {
         }
     }
 
-    @PutMapping("/comentario/{comentarioId}/delete")
+    @PutMapping("/{comentarioId}/delete")
     public ResponseEntity<RecetaResponse> deleteComentario(
             @PathVariable Long comentarioId,
             @RequestHeader("Authorization") String token) {
