@@ -145,22 +145,16 @@ public class RecetaService {
         return responseDTO;
     }
 
-    public List<Recetas> obtenerRecetasPorUsuario(Long usuarioId) {
-        return recetasRepository.findByUsuariosId(usuarioId);
+    public List<Recetas> obtenerRecetasPorUsuario(Long usuarioId, Pageable pageable) {
+        return recetasRepository.findByUsuariosId(usuarioId, pageable);
     }
 
-    public List<Recetas> obtenerRecetasFavoritasPorUsuario(Long usuarioId) {
-        return likesRepository.findRecetasFavoritasPorUsuario(usuarioId);
+    public List<Recetas> obtenerRecetasFavoritasPorUsuario(Long usuarioId, Pageable pageable) {
+        return likesRepository.findRecetasFavoritasPorUsuario(usuarioId, pageable);
     }
 
     public Page<Recetas> obtenerRecetasPorCategoria(Long categoriaId, Pageable pageable) {
         return recetasRepository.findByCategoriaId(categoriaId, pageable);
-    }
-
-    public Page<Recetas> obtenerRecetasEnComun(List<Long> categoriaIds, Pageable pageable) {
-        long categoriaCount = categoriaIds.size();
-        return recetasRepository.findByCategoriaIdsIn(categoriaIds, categoriaCount, pageable);
-
     }
 
     public Page<Recetas> buscarRecetas(String titulo, String descripcion, String ingrediente, String dificultad, Pageable pageable) {
