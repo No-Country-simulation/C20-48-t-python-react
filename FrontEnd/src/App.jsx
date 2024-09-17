@@ -4,6 +4,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { darkTheme, lightTheme } from "./components/UI/theme";
 import { useState, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import KeepAlive from "./components/KeepAlive";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
@@ -82,6 +83,7 @@ export default function App() {
             </HelmetProvider>
           </UserProvider>
         </BrowserRouter>
+        <KeepAlive />
       </Box>
     </ThemeProvider>
   );
