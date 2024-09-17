@@ -37,10 +37,10 @@ Es un aplicación web responsive, donde cualquier usuario puede consultar receta
 | <img width="48" height="48" src="https://github.com/No-Country-simulation/C20-48-t-python-react/blob/main/Documentacion/Adolfo.jpg" alt="Adolfo Sánchez" /> | Adolfo Sánchez | Frontend Developer | [![Github](https://skillicons.dev/icons?i=github)](https://github.com/Adolfsan99) [![Linkedin](https://skillicons.dev/icons?i=linkedin)](https://www.linkedin.com/in/adolfosanchezlopez) |
 | <img width="48" height="48" src="https://github.com/No-Country-simulation/C20-48-t-python-react/blob/main/Documentacion/Ivan.jpg" alt="Iván Capaquira" /> | Iván Capaquira | UX/UI | [![Github](https://skillicons.dev/icons?i=github)](https://github.com/) [![Linkedin](https://skillicons.dev/icons?i=linkedin)](https://www.linkedin.com/in/) |
 
-UX/UI: Iván Capaquira
-QA: Matías Badano - Priscila Ewens 
-Backend: Matias Badano - Juan Manuel Sanjurjo
-Frontend:  Adolfo Sanchez - Isaías Romero - Juan Manuel Sanjurjo
+- **UX/UI**: Iván Capaquira
+- **QA: Matías Badano** - Priscila Ewens 
+- **Backend**: Matias Badano - Juan Manuel Sanjurjo
+- **Frontend**:  Adolfo Sanchez - Isaías Romero - Juan Manuel Sanjurjo
 
 
 
