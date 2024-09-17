@@ -9,6 +9,7 @@ import {
   Paper,
 } from "@mui/material";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 function Register() {
   // Estado para manejar los valores de los campos y los errores
@@ -92,6 +93,10 @@ function Register() {
   };
   return (
     <Container maxWidth="sm">
+      <Helmet>
+        <title>Registrarse</title>
+        <meta name="description" content="Aqui puedes registrarte" />
+      </Helmet>
       <Box
         display="flex"
         flexDirection="column"

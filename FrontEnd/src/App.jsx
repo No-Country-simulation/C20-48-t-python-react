@@ -64,7 +64,7 @@ export default function App() {
             <HelmetProvider>
               <Helmet>
                 <title>RecetApp</title>
-                <meta name="description" content="RecetApp" />
+                <meta name="description" content="RecetApp la web app de recetas mas grande de todo No country" />
                 <link rel="icon" href={ollitaSrc} />
               </Helmet>
               <Routes>

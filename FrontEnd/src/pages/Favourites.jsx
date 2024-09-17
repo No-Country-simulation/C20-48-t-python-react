@@ -2,6 +2,7 @@ import DisplayCategories from "../components/DisplayCategories";
 import { useContext } from "react";
 import { RecipeListContext } from "../Context/RecipeContext";
 import { UserContext } from "../Context/UserContext";
+import { Helmet } from "react-helmet-async";
 // import Container from "@mui/material/Container";
 
 export default function Favourites() {
@@ -14,6 +15,10 @@ export default function Favourites() {
 
   return (
     <>
+    <Helmet>
+      <title>Favoritos</title>
+      <meta name="description" content="Aqui veras todas tus recetas guardadas" />
+    </Helmet>
       <DisplayCategories recetas={recetasFavoritas} category={"Favoritos"} />;
     </>
   );

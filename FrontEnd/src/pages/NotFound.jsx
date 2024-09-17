@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Container, Typography, Button } from "@mui/material";
+import { Helmet } from "react-helmet-async";
 
 const NotFound = () => {
   return (
@@ -12,6 +13,11 @@ const NotFound = () => {
         borderRadius: 4,
       }}
     >
+
+      <Helmet>
+        <title>Pagina no encontrada</title>
+        <meta name="description" content="Página no encontrada" />
+      </Helmet>
       <Typography variant="h2" component="h1">
         404 - Página no encontrada
       </Typography>

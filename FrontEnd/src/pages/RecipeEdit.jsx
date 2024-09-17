@@ -7,6 +7,7 @@ import AddNotes from "../components/recipe-edit/AddNotes";
 import AddImage from "../components/recipe-edit/AddImage";
 import AddTimingsAndDifficulty from "../components/recipe-edit/AddTimingsAndDifficulty";
 import { Alert, Button, Container, Snackbar, Stack } from "@mui/material";
+import { Helmet } from "react-helmet-async";
 
 function RecipeSteps() {
   const [error, setErrors] = useState(null);
@@ -92,6 +93,10 @@ function RecipeSteps() {
 
   return (
     <>
+    <Helmet>
+      <title>Editar o crear receta</title>
+      <meta name="description" content="Editar o crear receta" />
+    </Helmet>
       <Container
         maxWidth="sm"
         sx={{
