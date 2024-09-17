@@ -57,6 +57,8 @@ Es un aplicación web responsive, donde cualquier usuario puede consultar receta
 
 ![App Screenshot](https://github.com/No-Country-simulation/C20-48-t-python-react/blob/main/Documentacion/cap1.jpg)
 
+![App Screenshot2](https://github.com/No-Country-simulation/C20-48-t-python-react/blob/main/Documentacion/lasagna.jpeg)
+
 ## Color Reference
 
 | Color             | Hex                                                                |
