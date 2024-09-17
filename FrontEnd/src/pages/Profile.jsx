@@ -24,6 +24,7 @@ import pepper from "../assets/profile-icons/pepper-avatar.svg";
 import { UserContext } from "../Context/UserContext";
 import { useEffect } from "react";
 import { Navigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 function Profile() {
   const [editName, setEditName] = useState("");
   const [newPassword, setNewPassword] = useState("");
@@ -160,6 +161,11 @@ function Profile() {
   return (
     <>
       <Container maxWidth="sm">
+
+        <Helmet>
+          <title>Perfil</title>
+          <meta name="description" content="Perfil de usuario" />
+        </Helmet>
         <Box
           display="flex"
           flexDirection="column"

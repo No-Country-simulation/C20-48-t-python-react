@@ -477,6 +477,6 @@ export const recetas = [
     ],
     rating: 2,
     favoritos: 34,
-    notas: "La carne picada no tiene punto blue, a menos que te quieras morir",
+    notas: "La carne picada no tiene punto blue, a menos que te quieras morir ☠️",
   },
 ];

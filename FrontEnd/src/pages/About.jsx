@@ -1,10 +1,15 @@
 import Contaienr from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
+import { Helmet } from "react-helmet-async";
 
 export default function About() {
   return (
     <Contaienr maxWidth={"xl"} sx={{ marginTop: 4 }}>
+      <Helmet>
+        <title>About</title>
+        <meta name="description" content="Sobre RecetApp, una MVP desarrollada durante nuestra simulación laboral en No Country" />
+      </Helmet>
       <Paper elevation={0} sx={{ padding: 4 }}>
         <Typography variant="h4" sx={{ marginBlock: 2 }}>
           About RecetApp

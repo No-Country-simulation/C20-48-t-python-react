@@ -16,6 +16,7 @@ import { useContext, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { UserContext } from "../Context/UserContext";
 import CommentSection from "../components/CommentSection";
+import { Helmet } from "react-helmet-async";
 
 function RecipeDetail() {
   const { userInfo, setUserInfo, isLogin } = useContext(UserContext);
@@ -56,6 +57,10 @@ function RecipeDetail() {
 
   return (
     <Container disableGutters maxWidth={"lg"}>
+      <Helmet>
+        <title>{receta.nombre}</title>
+        <meta name="description" content="Aqui veras la receta" />
+      </Helmet>
       <Paper sx={{ padding: "50px 15px 150px 15px" }}>
         <Stack sx={{ padding: { xs: 0, sm: 2 }, gap: 2 }} direction="column">
           <Typography variant="h3">{receta.nombre}</Typography>

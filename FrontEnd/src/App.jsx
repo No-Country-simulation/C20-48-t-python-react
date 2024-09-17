@@ -61,6 +61,7 @@ export default function App() {
         }}
       >
         <BrowserRouter>
+<<<<<<< HEAD
           <AppDataProvider>
             <UserProvider>
               <Navbar toggleTheme={toggleTheme} />
@@ -90,6 +91,31 @@ export default function App() {
               </HelmetProvider>
             </UserProvider>
           </AppDataProvider>
+=======
+          <UserProvider>
+            <Navbar toggleTheme={toggleTheme} />
+            <HelmetProvider>
+              <Helmet>
+                <title>RecetApp</title>
+                <meta name="description" content="RecetApp la web app de recetas mas grande de todo No country" />
+                <link rel="icon" href={ollitaSrc} />
+              </Helmet>
+              <Routes>
+                <Route exact path="/" element={<Home />} />
+                <Route path="/detalle-receta" element={<RecipeDetail />} />
+                <Route path="/detalle-receta/:id" element={<RecipeDetail />} />
+                <Route path="/editar-receta" element={<RecipeEdit />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/registro" element={<Register />} />
+                <Route path="/perfil" element={<Profile />} />
+                <Route path="/mis-recetas" element={<MyRecipes />} />
+                <Route path="/favoritos" element={<Favourites />} />
+                <Route path="/about" element={<About />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </HelmetProvider>
+          </UserProvider>
+>>>>>>> main
         </BrowserRouter>
         <KeepAlive />
       </Box>
