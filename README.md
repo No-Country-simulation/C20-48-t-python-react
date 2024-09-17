@@ -45,13 +45,12 @@ Frontend:  Adolfo Sanchez - Isaías Romero - Juan Manuel Sanjurjo
 
 
 
-## Tecnologias utilizadas
+## Tecnologías utilizadas
 
-·Backend: Spring Boot
-·Base de Datos: PostgresQL
-·Autenticación: JWT (JSON Web Token) 
-.Dependencias: Spring Data JPA, Spring Security,  
- Spring Web, Lombok
+- **Backend**: Spring Boot
+- **Base de Datos**: PostgreSQL
+- **Autenticación**: JWT (JSON Web Token)
+- **Dependencias**: Spring Data JPA, Spring Security, Spring Web, Lombok
 
 
 ## Imagenes del Proyecto
