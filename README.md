@@ -2,7 +2,9 @@
 
  # NoCountry: C20-48-t-Python-React
 
-Proyecto: [!Loguito](https://github.com/No-Country-simulation/C20-48-t-python-react/blob/main/FrontEnd/src/assets/ollitalight.svg) RecetApp
+Proyecto: RecetApp
+
+![Loguito](https://github.com/No-Country-simulation/C20-48-t-python-react/blob/main/Documentacion/logo2.jpg)
 
 Versión: 1.0
 Fecha:20/09/2024
