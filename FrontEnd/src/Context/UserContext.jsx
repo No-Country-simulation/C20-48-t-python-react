@@ -16,13 +16,12 @@ export const UserProvider = ({ children }) => {
   const [isLogin, setIsLogin] = useState(false);
   const [userList, setUserList] = useState(() => {
     const localUserInfo = Object.keys(localStorage).filter((key) =>
-      key.includes("userInfo")
+      key.includes("userInfo"),
     );
     return localUserInfo.length > 0
       ? localUserInfo.map((key) => JSON.parse(localStorage.getItem(key)))
       : [];
   });
-
 
   useEffect(() => {
     const localUserInfo = Object.keys(localStorage).filter((key) =>
@@ -35,10 +34,12 @@ export const UserProvider = ({ children }) => {
       console.log(userList);
     }
   }, []);
-  
-function changesUserInfo(userInfo) {
+
+  function changesUserInfo(userInfo) {
     if (userInfo.id) {
-      const existingUserIndex = userList.findIndex((user) => user.id === userInfo.id);
+      const existingUserIndex = userList.findIndex(
+        (user) => user.id === userInfo.id,
+      );
       if (existingUserIndex !== -1) {
         const updatedUserList = [...userList];
         updatedUserList[existingUserIndex] = userInfo;
@@ -67,11 +68,10 @@ function changesUserInfo(userInfo) {
         userList,
         setUserList,
         saveUserInfo,
-        changesUserInfo
+        changesUserInfo,
       }}
     >
       {children}
     </UserContext.Provider>
   );
 };
-

@@ -9,12 +9,13 @@ import Footer from "../components/Footer";
 import CategoriesBar from "../components/UI/CategoriesBar";
 import Divider from "@mui/material/Divider";
 import RamenDiningIcon from "@mui/icons-material/RamenDining";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { RecipeListContext } from "../Context/RecipeContext";
 import useDebouncedFetch from "../hooks/useDebouncedFetch";
 import queryToString from "../utils/queryToString";
 // import { recetas } from "../assets/recetas";
 import { UserContext } from "../Context/UserContext";
+import { useAppData } from "../Context/AppDataContext";
 
 function Home() {
   // const [selectedCategory, setSelectedCategory] = useState(null);
@@ -27,6 +28,10 @@ function Home() {
   const { recipes } = useContext(RecipeListContext);
   const { isLogin } = useContext(UserContext);
 
+  const { categories, loading, error } = useAppData();
+  useEffect(() => {
+    console.log(categories);
+  }, [categories]);
   const debouncedFetch = useDebouncedFetch(queryToString(query));
 
   return (

@@ -1,5 +1,6 @@
 import { ThemeProvider } from "@mui/material/styles";
 import { UserProvider } from "./Context/UserContext";
+import { AppDataProvider } from "./Context/AppDataContext";
 import CssBaseline from "@mui/material/CssBaseline";
 import { darkTheme, lightTheme } from "./components/UI/theme";
 import { useState, useEffect } from "react";
@@ -17,6 +18,7 @@ import Favourites from "./pages/Favourites";
 import About from "./pages/About";
 import MyRecipes from "./pages/MyRecipes";
 import Box from "@mui/material/Box";
+import ApiDocs from "./pages/ApiDocs";
 import fondo from "./assets/fondoapp.png";
 import fondo2 from "./assets/fondoapp2.png";
 import { Helmet, HelmetProvider } from "react-helmet-async";
@@ -59,29 +61,35 @@ export default function App() {
         }}
       >
         <BrowserRouter>
-          <UserProvider>
-            <Navbar toggleTheme={toggleTheme} />
-            <HelmetProvider>
-              <Helmet>
-                <title>RecetApp</title>
-                <meta name="description" content="RecetApp" />
-                <link rel="icon" href={ollitaSrc} />
-              </Helmet>
-              <Routes>
-                <Route exact path="/" element={<Home />} />
-                <Route path="/detalle-receta" element={<RecipeDetail />} />
-                <Route path="/detalle-receta/:id" element={<RecipeDetail />} />
-                <Route path="/editar-receta" element={<RecipeEdit />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/registro" element={<Register />} />
-                <Route path="/perfil" element={<Profile />} />
-                <Route path="/mis-recetas" element={<MyRecipes />} />
-                <Route path="/favoritos" element={<Favourites />} />
-                <Route path="/about" element={<About />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </HelmetProvider>
-          </UserProvider>
+          <AppDataProvider>
+            <UserProvider>
+              <Navbar toggleTheme={toggleTheme} />
+              <HelmetProvider>
+                <Helmet>
+                  <title>RecetApp</title>
+                  <meta name="description" content="RecetApp" />
+                  <link rel="icon" href={ollitaSrc} />
+                </Helmet>
+                <Routes>
+                  <Route exact path="/" element={<Home />} />
+                  <Route path="/detalle-receta" element={<RecipeDetail />} />
+                  <Route
+                    path="/detalle-receta/:id"
+                    element={<RecipeDetail />}
+                  />
+                  <Route path="/editar-receta" element={<RecipeEdit />} />
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/registro" element={<Register />} />
+                  <Route path="/perfil" element={<Profile />} />
+                  <Route path="/mis-recetas" element={<MyRecipes />} />
+                  <Route path="/favoritos" element={<Favourites />} />
+                  <Route path="/api-docs" element={<ApiDocs />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </HelmetProvider>
+            </UserProvider>
+          </AppDataProvider>
         </BrowserRouter>
         <KeepAlive />
       </Box>
