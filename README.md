@@ -36,7 +36,6 @@ Backend: Matias Badano - Juan Manuel Sanjurjo
 Frontend:  Adolfo Sanchez - Isaías Romero - Juan Manuel Sanjurjo
 
 
-![Logo](https://github.com/No-Country-simulation/C20-48-t-python-react/blob/main/FrontEnd/src/assets/logoRecetApp.svg)
 
 
 ## Tecnologias utilizadas
