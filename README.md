@@ -28,29 +28,43 @@ Es un aplicación web responsive, donde cualquier usuario puede consultar receta
 
 
 
-## Authors
+| Avatar | Nombre | Rol | Redes Sociales |
+| --- | --- | --- | --- |
+| <img width="48" height="48" src="https://github.com/No-Country-simulation/C20-48-t-python-react/blob/main/Documentacion/57844658.png" alt="Juan Manuel Sanjurjo" /> | Juan Manuel Sanjurjo | Backend Developer / Frontend Developer | [![Github](https://skillicons.dev/icons?i=github)](https://github.com/JuanManuelSanjurjo) [![Linkedin](https://skillicons.dev/icons?i=linkedin)](https://www.linkedin.com) |
+| <img width="48" height="48" src="https://github.com/No-Country-simulation/C20-48-t-python-react/blob/main/Documentacion/isaias.jfif" alt="Isaias Romero" /> | Isaias Romero | Frontend Developer | [![Github](https://skillicons.dev/icons?i=github)](https://github.com/Isa696) [![Linkedin](https://skillicons.dev/icons?i=linkedin)](https://www.linkedin.com/) |
+| <img width="48" height="48" src="https://github.com/No-Country-simulation/C20-48-t-python-react/blob/main/Documentacion/mati.jfif" alt="Matias Badano" /> | Matias Badano | Backend Developer / QA | [![Github](https://skillicons.dev/icons?i=github)](https://github.com/MatiasJB95) [![Linkedin](https://skillicons.dev/icons?i=linkedin)](https://www.linkedin.com/in/matiasjb95/) |
+| <img width="48" height="48" src="https://github.com/No-Country-simulation/C20-48-t-python-react/blob/main/Documentacion/pri.jfif" alt="Priscila Ewens" /> | Priscila Ewens | QA | [![Github](https://skillicons.dev/icons?i=github)](https://github.com/dafnepriscilaewens) [![Linkedin](https://skillicons.dev/icons?i=linkedin)](https://www.linkedin.com/) |
+| <img width="48" height="48" src="https://github.com/No-Country-simulation/C20-48-t-python-react/blob/main/Documentacion/Adolfo.jpg" alt="Adolfo Sánchez" /> | Adolfo Sánchez | Frontend Developer | [![Github](https://skillicons.dev/icons?i=github)](https://github.com/Adolfsan99) [![Linkedin](https://skillicons.dev/icons?i=linkedin)](https://www.linkedin.com/in/adolfosanchezlopez) |
+| <img width="48" height="48" src="https://github.com/No-Country-simulation/C20-48-t-python-react/blob/main/Documentacion/ivan.jpg" alt="Iván Capaquira" /> | Iván Capaquira | UX/UI | [![Github](https://skillicons.dev/icons?i=github)](https://github.com/quiraoficial) [![Linkedin](https://skillicons.dev/icons?i=linkedin)](https://www.linkedin.com/in/hectorcapaquira/) |
 
-UX/UI: Iván Capaquira
-QA: Matías Badano - Priscila Ewens 
-Backend: Matias Badano - Juan Manuel Sanjurjo
-Frontend:  Adolfo Sanchez - Isaías Romero - Juan Manuel Sanjurjo
+- **UX/UI**: Iván Capaquira
+- **QA**: Matías Badano - Priscila Ewens 
+- **Backend**: Matias Badano - Juan Manuel Sanjurjo
+- **Frontend**:  Adolfo Sanchez - Isaías Romero - Juan Manuel Sanjurjo
 
 
-![Logo](https://github.com/No-Country-simulation/C20-48-t-python-react/blob/main/FrontEnd/src/assets/logoRecetApp.svg)
 
 
-## Tecnologias utilizadas
+## Tecnologías utilizadas
 
-·Backend: Spring Boot
-·Base de Datos: MySQL
-·Autenticación: JWT (JSON Web Token) 
-.Dependencias: çSpring Data JPA, Spring Security,  
- Spring Web, Lombok
+- **Backend**: Spring Boot
+- **Base de Datos**: PostgreSQL
+- **Autenticación**: JWT (JSON Web Token)
+- **Dependencias**: Spring Data JPA, Spring Security, Spring Web, Lombok
 
 
 ## Imagenes del Proyecto
 
-![App Screenshot](https://github.com/No-Country-simulation/C20-48-t-python-react/blob/main/Documentacion/cap1.jpg)
+## 🖼️ Imágenes del Proyecto
+
+![Vista Principal]
+<br>
+<img width="400" height= "200" src="https://github.com/No-Country-simulation/C20-48-t-python-react/blob/main/Documentacion/cap1.jpg" alt="Recetapp" />
+<br>
+![Vista Secundaria]
+<br>
+<img width="200" height= "200" src="https://github.com/No-Country-simulation/C20-48-t-python-react/blob/main/Documentacion/lasagna.jpeg" alt="vista segundaria Recetapp" />
+<br>
 
 ## Color Reference
 
