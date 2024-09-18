@@ -77,7 +77,7 @@ export default function CategoriesBar({
                     ? () =>
                         setSelectedCategory({
                           ...selectedCategory,
-                          category: null,
+                          categoriaIds: null,
                         })
                     : undefined
                 }

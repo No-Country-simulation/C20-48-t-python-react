@@ -13,7 +13,6 @@ import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 
 export default function MediaCard({ receta }) {
   const navigate = useNavigate();
-
   const handleClick = () => {
     navigate(`/detalle-receta/${receta.id}`, { state: receta });
   };
@@ -40,7 +39,7 @@ export default function MediaCard({ receta }) {
           objectFit: "cover",
           boxShadow: "0px 1px 6px 0px #1E1E1E",
         }}
-        image={receta.imagen}
+        image={receta?.imagenUrl || "https://via.placeholder.com/150"}
         title="Food"
       />
       <CardContent sx={{ padding: 2 }}>
@@ -61,9 +60,9 @@ export default function MediaCard({ receta }) {
             maxWidth: "18ch",
             margin: 0,
           }}
-          title={receta.nombre}
+          title={receta?.titulo}
         >
-          {receta.nombre}
+          {receta?.titulo}
         </Typography>
         <Divider sx={{ marginTop: 1, marginBottom: 2, marginInline: -1 }} />
         <Stack
@@ -86,7 +85,7 @@ export default function MediaCard({ receta }) {
               overflow: "hidden",
             }}
           >
-            por {receta.nombre_usuario}
+            por {receta?.usuarioEmail?.split("@")[0]}
           </Typography>
           <Stack
             direction="row"
@@ -105,16 +104,20 @@ export default function MediaCard({ receta }) {
             )}
 
             <Typography variant="subtitle2" color="success">
-              Prep: {receta.tiempo_preparacion} &prime;
+              Prep: {receta?.duracion?.split(" ")[0]} &prime;
             </Typography>
             <Typography variant="subtitle2" color="success">
-              Cook: {receta.tiempo_coccion} &prime;
+              Cook: {receta?.duracion?.split(" ")[0]} &prime;
             </Typography>
           </Stack>
           <Typography variant="subtitle2">
             Categoria:
             <Chip
-              label={receta.categoria[0]}
+              label={
+                receta?.recetaCategorias
+                  ? receta.recetaCategorias[0]?.nombreCategoria
+                  : "No categoria"
+              }
               sx={{
                 marginLeft: 1,
                 cursor: "default",
@@ -150,7 +153,11 @@ export default function MediaCard({ receta }) {
             Ver más
           </Button>
         </CardActions>
-        <UserRating scale={"0.7"} mode={"read"} />
+        <UserRating
+          value={receta.promedioPuntuacion}
+          scale={"0.7"}
+          mode={"read"}
+        />
       </Stack>
     </Card>
   );

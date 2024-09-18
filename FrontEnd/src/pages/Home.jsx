@@ -22,8 +22,6 @@ function Home() {
     ingrediente: null,
     dificultad: null,
     categoriaIds: null,
-    page: 0,
-    size: 10,
   });
   const { recipes } = useContext(RecipeListContext);
   const { isLogin, userInfo } = useUser();

@@ -9,7 +9,9 @@ export function useUser() {
 
 export const UserProvider = ({ children }) => {
   const [userInfo, setUserInfo] = useState(
-    localStorage.getItem("userInfo") || null,
+    localStorage.getItem("userInfo")
+      ? JSON.parse(localStorage.getItem("userInfo"))
+      : null,
   );
   const [isLogin, setIsLogin] = useState(
     localStorage.getItem("token") !== null,
@@ -17,11 +19,22 @@ export const UserProvider = ({ children }) => {
 
   const navigate = useNavigate();
 
-  async function login(userInfo) {
+  // ESTE SE USARIA LUEGO PARA HAER UPDATES DEL USER
+  // useEffect(() => {
+  //   const storedUserInfo = localStorage.getItem("userInfo");
+  //   const token = localStorage.getItem("token");
+  //
+  //   if (storedUserInfo && token) {
+  //     setUserInfo(JSON.parse(storedUserInfo));
+  //     setIsLogin(true);
+  //   }
+  // }, []);
+
+  async function login(credenciales) {
     try {
       const response = await fetch("https://recetapp-ggh9.onrender.com/login", {
         method: "POST",
-        body: JSON.stringify(userInfo),
+        body: JSON.stringify(credenciales),
         headers: {
           "Content-Type": "application/json",
         },
@@ -33,8 +46,12 @@ export const UserProvider = ({ children }) => {
       if (data.jwt) {
         localStorage.setItem("token", data.jwt);
         localStorage.setItem("role", data.role);
-        localStorage.setItem("userInfo", JSON.stringify(userInfo));
-        setUserInfo(userInfo);
+        localStorage.setItem("userId", data.userId);
+        localStorage.setItem(
+          "userInfo",
+          JSON.stringify({ ...credenciales, userId: data.userId }),
+        );
+        setUserInfo({ ...credenciales, userId: data.userId });
         setIsLogin(true);
         navigate("/");
       }
@@ -86,6 +103,8 @@ export const UserProvider = ({ children }) => {
       value={{
         userInfo,
         isLogin,
+        setUserInfo,
+        setIsLogin,
         login,
         logout,
         changesUserInfo,

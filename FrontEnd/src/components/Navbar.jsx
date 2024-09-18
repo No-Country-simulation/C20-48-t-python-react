@@ -22,9 +22,7 @@ import LinkUnstyled from "./UI/LinkUnstyled";
 import { useState } from "react";
 import { useUser } from "../Context/UserContext";
 import { useTheme } from "@emotion/react";
-import { UserContext } from "../Context/UserContext.jsx";
 
-// const menu = ["Home", "Mis recetas", "Favoritos"];
 const menu = [
   { name: "Home", path: "/" },
   { name: "Mis recetas", path: "/mis-recetas" },

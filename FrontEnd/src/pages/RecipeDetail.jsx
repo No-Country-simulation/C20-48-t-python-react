@@ -54,22 +54,21 @@ function RecipeDetail() {
     el.style.textDecoration =
       el.style.textDecoration === "line-through" ? "none" : "line-through";
   };
-
   return (
     <Container disableGutters maxWidth={"lg"}>
       <Helmet>
-        <title>{receta.nombre}</title>
+        <title>{receta.titulo}</title>
         <meta name="description" content="Aqui veras la receta" />
       </Helmet>
       <Paper sx={{ padding: "50px 15px 150px 15px" }}>
         <Stack sx={{ padding: { xs: 0, sm: 2 }, gap: 2 }} direction="column">
-          <Typography variant="h3">{receta.nombre}</Typography>
+          <Typography variant="h3">{receta.titulo}</Typography>
           <Typography color="success" variant="body1">
-            Por: {receta.nombre_usuario}
+            Por: {receta.usuarioEmail.split("@")[0]}
           </Typography>
           <Divider sx={{ marginBottom: 2 }} />
           <img
-            src={receta.imagen}
+            src={receta.imagenUrl}
             style={{
               width: "90%",
               height: "auto",
@@ -111,10 +110,10 @@ function RecipeDetail() {
                   margin: 0,
                 }}
               >
-                {receta.categoria.map((categoria, i) => (
+                {receta.recetaCategorias.map((categoria, i) => (
                   <Chip
                     key={categoria + i}
-                    label={categoria}
+                    label={categoria.nombreCategoria}
                     variant="outlined"
                     sx={{
                       minWidth: "80px",
@@ -136,7 +135,7 @@ function RecipeDetail() {
               }}
             >
               <UserRating />
-              <Typography variant="h5">{receta.rating}</Typography>
+              <Typography variant="h5">{receta.promedioPuntuacion}</Typography>
               <IconButton
                 aria-label="fingerprint"
                 color="secondary"
@@ -147,7 +146,7 @@ function RecipeDetail() {
                   sx={{ transition: "all 0.2s ease-in-out" }}
                 />
               </IconButton>
-              <Typography variant="h5">{receta.favoritos}</Typography>
+              <Typography variant="h5">{receta.cantidadLikes}</Typography>
             </Stack>
           </Stack>
           <Divider sx={{ marginBlock: 2 }} />
@@ -189,9 +188,9 @@ function RecipeDetail() {
                 fontSize: "1.2rem",
               }}
             >
-              {receta.descripcion.map((paso, i) => (
+              {receta.pasos.map(({ descripcion, orden }, i) => (
                 <Paper
-                  key={paso + i}
+                  key={orden + i}
                   elevation={2}
                   sx={{
                     marginBlock: 2,
@@ -212,7 +211,7 @@ function RecipeDetail() {
                   <Typography variant="h6" color="success">
                     {`${i + 1}. `}
                   </Typography>
-                  <Typography>{paso}</Typography>
+                  <Typography>{descripcion}</Typography>
                 </Paper>
               ))}
             </Box>

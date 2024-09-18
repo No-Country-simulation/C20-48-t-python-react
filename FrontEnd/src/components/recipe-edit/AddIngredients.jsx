@@ -22,7 +22,10 @@ export default function AddIngredients({ ingredients, onIngredientsChange }) {
   };
 
   const handleAddIngredient = () => {
-    onIngredientsChange([...ingredients, { quantity: "", unit: "", name: "" }]);
+    onIngredientsChange([
+      ...ingredients,
+      { cantidad: "", unidadMedida: "", nombre: "" },
+    ]);
   };
 
   const handleRemoveIngredient = (index) => {
@@ -51,19 +54,23 @@ export default function AddIngredients({ ingredients, onIngredientsChange }) {
             <TextField
               fullWidth
               label="Ingrediente"
-              value={ingredient.name}
+              value={ingredient.nombre}
               type="text"
               onChange={(event) =>
-                handleIngredientChange(index, "name", event.target.value)
+                handleIngredientChange(index, "nombre", event.target.value)
               }
               variant="outlined"
             />
             <FormControl variant="outlined">
               <InputLabel>Unidad</InputLabel>
               <Select
-                value={ingredient.unit}
+                value={ingredient.unidadMedida}
                 onChange={(event) =>
-                  handleIngredientChange(index, "unit", event.target.value)
+                  handleIngredientChange(
+                    index,
+                    "unidadMedida",
+                    event.target.value,
+                  )
                 }
                 label="Unidad"
               >
@@ -85,9 +92,9 @@ export default function AddIngredients({ ingredients, onIngredientsChange }) {
                   step: "any",
                 },
               }}
-              value={ingredient.quantity}
+              value={ingredient.cantidad}
               onChange={(event) =>
-                handleIngredientChange(index, "quantity", event.target.value)
+                handleIngredientChange(index, "cantidad", event.target.value)
               }
               variant="outlined"
             />

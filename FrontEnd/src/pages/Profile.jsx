@@ -22,7 +22,7 @@ import radish from "../assets/profile-icons/radish-avatar.svg";
 import pepper from "../assets/profile-icons/pepper-avatar.svg";
 import { UserContext } from "../Context/UserContext";
 import { useState, useEffect } from "react";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 
 function Profile() {
@@ -36,6 +36,7 @@ function Profile() {
   const [avatarIcon, setAvatarIcon] = useState("");
 
   const { userInfo, setUserInfo, isLogin, logout, setIsLogin } = useUser();
+  const navigate = useNavigate();
 
   // useEffect(() => {
   //   changesUserInfo(userInfo);
@@ -143,7 +144,7 @@ function Profile() {
     setIsLogin(false);
     setIsEditable(false);
     // Redirigir al usuario a /login
-    Navigate("/login");
+    navigate("/login");
   }
 
   return (

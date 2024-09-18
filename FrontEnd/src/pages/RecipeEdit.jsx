@@ -19,85 +19,11 @@ function RecipeSteps() {
     cook: "",
     difficulty: "",
   });
-  const [steps, setSteps] = useState([""]);
+  const [steps, setSteps] = useState([{}]);
   const [name, setName] = useState("");
   const [note, setNote] = useState("");
   const [categories, setCategories] = useState([]);
-  const [ingredients, setIngredients] = useState([
-    { cantidad: "", unidadMedida: "", nombre: "" },
-  ]);
-
-  // (function fetchData() {
-  //   fetch("https://recetapp-ggh9.onrender.com/recetas", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Authorization: `Bearer ${localStorage.getItem("token")}`,
-  //     },
-  //     body: JSON.stringify({
-  //       titulo: "Bolognesa",
-  //       descripcion:
-  //         "Una deliciosa lasaña casera con capas de pasta, salsa y queso.",
-  //       duracion: "90 minutos",
-  //       dificultad: "Alta",
-  //       imagenUrl: "http://example.com/lasagna.jpg",
-  //       tips: "Dejar reposar 10 minutos antes de servir.",
-  //       categoriaIds: [3],
-  //       ingredientes: [
-  //         {
-  //           nombre: "Láminas de lasaña",
-  //           unidadMedida: "paquete",
-  //           cantidad: 1,
-  //         },
-  //         {
-  //           nombre: "Carne molida",
-  //           unidadMedida: "kg",
-  //           cantidad: 0.5,
-  //         },
-  //         {
-  //           nombre: "Queso mozzarella",
-  //           unidadMedida: "gr",
-  //           cantidad: 200,
-  //         },
-  //         {
-  //           nombre: "Salsa de tomate",
-  //           unidadMedida: "taza",
-  //           cantidad: 2,
-  //         },
-  //       ],
-  //       pasos: [
-  //         {
-  //           descripcion: "Cocinar la carne molida con condimentos.",
-  //           orden: 1,
-  //         },
-  //         {
-  //           descripcion:
-  //             "Hervir las láminas de lasaña hasta que estén al dente.",
-  //           orden: 2,
-  //         },
-  //         {
-  //           descripcion:
-  //             "Colocar una capa de láminas de lasaña en el fondo del molde.",
-  //           orden: 3,
-  //         },
-  //         {
-  //           descripcion: "Añadir una capa de carne molida y salsa de tomate.",
-  //           orden: 4,
-  //         },
-  //         {
-  //           descripcion: "Espolvorear queso mozzarella y repetir las capas.",
-  //           orden: 5,
-  //         },
-  //         {
-  //           descripcion: "Hornear a 180°C por 30 minutos.",
-  //           orden: 6,
-  //         },
-  //       ],
-  //     }),
-  //   })
-  //     .then((response) => response.json())
-  //     .catch((error) => console.log(error));
-  // })();
+  const [ingredients, setIngredients] = useState([{}]);
 
   const handleNameChange = (event) => {
     setName(event.target.value);
