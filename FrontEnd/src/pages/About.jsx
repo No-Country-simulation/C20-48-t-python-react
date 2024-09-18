@@ -1,6 +1,7 @@
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
+import RamenDiningIcon from "@mui/icons-material/RamenDining";
 import { Helmet } from "react-helmet-async";
 import {
   Table,
@@ -75,8 +76,8 @@ export default function About() {
         />
       </Helmet>
       <Paper elevation={0} sx={{ padding: 4 }}>
-        <Typography variant="h4" sx={{ marginBlock: 2, textAlign: "center" }}>
-          Sobre RecetApp
+        <Typography variant="h4" sx={{ marginBlock: 2, textAlign: "center", textDecoration: "underline" }}>
+          Sobre RecetApp<RamenDiningIcon fontSize="large" />
         </Typography>
         <Typography variant="body1" sx={{ marginBlock: 2 , textAlign: "center"}}>
           Bienvenidos a RecetApp, tu aplicación web donde puedes
