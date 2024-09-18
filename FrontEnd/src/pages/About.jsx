@@ -2,7 +2,13 @@ import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import { Helmet } from "react-helmet-async";
-import { Table, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import {
+  Table,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from "@mui/material";
 
 import UserTable from "../components/UserTable";
 
@@ -13,9 +19,7 @@ import juanPhoto from "../assets/team-photos/juan.png";
 import matiPhoto from "../assets/team-photos/mati.jpg";
 import priPhoto from "../assets/team-photos/pri.jpg";
 
-
 export default function About() {
-
   const integrantes = [
     {
       name: "Juan Manuel Sanjurjo",
@@ -43,7 +47,7 @@ export default function About() {
       photo: priPhoto,
       role: "QA Tester",
       github: "https://github.com/dafnepriscilaewens",
-      linkedin: "www.linkedin.com/in/dafne-priscila-ewens"
+      linkedin: "www.linkedin.com/in/dafne-priscila-ewens",
     },
     {
       name: "Adolfo Sánchez",
@@ -59,7 +63,7 @@ export default function About() {
       github: "https://github.com/quiraoficial",
       linkedin: "https://www.linkedin.com/in/hectorcapaquira/",
     },
-  ]
+  ];
 
   return (
     <Container maxWidth={"xl"} sx={{ marginTop: 4 }}>
@@ -71,55 +75,57 @@ export default function About() {
         />
       </Helmet>
       <Paper elevation={0} sx={{ padding: 4 }}>
-        <Typography variant="h4" sx={{ marginBlock: 2 }}>
+        <Typography variant="h4" sx={{ marginBlock: 2, textAlign: "center" }}>
           Sobre RecetApp
         </Typography>
-        <Typography variant="body1" sx={{ marginBlock: 2 }}>
-          Es un aplicación web responsive, donde cualquier usuario puede
-          consultar recetas y siendo un usuario registrado, además podrá
-          compartir sus recetas, pudiendo recibir comentarios y calificaciones
-          de otros usuarios. Objetivos y funciones del Sitio Web: Permitir a
-          los usuarios, la búsqueda de recetas a partir de los ingredientes,
-          descripción o categoría de la misma. Los usuarios podrán crear y
-          compartir sus propias recetas, una vez que estén registrados en el
-          sitio web. Las recetas podrán ser visualizadas por otros usuarios, y
-          para quienes estén registrados, tendrán la opción de comentar y
-          realizar las puntuaciones de las mismas. En el perfil de usuario podrá
-          crear una lista de sus recetas favoritas, además de visualizar las
-          recetas que ha publicado, pudiendo editar las mismas. Un usuario
-          registrado podrá seguir a otros. Además, contarán con la opción de
-          dejar de seguirlos.
+        <Typography variant="body1" sx={{ marginBlock: 2 , textAlign: "center"}}>
+          Bienvenidos a RecetApp, tu aplicación web donde puedes
+          descubrir y compartir recetas deliciosas.😋 <br />🔍 Búsqueda de Recetas:<br />
+          Encuentra recetas por ingredientes, descripción o categoría.<br /> 👩‍🍳 Crea y
+          Comparte:<br /> Los usuarios registrados pueden crear y compartir sus
+          propias recetas.<br /> 💬 Comentarios y Calificaciones:<br /> Recibe comentarios y
+          calificaciones de otros usuarios.<br /> ⭐ Favoritos:<br /> Crea una lista de tus
+          recetas favoritas y edita tus publicaciones en tu perfil.<br /> 👥 Sigue a
+          Otros:<br /> Sigue a tus cocineros favoritos y deja de seguirlos cuando
+          quieras. <br /><br />Este proyecto fue realizado durante una simulación laboral de
+          No Country. <br />¡Únete a nuestra comunidad y comparte tu pasión por la
+          cocina! 🍽️❤️
         </Typography>
-        <Typography variant="h5" sx={{ marginBlock: 2 }}>
-          Integrantes
+        <Typography variant="h5" sx={{ marginBlock: 2, textAlign: "center" }}>
+          RecetApp Team
         </Typography>
-      {/*  */}
-        <TableContainer component={Paper} >
-      <Table>
-        <TableHead sx={{ backgroundColor: "background.default" }}>
-          <TableRow>
-            <TableCell sx={{ fontWeight: "bold", fontSize: "1.2rem" }}>Foto</TableCell>
-            <TableCell sx={{ fontWeight: "bold", fontSize: "1.2rem" }}>Nombre</TableCell>
-            <TableCell sx={{ fontWeight: "bold", fontSize: "1.2rem" }}>Rol</TableCell>
-            <TableCell sx={{ fontWeight: "bold", fontSize: "1.2rem" }}>Redes Sociales</TableCell>
-          </TableRow>
-        </TableHead>
+        {/*  */}
+        <TableContainer component={Paper}>
+          <Table>
+            <TableHead sx={{ backgroundColor: "background.default" }}>
+              <TableRow>
+                <TableCell sx={{ fontWeight: "bold", fontSize: "1.2rem" }}>
+                  Foto
+                </TableCell>
+                <TableCell sx={{ fontWeight: "bold", fontSize: "1.2rem" }}>
+                  Nombre
+                </TableCell>
+                <TableCell sx={{ fontWeight: "bold", fontSize: "1.2rem" }}>
+                  Rol
+                </TableCell>
+                <TableCell sx={{ fontWeight: "bold", fontSize: "1.2rem" }}>
+                  Redes Sociales
+                </TableCell>
+              </TableRow>
+            </TableHead>
 
-        {
-          integrantes.map((integrante) => (
-            <UserTable
-              key={integrante.name}
-              photo={integrante.photo}
-              name={integrante.name}
-              role={integrante.role}
-              github={integrante.github}
-              linkedin={integrante.linkedin}
-            />
-          ))
-        }
-
-</Table>
-</TableContainer>
+            {integrantes.map((integrante) => (
+              <UserTable
+                key={integrante.name}
+                photo={integrante.photo}
+                name={integrante.name}
+                role={integrante.role}
+                github={integrante.github}
+                linkedin={integrante.linkedin}
+              />
+            ))}
+          </Table>
+        </TableContainer>
       </Paper>
     </Container>
   );
