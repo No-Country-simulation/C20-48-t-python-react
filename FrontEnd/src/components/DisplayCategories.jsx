@@ -6,7 +6,7 @@ import { Suspense } from "react";
 import CardSkeletons from "./skeletons/CardSkeletons";
 import filtersToString from "../utils/filtersToString";
 
-export default function DisplayCategories({ category, recetas }) {
+export default function DisplayCategories({ recetas, category }) {
   const filters = filtersToString(category);
 
   return (
@@ -54,17 +54,14 @@ export default function DisplayCategories({ category, recetas }) {
         }}
       >
         <Suspense fallback={<CardSkeletons />}>
-          {
-            // Si no hay recetas, mostrar mensaje de no hay nada
-            recetas.length === 0 && (
-              <Typography
-                variant="h6"
-                sx={{ textAlign: "center", minHeight: "50vh", paddingTop: 4 }}
-              >
-                Aún no hay ninguna receta aqúi
-              </Typography>
-            )
-          }
+          {recetas.length === 0 && (
+            <Typography
+              variant="h6"
+              sx={{ textAlign: "center", minHeight: "50vh", paddingTop: 4 }}
+            >
+              Aún no hay ninguna receta aqúi
+            </Typography>
+          )}
           <Container
             disableGutters
             maxWidth={"xl"}

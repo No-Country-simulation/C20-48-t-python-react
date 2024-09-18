@@ -7,75 +7,62 @@ import TextField from "@mui/material/TextField";
 import AutoCompleteSelection from "./AutoCompleteSelection";
 import Container from "@mui/material/Container";
 import Collapse from "@mui/material/Collapse";
+import SearchbarSkeleton from "./skeletons/SearchbarSkeleton";
 import { useTheme, useMediaQuery } from "@mui/material";
 import { useState, useRef } from "react";
+import { useAppData } from "../Context/AppDataContext";
 
 const dificulty = ["Facil", "Normal", "Dificil"];
 
-const categories = [
-  "Cocina",
-  "Cafe",
-  "Cervezas",
-  "Comida",
-  "Vinos",
-  "Pastas",
-  "Desayunos",
-  "Ensaladas",
-  "Hamburguesas",
-  "Carnes",
-  "Pescados",
-  "Entradas",
-  "Sopas",
-  "Postres",
-  "Bebidas",
-  "Snacks",
-];
-
 const ingredients = [
-  "Arroz",
-  "Pollo",
-  "Carne",
-  "Cerdo",
-  "Pescado",
+  "arroz",
+  "pollo",
+  "carne",
+  "cerdo",
+  "pescado",
   "tomate",
   "pepino",
   "ajo",
   "cebolla",
-  "oreganos",
+  "oregano",
 ];
 
 export default function SearchBar({ query, setQuery }) {
   const [open, setOpen] = useState(false);
   const ref = useRef();
+  const { categorias, categoriasLoading, categoriasError } = useAppData();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setQuery({
-      searchTerm: null,
-      category: null,
-      difficulty: null,
-      ingredient: null,
+      titulo: null,
+      descripcion: null,
+      ingrediente: null,
+      dificultad: null,
+      categoriaIds: null,
+      page: 0,
+      size: 10,
     });
     console.log({ query });
   };
   const handleSearch = (e) => {
     if (e.target.value === "") {
-      setQuery({ ...query, searchTerm: null });
+      setQuery({ ...query, titulo: null });
       return;
     }
-    setQuery({ ...query, searchTerm: e.target.value });
+    setQuery({ ...query, titulo: e.target.value });
   };
 
   const handleCategory = (value) => {
-    setQuery({ ...query, category: value });
+    setQuery({ ...query, categoriaIds: value });
   };
 
   const handleIngredient = (value) => {
-    setQuery({ ...query, ingredient: value });
+    setQuery({ ...query, ingrediente: value });
   };
 
   const handleDifficulty = (value) => {
-    setQuery({ ...query, difficulty: value });
+    setQuery({ ...query, dificultad: value });
   };
 
   const theme = useTheme();
@@ -86,6 +73,10 @@ export default function SearchBar({ query, setQuery }) {
     if (ref.current) {
       ref.current.style.display = open ? "none" : "grid";
     }
+  }
+
+  if (categoriasLoading) {
+    return <SearchbarSkeleton />;
   }
   return (
     <form onSubmit={handleSubmit}>
@@ -148,19 +139,19 @@ export default function SearchBar({ query, setQuery }) {
             >
               <AutoCompleteSelection
                 field="Categoria"
-                options={categories}
-                value={query.category}
+                options={categorias.map(({ id, nombre }) => nombre)}
+                value={query.categoriaIds}
                 handler={handleCategory}
               />
               <AutoCompleteSelection
                 field="Ingrediente"
-                value={query.ingredient}
+                value={query.ingrediente}
                 options={ingredients}
                 handler={handleIngredient}
               />
               <AutoCompleteSelection
                 field="Dificultad"
-                value={query.difficulty}
+                value={query.dificultad}
                 options={dificulty}
                 handler={handleDifficulty}
               />

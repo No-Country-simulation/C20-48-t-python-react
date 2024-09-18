@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { UserContext } from "../Context/UserContext";
+import { useUser } from "../Context/UserContext";
 import {
   TextField,
   Button,
@@ -19,7 +19,7 @@ function Register() {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
-
+  //
   // Luego de registrarse, redireccionar al usuario a la página de inicio de sesión
   const [isRegistered, setIsRegistered] = useState(false);
 
@@ -27,10 +27,10 @@ function Register() {
 
   // Importar el contexto de usuario
 
-  const { userInfo, saveUserInfo, userList } = useContext(UserContext);
+  const { userInfo, saveUserInfo, userList, register } = useUser();
 
   // Función para manejar el envío del formulario
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     // Resetear errores
@@ -48,11 +48,6 @@ function Register() {
       valid = false;
     } else if (email.split("@")[0].length < 3) {
       setEmailError("El email debe tener al menos 3 caracteres.");
-      valid = false;
-    } else if (
-      email.split("@")[0] === userList.map((user) => user.email.split("@")[0])
-    ) {
-      setEmailError("El email ya existe.");
       valid = false;
     }
 
@@ -77,19 +72,14 @@ function Register() {
       // Aquí puedes agregar la lógica para enviar los datos del formulario
 
       const newUserInfo = {
-        id: userInfo.id + 1,
-        name: email.split("@")[0],
+        nombre: email.split("@")[0],
         email: email,
-        password: password,
-        avatar: "",
-        favorites: [],
+        avatar: "tomate",
+        contrasena: password,
+        repeatcontrasena: confirmPassword,
       };
-
-      saveUserInfo(newUserInfo);
-      setIsRegistered(true);
+      await register(newUserInfo);
     }
-
-    // Luego de enviarlos, puedes redireccionar o mostrar un mensaje de éxito
   };
   return (
     <Container maxWidth="sm">

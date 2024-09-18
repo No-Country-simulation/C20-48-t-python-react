@@ -8,9 +8,11 @@ import AddImage from "../components/recipe-edit/AddImage";
 import AddTimingsAndDifficulty from "../components/recipe-edit/AddTimingsAndDifficulty";
 import { Alert, Button, Container, Snackbar, Stack } from "@mui/material";
 import { Helmet } from "react-helmet-async";
+import useFetch from "../hooks/useFetch";
 
 function RecipeSteps() {
   const [error, setErrors] = useState(null);
+  const [exito, setExito] = useState(null);
   const [image, setImage] = useState("");
   const [timings, setTimings] = useState({
     prep: "",
@@ -22,8 +24,80 @@ function RecipeSteps() {
   const [note, setNote] = useState("");
   const [categories, setCategories] = useState([]);
   const [ingredients, setIngredients] = useState([
-    { quantity: "", unit: "", name: "" },
+    { cantidad: "", unidadMedida: "", nombre: "" },
   ]);
+
+  // (function fetchData() {
+  //   fetch("https://recetapp-ggh9.onrender.com/recetas", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Authorization: `Bearer ${localStorage.getItem("token")}`,
+  //     },
+  //     body: JSON.stringify({
+  //       titulo: "Bolognesa",
+  //       descripcion:
+  //         "Una deliciosa lasaña casera con capas de pasta, salsa y queso.",
+  //       duracion: "90 minutos",
+  //       dificultad: "Alta",
+  //       imagenUrl: "http://example.com/lasagna.jpg",
+  //       tips: "Dejar reposar 10 minutos antes de servir.",
+  //       categoriaIds: [3],
+  //       ingredientes: [
+  //         {
+  //           nombre: "Láminas de lasaña",
+  //           unidadMedida: "paquete",
+  //           cantidad: 1,
+  //         },
+  //         {
+  //           nombre: "Carne molida",
+  //           unidadMedida: "kg",
+  //           cantidad: 0.5,
+  //         },
+  //         {
+  //           nombre: "Queso mozzarella",
+  //           unidadMedida: "gr",
+  //           cantidad: 200,
+  //         },
+  //         {
+  //           nombre: "Salsa de tomate",
+  //           unidadMedida: "taza",
+  //           cantidad: 2,
+  //         },
+  //       ],
+  //       pasos: [
+  //         {
+  //           descripcion: "Cocinar la carne molida con condimentos.",
+  //           orden: 1,
+  //         },
+  //         {
+  //           descripcion:
+  //             "Hervir las láminas de lasaña hasta que estén al dente.",
+  //           orden: 2,
+  //         },
+  //         {
+  //           descripcion:
+  //             "Colocar una capa de láminas de lasaña en el fondo del molde.",
+  //           orden: 3,
+  //         },
+  //         {
+  //           descripcion: "Añadir una capa de carne molida y salsa de tomate.",
+  //           orden: 4,
+  //         },
+  //         {
+  //           descripcion: "Espolvorear queso mozzarella y repetir las capas.",
+  //           orden: 5,
+  //         },
+  //         {
+  //           descripcion: "Hornear a 180°C por 30 minutos.",
+  //           orden: 6,
+  //         },
+  //       ],
+  //     }),
+  //   })
+  //     .then((response) => response.json())
+  //     .catch((error) => console.log(error));
+  // })();
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -81,22 +155,56 @@ function RecipeSteps() {
     setIngredients(newIngredients);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // Enviar la información a la base de datos
     // Error handling
-    if (!name || !categories || !ingredients || !steps || !note) {
+    if (!name || !categories || !ingredients || !steps) {
       setErrors("true");
+      return;
     }
-    console.log(name, categories, ingredients, steps, note, timings, image);
+    // Enviar la información a la base de datos
+    const nuevaReceta = {
+      titulo: name,
+      duracion: timings.prep,
+      dificultad: timings.difficulty,
+      imageUrl: image,
+      categoriaIds: categories.map((category) => category.id),
+      tips: note,
+      ingredientes: ingredients,
+      pasos: steps.map((step, index) => {
+        return { descripcion: step, orden: index };
+      }),
+    };
+    console.log(nuevaReceta);
+    try {
+      const response = await fetch(
+        "https://recetapp-ggh9.onrender.com/recetas",
+        {
+          method: "POST",
+          body: JSON.stringify(nuevaReceta),
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        },
+      );
+
+      if (!response.ok) {
+        throw new Error("Error al enviar la receta");
+      }
+      setExito(true);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     <>
-    <Helmet>
-      <title>Editar o crear receta</title>
-      <meta name="description" content="Editar o crear receta" />
-    </Helmet>
+      <Helmet>
+        <title>Editar o crear receta</title>
+        <meta name="description" content="Editar o crear receta" />
+      </Helmet>
       <Container
         maxWidth="sm"
         sx={{
@@ -139,6 +247,15 @@ function RecipeSteps() {
           <Alert severity="warning">
             Por favor, rellena todos los campos requeridos.
           </Alert>
+        </Snackbar>
+      )}
+      {exito && (
+        <Snackbar
+          open={exito}
+          autoHideDuration={4000}
+          onClose={() => setExito(null)}
+        >
+          <Alert severity="success">Receta enviada con éxito</Alert>
         </Snackbar>
       )}
     </>

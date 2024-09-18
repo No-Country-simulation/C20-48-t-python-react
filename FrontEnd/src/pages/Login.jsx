@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import {
   TextField,
   Button,
@@ -6,28 +6,27 @@ import {
   Container,
   Box,
   Paper,
+  Snackbar,
+  Alert,
 } from "@mui/material";
 import { Link } from "react-router-dom";
-import { UserContext } from "../Context/UserContext";
+import { useUser } from "../Context/UserContext";
 import { Helmet } from "react-helmet-async";
 
 function Login() {
-  // Importar el contexto de usuario
-  const { userInfo, setUserInfo, userList, isLogin, setIsLogin } = useContext(
-    UserContext
-  );
-
-  // Estado para manejar los valores de los campos y los errores
+  const [loading, setLoading] = useState(false);
+  const [error, setErrors] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
 
+  const { isLogin, login } = useUser();
+
   // Función para manejar el envío del formulario
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Resetear errores
     setEmailError("");
     setPasswordError("");
 
@@ -47,20 +46,15 @@ function Login() {
       valid = false;
     }
 
-    if (email && password) {
-      const user = userList.filter((user) => {
-        return user.email === email && user.password === password;
-      });
-
-      if (user.length === 0) {
-        setEmailError("El correo electrónico es incorrecto.");
-        setPasswordError("La contraseña es incorrecta.");
-        valid = false;
-      }
-
-      if (valid) {
-        setUserInfo(user[0]);
-        setIsLogin(true);
+    if (valid) {
+      try {
+        setLoading(true);
+        const rta = await login({ username: email, password });
+      } catch (error) {
+        setErrors(true);
+        console.log(error);
+      } finally {
+        setLoading(false);
       }
     }
   };
@@ -136,7 +130,7 @@ function Login() {
             borderRadius: 2,
           }}
         >
-          ¿No tienes una cuenta?{" "}
+          ¿No tienes una cuenta?
           <Link
             to="/registro"
             style={{ textDecoration: "none", color: "#ff7961" }}
@@ -144,10 +138,10 @@ function Login() {
             Registráte
           </Link>
         </Typography>
-        <p></p>
+
         {!isLogin ? (
           <Button variant="contained" onClick={handleSubmit}>
-            Inicia sesión
+            {loading ? "Cargando..." : "Inicia sesión"}
           </Button>
         ) : (
           <Button variant="contained">
@@ -156,6 +150,14 @@ function Login() {
             </Link>
           </Button>
         )}
+
+        <Snackbar
+          open={error}
+          autoHideDuration={4000}
+          onClose={() => setErrors(false)}
+        >
+          <Alert severity="error">No se pudo iniciar sesión</Alert>
+        </Snackbar>
       </Box>
     </Container>
   );

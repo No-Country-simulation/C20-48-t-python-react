@@ -13,26 +13,22 @@ import { useContext, useState, useEffect } from "react";
 import { RecipeListContext } from "../Context/RecipeContext";
 import useDebouncedFetch from "../hooks/useDebouncedFetch";
 import queryToString from "../utils/queryToString";
-// import { recetas } from "../assets/recetas";
-import { UserContext } from "../Context/UserContext";
-import { useAppData } from "../Context/AppDataContext";
+import { useUser } from "../Context/UserContext";
 
 function Home() {
-  // const [selectedCategory, setSelectedCategory] = useState(null);
   const [query, setQuery] = useState({
-    searchTerm: null,
-    category: null,
-    difficulty: null,
-    ingredient: null,
+    titulo: null,
+    descripcion: null,
+    ingrediente: null,
+    dificultad: null,
+    categoriaIds: null,
+    page: 0,
+    size: 10,
   });
   const { recipes } = useContext(RecipeListContext);
-  const { isLogin } = useContext(UserContext);
+  const { isLogin, userInfo } = useUser();
 
-  const { categories, loading, error } = useAppData();
-  useEffect(() => {
-    console.log(categories);
-  }, [categories]);
-  const debouncedFetch = useDebouncedFetch(queryToString(query));
+  const { data, loading, error } = useDebouncedFetch(queryToString(query));
 
   return (
     <>
@@ -62,8 +58,6 @@ function Home() {
           <SearchBar query={query} setQuery={setQuery} />
           <Divider sx={{ marginBlock: 2 }} />
           <CategoriesBar
-            // selectedCategory={selectedCategory}
-            // setSelectedCategory={setSelectedCategory}
             selectedCategory={query}
             setSelectedCategory={setQuery}
           />
@@ -80,6 +74,7 @@ function Home() {
         )}
         {isLogin && <FloatingAB />}
       </Container>
+      {error && <div>Error</div>}
       <Footer />
     </>
   );

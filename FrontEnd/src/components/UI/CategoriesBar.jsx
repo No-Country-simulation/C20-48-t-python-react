@@ -4,19 +4,17 @@ import Container from "@mui/material/Container";
 import DoneIcon from "@mui/icons-material/Done";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import { useState } from "react";
+import { useAppData } from "../../Context/AppDataContext";
+import Skeleton from "@mui/material/Skeleton";
 
 export default function CategoriesBar({
   selectedCategory,
   setSelectedCategory,
 }) {
-  const categories = [
-"Italia", "Tardicionales", "Mexicanas", "Rapidas", "Pan", "Pastas"
-  ];
-
   function handleClick(category) {
-    setSelectedCategory({ ...selectedCategory, category: category });
+    setSelectedCategory({ ...selectedCategory, categoriaIds: category });
   }
+  const { categorias, categoriasLoading, categoriasError } = useAppData();
 
   return (
     <Box
@@ -28,55 +26,71 @@ export default function CategoriesBar({
         borderRadius: "100px",
       }}
     >
-      <Swiper
-        spaceBetween={10}
-        slidesPerView="auto"
-        freeMode={true}
-        loop={true}
-        style={{
-          borderRadius: "10px",
-        }}
-      >
-        {categories.map((category, i) => (
-          <SwiperSlide
-            key={category + i}
-            style={{
-              width: "min-content", // El ancho se ajusta automáticamente según el contenido
-              display: "flex",
-              justifyContent: "center",
+      {categoriasLoading ? (
+        <Container disableGutters maxWidth={"xl"}>
+          <Skeleton
+            variant="rectangular"
+            height={30}
+            width={"100%"}
+            animation="wave"
+            sx={{
+              borderRadius: 1,
             }}
-          >
-            <Chip
-              label={category}
-              sx={{
-                cursor: "pointer",
-                minWidth: "80px",
-                backgroundColor: "background.paper",
-                borderColor: "primary.main",
-                boxShadow: "2px, 2px, 2px, 0px rgba(0, 0, 0, 0.1)",
-              }} // Ajuste mínimo para evitar chips muy pequeños
-              onClick={() => handleClick(category)}
-              variant={
-                selectedCategory.category === category ? "filled" : "outlined"
-              }
-              onDelete={
-                selectedCategory.category === category
-                  ? () =>
-                      setSelectedCategory({
-                        ...selectedCategory,
-                        category: null,
-                      })
-                  : undefined
-              }
-              deleteIcon={
-                selectedCategory.category === category ? (
-                  <DoneIcon />
-                ) : undefined
-              }
-            />
-          </SwiperSlide>
-        ))}
-      </Swiper>
+          />
+        </Container>
+      ) : (
+        <Swiper
+          spaceBetween={10}
+          slidesPerView="auto"
+          freeMode={true}
+          loop={true}
+          style={{
+            borderRadius: "10px",
+          }}
+        >
+          {categorias?.map(({ id, nombre: category }, i) => (
+            <SwiperSlide
+              key={category + i}
+              style={{
+                width: "min-content", // El ancho se ajusta automáticamente según el contenido
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <Chip
+                label={category}
+                sx={{
+                  cursor: "pointer",
+                  minWidth: "80px",
+                  backgroundColor: "background.paper",
+                  borderColor: "primary.main",
+                  boxShadow: "2px, 2px, 2px, 0px rgba(0, 0, 0, 0.1)",
+                }} // Ajuste mínimo para evitar chips muy pequeños
+                onClick={() => handleClick(category)}
+                variant={
+                  selectedCategory.categoriaIds === category
+                    ? "filled"
+                    : "outlined"
+                }
+                onDelete={
+                  selectedCategory.categoriaIds === category
+                    ? () =>
+                        setSelectedCategory({
+                          ...selectedCategory,
+                          category: null,
+                        })
+                    : undefined
+                }
+                deleteIcon={
+                  selectedCategory.categoriaIds === category ? (
+                    <DoneIcon />
+                  ) : undefined
+                }
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      )}
     </Box>
   );
 }

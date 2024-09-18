@@ -152,7 +152,7 @@ export default function CommentSection() {
                     p: 0,
                     marginTop: 1,
                     lineHeight: 1,
-                    maxWidth: "17px",
+                    // maxWidth: "17px",
                     alignSelf: "flex-end",
                   }}
                   onClick={() => expandComent(comment.id)}

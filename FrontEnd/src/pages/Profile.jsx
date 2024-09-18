@@ -15,43 +15,31 @@ import {
 import EditIcon from "@mui/icons-material/Edit";
 import SaveIcon from "@mui/icons-material/Save";
 import CancelIcon from "@mui/icons-material/Cancel";
-
-import { useContext, useState } from "react";
+import { useUser } from "../Context/UserContext";
 import cucumber from "../assets/profile-icons/cucumber-avatar.svg";
 import lemon from "../assets/profile-icons/lemon-avatar.svg";
 import radish from "../assets/profile-icons/radish-avatar.svg";
 import pepper from "../assets/profile-icons/pepper-avatar.svg";
 import { UserContext } from "../Context/UserContext";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+
 function Profile() {
   const [editName, setEditName] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [newPasswordError, setNewPasswordError] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
-  // Edit Profile
   const [isEditable, setIsEditable] = useState(false);
-  // DIalog
   const [open, setOpen] = useState(false);
-
   const [avatarIcon, setAvatarIcon] = useState("");
 
-  // Importar el contexto de usuario
-  const {
-    userInfo,
-    setUserInfo,
-    userList,
-    setUserList,
-    isLogin,
-    setIsLogin,
-    changesUserInfo,
-  } = useContext(UserContext);
+  const { userInfo, setUserInfo, isLogin, logout, setIsLogin } = useUser();
 
-  useEffect(() => {
-    changesUserInfo(userInfo);
-  }, [userInfo]);
+  // useEffect(() => {
+  //   changesUserInfo(userInfo);
+  // }, [userInfo]);
 
   function HandleEditProfile() {
     if (isLogin) {
@@ -91,13 +79,13 @@ function Profile() {
     if (valid) {
       console.log("cambio exitoso");
       setUserInfo({ ...userInfo, password: newPassword });
-      setUserList(
-        userList.map((user) =>
-          user.email === userInfo.email
-            ? { ...user, password: newPassword }
-            : user
-        )
-      );
+      // setUserList(
+      //   userList.map((user) =>
+      //     user.email === userInfo.email
+      //       ? { ...user, password: newPassword }
+      //       : user,
+      //   ),
+      // );
       setNewPassword("");
       setConfirmPassword("");
       setIsEditable(false);
@@ -121,11 +109,11 @@ function Profile() {
       console.log("editName:", editName);
       console.log(userInfo);
 
-      setUserList(
-        userList.map((user) =>
-          user.email === userInfo.email ? { ...user, name: editName } : user
-        )
-      );
+      // setUserList(
+      //   userList.map((user) =>
+      //     user.email === userInfo.email ? { ...user, name: editName } : user,
+      //   ),
+      // );
 
       setIsEditable(false);
     }
@@ -138,10 +126,11 @@ function Profile() {
     setUserInfo({ ...userInfo, avatar: event.target.src });
     handleClose();
   }
-// Array avatares
+  // Array avatares
   const avatarList = [cucumber, lemon, radish, pepper];
 
   function handleLogout() {
+    logout();
     setUserInfo({
       ...userInfo,
       name: "",
@@ -160,7 +149,6 @@ function Profile() {
   return (
     <>
       <Container maxWidth="sm">
-
         <Helmet>
           <title>Perfil</title>
           <meta name="description" content="Perfil de usuario" />

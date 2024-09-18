@@ -8,7 +8,7 @@ function useDebounce(value, delay) {
     const handler = setTimeout(() => {
       setDebouncedValue(value);
     }, delay);
-    console.log(debouncedValue);
+    // console.log(debouncedValue);
     // Cleanup: si el valor cambia antes de que se cumpla el delay, limpia el timer
     return () => {
       clearTimeout(handler);

@@ -11,11 +11,11 @@ function useDebouncedFetch(query, options = {}, delay = 500) {
 
   // Debouncing the query to avoid unnecessary requests
   const debouncedQuery = useDebounce(query, delay); // deb
-
+  console.log(debouncedQuery);
   // Adjust the URL based on the debounced query
   useEffect(() => {
     if (debouncedQuery) {
-      setUrl(`https://api.example.com/search?${debouncedQuery}`);
+      setUrl(`https://recetapp-ggh9.onrender.com/busqueda?${debouncedQuery}`);
     } else {
       setUrl(null); // Avoid fetching when there's no query
     }

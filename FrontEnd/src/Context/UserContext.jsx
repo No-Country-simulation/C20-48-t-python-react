@@ -1,74 +1,95 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
-const USER_STRUCTURE = {
-  id: parseInt(Math.random() * 1000),
-  name: "",
-  email: "",
-  password: "",
-  avatar: "",
-  favorites: [],
-};
+export const UserContext = createContext();
 
-export const UserContext = createContext({ userInfo: USER_STRUCTURE });
+export function useUser() {
+  return useContext(UserContext);
+}
 
 export const UserProvider = ({ children }) => {
-  const [userInfo, setUserInfo] = useState(USER_STRUCTURE);
-  const [isLogin, setIsLogin] = useState(false);
-  const [userList, setUserList] = useState(() => {
-    const localUserInfo = Object.keys(localStorage).filter((key) =>
-      key.includes("userInfo"),
-    );
-    return localUserInfo.length > 0
-      ? localUserInfo.map((key) => JSON.parse(localStorage.getItem(key)))
-      : [];
-  });
+  const [userInfo, setUserInfo] = useState(
+    localStorage.getItem("userInfo") || null,
+  );
+  const [isLogin, setIsLogin] = useState(
+    localStorage.getItem("token") !== null,
+  );
 
-  useEffect(() => {
-    const localUserInfo = Object.keys(localStorage).filter((key) =>
-      key.includes("userInfo"),
-    );
-    if (localUserInfo.length > 0) {
-      setUserList(
-        localUserInfo.map((key) => JSON.parse(localStorage.getItem(key))),
-      );
-      console.log(userList);
-    }
-  }, []);
+  const navigate = useNavigate();
 
-  function changesUserInfo(userInfo) {
-    if (userInfo.id) {
-      const existingUserIndex = userList.findIndex(
-        (user) => user.id === userInfo.id,
-      );
-      if (existingUserIndex !== -1) {
-        const updatedUserList = [...userList];
-        updatedUserList[existingUserIndex] = userInfo;
-        setUserList(updatedUserList);
-      } else {
-        setUserList([...userList, userInfo]);
+  async function login(userInfo) {
+    try {
+      const response = await fetch("https://recetapp-ggh9.onrender.com/login", {
+        method: "POST",
+        body: JSON.stringify(userInfo),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (!response.ok) {
+        throw new Error("Failed to fetch data");
       }
+      const data = await response.json();
+      if (data.jwt) {
+        localStorage.setItem("token", data.jwt);
+        localStorage.setItem("role", data.role);
+        localStorage.setItem("userInfo", JSON.stringify(userInfo));
+        setUserInfo(userInfo);
+        setIsLogin(true);
+        navigate("/");
+      }
+    } catch (error) {
+      console.error("Error during login:", error.message);
+      throw error;
     }
   }
 
-  function saveUserInfo(newUserInfo) {
-    setUserInfo(newUserInfo);
-    localStorage.setItem(
-      "userInfo" + newUserInfo.id,
-      JSON.stringify(newUserInfo),
-    );
+  function logout() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("role");
+    setIsLogin(false);
+    setUserInfo(null);
+    navigate("/login");
   }
 
+  function changesUserInfo(updatedUserInfo) {
+    setUserInfo((prevUserInfo) => ({
+      ...prevUserInfo,
+      ...updatedUserInfo,
+    }));
+  }
+
+  async function register(newUserInfo) {
+    try {
+      const response = await fetch(
+        "https://recetapp-ggh9.onrender.com/register",
+        {
+          method: "POST",
+          body: JSON.stringify(newUserInfo),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        },
+      );
+      if (!response.ok) {
+        throw new Error("Failed to fetch data");
+      }
+      const data = await response.json();
+      console.log(data);
+      navigate("/login");
+    } catch (error) {
+      console.error("Error during registration:", error.message);
+    }
+  }
   return (
     <UserContext.Provider
       value={{
         userInfo,
-        setUserInfo,
         isLogin,
-        setIsLogin,
-        userList,
-        setUserList,
-        saveUserInfo,
+        login,
+        logout,
         changesUserInfo,
+        register,
       }}
     >
       {children}

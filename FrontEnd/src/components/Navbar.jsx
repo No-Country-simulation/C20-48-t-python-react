@@ -19,7 +19,8 @@ import {
 } from "@mui/material";
 import Drawer from "@mui/material/Drawer";
 import LinkUnstyled from "./UI/LinkUnstyled";
-import { useContext, useState } from "react";
+import { useState } from "react";
+import { useUser } from "../Context/UserContext";
 import { useTheme } from "@emotion/react";
 import { UserContext } from "../Context/UserContext.jsx";
 
@@ -33,7 +34,7 @@ const menu = [
 
 function ResponsiveAppBar({ toggleTheme }) {
   const [anchorElNav, setAnchorElNav] = useState(null);
-  const { isLogin } = useContext(UserContext);
+  const { userInfo, isLogin } = useUser();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -150,7 +151,18 @@ function ResponsiveAppBar({ toggleTheme }) {
               ))}
             </Stack>
           </Box>
-
+          {userInfo && (
+            <Typography
+              variant="body2"
+              sx={{
+                color: "white",
+                opacity: 0.7,
+                display: { xs: "none", lg: "block" },
+              }}
+            >
+              Hola! {userInfo.username}
+            </Typography>
+          )}
           <Tooltip
             title={isLogin ? "Ver perfil" : "Iniciar sesión"}
             TransitionComponent={Fade}
