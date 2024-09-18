@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { Autocomplete, Container, TextField, Typography } from "@mui/material";
-
+import { useAppData } from "../../Context/AppDataContext";
+import { useEffect } from "react";
 const categoryOptions = [
   "Desayuno",
   "Almuerzo",
@@ -11,6 +12,11 @@ const categoryOptions = [
   "Sin Gluten",
 ];
 export default function AddCategories({ categories, handleCategoriesChange }) {
+  const { categorias, categoriasLoading, categoriasError } = useAppData();
+
+  if (categoriasLoading) {
+    return <p>Cargando...</p>;
+  }
   return (
     <Container maxWidth="sm" sx={{ mt: 4 }}>
       <Typography variant="h5" gutterBottom>
@@ -18,7 +24,8 @@ export default function AddCategories({ categories, handleCategoriesChange }) {
       </Typography>
       <Autocomplete
         multiple
-        options={categoryOptions}
+        options={categorias}
+        getOptionLabel={(option) => option.nombre} //
         value={categories}
         onChange={handleCategoriesChange}
         renderInput={(params) => (
