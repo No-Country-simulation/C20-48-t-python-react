@@ -1,11 +1,68 @@
-import Contaienr from "@mui/material/Container";
+import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import { Helmet } from "react-helmet-async";
+import { Table, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+
+import UserTable from "../components/UserTable";
+
+import adolfoPhoto from "../assets/team-photos/Adolfo.jpg";
+import isaiasPhoto from "../assets/team-photos/isaias.jpg";
+import ivanPhoto from "../assets/team-photos/ivan.jpg";
+import juanPhoto from "../assets/team-photos/juan.png";
+import matiPhoto from "../assets/team-photos/mati.jpg";
+import priPhoto from "../assets/team-photos/pri.jpg";
+
 
 export default function About() {
+
+  const integrantes = [
+    {
+      name: "Juan Manuel Sanjurjo",
+      photo: juanPhoto,
+      role: "Backend Developer / Frontend Developer",
+      github: "https://github.com/JuanManuelSanjurjo",
+      linkedin: "https://www.linkedin.com/in/juanmanuelsanjurjo/",
+    },
+    {
+      name: "Isaias Romero",
+      photo: isaiasPhoto,
+      role: "Frontend Developer",
+      github: "https://github.com/Isa696",
+      linkedin: "https://www.linkedin.com/in/isaias-romero696/",
+    },
+    {
+      name: "Matias Badano",
+      photo: matiPhoto,
+      role: "Backend Developer / QA Tester",
+      github: "https://github.com/MatiasJB95",
+      linkedin: "https://www.linkedin.com/in/matiasjb95/",
+    },
+    {
+      name: "Priscila Ewens",
+      photo: priPhoto,
+      role: "QA Tester",
+      github: "https://github.com/dafnepriscilaewens",
+      linkedin: "www.linkedin.com/in/dafne-priscila-ewens"
+    },
+    {
+      name: "Adolfo Sánchez",
+      photo: adolfoPhoto,
+      role: "Frontend Developer",
+      github: "https://github.com/Adolfsan99",
+      linkedin: "https://www.linkedin.com/in/adolfosanchezlopez/",
+    },
+    {
+      name: "Iván Capaquira",
+      photo: ivanPhoto,
+      role: "UX/UI Designer",
+      github: "https://github.com/quiraoficial",
+      linkedin: "https://www.linkedin.com/in/hectorcapaquira/",
+    },
+  ]
+
   return (
-    <Contaienr maxWidth={"xl"} sx={{ marginTop: 4 }}>
+    <Container maxWidth={"xl"} sx={{ marginTop: 4 }}>
       <Helmet>
         <title>About</title>
         <meta
@@ -36,15 +93,34 @@ export default function About() {
         <Typography variant="h5" sx={{ marginBlock: 2 }}>
           Integrantes
         </Typography>
-        <Typography variant="body1" sx={{ marginBlock: 2 }}>
-          <ul>
-            <li>UX/UI: Ivan </li>
-            <li>QA: Priscila, Matias </li>
-            <li>Backend: Matias , Juan Manuel</li>
-            <li>Frontend: Isaias, Adolfo, Juan Manuel</li>
-          </ul>
-        </Typography>
+      {/*  */}
+        <TableContainer component={Paper} >
+      <Table>
+        <TableHead sx={{ backgroundColor: "background.default" }}>
+          <TableRow>
+            <TableCell sx={{ fontWeight: "bold", fontSize: "1.2rem" }}>Foto</TableCell>
+            <TableCell sx={{ fontWeight: "bold", fontSize: "1.2rem" }}>Nombre</TableCell>
+            <TableCell sx={{ fontWeight: "bold", fontSize: "1.2rem" }}>Rol</TableCell>
+            <TableCell sx={{ fontWeight: "bold", fontSize: "1.2rem" }}>Redes Sociales</TableCell>
+          </TableRow>
+        </TableHead>
+
+        {
+          integrantes.map((integrante) => (
+            <UserTable
+              key={integrante.name}
+              photo={integrante.photo}
+              name={integrante.name}
+              role={integrante.role}
+              github={integrante.github}
+              linkedin={integrante.linkedin}
+            />
+          ))
+        }
+
+</Table>
+</TableContainer>
       </Paper>
-    </Contaienr>
+    </Container>
   );
 }
