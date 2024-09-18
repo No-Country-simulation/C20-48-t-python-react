@@ -8,20 +8,30 @@ export default function About() {
     <Contaienr maxWidth={"xl"} sx={{ marginTop: 4 }}>
       <Helmet>
         <title>About</title>
-        <meta name="description" content="Sobre RecetApp, una MVP desarrollada durante nuestra simulación laboral en No Country" />
+        <meta
+          name="description"
+          content="Sobre RecetApp, una MVP desarrollada durante nuestra simulación laboral en No Country"
+        />
       </Helmet>
       <Paper elevation={0} sx={{ padding: 4 }}>
         <Typography variant="h4" sx={{ marginBlock: 2 }}>
-          About RecetApp
+          Sobre RecetApp
         </Typography>
         <Typography variant="body1" sx={{ marginBlock: 2 }}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
+          Es un aplicación web responsive, donde cualquier usuario puede
+          consultar recetas y siendo un usuario registrado, además podrá
+          compartir sus recetas, pudiendo recibir comentarios y calificaciones
+          de otros usuarios. Objetivos y funciones del Sitio Web: Permitir a
+          los usuarios, la búsqueda de recetas a partir de los ingredientes,
+          descripción o categoría de la misma. Los usuarios podrán crear y
+          compartir sus propias recetas, una vez que estén registrados en el
+          sitio web. Las recetas podrán ser visualizadas por otros usuarios, y
+          para quienes estén registrados, tendrán la opción de comentar y
+          realizar las puntuaciones de las mismas. En el perfil de usuario podrá
+          crear una lista de sus recetas favoritas, además de visualizar las
+          recetas que ha publicado, pudiendo editar las mismas. Un usuario
+          registrado podrá seguir a otros. Además, contarán con la opción de
+          dejar de seguirlos.
         </Typography>
         <Typography variant="h5" sx={{ marginBlock: 2 }}>
           Integrantes

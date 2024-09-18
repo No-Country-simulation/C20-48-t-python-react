@@ -155,7 +155,6 @@ function Profile() {
     setIsEditable(false);
     // Redirigir al usuario a /login
     Navigate("/login");
-    console.log(userInfo);
   }
 
   return (
