@@ -63,7 +63,7 @@ Es un aplicación web responsive, donde cualquier usuario puede consultar receta
 <br>
 <h3>Vista "Detalle de receta"</h3>
 <br>
-<img width="200" height= "200" src="https://github.com/No-Country-simulation/C20-48-t-python-react/blob/main/Documentacion/lasagna.jpeg" alt="vista segundaria Recetapp" />
+<img width="150" height= "150" src="https://github.com/No-Country-simulation/C20-48-t-python-react/blob/main/Documentacion/lasagna.jpeg" alt="vista segundaria Recetapp" />
 <br>
 
 ## Color Reference
