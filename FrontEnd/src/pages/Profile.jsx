@@ -35,8 +35,7 @@ function Profile() {
   const [open, setOpen] = useState(false);
   const [avatarIcon, setAvatarIcon] = useState("");
 
-  const { userInfo, setUserInfo, isLogin, logout, setIsLogin } = useUser();
-  const navigate = useNavigate();
+  const { userInfo, setUserInfo, isLogin, logout, changesUserInfo} = useUser();
 
   // useEffect(() => {
   //   changesUserInfo(userInfo);
@@ -106,18 +105,16 @@ function Profile() {
   function handleUserNameEdit() {
     if (editName.length > 2) {
       setEditName(editName);
-      setUserInfo({ ...userInfo, name: editName });
-      console.log("editName:", editName);
-      console.log(userInfo);
-
+      changesUserInfo({ username: editName });
+      
       // setUserList(
-      //   userList.map((user) =>
-      //     user.email === userInfo.email ? { ...user, name: editName } : user,
-      //   ),
-      // );
-
-      setIsEditable(false);
-    }
+        //   userList.map((user) =>
+          //     user.email === userInfo.email ? { ...user, name: editName } : user,
+        //   ),
+        // );
+      }
+        setIsEditable(false);
+      console.log(userInfo.username);
   }
 
   // funcion cambiar avatars
@@ -191,7 +188,7 @@ function Profile() {
           >
             {!isEditable ? (
               <Typography variant="h5" sx={{ m: 1 }}>
-                {userInfo.name || "Nombre de usuario"}
+                {userInfo.username || "Nombre de usuario"}
               </Typography>
             ) : (
               <TextField
