@@ -4,6 +4,7 @@ import Paper from "@mui/material/Paper";
 import RamenDiningIcon from "@mui/icons-material/RamenDining";
 import { Helmet } from "react-helmet-async";
 import {
+  Button,
   Table,
   TableCell,
   TableContainer,
@@ -19,6 +20,7 @@ import ivanPhoto from "../assets/team-photos/ivan.jpg";
 import juanPhoto from "../assets/team-photos/juan.png";
 import matiPhoto from "../assets/team-photos/mati.jpg";
 import priPhoto from "../assets/team-photos/pri.jpg";
+import { Link } from "react-router-dom";
 
 export default function About() {
   const integrantes = [
@@ -128,6 +130,14 @@ export default function About() {
           </Table>
         </TableContainer>
       </Paper>
+
+      <Button
+        variant="contained"
+        sx={{ margin: "auto", display: "block", marginY: 2 }}
+        ><Link to="/api-docs" style={{ textDecoration: "none", color: "white" }} variant="contained">
+          Ver Docs
+        </Link>
+          </Button>
     </Container>
   );
 }
