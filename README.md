@@ -16,17 +16,6 @@ Es un aplicación web responsive, donde cualquier usuario puede consultar receta
 
 
 
-## 🔗Enlaces importantes
-
-•	Documentación del Proyecto
-•	Guía de Estilo del Proyecto
-•	Organización del Proyecto
-•	GitHub del Proyecto
-•	Video de Presentación
-•	Despliege de Backend
-•	Sitio Web
-
-
 
 | Avatar | Nombre | Rol | Redes Sociales |
 | --- | --- | --- | --- |
@@ -38,6 +27,15 @@ Es un aplicación web responsive, donde cualquier usuario puede consultar receta
 | <img width="48" height="48" src="https://github.com/No-Country-simulation/C20-48-t-python-react/blob/main/Documentacion/ivan.jpg" alt="Iván Capaquira" /> | Iván Capaquira | UX/UI | [![Github](https://skillicons.dev/icons?i=github)](https://github.com/quiraoficial) [![Linkedin](https://skillicons.dev/icons?i=linkedin)](https://www.linkedin.com/in/hectorcapaquira/) |
 
 
+## 🔗Enlaces importantes
+
+•	Documentación del Proyecto
+•	Guía de Estilo del Proyecto
+•	Organización del Proyecto
+•	GitHub del Proyecto
+•	Video de Presentación
+•	Despliege de Backend
+•	Sitio Web
 
 
 
