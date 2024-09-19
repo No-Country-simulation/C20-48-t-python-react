@@ -36,11 +36,11 @@ function RecipeSteps() {
         {
           method: "DELETE",
           headers: {
-            "Content-Type": "application/json",
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         },
       );
+
       if (!response.ok) {
         throw new Error("Error al eliminar la receta");
       }
