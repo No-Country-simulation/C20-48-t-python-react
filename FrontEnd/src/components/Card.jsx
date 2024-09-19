@@ -95,7 +95,7 @@ export default function MediaCard({ receta }) {
             <Typography variant="subtitle2" color="success">
               Dif:
             </Typography>
-            {receta.dificultad === "fácil" ? (
+            {receta.dificultad === "facil" ? (
               <FiberManualRecordIcon color="success" fontSize="small" />
             ) : receta.dificultad === "medio" ? (
               <FiberManualRecordIcon color="warning" fontSize="small" />

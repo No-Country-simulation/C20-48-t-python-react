@@ -48,7 +48,6 @@ function RecipeDetail() {
       receta.favoritos--;
     }
   };
-  console.log(receta);
   const handleDoneStep = (e, i) => {
     const el = e.currentTarget;
     el.style.textDecoration =
@@ -173,10 +172,10 @@ function RecipeDetail() {
                 Dificultad: {receta.dificultad}
               </Typography>
               <Typography variant="h6" color="success">
-                Preparación: {receta.tiempo_preparacion} min
+                Preparación: {receta.duracion} min
               </Typography>
               <Typography variant="h6" color="success">
-                Cocción: {receta.tiempo_coccion} min
+                Cocción: {receta.duracion} min
               </Typography>
             </Stack>
             <Box
