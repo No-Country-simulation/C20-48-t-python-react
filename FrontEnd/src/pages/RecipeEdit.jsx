@@ -34,7 +34,7 @@ function RecipeSteps() {
       const response = await fetch(
         `https://recetapp-ggh9.onrender.com/recetas/${receta.id}/eliminar`,
         {
-          method: "DELETE",
+          method: "PUT",
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
