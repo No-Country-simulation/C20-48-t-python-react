@@ -22,7 +22,7 @@ export default function IngredientList({ ingredients }) {
 
   return (
     <List sx={{ borderRadius: 4, bgcolor: "background.paper" }}>
-      {ingredients?.map(({ titulo: nombre, cantidad, unidadMedida }) => {
+      {ingredients?.map(({ nombre, cantidad, unidadMedida }) => {
         return (
           <ListItem key={nombre} disablePadding>
             <ListItemButton

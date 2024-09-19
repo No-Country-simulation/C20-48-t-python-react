@@ -139,6 +139,9 @@ function RecipeSteps() {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
+      console.log(method, url);
+      console.log(response);
+      console.log(nuevaReceta);
 
       if (!response.ok) {
         throw new Error("Error al enviar la receta");

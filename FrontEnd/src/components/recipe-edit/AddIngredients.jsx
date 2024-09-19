@@ -74,13 +74,16 @@ export default function AddIngredients({ ingredients, onIngredientsChange }) {
                 }
                 label="Unidad"
               >
-                <MenuItem value={"taza"}>Taza</MenuItem>
-                <MenuItem value={"cucharada"}>Cucharada</MenuItem>
-                <MenuItem value={"cucharadita"}>Cucharadita</MenuItem>
-                <MenuItem value={"gramos"}>Gramos</MenuItem>
-                <MenuItem value={"kilogramos"}>Kilogramos</MenuItem>
-                <MenuItem value={"ml"}>Mililitros (ml)</MenuItem>
-                <MenuItem value={"litro"}>Litro</MenuItem>
+                <MenuItem value={"Unidad"}>Unidad</MenuItem>
+                <MenuItem value={"Taza"}>Taza</MenuItem>
+                <MenuItem value={"Cucharada"}>Cucharada</MenuItem>
+                <MenuItem value={"Cucharadita"}>Cucharadita</MenuItem>
+                <MenuItem value={"Pisca"}>Pisca</MenuItem>
+                <MenuItem value={"Puñado"}>Puñado</MenuItem>
+                <MenuItem value={"Gramos"}>Gramos</MenuItem>
+                <MenuItem value={"Kilogramos"}>Kilogramos</MenuItem>
+                <MenuItem value={"Ml"}>Mililitros (ml)</MenuItem>
+                <MenuItem value={"Litro"}>Litro</MenuItem>
               </Select>
             </FormControl>
             <TextField
