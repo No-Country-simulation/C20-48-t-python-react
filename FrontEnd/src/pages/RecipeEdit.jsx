@@ -132,7 +132,6 @@ function RecipeSteps() {
         return { descripcion: step.descripcion, orden: index };
       }),
     };
-    console.log(nuevaReceta);
     try {
       const response = await fetch(url, {
         method: method,

@@ -20,7 +20,7 @@ import cucumber from "../assets/profile-icons/cucumber-avatar.svg";
 import lemon from "../assets/profile-icons/lemon-avatar.svg";
 import radish from "../assets/profile-icons/radish-avatar.svg";
 import pepper from "../assets/profile-icons/pepper-avatar.svg";
-import { useState, /* useEffect */ } from "react";
+import { useState /* useEffect */ } from "react";
 import { Helmet } from "react-helmet-async";
 
 function Profile() {
@@ -33,10 +33,7 @@ function Profile() {
   const [open, setOpen] = useState(false);
   const [avatarIcon, setAvatarIcon] = useState("");
 
-  const { userInfo, setUserInfo, isLogin, logout, changesUserInfo} = useUser();
-
-  console.log(userInfo);
-  
+  const { userInfo, setUserInfo, isLogin, logout, changesUserInfo } = useUser();
 
   // useEffect(() => {
   //   changesUserInfo(userInfo);
@@ -107,15 +104,15 @@ function Profile() {
     if (editName.length > 2) {
       setEditName(editName);
       changesUserInfo({ username: editName });
-      
+
       // setUserList(
-        //   userList.map((user) =>
-          //     user.email === userInfo.email ? { ...user, name: editName } : user,
-        //   ),
-        // );
-      }
-        setIsEditable(false);
-      console.log(userInfo.username);
+      //   userList.map((user) =>
+      //     user.email === userInfo.email ? { ...user, name: editName } : user,
+      //   ),
+      // );
+    }
+    setIsEditable(false);
+    console.log(userInfo.username);
   }
 
   // funcion cambiar avatars
