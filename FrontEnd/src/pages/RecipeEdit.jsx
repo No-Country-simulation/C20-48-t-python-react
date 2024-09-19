@@ -8,22 +8,25 @@ import AddImage from "../components/recipe-edit/AddImage";
 import AddTimingsAndDifficulty from "../components/recipe-edit/AddTimingsAndDifficulty";
 import { Alert, Button, Container, Snackbar, Stack } from "@mui/material";
 import { Helmet } from "react-helmet-async";
-import useFetch from "../hooks/useFetch";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function RecipeSteps() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const receta = location.state || {};
+  console.log(receta);
   const [error, setErrors] = useState(null);
   const [exito, setExito] = useState(null);
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState(receta?.imagenUrl || "");
   const [timings, setTimings] = useState({
-    prep: "",
-    cook: "",
-    difficulty: "",
+    duracion: parseInt(receta?.duracion?.split(" ")[0]) || "",
+    dificultad: receta?.dificultad || "",
   });
-  const [steps, setSteps] = useState([{}]);
-  const [name, setName] = useState("");
-  const [note, setNote] = useState("");
-  const [categories, setCategories] = useState([]);
-  const [ingredients, setIngredients] = useState([{}]);
+  const [steps, setSteps] = useState(receta?.pasos || [{}]);
+  const [name, setName] = useState(receta?.titulo || "");
+  const [note, setNote] = useState(receta?.tips || "");
+  const [categories, setCategories] = useState(receta?.recetaCategorias || []);
+  const [ingredients, setIngredients] = useState(receta?.ingredientes || []);
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -101,7 +104,6 @@ function RecipeSteps() {
         return { descripcion: step, orden: index };
       }),
     };
-    console.log(nuevaReceta);
     try {
       const response = await fetch(
         "https://recetapp-ggh9.onrender.com/recetas",

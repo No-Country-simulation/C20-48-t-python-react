@@ -24,7 +24,7 @@ function RecipeDetail() {
   const [isFavorite, setIsFavorite] = useState(false);
   const location = useLocation();
   const receta = location.state || {};
-
+  console.log(receta);
   const handleToggleFavorite = () => {
     const exists = userInfo.favorites.some((id) => id === receta.id);
     if (exists) {
@@ -63,7 +63,7 @@ function RecipeDetail() {
         <Stack sx={{ padding: { xs: 0, sm: 2 }, gap: 2 }} direction="column">
           <Typography variant="h3">{receta.titulo}</Typography>
           <Typography color="success" variant="body1">
-            Por: {receta.usuarioEmail.split("@")[0]}
+            Por: {receta?.usuarioEmail?.split("@")[0]}
           </Typography>
           <Divider sx={{ marginBottom: 2 }} />
           <img
@@ -109,10 +109,10 @@ function RecipeDetail() {
                   margin: 0,
                 }}
               >
-                {receta.recetaCategorias.map((categoria, i) => (
+                {receta?.recetaCategorias?.map((categoria, i) => (
                   <Chip
                     key={categoria + i}
-                    label={categoria.nombreCategoria}
+                    label={categoria?.nombreCategoria}
                     variant="outlined"
                     sx={{
                       minWidth: "80px",
@@ -169,13 +169,13 @@ function RecipeDetail() {
                 Preparación :
               </Typography>
               <Typography variant="h6" color="success">
-                Dificultad: {receta.dificultad}
+                Dificultad: {receta?.dificultad}
               </Typography>
               <Typography variant="h6" color="success">
-                Preparación: {receta.duracion} min
+                Preparación: {receta?.duracion} min
               </Typography>
               <Typography variant="h6" color="success">
-                Cocción: {receta.duracion} min
+                Cocción: {receta?.duracion} min
               </Typography>
             </Stack>
             <Box
@@ -187,7 +187,7 @@ function RecipeDetail() {
                 fontSize: "1.2rem",
               }}
             >
-              {receta.pasos.map(({ descripcion, orden }, i) => (
+              {receta?.pasos?.map(({ descripcion, orden }, i) => (
                 <Paper
                   key={orden + i}
                   elevation={2}
@@ -227,13 +227,15 @@ function RecipeDetail() {
             <Typography gutterBottom variant="h4">
               Notas
             </Typography>
-            <Typography variant="body1">{receta.notas}</Typography>
+            <Typography variant="body1">{receta.tips}</Typography>
           </Container>
           <CommentSection />
         </Stack>
       </Paper>
 
-      {isLogin && userInfo.id === receta.id_usuario && <FloatingAB />}
+      {isLogin && userInfo.id === receta.id_usuario && (
+        <FloatingAB receta={receta} />
+      )}
     </Container>
   );
 }

@@ -40,8 +40,6 @@ export default function SearchBar({ query, setQuery }) {
       ingrediente: null,
       dificultad: null,
       categoriaIds: null,
-      page: 0,
-      size: 10,
     });
     console.log({ query });
   };
@@ -104,6 +102,7 @@ export default function SearchBar({ query, setQuery }) {
               width: "100%",
             }}
             placeholder="Buscar recetas..."
+            value={query.titulo}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">

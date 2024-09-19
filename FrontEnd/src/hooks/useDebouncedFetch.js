@@ -11,7 +11,6 @@ function useDebouncedFetch(query, options = {}, delay = 500) {
 
   // Debouncing the query to avoid unnecessary requests
   const debouncedQuery = useDebounce(query, delay); // deb
-  console.log(debouncedQuery);
   // Adjust the URL based on the debounced query
   useEffect(() => {
     if (debouncedQuery) {

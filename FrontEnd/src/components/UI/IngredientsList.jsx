@@ -8,12 +8,12 @@ import { Typography } from "@mui/material";
 export default function IngredientList({ ingredients }) {
   const [checked, setChecked] = React.useState([0]);
 
-  const handleToggle = (titulo) => () => {
-    const currentIndex = checked.indexOf(titulo);
+  const handleToggle = (nombre) => () => {
+    const currentIndex = checked.indexOf(nombre);
     const newChecked = [...checked];
 
     if (currentIndex === -1) {
-      newChecked.push(titulo);
+      newChecked.push(nombre);
     } else {
       newChecked.splice(currentIndex, 1);
     }
@@ -22,21 +22,21 @@ export default function IngredientList({ ingredients }) {
 
   return (
     <List sx={{ borderRadius: 4, bgcolor: "background.paper" }}>
-      {ingredients?.map(({ titulo, cantidad, unidadMedida }) => {
+      {ingredients?.map(({ nombre, cantidad, unidadMedida }) => {
         return (
-          <ListItem key={titulo} disablePadding>
+          <ListItem key={nombre} disablePadding>
             <ListItemButton
               role={undefined}
-              onClick={handleToggle(titulo)}
+              onClick={handleToggle(nombre)}
               dense
             >
               <Checkbox
                 edge="start"
-                checked={checked.indexOf(titulo) !== -1}
+                checked={checked.indexOf(nombre) !== -1}
                 tabIndex={-1}
                 disableRipple
               />
-              <Typography>{`${titulo}, ${cantidad} ${unidadMedida}`}</Typography>
+              <Typography>{`${nombre}, ${cantidad} ${unidadMedida}`}</Typography>
             </ListItemButton>
           </ListItem>
         );

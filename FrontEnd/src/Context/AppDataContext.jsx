@@ -13,9 +13,17 @@ export const AppDataProvider = ({ children }) => {
     loading: categoriasLoading,
     error: categoriasError,
   } = useFetch("https://recetapp-ggh9.onrender.com/categorias");
+  const [cacheMisRecetas, setCacheMisRecetas] = useState([]);
+
   return (
     <AppDataContext.Provider
-      value={{ categorias, categoriasLoading, categoriasError }}
+      value={{
+        categorias,
+        categoriasLoading,
+        categoriasError,
+        cacheMisRecetas,
+        setCacheMisRecetas,
+      }}
     >
       {children}
     </AppDataContext.Provider>

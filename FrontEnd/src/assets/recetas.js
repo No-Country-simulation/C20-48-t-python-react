@@ -18,7 +18,7 @@ export const recetas = [
     ],
     duracion: "10",
     tiempo_coccion: "20",
-    dificultad: "medio",
+    dificultad: "dificil",
     pasos: [
       {
         descripcion:
@@ -333,7 +333,7 @@ export const recetas = [
       "https://plus.unsplash.com/premium_photo-1669150850585-e4ab18a54706?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     duracion: "10",
     tiempo_coccion: "20",
-    dificultad: "fácil",
+    dificultad: "facil",
     pasos: [
       {
         descripcion:
@@ -374,7 +374,7 @@ export const recetas = [
       "https://images.unsplash.com/photo-1703849062114-1b08bb62b150?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     duracion: "10",
     tiempo_coccion: "20",
-    dificultad: "fácil",
+    dificultad: "facil",
     pasos: [
       {
         descripcion: "Cocina el penne en agua con sal hasta que esté al dente.",
@@ -453,7 +453,7 @@ export const recetas = [
       "https://plus.unsplash.com/premium_photo-1675252369719-dd52bc69c3df?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     duracion: "10",
     tiempo_coccion: "20",
-    dificultad: "fácil",
+    dificultad: "facil",
     pasos: [
       {
         descripcion:
@@ -499,7 +499,7 @@ export const recetas = [
       "https://images.unsplash.com/photo-1432139509613-5c4255815697?q=80&w=1970&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     duracion: "10",
     tiempo_coccion: "20",
-    dificultad: "fácil",
+    dificultad: "facil",
     pasos: [
       {
         descripcion:
@@ -545,7 +545,7 @@ export const recetas = [
       "https://plus.unsplash.com/premium_photo-1673809798970-30c14cfd0ab6?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     duracion: "10",
     tiempo_coccion: "20",
-    dificultad: "fácil",
+    dificultad: "facil",
     pasos: [
       {
         descripcion:
@@ -594,7 +594,7 @@ export const recetas = [
       "https://plus.unsplash.com/premium_photo-1663858367001-89e5c92d1e0e?q=80&w=2030&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     duracion: "10",
     tiempo_coccion: "20",
-    dificultad: "fácil",
+    dificultad: "dificil",
     pasos: [
       {
         descripcion:
@@ -644,7 +644,7 @@ export const recetas = [
       "https://images.unsplash.com/photo-1487790343276-2fe56a7d9439?q=80&w=2067&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     duracion: "10",
     tiempo_coccion: "20",
-    dificultad: "fácil",
+    dificultad: "facil",
     pasos: [
       {
         descripcion: "Cocina el pollo en agua con sal hasta que esté al dente.",

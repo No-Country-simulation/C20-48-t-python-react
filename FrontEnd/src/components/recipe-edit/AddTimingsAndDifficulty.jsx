@@ -16,6 +16,7 @@ export default function AddTimingsAndDifficulty({
   timings,
   handleTimingsChange,
 }) {
+  console.log(timings);
   return (
     <Container maxWidth="sm" sx={{ mt: 4 }}>
       <Typography variant="h5" gutterBottom>
@@ -37,9 +38,10 @@ export default function AddTimingsAndDifficulty({
           <FormControl variant="outlined">
             <InputLabel>Dificultad</InputLabel>
             <Select
-              value={timings.difficulty}
+              value={timings?.dificultad}
+              defaultValue={timings?.dificultad}
               onChange={(event) =>
-                handleTimingsChange("difficulty", event.target.value)
+                handleTimingsChange("dificultad", event.target.value)
               }
               label="Dificultad"
             >
@@ -58,24 +60,25 @@ export default function AddTimingsAndDifficulty({
                 step: "any",
               },
             }}
-            value={timings.prep}
+            value={timings?.duracion}
             onChange={(event) =>
-              handleTimingsChange("prep", event.target.value)
+              handleTimingsChange("duracion", event.target.value)
             }
             variant="outlined"
           />
           <TextField
             label="Cocinar"
             type="number"
+            placeholder={timings?.duracion}
             slotProps={{
               htmlInput: {
                 min: 0,
                 step: "any",
               },
             }}
-            value={timings.cook}
+            value={timings?.duracion}
             onChange={(event) =>
-              handleTimingsChange("cook", event.target.value)
+              handleTimingsChange("duracion", event.target.value)
             }
             variant="outlined"
           />

@@ -2,7 +2,6 @@ import Paper from "@mui/material/Paper";
 import Container from "@mui/material/Container";
 import Card from "./Card";
 import Typography from "@mui/material/Typography";
-import { Suspense } from "react";
 import CardSkeletons from "./skeletons/CardSkeletons";
 import filtersToString from "../utils/filtersToString";
 
@@ -53,31 +52,29 @@ export default function DisplayCategories({ recetas, category }) {
           marginBlock: 4,
         }}
       >
-        <Suspense fallback={<CardSkeletons />}>
-          {recetas.length === 0 && (
-            <Typography
-              variant="h6"
-              sx={{ textAlign: "center", minHeight: "50vh", paddingTop: 4 }}
-            >
-              Aún no hay ninguna receta aqúi
-            </Typography>
-          )}
-          <Container
-            disableGutters
-            maxWidth={"xl"}
-            sx={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-              gap: 4,
-              margin: 0,
-              padding: 0,
-            }}
+        {recetas.length === 0 && (
+          <Typography
+            variant="h6"
+            sx={{ textAlign: "center", minHeight: "50vh", paddingTop: 4 }}
           >
-            {recetas.map((receta) => (
-              <Card key={receta.id} receta={receta} />
-            ))}
-          </Container>
-        </Suspense>
+            Aún no hay ninguna receta aqúi
+          </Typography>
+        )}
+        <Container
+          disableGutters
+          maxWidth={"xl"}
+          sx={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+            gap: 4,
+            margin: 0,
+            padding: 0,
+          }}
+        >
+          {recetas.map((receta) => (
+            <Card key={receta.id} receta={receta} />
+          ))}
+        </Container>
       </Paper>
     </Container>
   );

@@ -13,17 +13,16 @@ const actionsHome = [
 ];
 
 const actionsDetalleReceta = [
-  { icon: <EditIcon />, name: "Editar", path: "/detalle-receta" },
+  { icon: <EditIcon />, name: "Editar", path: "/editar-receta" },
 ];
 
-export default function FloatingAB() {
+export default function FloatingAB({ receta = {} }) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const navigate = useNavigate();
-
   const handleActionClick = (path) => {
-    navigate(path);
+    navigate(path, { state: receta });
     handleClose();
   };
 
@@ -33,11 +32,9 @@ export default function FloatingAB() {
   const location = useLocation();
   let actions = [];
   // Verificamos si estamos en la página de inicio
-  if (location.pathname === "/") {
+  if (location.pathname === "/" || location.pathname.includes("/mis-recetas")) {
     actions = actionsHome;
-  }
-  // Verificamos si estamos en la página de detalle de receta (puede incluir un ID en la URL)
-  else if (location.pathname.includes("/detalle-receta")) {
+  } else if (location.pathname.includes("/detalle-receta")) {
     actions = actionsDetalleReceta;
   }
 

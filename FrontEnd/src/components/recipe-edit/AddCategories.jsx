@@ -25,7 +25,7 @@ export default function AddCategories({ categories, handleCategoriesChange }) {
       <Autocomplete
         multiple
         options={categorias}
-        getOptionLabel={(option) => option.nombre} //
+        getOptionLabel={(option) => option?.nombreCategoria || option.nombre} //
         value={categories}
         onChange={handleCategoriesChange}
         renderInput={(params) => (
