@@ -16,7 +16,6 @@ export default function AddTimingsAndDifficulty({
   timings,
   handleTimingsChange,
 }) {
-  console.log(timings);
   return (
     <Container maxWidth="sm" sx={{ mt: 4 }}>
       <Typography variant="h5" gutterBottom>

@@ -15,7 +15,6 @@ function RecipeSteps() {
   const navigate = useNavigate();
   const location = useLocation();
   const receta = location.state || {};
-  console.log(receta);
   const [error, setErrors] = useState(null);
   const [exito, setExito] = useState(null);
   const [image, setImage] = useState(receta?.imagenUrl || "");
@@ -23,7 +22,7 @@ function RecipeSteps() {
     duracion: parseInt(receta?.duracion?.split(" ")[0]) || "",
     dificultad: receta?.dificultad || "",
   });
-  const [steps, setSteps] = useState(receta?.pasos || [{}]);
+  const [steps, setSteps] = useState(receta?.pasos || []);
   const [name, setName] = useState(receta?.titulo || "");
   const [note, setNote] = useState(receta?.tips || "");
   const [categories, setCategories] = useState(receta?.recetaCategorias || []);
@@ -67,11 +66,12 @@ function RecipeSteps() {
   const handleSteps = {
     handleStepChange: (index, event) => {
       const newSteps = [...steps];
-      newSteps[index] = event.target.value;
+      newSteps[index].descripcion = event.target.value;
       setSteps(newSteps);
+      console.log(newSteps);
     },
     handleAddStep: () => {
-      setSteps([...steps, ""]);
+      setSteps([...steps, { descripcion: "", orden: steps.length }]);
     },
     handleRemoveStep: (index) => {
       const newSteps = [...steps];
@@ -127,9 +127,10 @@ function RecipeSteps() {
       tips: note,
       ingredientes: ingredients,
       pasos: steps.map((step, index) => {
-        return { descripcion: step, orden: index };
+        return { descripcion: step.descripcion, orden: index };
       }),
     };
+    console.log(nuevaReceta);
     try {
       const response = await fetch(url, {
         method: method,
@@ -139,15 +140,11 @@ function RecipeSteps() {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
-      console.log(method, url);
-      console.log(response);
-      console.log(nuevaReceta);
 
       if (!response.ok) {
         throw new Error("Error al enviar la receta");
       }
       setExito(true);
-      console.log(response);
     } catch (error) {
       console.log(error);
     }

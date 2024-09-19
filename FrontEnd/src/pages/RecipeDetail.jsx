@@ -24,7 +24,7 @@ function RecipeDetail() {
   const [isFavorite, setIsFavorite] = useState(false);
   const location = useLocation();
   const receta = location.state || {};
-  console.log(receta);
+
   const handleToggleFavorite = () => {
     const exists = userInfo.favorites.some((id) => id === receta.id);
     if (exists) {

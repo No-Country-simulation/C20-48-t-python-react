@@ -7,7 +7,6 @@ import filtersToString from "../utils/filtersToString";
 
 export default function DisplayCategories({ recetas, category }) {
   const filters = filtersToString(category);
-
   return (
     <Container sx={{ marginBlock: 4 }} maxWidth={"xl"} disableGutters>
       <Typography
@@ -35,7 +34,9 @@ export default function DisplayCategories({ recetas, category }) {
             wordBreak: "break-word",
           }}
         >
-          {filters}
+          {typeof category === "string"
+            ? category
+            : Object.values(filters).join(" - ")}
         </Typography>
       </Typography>
       <Paper
