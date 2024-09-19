@@ -132,19 +132,8 @@ function Profile() {
 
   function handleLogout() {
     logout();
-    setUserInfo({
-      ...userInfo,
-      name: "",
-      email: "",
-      password: "",
-      avatar: "",
-      id: "",
-      favorites: [],
-    });
-    setIsLogin(false);
     setIsEditable(false);
     // Redirigir al usuario a /login
-    navigate("/login");
   }
 
   return (
