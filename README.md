@@ -57,7 +57,7 @@ Es un aplicación web responsive, donde cualquier usuario puede consultar receta
 
 ## 🖼️ Imágenes del Proyecto
 
-![Vista Principal]
+![Vista Home]
 <br>
 <img width="400" height= "200" src="https://github.com/No-Country-simulation/C20-48-t-python-react/blob/main/Documentacion/cap1.jpg" alt="Recetapp" />
 <br>
