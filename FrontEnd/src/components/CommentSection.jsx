@@ -72,7 +72,6 @@ export default function CommentSection() {
       }}
     >
       <Stack
-        disableGutters
         sx={{ padding: 2, paddingInline: 4, flexDirection: "row", gap: 2 }}
       >
         <Typography variant="h5" gutterBottom>
@@ -89,7 +88,6 @@ export default function CommentSection() {
       </Stack>
       <form onSubmit={(event) => onSubmit(event)}>
         <Stack
-          disableGutters
           sx={{
             paddingInline: 4,
             flexDirection: {
