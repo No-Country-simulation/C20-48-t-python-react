@@ -16,7 +16,7 @@ export default function Favourites() {
         setLoading(true);
         try {
           const response = await fetch(
-            `https://recetapp-ggh9.onrender.com/user/mis-recetas?page=0&size=10`,
+            `https://recetapp-ggh9.onrender.com/user/mis-recetas?page=0&size=20`,
             {
               method: "GET",
               headers: {

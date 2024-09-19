@@ -48,7 +48,7 @@ function RecipeDetail() {
       receta.favoritos--;
     }
   };
-
+  console.log(receta);
   const handleDoneStep = (e, i) => {
     const el = e.currentTarget;
     el.style.textDecoration =

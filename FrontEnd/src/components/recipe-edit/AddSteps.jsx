@@ -28,13 +28,13 @@ export default function AddSteps({
         Pasos
       </Typography>
       <Stack spacing={2}>
-        {steps.map((step, index) => (
+        {steps.map(({ descripcion, id, orden }, index) => (
           <Stack key={index} direction="column" alignItems="end" spacing={1}>
             <TextField
               fullWidth
               multiline
               label={`Paso ${index + 1}`}
-              value={step}
+              value={descripcion}
               onChange={(event) => handleStepChange(index, event)}
               variant="outlined"
             />
