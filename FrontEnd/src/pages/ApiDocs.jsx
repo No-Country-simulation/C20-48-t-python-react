@@ -37,7 +37,11 @@ export default function ApiDocs() {
             1. Tecnologías Utilizadas
           </Typography>
           <ul>
-            <Typography variant="h6">Backend</Typography>
+            <Typography variant="h5">FrontEnd:</Typography>
+            <Typography variant="h6">React + Vite</Typography>
+            <Typography variant="h6">Material UI</Typography>
+            <br/>
+            <Typography variant="h5">Backend:</Typography>
             <Typography variant="h6">Base de Datos: MySQL</Typography>
             <Typography variant="h6">
               {" "}

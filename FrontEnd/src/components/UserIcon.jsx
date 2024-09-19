@@ -2,10 +2,10 @@ import Avatar from "@mui/icons-material/AccountCircle";
 import { Box } from "@mui/material";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { UserContext } from "../Context/UserContext";
+import { useUser } from "../Context/UserContext";
 
 function UserIcon() {
-  const { isLogin, userInfo } = useContext(UserContext);
+  const { isLogin, userInfo } = useUser();
   return (
     <>
       <Box
