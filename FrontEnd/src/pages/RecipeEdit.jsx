@@ -47,6 +47,8 @@ function RecipeSteps() {
     } catch (error) {
       console.log(error);
     }
+
+    navigate("/mis-recetas");
   };
 
   const handleNameChange = (event) => {
