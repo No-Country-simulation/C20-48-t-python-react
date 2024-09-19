@@ -1,12 +1,55 @@
-import Fab from "@mui/material/Fab";
-import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import { Tooltip, Box } from "@mui/material";
+import React, { useState } from 'react';
+import Box from '@mui/material/Box';
+import Fab from '@mui/material/Fab';
+import Tooltip from '@mui/material/Tooltip';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Button from '@mui/material/Button';
+
+function ConfirmDialog({ open, onClose, onConfirm }) {
+  return (
+    <Dialog
+      open={open}
+      onClose={onClose}
+      aria-labelledby="alert-dialog-title"
+      aria-describedby="alert-dialog-description"
+    >
+      <DialogTitle id="alert-dialog-title">{"Confirmar eliminación?"}</DialogTitle>
+      <DialogContent>
+        <DialogContentText id="alert-dialog-description">
+          ¿Estás seguro de que deseas eliminar esta receta?
+        </DialogContentText>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={onClose} color="primary">
+          Cancelar
+        </Button>
+        <Button onClick={onConfirm} color="primary" autoFocus>
+          Eliminar
+        </Button>
+      </DialogActions>
+    </Dialog>
+  );
+}
 
 export default function DeleteRecipeFAB({ onDelete }) {
+  const [open, setOpen] = useState(false);
+
   const handleDelete = () => {
-    if (window.confirm("¿Estás seguro de que deseas eliminar esta receta?")) {
-      onDelete(); // Ejecuta la función pasada como prop
-    }
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleConfirm = () => {
+    setOpen(false);
+    onDelete(); // Ejecuta la función pasada como prop
   };
 
   return (
@@ -34,6 +77,7 @@ export default function DeleteRecipeFAB({ onDelete }) {
           <DeleteForeverIcon />
         </Fab>
       </Tooltip>
+      <ConfirmDialog open={open} onClose={handleClose} onConfirm={handleConfirm} />
     </Box>
   );
 }
