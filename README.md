@@ -68,8 +68,4 @@ Es un aplicación web responsive, donde cualquier usuario puede consultar receta
 <h3>Vista "Agregar receta"</h3>
 <img width="150" height= "300" src="https://github.com/No-Country-simulation/C20-48-t-python-react/blob/main/Documentacion/agregar receta.jpeg" alt="vista segundaria Recetapp" />
 
-## Color Reference
 
-| Color             | Hex                                                                |
-| ----------------- | ------------------------------------------------------------------ |
-| Example Color | ![fond](FrontEnd/src/assets/fondoapp2.png) 
