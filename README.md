@@ -57,17 +57,15 @@ Es un aplicación web responsive, donde cualquier usuario puede consultar receta
 
 ## 🖼️ Imágenes del Proyecto
 
-![Vista Principal]
+<h3>Vista Home</h3>
 <br>
 <img width="400" height= "200" src="https://github.com/No-Country-simulation/C20-48-t-python-react/blob/main/Documentacion/cap1.jpg" alt="Recetapp" />
 <br>
-![Vista Secundaria]
+<h3>Vista "Detalle de receta"</h3>
 <br>
-<img width="200" height= "200" src="https://github.com/No-Country-simulation/C20-48-t-python-react/blob/main/Documentacion/lasagna.jpeg" alt="vista segundaria Recetapp" />
+<img width="150" height= "300" src="https://github.com/No-Country-simulation/C20-48-t-python-react/blob/main/Documentacion/lasagna.jpeg" alt="vista segundaria Recetapp" />
 <br>
+<h3>Vista "Agregar receta"</h3>
+<img width="150" height= "300" src="https://github.com/No-Country-simulation/C20-48-t-python-react/blob/main/Documentacion/agregar receta.jpeg" alt="vista segundaria Recetapp" />
 
-## Color Reference
 
-| Color             | Hex                                                                |
-| ----------------- | ------------------------------------------------------------------ |
-| Example Color | ![fond](FrontEnd/src/assets/fondoapp2.png) 
