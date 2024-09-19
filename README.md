@@ -15,7 +15,7 @@ Es un aplicación web responsive, donde cualquier usuario puede consultar receta
 
 
 
-
+<h3>Autores</h3>
 
 | Avatar | Nombre | Rol | Redes Sociales |
 | --- | --- | --- | --- |
