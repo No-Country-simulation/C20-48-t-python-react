@@ -29,7 +29,7 @@ Es un aplicación web responsive, donde cualquier usuario puede consultar receta
 
 ## 🔗Enlaces importantes
 
--	Documentación del Proyecto
+-	[Documentación del Proyecto](https://drive.google.com/drive/folders/1bE1Dbx32OKSVn7xdsioF0N5PbGLC9vTf?hl=es)
 - [GitHub del Proyecto](https://github.com/No-Country-simulation/C20-48-t-python-react)
 -	[Despliege de Backend](https://recetapp-ggh9.onrender.com/categorias)
 -	[Plan de pruebas]
