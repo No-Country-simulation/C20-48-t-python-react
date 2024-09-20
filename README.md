@@ -15,7 +15,7 @@ Es un aplicación web responsive, donde cualquier usuario puede consultar receta
 
 
 
-<h3>Autores</h3>
+<h3>👥Miembros del equipo</h3>
 
 | Avatar | Nombre | Rol | Redes Sociales |
 | --- | --- | --- | --- |
@@ -30,17 +30,14 @@ Es un aplicación web responsive, donde cualquier usuario puede consultar receta
 ## 🔗Enlaces importantes
 
 -	Documentación del Proyecto
--	Guía de Estilo del Proyecto
--	Organización del Proyecto
--	GitHub del Proyecto
--	Video de Presentación
--	Despliege de Backend
--	Sitio Web
+- [GitHub del Proyecto](https://github.com/No-Country-simulation/C20-48-t-python-react)
+-	[Despliege de Backend]
+- [Sitio Web](https://recetapp-no-country.onrender.com/)
 
 
 
 
-## Tecnologías utilizadas
+## 🛠️ Tecnologías utilizadas
 
 - **Backend**: Spring Boot
 - **Base de Datos**: PostgreSQL
