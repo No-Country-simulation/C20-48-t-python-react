@@ -7,8 +7,7 @@
 
 El proyecto es una API para la gestión de recetas, de libre acceso para todo el mundo y permitiendo a los usuarios autenticados mediante JWT crear, actualizar, eliminar y consultar recetas. Cada receta puede ser valorada, recibir likes y estar asociada con diferentes categorías e ingredientes. Los usuarios pueden ver sus recetas, buscar recetas por categorías, nombre y hasta ingredientes.
 
-## Despliegue del Backend
-https://recetapp-ggh9.onrender.com/categorias
+[## Despliegue del Backend](https://recetapp-ggh9.onrender.com/categorias)
 
 ## Tecnologías Utilizadas
 - **Backend**: Spring Boot
