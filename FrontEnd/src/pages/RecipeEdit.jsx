@@ -125,7 +125,7 @@ function RecipeSteps() {
       duracion: timings.duracion,
       dificultad: timings.dificultad,
       imagenUrl: image,
-      categoriaIds: categories.map((category) => category.id),
+      categoriaNombres: categories.map((category) => category.id),
       tips: note,
       ingredientes: ingredients,
       pasos: steps.map((step, index) => {
