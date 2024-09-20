@@ -158,7 +158,7 @@ function ResponsiveAppBar({ toggleTheme }) {
                 display: { xs: "none", lg: "block" },
               }}
             >
-              Hola! {userInfo.username}
+              Hola! {userInfo.nombre}
             </Typography>
           )}
           <Tooltip

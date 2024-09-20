@@ -112,7 +112,6 @@ function Profile() {
       // );
     }
     setIsEditable(false);
-    console.log(userInfo.username);
   }
 
   // funcion cambiar avatars
@@ -186,7 +185,7 @@ function Profile() {
           >
             {!isEditable ? (
               <Typography variant="h5" sx={{ m: 1 }}>
-                {userInfo.username || "Nombre de usuario"}
+                {userInfo.nombre || "Nombre de usuario"}
               </Typography>
             ) : (
               <TextField

@@ -72,7 +72,7 @@ function Register() {
       // Aquí puedes agregar la lógica para enviar los datos del formulario
 
       const newUserInfo = {
-        username: email.split("@")[0],
+        nombre: email.split("@")[0],
         email: email,
         avatar: "tomate",
         contrasena: password,
