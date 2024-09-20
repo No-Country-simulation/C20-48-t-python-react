@@ -29,13 +29,13 @@ Es un aplicación web responsive, donde cualquier usuario puede consultar receta
 
 ## 🔗Enlaces importantes
 
-•	Documentación del Proyecto
-•	Guía de Estilo del Proyecto
-•	Organización del Proyecto
-•	GitHub del Proyecto
-•	Video de Presentación
-•	Despliege de Backend
-•	Sitio Web
+-	Documentación del Proyecto
+-	Guía de Estilo del Proyecto
+-	Organización del Proyecto
+-	GitHub del Proyecto
+-	Video de Presentación
+-	Despliege de Backend
+-	Sitio Web
 
 
 
