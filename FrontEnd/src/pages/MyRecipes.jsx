@@ -15,31 +15,29 @@ export default function Favourites() {
 
   useEffect(() => {
     const fetchData = async () => {
-      if (userInfo.userId) {
-        setLoading(true);
-        try {
-          const response = await fetch(
-            `https://recetapp-ggh9.onrender.com/user/mis-recetas?page=0&size=20`,
-            {
-              method: "GET",
-              headers: {
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
-              },
+      setLoading(true);
+      try {
+        const response = await fetch(
+          `https://recetapp-ggh9.onrender.com/user/mis-recetas?page=0&size=20`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
-          );
+          },
+        );
 
-          if (!response.ok) {
-            throw new Error("Failed to fetch data");
-          }
-
-          const data = await response.json();
-          // setCacheMisRecetas(data);
-          setRecetas(data); // Asegúrate de que `data` sea el formato correcto para `setRecetas`
-        } catch (e) {
-          setError(true);
-        } finally {
-          setLoading(false);
+        if (!response.ok) {
+          throw new Error("Failed to fetch data");
         }
+
+        const data = await response.json();
+        // setCacheMisRecetas(data);
+        setRecetas(data); // Asegúrate de que `data` sea el formato correcto para `setRecetas`
+      } catch (e) {
+        setError(true);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -56,7 +54,11 @@ export default function Favourites() {
         />
       </Helmet>
       {recetas && recetas.length > 0 && (
-        <DisplayCategories recetas={recetas} category={"Mis Recetas"} />
+        <DisplayCategories
+          recetas={recetas}
+          loading={loading}
+          category={"Mis Recetas"}
+        />
       )}
       <Snackbar open={loading} onClose={() => setLoading(false)}>
         <Alert severity="info">Cargando...</Alert>

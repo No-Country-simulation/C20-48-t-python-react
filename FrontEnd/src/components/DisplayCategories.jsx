@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import CardSkeletons from "./skeletons/CardSkeletons";
 import filtersToString from "../utils/filtersToString";
 
-export default function DisplayCategories({ recetas, category }) {
+export default function DisplayCategories({ recetas, loading, category }) {
   const filters = filtersToString(category);
   return (
     <Container sx={{ marginBlock: 4 }} maxWidth={"xl"} disableGutters>
@@ -53,6 +53,7 @@ export default function DisplayCategories({ recetas, category }) {
           marginBlock: 4,
         }}
       >
+        {loading && <CardSkeletons />}
         {recetas.length === 0 && (
           <Typography
             variant="h6"

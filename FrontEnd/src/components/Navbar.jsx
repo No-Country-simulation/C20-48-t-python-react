@@ -110,7 +110,18 @@ function ResponsiveAppBar({ toggleTheme }) {
                   <RecetAppLogoTextLink />
                 </Stack>
                 {menu.map((page) => (
-                  <MenuItem key={page.name} onClick={handleCloseNavMenu}>
+                  <MenuItem
+                    key={page.name}
+                    onClick={handleCloseNavMenu}
+                    sx={{
+                      display:
+                        (page.name === "Mis recetas" ||
+                          page.name === "Favoritos") &&
+                        !isLogin
+                          ? "none"
+                          : "block",
+                    }}
+                  >
                     <LinkUnstyled to={page.path}>{page.name}</LinkUnstyled>
                   </MenuItem>
                 ))}
@@ -140,7 +151,12 @@ function ResponsiveAppBar({ toggleTheme }) {
                   onClick={handleCloseNavMenu}
                   sx={{
                     color: "white",
-                    display: "block",
+                    display:
+                      (page.name === "Mis recetas" ||
+                        page.name === "Favoritos") &&
+                      !isLogin
+                        ? "none"
+                        : "block",
                   }}
                 >
                   <LinkUnstyled to={page.path}>{page.name}</LinkUnstyled>

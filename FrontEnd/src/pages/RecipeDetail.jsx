@@ -25,27 +25,28 @@ function RecipeDetail() {
   const location = useLocation();
   const receta = location.state || {};
 
-  const handleToggleFavorite = () => {
-    const exists = userInfo.favorites.some((id) => id === receta.id);
-    if (exists) {
-      userInfo.favorites = userInfo.favorites.filter((id) => id !== receta.id);
-    } else {
-      userInfo.favorites.push(receta.id);
+  const handleToggleFavorite = async () => {
+    try {
+      const respsonse = await fetch(
+        `https://recetapp-ggh9.onrender.com/recetas/${receta.id}/like`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        },
+      );
+      const data = await respsonse.json();
+    } catch (error) {
+      console.log(error);
     }
-    setUserInfo({ ...userInfo });
-    // setUserInfo({ ...userInfo, favorites: [...userInfo.favorites, receta.id] });
-    /*     setIsFavorite(!isFavorite);
+
+    setIsFavorite(!isFavorite);
     if (isFavorite) {
-      receta.favoritos++;
+      receta.cantidadLikes++;
     } else {
-      receta.favoritos--;
-    } */
-    const newIsFavorite = !isFavorite;
-    setIsFavorite(newIsFavorite);
-    if (newIsFavorite) {
-      receta.favoritos++;
-    } else {
-      receta.favoritos--;
+      receta.cantidadLikes--;
     }
   };
   const handleDoneStep = (e, i) => {
@@ -139,6 +140,7 @@ function RecipeDetail() {
                 aria-label="fingerprint"
                 color="secondary"
                 onClick={handleToggleFavorite}
+                disabled={!isLogin}
               >
                 <FavoriteIcon
                   color={isFavorite ? "primary" : "default"}
