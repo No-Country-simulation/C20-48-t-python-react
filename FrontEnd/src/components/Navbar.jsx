@@ -44,7 +44,6 @@ function ResponsiveAppBar({ toggleTheme }) {
 
   // Theme context para cambiar icono
   const theme = useTheme();
-  console.log(userInfo);
   return (
     <AppBar position="sticky" elevation={0}>
       <Container maxWidth="full" sx={{ margin: 0 }}>
@@ -158,7 +157,7 @@ function ResponsiveAppBar({ toggleTheme }) {
                 display: { xs: "none", lg: "block" },
               }}
             >
-              Hola! {userInfo.nombre} {userInfo.email}
+              Hola! {userInfo.nombreusuario}
             </Typography>
           )}
           <Tooltip

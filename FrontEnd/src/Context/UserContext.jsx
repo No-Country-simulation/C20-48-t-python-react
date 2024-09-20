@@ -39,19 +39,30 @@ export const UserProvider = ({ children }) => {
           "Content-Type": "application/json",
         },
       });
-      if (!response.ok) {
+      const data = await response.json();
+      const responseUser = await fetch(
+        "https://recetapp-ggh9.onrender.com/user",
+        { method: "GET", headers: { Authorization: `Bearer ${data.jwt}` } },
+      );
+      const userData = await responseUser.json();
+
+      if (!response.ok || !responseUser.ok) {
         throw new Error("Failed to fetch data");
       }
-      const data = await response.json();
+
       if (data.jwt) {
         localStorage.setItem("token", data.jwt);
         localStorage.setItem("role", data.role);
         localStorage.setItem("userId", data.userId);
         localStorage.setItem(
           "userInfo",
-          JSON.stringify({ ...credenciales, userId: data.userId }),
+          JSON.stringify({ ...userData, ...credenciales, userId: data.userId }),
         );
-        setUserInfo({ username: credenciales.username, userId: data.userId });
+        setUserInfo({
+          ...userData,
+          username: credenciales.username,
+          userId: data.userId,
+        });
         setIsLogin(true);
         navigate("/");
       }

@@ -1,8 +1,11 @@
-import Avatar from "@mui/icons-material/AccountCircle";
+import Avatar from "@mui/material/Avatar";
 import { Box } from "@mui/material";
-import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { useUser } from "../Context/UserContext";
+import cucumber from "../assets/profile-icons/cucumber-avatar.svg";
+import lemon from "../assets/profile-icons/lemon-avatar.svg";
+import pepper from "../assets/profile-icons/pepper-avatar.svg";
+import radish from "../assets/profile-icons/radish-avatar.svg";
 
 function UserIcon() {
   const { isLogin, userInfo } = useUser();
@@ -10,12 +13,14 @@ function UserIcon() {
     <>
       <Box
         sx={{
-          flexGrow: 0,
-          margin: 0,
-          padding: 0.7,
+          display: "flex",
           borderRadius: "100%",
           backgroundColor: "background.default",
+          alignItems: "center",
+          justifyContent: "center",
           cursor: "pointer",
+          height: "35.19px",
+          width: "35.19px",
         }}
       >
         <Link
@@ -23,10 +28,12 @@ function UserIcon() {
           style={{ textDecoration: "none" }}
         >
           <Avatar
-            src={isLogin ? userInfo.avatar : ""}
+            src={isLogin && userInfo.avatar === "tomate" ? lemon : ""}
+            size="sm"
             sx={{
               cursor: "pointer",
               color: "primary.light",
+              backgroundColor: "background.default",
               display: "flex",
               scale: 0.8,
               alignItems: "center",

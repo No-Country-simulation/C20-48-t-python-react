@@ -74,7 +74,7 @@ function Register() {
       const newUserInfo = {
         nombre: email.split("@")[0],
         email: email,
-        avatar: "tomate",
+        avatar: "lemon",
         contrasena: password,
         repeatcontrasena: confirmPassword,
       };
