@@ -1,10 +1,16 @@
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { Container } from "@mui/material";
-import { Typography, Stack } from "@mui/material";
+import { Typography, Stack, Avatar } from "@mui/material";
 import Collapse from "@mui/material/Collapse";
 import Divider from "@mui/material/Divider";
 import { useState } from "react";
+import { useUser } from "../Context/UserContext";
+import cucumber from "../assets/profile-icons/cucumber-avatar.svg";
+import lemon from "../assets/profile-icons/lemon-avatar.svg";
+import pepper from "../assets/profile-icons/pepper-avatar.svg";
+import radish from "../assets/profile-icons/radish-avatar.svg";
+
 const hardcodedComments = [
   {
     id: 0,
@@ -29,13 +35,14 @@ const hardcodedComments = [
 ];
 
 export default function CommentSection() {
+  const { userInfo, isLogin } = useUser();
   const [expanded, setExpanded] = useState({ id: -1 });
   const [showComments, setShowComments] = useState(false);
   const [comments, setComments] = useState(hardcodedComments);
   const [comment, setComment] = useState({
     id: comments.length + 1,
     id_user: comments.length + 1,
-    name: "carlitos",
+    name: userInfo?.nombreusuario || "",
     comment: "",
   });
 
@@ -47,7 +54,7 @@ export default function CommentSection() {
     setComment({
       id_user: comments.length + 1,
       id: comments.length + 1,
-      name: "carlitos",
+      name: userInfo?.nombreusuario || "",
       comment: "",
     });
     setShowComments(true);
@@ -101,6 +108,7 @@ export default function CommentSection() {
             fullWidth
             multiline
             rows={2}
+            disabled={!isLogin}
             label={`Deja tu comentario`}
             value={comment.comment}
             onChange={(event) =>
@@ -111,7 +119,12 @@ export default function CommentSection() {
             }
             variant="outlined"
           />
-          <Button type="submit" variant="contained" color="primary">
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            disabled={!isLogin}
+          >
             Enviar
           </Button>
         </Stack>
@@ -123,16 +136,42 @@ export default function CommentSection() {
             .reverse()
             .map((comment) => (
               <Container
-                sx={{ padding: 2, display: "flex", flexDirection: "column" }}
+                sx={{
+                  padding: 2,
+                  display: "flex",
+                  flexDirection: "column",
+                }}
                 key={comment.id}
               >
-                <Typography variant="h6" gutterBottom fontWeight="bold">
-                  &#9679; {comment.name}
-                </Typography>
+                <Stack
+                  sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "flex-start",
+                    gap: 2,
+                    paddingBottom: 2,
+                  }}
+                >
+                  <Avatar
+                    alt="Cindy Baker"
+                    src={isLogin && userInfo.avatar === "tomate" ? lemon : ""}
+                    sx={{
+                      width: 35,
+                      height: 35,
+                      border: "1px solid ",
+                      borderColor: "secondary.main",
+                    }}
+                  >
+                    {comment.name.charAt(0)}
+                  </Avatar>
+                  <Typography variant="h6" fontWeight="bold">
+                    {comment.name}
+                  </Typography>
+                </Stack>
                 <Collapse
                   in={expanded.id === comment.id}
                   timeout="auto"
-                  collapsedSize={50}
+                  collapsedSize={40}
                 >
                   <Typography
                     sx={{
