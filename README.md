@@ -46,7 +46,6 @@ Es un aplicación web responsive, donde cualquier usuario puede consultar receta
 - **Dependencias**: Spring Data JPA, Spring Security, Spring Web, Lombok
 
 
-## Imagenes del Proyecto
 
 ## 🖼️ Imágenes del Proyecto
 
