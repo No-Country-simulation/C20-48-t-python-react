@@ -53,8 +53,7 @@ export default function DisplayCategories({ recetas, loading, category }) {
           marginBlock: 4,
         }}
       >
-        {loading && <CardSkeletons />}
-        {recetas.length === 0 && (
+        {recetas && recetas.length === 0 && (
           <Typography
             variant="h6"
             sx={{ textAlign: "center", minHeight: "50vh", paddingTop: 4 }}
@@ -73,7 +72,8 @@ export default function DisplayCategories({ recetas, loading, category }) {
             padding: 0,
           }}
         >
-          {recetas.map((receta) => (
+          {loading && recetas?.length === 0 && <CardSkeletons />}
+          {recetas?.map((receta) => (
             <Card key={receta.id} receta={receta} />
           ))}
         </Container>

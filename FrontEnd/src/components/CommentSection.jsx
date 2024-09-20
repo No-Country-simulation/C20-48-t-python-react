@@ -147,7 +147,7 @@ export default function CommentSection() {
                   sx={{
                     display: "flex",
                     flexDirection: "row",
-                    alignItems: "flex-start",
+                    alignItems: "center",
                     gap: 2,
                     paddingBottom: 2,
                   }}
@@ -164,7 +164,17 @@ export default function CommentSection() {
                   >
                     {comment.name.charAt(0)}
                   </Avatar>
-                  <Typography variant="h6" fontWeight="bold">
+                  <Typography
+                    variant="boydy2"
+                    fontWeight="bold"
+                    sx={{
+                      backgroundColor:
+                        userInfo.nombreusuario === comment.name &&
+                        "secondary.main",
+                      paddingInline: 1,
+                      borderRadius: 10,
+                    }}
+                  >
                     {comment.name}
                   </Typography>
                 </Stack>

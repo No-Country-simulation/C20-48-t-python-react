@@ -7,5 +7,5 @@ export default function queryToString(query) {
     }
   });
 
-  return params.toString();
+  return params.toString().replace(/\+/g, "%20");
 }

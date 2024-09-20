@@ -14,6 +14,7 @@ import { RecipeListContext } from "../Context/RecipeContext";
 import useDebouncedFetch from "../hooks/useDebouncedFetch";
 import queryToString from "../utils/queryToString";
 import { useUser } from "../Context/UserContext";
+import CardSkeletons from "../components/skeletons/CardSkeletons";
 
 function Home() {
   const [query, setQuery] = useState({
@@ -27,6 +28,8 @@ function Home() {
   const { isLogin, userInfo } = useUser();
 
   const { data, loading, error } = useDebouncedFetch(queryToString(query));
+  console.log(queryToString(query));
+  console.log(data);
 
   return (
     <>
@@ -60,7 +63,7 @@ function Home() {
             setSelectedCategory={setQuery}
           />
         </Container>
-        {Object.values(query).every((value) => value === null) ? (
+        {!data && Object.values(query).every((value) => value === null) ? (
           <>
             <Slider category="Tradicionales" recetas={recipes} />
             <Slider category="Desayunos" recetas={recipes} />
@@ -68,7 +71,11 @@ function Home() {
             <Slider category="Mexicana" recetas={recipes} />
           </>
         ) : (
-          <DisplayCategories recetas={recipes} category={query} />
+          <DisplayCategories
+            recetas={data?.content}
+            loading={loading}
+            category={query}
+          />
         )}
         {isLogin && <FloatingAB />}
       </Container>
