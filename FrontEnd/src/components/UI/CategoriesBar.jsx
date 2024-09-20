@@ -12,7 +12,7 @@ export default function CategoriesBar({
   setSelectedCategory,
 }) {
   function handleClick(category) {
-    setSelectedCategory({ ...selectedCategory, categoriaNombres: category });
+    setSelectedCategory({ ...selectedCategory, categoriaIds: category });
   }
   const { categorias, categoriasLoading, categoriasError } = useAppData();
 
@@ -68,21 +68,21 @@ export default function CategoriesBar({
                 }} // Ajuste mínimo para evitar chips muy pequeños
                 onClick={() => handleClick(category)}
                 variant={
-                  selectedCategory.categoriaNombres === category
+                  selectedCategory.categoriaIds === category
                     ? "filled"
                     : "outlined"
                 }
                 onDelete={
-                  selectedCategory.categoriaNombres === category
+                  selectedCategory.categoriaIds === category
                     ? () =>
                         setSelectedCategory({
                           ...selectedCategory,
-                          categoriaNombres: null,
+                          categoriaIds: null,
                         })
                     : undefined
                 }
                 deleteIcon={
-                  selectedCategory.categoriaNombres === category ? (
+                  selectedCategory.categoriaIds === category ? (
                     <DoneIcon />
                   ) : undefined
                 }
