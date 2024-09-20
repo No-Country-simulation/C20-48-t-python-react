@@ -45,7 +45,15 @@ function ResponsiveAppBar({ toggleTheme }) {
   // Theme context para cambiar icono
   const theme = useTheme();
   return (
-    <AppBar position="sticky" elevation={0}>
+    <AppBar
+      position="sticky"
+      elevation={0}
+      sx={{
+        backgroundColor: "rgba(71, 29, 42, 0.7)",
+        backdropFilter: "blur(15px)",
+        boxShadow: "0 0 20px rgba(0, 0, 0, 0.5)",
+      }}
+    >
       <Container maxWidth="full" sx={{ margin: 0 }}>
         <Toolbar disableGutters>
           {/* Start Mobile Menu */}
