@@ -22,7 +22,7 @@ function Home() {
     descripcion: null,
     ingrediente: null,
     dificultad: null,
-    categoriaIds: null,
+    categoriaNombres: null,
   });
 
   const { recipes } = useContext(RecipeListContext);
