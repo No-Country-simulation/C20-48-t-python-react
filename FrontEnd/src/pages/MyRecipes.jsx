@@ -9,9 +9,8 @@ import FloatingAB from "../components/FloatingAB";
 export default function Favourites() {
   const { userInfo } = useUser();
   const [recetas, setRecetas] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-  // const { cacheMisRecetas: recetas, setCacheMisRecetas } = useAppData();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,10 +33,9 @@ export default function Favourites() {
         const data = await response.json();
         // setCacheMisRecetas(data);
         setRecetas(data); // Asegúrate de que `data` sea el formato correcto para `setRecetas`
+        setLoading(false);
       } catch (e) {
         setError(true);
-      } finally {
-        setLoading(false);
       }
     };
 
@@ -53,13 +51,13 @@ export default function Favourites() {
           content="Aqui veras todas tus recetas creadas"
         />
       </Helmet>
-      {recetas && recetas.length > 0 && (
-        <DisplayCategories
-          recetas={recetas}
-          loading={loading}
-          category={"Mis Recetas"}
-        />
-      )}
+
+      <DisplayCategories
+        recetas={recetas}
+        loading={loading}
+        category={"Mis Recetas"}
+      />
+
       <Snackbar open={loading} onClose={() => setLoading(false)}>
         <Alert severity="info">Cargando...</Alert>
       </Snackbar>

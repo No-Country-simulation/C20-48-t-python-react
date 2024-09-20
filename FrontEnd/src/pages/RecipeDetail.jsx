@@ -20,10 +20,9 @@ import { Helmet } from "react-helmet-async";
 
 function RecipeDetail() {
   const { userInfo, setUserInfo, isLogin } = useContext(UserContext);
-
-  const [isFavorite, setIsFavorite] = useState(false);
   const location = useLocation();
   const receta = location.state || {};
+  const [isFavorite, setIsFavorite] = useState(receta.cantidadLikes || false);
 
   const handleToggleFavorite = async () => {
     try {
@@ -54,6 +53,7 @@ function RecipeDetail() {
     el.style.textDecoration =
       el.style.textDecoration === "line-through" ? "none" : "line-through";
   };
+
   return (
     <Container disableGutters maxWidth={"lg"}>
       <Helmet>
@@ -235,7 +235,7 @@ function RecipeDetail() {
         </Stack>
       </Paper>
 
-      {isLogin && userInfo.id === receta.id_usuario && (
+      {isLogin && userInfo.username === receta.usuarioEmail && (
         <FloatingAB receta={receta} />
       )}
     </Container>

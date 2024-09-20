@@ -6,8 +6,6 @@ import { Helmet } from "react-helmet-async";
 import { useEffect, useState } from "react";
 
 export default function Favourites() {
-  // const { recipes } = useContext(RecipeListContext);
-  // const recetasFavoritas = recipes;
   const { userInfo } = useUser();
   const [recetasFavoritas, setRecetasFavoritas] = useState([]);
   const [loading, setLoading] = useState(true);

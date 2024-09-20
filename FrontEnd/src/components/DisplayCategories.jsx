@@ -53,7 +53,8 @@ export default function DisplayCategories({ recetas, loading, category }) {
           marginBlock: 4,
         }}
       >
-        {recetas && recetas.length === 0 && (
+        {loading && <CardSkeletons />}
+        {!loading && recetas?.length === 0 && (
           <Typography
             variant="h6"
             sx={{ textAlign: "center", minHeight: "50vh", paddingTop: 4 }}
@@ -67,12 +68,13 @@ export default function DisplayCategories({ recetas, loading, category }) {
           sx={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+            alignItems: "center",
+            justifyItems: "center",
             gap: 4,
             margin: 0,
             padding: 0,
           }}
         >
-          {loading && recetas?.length === 0 && <CardSkeletons />}
           {recetas?.map((receta) => (
             <Card key={receta.id} receta={receta} />
           ))}

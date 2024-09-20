@@ -146,6 +146,9 @@ function RecipeSteps() {
         throw new Error("Error al enviar la receta");
       }
       setExito(true);
+      setTimeout(() => {
+        navigate("/mis-recetas");
+      }, 2000);
     } catch (error) {
       console.log(error);
     }

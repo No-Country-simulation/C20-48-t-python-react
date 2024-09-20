@@ -24,12 +24,19 @@ function Home() {
     dificultad: null,
     categoriaIds: null,
   });
+
   const { recipes } = useContext(RecipeListContext);
   const { isLogin, userInfo } = useUser();
-
   const { data, loading, error } = useDebouncedFetch(queryToString(query));
-  console.log(queryToString(query));
-  console.log(data);
+  const [displayData, setDisplayData] = useState(data);
+
+  useEffect(() => {
+    if (Object.values(query).every((value) => value === null)) {
+      setDisplayData(null);
+    } else {
+      setDisplayData(data);
+    }
+  }, [query, data]);
 
   return (
     <>
@@ -63,7 +70,7 @@ function Home() {
             setSelectedCategory={setQuery}
           />
         </Container>
-        {!data && Object.values(query).every((value) => value === null) ? (
+        {!displayData ? (
           <>
             <Slider category="Tradicionales" recetas={recipes} />
             <Slider category="Desayunos" recetas={recipes} />
@@ -72,7 +79,7 @@ function Home() {
           </>
         ) : (
           <DisplayCategories
-            recetas={data?.content}
+            recetas={displayData?.content}
             loading={loading}
             category={query}
           />
