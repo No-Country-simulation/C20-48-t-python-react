@@ -51,7 +51,7 @@ export const UserProvider = ({ children }) => {
           "userInfo",
           JSON.stringify({ ...credenciales, userId: data.userId }),
         );
-        setUserInfo({ ...credenciales, userId: data.userId });
+        setUserInfo({ username: credenciales.username, userId: data.userId });
         setIsLogin(true);
         navigate("/");
       }
@@ -94,7 +94,6 @@ export const UserProvider = ({ children }) => {
         throw new Error("Failed to fetch data");
       }
       const data = await response.json();
-      console.log(data);
       navigate("/login");
     } catch (error) {
       console.error("Error during registration:", error.message);
