@@ -32,6 +32,7 @@ Es un aplicación web responsive, donde cualquier usuario puede consultar receta
 -	Documentación del Proyecto
 - [GitHub del Proyecto](https://github.com/No-Country-simulation/C20-48-t-python-react)
 -	[Despliege de Backend]
+-	[Plan de pruebas]
 - [Sitio Web](https://recetapp-no-country.onrender.com/)
 
 
