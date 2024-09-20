@@ -62,9 +62,9 @@ function Home() {
         </Container>
         {Object.values(query).every((value) => value === null) ? (
           <>
-            <Slider category="Fitness" recetas={recipes} />
+            <Slider category="Tradicionales" recetas={recipes} />
             <Slider category="Desayunos" recetas={recipes} />
-            <Slider category="China" recetas={recipes} />
+            <Slider category="Asiatica" recetas={recipes} />
             <Slider category="Mexicana" recetas={recipes} />
           </>
         ) : (
