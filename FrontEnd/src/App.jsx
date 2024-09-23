@@ -69,7 +69,7 @@ export default function App() {
                 <link rel="canonical" href="https://recetapp-no-country.onrender.com/" />
                   <meta name="title" content="RecetApp" />
                   <meta name="description" content="aplicación web donde puedes descubrir y compartir recetas deliciosas." />
-                  <meta name="og:image" content="./assets/logoThumbnail.jpg" />
+                  <meta property="og:image" content="https://recetapp-no-country.onrender.com/assets/logoThumbnail.jpg" />
                   <link rel="icon" href={ollitaSrc} />
                   <title>RecetApp</title>
                 </Helmet>
