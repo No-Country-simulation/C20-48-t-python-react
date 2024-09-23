@@ -67,7 +67,9 @@ export default function App() {
               <HelmetProvider>
                 <Helmet>
                   <title>RecetApp</title>
-                  <meta name="description" content="RecetApp" />
+                  <meta name="title" content="RecetApp" />
+                  <meta name="description" content="aplicación web donde puedes descubrir y compartir recetas deliciosas." />
+                  <meta name="og:image" content="./assets/logoThumbnail.jpg" />
                   <link rel="icon" href={ollitaSrc} />
                 </Helmet>
                 <Routes>
