@@ -2,6 +2,7 @@ package C20_48_t_Python_React.demo.controller;
 
 import C20_48_t_Python_React.demo.dto.CategoriasDTO;
 import C20_48_t_Python_React.demo.dto.MostrarReceta;
+import C20_48_t_Python_React.demo.persistence.entity.Categorias;
 import C20_48_t_Python_React.demo.persistence.entity.Recetas;
 import C20_48_t_Python_React.demo.persistence.repository.LikesRepository;
 import C20_48_t_Python_React.demo.persistence.repository.ValoracionRepository;
@@ -61,6 +62,11 @@ public class CategoriasController {
         Page<MostrarReceta> recetaDTOsPage = new PageImpl<>(recetaDTOs, pageable, recetasPage.getTotalElements());
 
         return ResponseEntity.ok(recetaDTOsPage);
+    }
+    @PostMapping
+    public ResponseEntity<Categorias> crearCategoria(@RequestBody CategoriasDTO categoriaDTO) {
+        Categorias nuevaCategoria = categoriaService.crearCategoria(categoriaDTO);
+        return ResponseEntity.ok(nuevaCategoria);
     }
 
 }

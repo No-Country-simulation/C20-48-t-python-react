@@ -2,7 +2,10 @@ package C20_48_t_Python_React.demo.controller;
 
 import C20_48_t_Python_React.demo.dto.MostrarReceta;
 import C20_48_t_Python_React.demo.persistence.entity.Recetas;
+import C20_48_t_Python_React.demo.persistence.entity.Categorias;
+import C20_48_t_Python_React.demo.persistence.repository.CategoriasRepository;
 import C20_48_t_Python_React.demo.persistence.repository.LikesRepository;
+import C20_48_t_Python_React.demo.persistence.repository.RecetasRepository;
 import C20_48_t_Python_React.demo.persistence.repository.ValoracionRepository;
 import C20_48_t_Python_React.demo.service.ComentarioService;
 import C20_48_t_Python_React.demo.service.LikesService;
@@ -14,16 +17,15 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
+
 @RequestMapping("/busqueda")
 public class busquedaControllador {
     @Autowired
@@ -35,25 +37,29 @@ public class busquedaControllador {
     private ValoracionRepository valoracionRepository;
     @Autowired
     private ComentarioService comentarioService;
+    @Autowired
+    private CategoriasRepository categoriasRepository;
 
+    @Autowired
+    private RecetasRepository recetasRepository;
 
 
     @GetMapping()
-    public ResponseEntity<Page<MostrarReceta>> buscarRecetas(
-            @RequestParam(required = false) String titulo,
-            @RequestParam(required = false) String descripcion,
-            @RequestParam(required = false) String ingrediente,
-            @RequestParam(required = false) String dificultad,
-            @RequestParam(required = false) List<Long> categoriaIds,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size) {
+    public Page<MostrarReceta> buscarRecetas(@RequestParam(required = false) String titulo,
+                                             @RequestParam(required = false) String dificultad,
+                                             @RequestParam(required = false) String ingrediente,
+                                             @RequestParam(required = false) List<String> categoriaNombres,
+                                             @PageableDefault(size = 10) Pageable pageable) {
+        List<Long> categoriaIds = null;
 
-        Pageable pageable = PageRequest.of(page, size);
-        Page<Recetas> recetas = recetaService.buscarRecetasPorParametros(titulo, descripcion, ingrediente, dificultad, categoriaIds, pageable);
+        if (categoriaNombres != null && !categoriaNombres.isEmpty()) {
+            categoriaIds = categoriasRepository.findByNombreIn(categoriaNombres)
+                    .stream()
+                    .map(Categorias::getId)
+                    .collect(Collectors.toList());
+        }
 
-        // Convertir recetas a DTOs si es necesario
-        Page<MostrarReceta> recetaDTOs = recetas.map(receta -> MostrarReceta.fromEntity(receta, valoracionRepository, likesRepository));
-
-        return ResponseEntity.ok(recetaDTOs);
+        Page<Recetas> recetasPage = recetaService.buscarRecetas(titulo, dificultad, ingrediente, categoriaIds, pageable);
+        return recetasPage.map(receta -> MostrarReceta.fromEntity(receta, valoracionRepository, likesRepository));
     }
 }

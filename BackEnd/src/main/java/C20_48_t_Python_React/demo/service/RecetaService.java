@@ -6,6 +6,7 @@ import C20_48_t_Python_React.demo.dto.RecetaCategoriaDTO;
 import C20_48_t_Python_React.demo.dto.RecetaDTO;
 import C20_48_t_Python_React.demo.persistence.entity.*;
 import C20_48_t_Python_React.demo.persistence.repository.*;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -192,6 +193,8 @@ public class RecetaService {
     public Recetas obtenerRecetaPorId(Long id){
         return recetasRepository.findById(id).orElse(null);
     }
+
+    @Transactional
     public RecetaDTO editarReceta(Long recetaId, RecetaDTO recetaDTO, Long usuarioId) {
         // Buscar la receta por ID
         Recetas receta = recetasRepository.findById(recetaId)
@@ -210,11 +213,12 @@ public class RecetaService {
         receta.setImagenUrl(recetaDTO.getImagenUrl());
         receta.setTips(recetaDTO.getTips());
 
-        // Guardar los cambios en la receta
-        Recetas recetaGuardada = recetasRepository.save(receta);
+        // Eliminar ingredientes y pasos existentes
+        ingredientesRepository.deleteByRecetasId(recetaId);
+        pasosRepository.deleteByRecetasId(recetaId);
 
-        // Actualizar las relaciones receta-categoría
-        categoriaRepository.deleteByRecetasId(recetaId);  // Eliminar las categorías actuales
+        // Agregar nuevas categorías
+        categoriaRepository.deleteByRecetasId(recetaId);
         List<RecetaCategoria> recetaCategorias = recetaDTO.getCategoriaIds().stream()
                 .map(categoriaId -> {
                     Categorias categoria = categoriasRepository.findById(categoriaId)
@@ -222,69 +226,64 @@ public class RecetaService {
 
                     RecetaCategoria recetaCategoria = new RecetaCategoria();
                     RecetaCategoriaId recetaCategoriaId = new RecetaCategoriaId();
-                    recetaCategoriaId.setRecetaId(recetaGuardada.getId());
+                    recetaCategoriaId.setRecetaId(recetaId);
                     recetaCategoriaId.setCategoriaId(categoria.getId());
 
                     recetaCategoria.setId(recetaCategoriaId);
-                    recetaCategoria.setRecetas(recetaGuardada);
+                    recetaCategoria.setRecetas(receta);
                     recetaCategoria.setCategorias(categoria);
 
                     return recetaCategoria;
                 }).collect(Collectors.toList());
         categoriaRepository.saveAll(recetaCategorias);
 
-        // Actualizar los ingredientes
-        ingredientesRepository.deleteByRecetasId(recetaId);  // Eliminar los ingredientes actuales
+        // Agregar nuevos ingredientes
         List<Ingredientes> ingredientes = recetaDTO.getIngredientes().stream()
                 .map(ingredienteDTO -> {
                     Ingredientes ingrediente = new Ingredientes();
                     ingrediente.setNombre(ingredienteDTO.getNombre());
                     ingrediente.setUnidadMedida(ingredienteDTO.getUnidadMedida());
                     ingrediente.setCantidad(ingredienteDTO.getCantidad());
-                    ingrediente.setRecetas(recetaGuardada);
+                    ingrediente.setRecetas(receta);
                     return ingrediente;
                 }).collect(Collectors.toList());
         ingredientesRepository.saveAll(ingredientes);
 
-        // Actualizar los pasos
-        pasosRepository.deleteByRecetasId(recetaId);  // Eliminar los pasos actuales
+        // Agregar nuevos pasos
         List<Pasos> pasos = recetaDTO.getPasos().stream()
                 .map(pasoDTO -> {
                     Pasos paso = new Pasos();
                     paso.setDescripcion(pasoDTO.getDescripcion());
                     paso.setOrden(pasoDTO.getOrden());
-                    paso.setRecetas(recetaGuardada);
+                    paso.setRecetas(receta);
                     return paso;
                 }).collect(Collectors.toList());
         pasosRepository.saveAll(pasos);
 
         // Convertir la receta actualizada en un DTO de respuesta
         RecetaDTO responseDTO = new RecetaDTO();
-        responseDTO.setId(recetaGuardada.getId());
-        responseDTO.setTitulo(recetaGuardada.getTitulo());
-        responseDTO.setDescripcion(recetaGuardada.getDescripcion());
-        responseDTO.setDuracion(recetaGuardada.getDuracion());
-        responseDTO.setDificultad(recetaGuardada.getDificultad());
-        responseDTO.setImagenUrl(recetaGuardada.getImagenUrl());
-        responseDTO.setTips(recetaGuardada.getTips());
-        responseDTO.setUsuarioEmail(recetaGuardada.getUsuarios().getEmail());
-        responseDTO.setFechaCreacion(recetaGuardada.getFechaCreacion());
+        responseDTO.setId(receta.getId());
+        responseDTO.setTitulo(receta.getTitulo());
+        responseDTO.setDescripcion(receta.getDescripcion());
+        responseDTO.setDuracion(receta.getDuracion());
+        responseDTO.setDificultad(receta.getDificultad());
+        responseDTO.setImagenUrl(receta.getImagenUrl());
+        responseDTO.setTips(receta.getTips());
+        responseDTO.setUsuarioEmail(receta.getUsuarios().getEmail());
+        responseDTO.setFechaCreacion(receta.getFechaCreacion());
 
         responseDTO.setRecetaCategorias(
-                recetaGuardada.getRecetaCategorias() != null
-                        ? recetaGuardada.getRecetaCategorias().stream()
+                receta.getRecetaCategorias().stream()
                         .map(rc -> {
                             RecetaCategoriaDTO dto = new RecetaCategoriaDTO();
                             dto.setId(rc.getCategorias().getId());
                             dto.setNombreCategoria(rc.getCategorias().getNombre());
                             return dto;
                         }).collect(Collectors.toList())
-                        : new ArrayList<>()
         );
 
         responseDTO.setIngredientes(
-                recetaGuardada.getIngredientes() != null
-                        ? recetaGuardada.getIngredientes().stream()
+                receta.getIngredientes().stream()
                         .map(ing -> {
                             IngredientesDTO dto = new IngredientesDTO();
                             dto.setNombre(ing.getNombre());
@@ -292,19 +291,23 @@ public class RecetaService {
                             dto.setCantidad(ing.getCantidad());
                             return dto;
                         }).collect(Collectors.toList())
-                        : new ArrayList<>()
         );
 
-        responseDTO.setPasos(recetaGuardada.getPasos().stream()
-                .map(ps -> {
-                    PasosDTO dto = new PasosDTO();
-                    dto.setDescripcion(ps.getDescripcion());
-                    dto.setOrden(ps.getOrden());
-                    return dto;
-                }).collect(Collectors.toList()));
+        responseDTO.setPasos(
+                receta.getPasos().stream()
+                        .map(ps -> {
+                            PasosDTO dto = new PasosDTO();
+                            dto.setDescripcion(ps.getDescripcion());
+                            dto.setOrden(ps.getOrden());
+                            return dto;
+                        }).collect(Collectors.toList())
+        );
 
         return responseDTO;
     }
+
+
+
 
     public void DisabledReceta(Long recetaId) {
         Recetas receta = recetasRepository.findById(recetaId)
@@ -316,25 +319,8 @@ public class RecetaService {
         recetasRepository.save(receta); // Guardar los cambios
     }
 
-    public Page<Recetas> buscarRecetasPorCategoriasYTitulo(List<Long> categoriaIds, String titulo, Pageable pageable) {
-        // Se pasa la lista de categorías y el título al repositorio
-        long categoriaCount = categoriaIds.size();  // Para la cantidad de categorías
-        return recetasRepository.findByCategoriaIdsInAndTituloContaining(categoriaIds, categoriaCount, titulo, pageable);
-    }
 
-    public Page<Recetas> buscarRecetas(String titulo, String descripcion, String ingrediente, String dificultad, List<Long> categoriaIds, Pageable pageable) {
-        // Verifica qué parámetros están presentes y llama al repositorio correspondiente
-        if (categoriaIds != null && !categoriaIds.isEmpty()) {
-            long categoriaCount = categoriaIds.size();
-            return recetasRepository.findByCategoriaIdsInAndTituloContaining(titulo, categoriaIds, categoriaCount, pageable);
-        } else if (titulo != null || descripcion != null || ingrediente != null || dificultad != null) {
-            return null;
-        } else {
-            return recetasRepository.findAll(pageable);
-        }
-
-    }
-    public Page<Recetas> buscarRecetasPorParametros(String titulo, String descripcion, String ingrediente, String dificultad, List<Long> categoriaIds, Pageable pageable) {
-        return recetasRepository.buscarRecetasPorParametros(titulo, descripcion, ingrediente, dificultad, categoriaIds, pageable);
+    public Page<Recetas> buscarRecetas(String titulo, String dificultad, String ingrediente, List<Long> categoriaIds, Pageable pageable) {
+        return recetasRepository.buscarRecetas(titulo, dificultad, ingrediente, categoriaIds, pageable);
     }
 }

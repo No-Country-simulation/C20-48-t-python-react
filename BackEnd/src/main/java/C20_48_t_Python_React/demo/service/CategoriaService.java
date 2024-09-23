@@ -19,4 +19,9 @@ public class CategoriaService {
                 .map(categoria -> new CategoriasDTO(categoria.getId(), categoria.getNombre()))
                 .collect(Collectors.toList());
     }
+    public Categorias crearCategoria(CategoriasDTO categoriaDTO) {
+        Categorias categoria = new Categorias();
+        categoria.setNombre(categoriaDTO.getNombre());
+        return categoriasRepository.save(categoria);
+    }
 }

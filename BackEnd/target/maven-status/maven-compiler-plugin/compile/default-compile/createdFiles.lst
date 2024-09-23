@@ -29,6 +29,7 @@ C20_48_t_Python_React\demo\persistence\repository\CategoriasRepository.class
 C20_48_t_Python_React\demo\config\HttpSecurityConfig.class
 C20_48_t_Python_React\demo\dto\RegisterError$RegisterErrorBuilder.class
 C20_48_t_Python_React\demo\dto\RegisteredUser.class
+C20_48_t_Python_React\demo\KeepAliveService.class
 C20_48_t_Python_React\demo\dto\UsuarioResponse.class
 C20_48_t_Python_React\demo\dto\IngredientesDTO$IngredientesDTOBuilder.class
 C20_48_t_Python_React\demo\persistence\repository\UsuariosRepository.class
@@ -38,9 +39,11 @@ C20_48_t_Python_React\demo\persistence\entity\Rol.class
 C20_48_t_Python_React\demo\service\LikesService.class
 C20_48_t_Python_React\demo\dto\ComentariosDTO$ComentariosDTOBuilder.class
 C20_48_t_Python_React\demo\persistence\entity\Pasos.class
+C20_48_t_Python_React\demo\config\CorsConfig.class
 C20_48_t_Python_React\demo\persistence\entity\Categorias.class
 C20_48_t_Python_React\demo\persistence\repository\RecetasRepository.class
 C20_48_t_Python_React\demo\service\ValoracionService.class
+C20_48_t_Python_React\demo\controller\busquedaControllador.class
 C20_48_t_Python_React\demo\config\filter\JwtAuthenticationFilter.class
 C20_48_t_Python_React\demo\dto\RegisterError.class
 C20_48_t_Python_React\demo\dto\RecetaDTO.class

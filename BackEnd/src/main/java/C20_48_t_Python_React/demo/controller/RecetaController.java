@@ -112,7 +112,7 @@ public class RecetaController {
     }
 
 
-    @PutMapping("/{comentarioId}")
+    @PutMapping("comentario/{comentarioId}")
     public ResponseEntity<RecetaResponse> actualizarComentario(
             @PathVariable Long comentarioId,
             @RequestBody ComentariosDTO comentarioDTO,
