@@ -66,9 +66,12 @@ export default function App() {
               <Navbar toggleTheme={toggleTheme} />
               <HelmetProvider>
                 <Helmet>
-                  <title>RecetApp</title>
-                  <meta name="description" content="RecetApp" />
+                <link rel="canonical" href="https://recetapp-no-country.onrender.com/" />
+                  <meta name="title" content="RecetApp" />
+                  <meta name="description" content="aplicación web donde puedes descubrir y compartir recetas deliciosas." />
+                  <meta property="og:image" content="https://recetapp-no-country.onrender.com/assets/logoThumbnail.jpg" />
                   <link rel="icon" href={ollitaSrc} />
+                  <title>RecetApp</title>
                 </Helmet>
                 <Routes>
                   <Route exact path="/" element={<Home />} />

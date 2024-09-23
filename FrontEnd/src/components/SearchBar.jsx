@@ -39,7 +39,7 @@ export default function SearchBar({ query, setQuery }) {
       descripcion: null,
       ingrediente: null,
       dificultad: null,
-      categoriaIds: null,
+      categoriaNombres: null,
     });
     console.log({ query });
   };
@@ -52,7 +52,7 @@ export default function SearchBar({ query, setQuery }) {
   };
 
   const handleCategory = (value) => {
-    setQuery({ ...query, categoriaIds: value });
+    setQuery({ ...query, categoriaNombres: value });
   };
 
   const handleIngredient = (value) => {
@@ -139,7 +139,7 @@ export default function SearchBar({ query, setQuery }) {
               <AutoCompleteSelection
                 field="Categoria"
                 options={categorias.map(({ id, nombre }) => nombre)}
-                value={query.categoriaIds}
+                value={query.categoriaNombres}
                 handler={handleCategory}
               />
               <AutoCompleteSelection

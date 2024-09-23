@@ -41,12 +41,12 @@ function RecipeDetail() {
       console.log(error);
     }
 
-    setIsFavorite(!isFavorite);
-    if (isFavorite) {
-      receta.cantidadLikes++;
-    } else {
-      receta.cantidadLikes--;
-    }
+    // setIsFavorite(!isFavorite);
+    // if (isFavorite) {
+    //   receta.cantidadLikes++;
+    // } else {
+    //   receta.cantidadLikes--;
+    // }
   };
   const handleDoneStep = (e, i) => {
     const el = e.currentTarget;
@@ -143,7 +143,7 @@ function RecipeDetail() {
                 disabled={!isLogin}
               >
                 <FavoriteIcon
-                  color={isFavorite ? "primary" : "default"}
+                  // color={isFavorite ? "primary" : "default"}
                   sx={{ transition: "all 0.2s ease-in-out" }}
                 />
               </IconButton>

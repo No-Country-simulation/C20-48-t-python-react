@@ -50,7 +50,7 @@ export default function About() {
       photo: priPhoto,
       role: "QA Tester",
       github: "https://github.com/dafnepriscilaewens",
-      linkedin: "www.linkedin.com/in/dafne-priscila-ewens",
+      linkedin: "https://www.linkedin.com/in/dafne-priscila-ewens/",
     },
     {
       name: "Adolfo Sánchez",

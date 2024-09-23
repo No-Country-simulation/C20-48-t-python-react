@@ -22,7 +22,7 @@ function Home() {
     descripcion: null,
     ingrediente: null,
     dificultad: null,
-    categoriaIds: null,
+    categoriaNombres: null,
   });
 
   const { recipes } = useContext(RecipeListContext);
@@ -72,10 +72,9 @@ function Home() {
         </Container>
         {!displayData ? (
           <>
-            <Slider category="Tradicionales" recetas={recipes} />
-            <Slider category="Desayunos" recetas={recipes} />
-            <Slider category="Asiatica" recetas={recipes} />
-            <Slider category="Mexicana" recetas={recipes} />
+            <Slider category="Destacados" recetas={recipes} />
+            <Slider category="Recientes" recetas={recipes} />
+            <Slider category="Populares" recetas={recipes} />
           </>
         ) : (
           <DisplayCategories

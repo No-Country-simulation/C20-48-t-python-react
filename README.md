@@ -15,6 +15,7 @@ Es un aplicación web responsive, donde cualquier usuario puede consultar receta
 
 
 
+
 <h3>👥Miembros del equipo</h3>
 
 | Avatar | Nombre | Rol | Redes Sociales |
@@ -29,10 +30,10 @@ Es un aplicación web responsive, donde cualquier usuario puede consultar receta
 
 ## 🔗Enlaces importantes
 
--	Documentación del Proyecto
+-	[Documentación del Proyecto](https://drive.google.com/drive/folders/1bE1Dbx32OKSVn7xdsioF0N5PbGLC9vTf?hl=es)
 - [GitHub del Proyecto](https://github.com/No-Country-simulation/C20-48-t-python-react)
 -	[Despliege de Backend](https://recetapp-ggh9.onrender.com/categorias)
--	[Plan de pruebas]
+-	[Reporte de Ejecución de Pruebas](https://docs.google.com/spreadsheets/d/1_vgJ7O6wdoWka3h_tHsUI2qETJUZuNEDMRCtD-US4gk/edit?gid=0#gid=0)
 - [Sitio Web](https://recetapp-no-country.onrender.com/)
 
 
