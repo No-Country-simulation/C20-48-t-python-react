@@ -21,7 +21,7 @@ import { Helmet } from "react-helmet-async";
 function RecipeDetail() {
   const { userInfo, setUserInfo, isLogin } = useContext(UserContext);
   const location = useLocation();
-  const receta = location.state || {};
+  const receta = location?.state || {};
   const [isFavorite, setIsFavorite] = useState(receta.cantidadLikes || false);
 
   const handleToggleFavorite = async () => {
