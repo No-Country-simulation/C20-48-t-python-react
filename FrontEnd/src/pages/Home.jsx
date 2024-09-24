@@ -31,12 +31,13 @@ function Home() {
   const [displayData, setDisplayData] = useState(data);
 
   useEffect(() => {
+    setDisplayData(null);
     if (Object.values(query).every((value) => value === null)) {
       setDisplayData(null);
     } else {
       setDisplayData(data);
     }
-  }, [query, data]);
+  }, [query, data, loading]);
 
   return (
     <>

@@ -15,22 +15,20 @@ const hardcodedComments = [
   {
     id: 0,
     id_user: 1,
-    name: "John Doe",
-    comment:
-      "Lorem ipsum dolor sit amettempor eros aliquam conse ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat.",
+    name: "Jane Doe",
+    comment: "Wow! que buena receta! La recomiendo! 😍",
   },
   {
     id: 1,
     id_user: 2,
-    name: "Jane Doe",
-    comment:
-      "Ls ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat.",
+    name: "Natalia Natalia",
+    comment: "La voy a probar el fin de semana!",
   },
   {
     id: 2,
     id_user: 3,
     name: "John Doe",
-    comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. ",
+    comment: "Esta es una receta muy buena, no tuve que hacer nungun ajuste",
   },
 ];
 
@@ -90,7 +88,7 @@ export default function CommentSection() {
           sx={{ borderRadius: 10 }}
           onClick={() => setShowComments(!showComments)}
         >
-          Mostrar ({comments.length})
+          Mostrar ({comments?.length})
         </Button>
       </Stack>
       <form onSubmit={(event) => onSubmit(event)}>
@@ -110,7 +108,7 @@ export default function CommentSection() {
             rows={2}
             disabled={!isLogin}
             label={`Deja tu comentario`}
-            value={comment.comment}
+            value={comment?.comment}
             onChange={(event) =>
               setComment({
                 ...comment,
@@ -130,7 +128,7 @@ export default function CommentSection() {
         </Stack>
       </form>
       <Collapse in={showComments} sx={{ padding: 2 }}>
-        {comments.length > 0 ? (
+        {comments?.length > 0 ? (
           comments
             .slice()
             .reverse()
@@ -154,11 +152,12 @@ export default function CommentSection() {
                 >
                   <Avatar
                     alt="Cindy Baker"
-                    src={isLogin && userInfo.avatar === "tomate" ? lemon : ""}
+                    src={isLogin && userInfo?.avatar === "tomate" ? lemon : ""}
                     sx={{
                       width: 35,
                       height: 35,
                       border: "1px solid ",
+                      backgroundColor: "secondary.light",
                       borderColor: "secondary.main",
                     }}
                   >
@@ -169,7 +168,7 @@ export default function CommentSection() {
                     fontWeight="bold"
                     sx={{
                       backgroundColor:
-                        userInfo.nombreusuario === comment.name &&
+                        userInfo?.nombreusuario === comment.name &&
                         "secondary.main",
                       paddingInline: 1,
                       borderRadius: 10,

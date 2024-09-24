@@ -40,7 +40,7 @@ export default function Favourites() {
     };
 
     fetchData();
-  }, [userInfo]); // Asegúrate de incluir `userInfo` como dependencia
+  }, []);
 
   return (
     <>
