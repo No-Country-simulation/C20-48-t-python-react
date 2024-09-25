@@ -11,17 +11,23 @@ import {
 import UserRating from "../components/UI/UserRaiting";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import IngredientList from "../components/UI/IngredientsList";
+import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
+import RestaurantIcon from '@mui/icons-material/Restaurant';
+import MicrowaveIcon from '@mui/icons-material/Microwave';
+import ClassIcon from '@mui/icons-material/Class';
+import MenuBookIcon from '@mui/icons-material/MenuBook';
 import FloatingAB from "../components/FloatingAB";
 import { useContext, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { UserContext } from "../Context/UserContext";
 import CommentSection from "../components/CommentSection";
 import { Helmet } from "react-helmet-async";
+import FiberManualRecord from "@mui/icons-material/FiberManualRecord";
 
 function RecipeDetail() {
   const { userInfo, setUserInfo, isLogin } = useContext(UserContext);
   const location = useLocation();
-  const receta = location.state || {};
+  const receta = location?.state || {};
   const [isFavorite, setIsFavorite] = useState(receta.cantidadLikes || false);
 
   const handleToggleFavorite = async () => {
@@ -34,7 +40,7 @@ function RecipeDetail() {
             "Content-Type": "application/json",
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
-        },
+        }
       );
       const data = await respsonse.json();
     } catch (error) {
@@ -100,7 +106,14 @@ function RecipeDetail() {
                 },
               }}
             >
-              <Typography variant="h5">Categorias:</Typography>
+              <Typography variant="h5"
+                              sx={{
+                                display: "flex",
+                                alignItems: "center",
+                              }}
+              >
+                <ClassIcon  sx={{ marginRight: 1 }}/>
+                Categorias:</Typography>
               <Container
                 sx={{
                   display: "flex",
@@ -151,7 +164,14 @@ function RecipeDetail() {
             </Stack>
           </Stack>
           <Divider sx={{ marginBlock: 2 }} />
-          <Typography variant="h5">Ingredientes</Typography>
+          <Typography variant="h5"
+                          sx={{
+                            display: "flex",
+                            alignItems: "center",
+                          }}
+          >
+            <MenuBookIcon sx={{ marginRight: 1 }}/>
+            Ingredientes</Typography>
           <IngredientList ingredients={receta.ingredientes} />
           <Divider sx={{ marginBlock: 2 }} />
           <Container disableGutters>
@@ -168,15 +188,41 @@ function RecipeDetail() {
               }}
             >
               <Typography gutterBottom variant="h4" m={0}>
-                Preparación :
+                Detalles :
               </Typography>
-              <Typography variant="h6" color="success">
-                Dificultad: {receta?.dificultad}
+              <Typography
+                variant="h6"
+                color="success"
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
+                {receta.dificultad === "facil" ? (
+                  <FiberManualRecordIcon color="success" fontSize="small" />
+                ) : receta.dificultad === "medio" ? (
+                  <FiberManualRecordIcon color="warning" fontSize="small" />
+                ) : (
+                  <FiberManualRecordIcon color="error" fontSize="small" />
+                )}
+                  Dificultad: {receta?.dificultad}
               </Typography>
-              <Typography variant="h6" color="success">
+              <Typography variant="h6" color="success"
+                              sx={{
+                                display: "flex",
+                                alignItems: "center",
+                              }}
+              >
+              <RestaurantIcon sx={{ marginRight: 1 }} />
                 Preparación: {receta?.duracion} min
               </Typography>
-              <Typography variant="h6" color="success">
+              <Typography variant="h6" color="success"
+                              sx={{
+                                display: "flex",
+                                alignItems: "center",
+                              }}
+              >
+                <MicrowaveIcon sx={{ marginRight: 1 }} />
                 Cocción: {receta?.duracion} min
               </Typography>
             </Stack>
