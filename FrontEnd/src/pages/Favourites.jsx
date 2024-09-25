@@ -1,38 +1,9 @@
 import DisplayCategories from "../components/DisplayCategories";
-import { useUser } from "../Context/UserContext";
-import { useContext } from "react";
-import { RecipeListContext } from "../Context/RecipeContext";
 import { Helmet } from "react-helmet-async";
-import { useEffect, useState } from "react";
+import { useAppData } from "../Context/AppDataContext";
 
 export default function Favourites() {
-  const { userInfo } = useUser();
-  const [recetasFavoritas, setRecetasFavoritas] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    async function fetchData() {
-      setLoading(true);
-      try {
-        const response = await fetch(
-          `https://recetapp-ggh9.onrender.com/user/mis-favoritos`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          },
-        );
-        const data = await response.json();
-        setRecetasFavoritas(data);
-        setLoading(false);
-      } catch (e) {
-        console.log(e);
-      }
-    }
-    fetchData();
-  }, []);
+  const { recetasFavoritas, loadingFavoritos } = useAppData();
 
   return (
     <>
@@ -45,7 +16,7 @@ export default function Favourites() {
       </Helmet>
       <DisplayCategories
         recetas={recetasFavoritas}
-        loading={loading}
+        loading={loadingFavoritos}
         category={"Favoritos"}
       />
     </>

@@ -14,6 +14,39 @@ export const AppDataProvider = ({ children }) => {
     error: categoriasError,
   } = useFetch("https://recetapp-ggh9.onrender.com/categorias");
   const [cacheMisRecetas, setCacheMisRecetas] = useState([]);
+  // Estado para almacenar las recetas favoritas
+  const [recetasFavoritas, setRecetasFavoritas] = useState([]);
+  const [loadingFavoritos, setLoadingFavoritos] = useState(true);
+
+  // Función para obtener las recetas favoritas del usuario
+  const fetchRecetasFavoritas = async () => {
+    setLoadingFavoritos(true);
+    try {
+      const response = await fetch(
+        `https://recetapp-ggh9.onrender.com/user/mis-favoritos`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      const data = await response.json();
+      setRecetasFavoritas(data);
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setLoadingFavoritos(false);
+    }
+  };
+
+  useEffect(() => {
+    // Solo busca recetas favoritas si el usuario ha iniciado sesión
+    if (localStorage.getItem("token")) {
+      fetchRecetasFavoritas();
+    }
+  }, []);
 
   return (
     <AppDataContext.Provider
@@ -23,6 +56,10 @@ export const AppDataProvider = ({ children }) => {
         categoriasError,
         cacheMisRecetas,
         setCacheMisRecetas,
+        // Agregar las recetas favoritas al contexto
+        recetasFavoritas,
+        loadingFavoritos,
+        fetchRecetasFavoritas,
       }}
     >
       {children}
