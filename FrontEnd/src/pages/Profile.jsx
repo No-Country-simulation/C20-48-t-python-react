@@ -35,10 +35,6 @@ function Profile() {
 
   const { userInfo, setUserInfo, isLogin, logout, changesUserInfo } = useUser();
 
-  // useEffect(() => {
-  //   changesUserInfo(userInfo);
-  // }, [userInfo]);
-
   function HandleEditProfile() {
     if (isLogin) {
       setIsEditable(!isEditable);
@@ -181,18 +177,17 @@ function Profile() {
             justifyContent="space-between"
             mt={1}
             px={2}
-            sx={{ borderRadius: 2 }}
+            sx={{ borderRadius: 2, gap: 1 }}
           >
             {!isEditable ? (
               <Typography variant="h5" sx={{ m: 1 }}>
-                {userInfo.nombre || "Nombre de usuario"}
+                {userInfo.username || "Nombre de usuario"}
               </Typography>
             ) : (
               <TextField
                 label={"Nombre de usuario"}
                 type="name"
                 variant="filled"
-                fullWidth
                 margin="normal"
                 value={editName}
                 onChange={(e) => setEditName(e.target.value)}
@@ -207,6 +202,7 @@ function Profile() {
                 width: 40,
                 height: 40,
                 cursor: "pointer",
+                borderRadius: 10,
               }}
               onClick={handleUserNameEdit}
               disabled={!isEditable}
@@ -242,13 +238,13 @@ function Profile() {
             />
           </Paper>
 
-          <Box>
+          <Box sx={{ display: "flex", gap: 1 }}>
             {isEditable ? (
               <Button
                 variant="contained"
                 startIcon={<CancelIcon />}
                 color="primary"
-                sx={{ mt: 1 }}
+                sx={{ mt: 1, minWidth: "125px" }}
                 onClick={HandleEditProfile}
               >
                 Cancelar
@@ -258,7 +254,7 @@ function Profile() {
                 variant="contained"
                 startIcon={<EditIcon />}
                 color="primary"
-                sx={{ mt: 1 }}
+                sx={{ mt: 1, minWidth: "160px" }}
                 onClick={HandleEditProfile}
               >
                 Editar
@@ -270,7 +266,7 @@ function Profile() {
                 variant="contained"
                 startIcon={<SaveIcon />}
                 color="primary"
-                sx={{ mt: 1 }}
+                sx={{ mt: 1, minWidth: "125px" }}
                 onClick={HandleConfirmChanges}
               >
                 Guardar
@@ -280,7 +276,7 @@ function Profile() {
           <Button
             variant="contained"
             color="primary"
-            sx={{ mt: 1 }}
+            sx={{ mt: 1, minWidth: "160px" }}
             onClick={handleLogout}
           >
             Cerrar sesion

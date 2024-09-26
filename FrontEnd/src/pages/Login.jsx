@@ -133,7 +133,7 @@ function Login() {
           ¿No tienes una cuenta?
           <Link
             to="/registro"
-            style={{ textDecoration: "none", color: "#ff7961" }}
+            style={{ textDecoration: "none", color: "#ff7961", marginLeft: 5 }}
           >
             Registráte
           </Link>
