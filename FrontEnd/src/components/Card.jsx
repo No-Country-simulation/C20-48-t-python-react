@@ -30,6 +30,16 @@ export default function MediaCard({ receta }) {
           boxShadow: "4px 4px 0px 4px  #1E1E1E",
           scale: 1.02,
         },
+        opacity: 1,
+        animation: "fadeIn 0.5s ease-in-out forwards",
+        "@keyframes fadeIn": {
+          "0%": {
+            opacity: 0,
+          },
+          "100%": {
+            opacity: 1,
+          },
+        },
       }}
     >
       <CardMedia
