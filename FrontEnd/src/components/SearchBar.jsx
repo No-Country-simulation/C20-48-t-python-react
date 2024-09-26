@@ -12,8 +12,6 @@ import { useTheme, useMediaQuery } from "@mui/material";
 import { useState, useRef } from "react";
 import { useAppData } from "../Context/AppDataContext";
 
-const dificulty = ["Facil", "Normal", "Dificil"];
-
 const ingredients = [
   "arroz",
   "pollo",
@@ -151,7 +149,7 @@ export default function SearchBar({ query, setQuery }) {
               <AutoCompleteSelection
                 field="Dificultad"
                 value={query.dificultad}
-                options={dificulty}
+                options={["facil", "medio", "dificil"]}
                 handler={handleDifficulty}
               />
               <Button
