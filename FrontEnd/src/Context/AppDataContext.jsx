@@ -48,6 +48,23 @@ export const AppDataProvider = ({ children }) => {
     [update],
   );
 
+  // pedido de recetas por categoria para mostrar en el home
+  const {
+    data: tradicionales,
+    loading: loadingTradicionales,
+    error: errorTradicionales,
+  } = useFetch("https://recetapp-ggh9.onrender.com/categorias/3");
+  const {
+    data: pastas,
+    loading: loadingPastas,
+    error: errorPastas,
+  } = useFetch("https://recetapp-ggh9.onrender.com/categorias/4");
+  const {
+    data: carnes,
+    loading: loadingCarnes,
+    error: errorCarnes,
+  } = useFetch("https://recetapp-ggh9.onrender.com/categorias/8");
+
   return (
     <AppDataContext.Provider
       value={{
@@ -65,6 +82,15 @@ export const AppDataProvider = ({ children }) => {
         misRecetas,
         loadingMisRecetas,
         errorMisRecetas,
+        tradicionales,
+        loadingTradicionales,
+        errorTradicionales,
+        pastas,
+        loadingPastas,
+        errorPastas,
+        carnes,
+        loadingCarnes,
+        errorCarnes,
       }}
     >
       {children}

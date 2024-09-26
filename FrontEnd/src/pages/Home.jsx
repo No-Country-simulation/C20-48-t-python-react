@@ -2,19 +2,17 @@ import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import SearchBar from "../components/SearchBar";
 import FloatingAB from "../components/FloatingAB";
-// import Hero from "../components/Hero";
 import Slider from "../components/Slider/Slider";
 import DisplayCategories from "../components/DisplayCategories";
 import Footer from "../components/Footer";
 import CategoriesBar from "../components/UI/CategoriesBar";
 import Divider from "@mui/material/Divider";
 import RamenDiningIcon from "@mui/icons-material/RamenDining";
-import { useContext, useState, useEffect } from "react";
-import { RecipeListContext } from "../Context/RecipeContext";
+import { useState, useEffect } from "react";
 import useDebouncedFetch from "../hooks/useDebouncedFetch";
+import { useAppData } from "../Context/AppDataContext";
 import queryToString from "../utils/queryToString";
 import { useUser } from "../Context/UserContext";
-import CardSkeletons from "../components/skeletons/CardSkeletons";
 
 function Home() {
   const [query, setQuery] = useState({
@@ -25,7 +23,17 @@ function Home() {
     categoriaNombres: null,
   });
 
-  const { recipes } = useContext(RecipeListContext);
+  const {
+    tradicionales,
+    loadingTradicionales,
+    errorTradicionales,
+    pastas,
+    loadingPastas,
+    errorPastas,
+    carnes,
+    loadingCarnes,
+    errorCarnes,
+  } = useAppData();
   const { isLogin, userInfo } = useUser();
   const { data, loading, error } = useDebouncedFetch(queryToString(query));
   const [displayData, setDisplayData] = useState(data);
@@ -37,7 +45,7 @@ function Home() {
     } else {
       setDisplayData(data);
     }
-  }, [query, data, loading]);
+  }, [query, data]);
 
   return (
     <>
@@ -71,11 +79,26 @@ function Home() {
             setSelectedCategory={setQuery}
           />
         </Container>
-        {!displayData ? (
+        {!displayData && !loading ? (
           <>
-            <Slider category="Destacados" recetas={recipes} />
-            <Slider category="Recientes" recetas={recipes} />
-            <Slider category="Populares" recetas={recipes} />
+            <Slider
+              category="Tradicionales"
+              recetas={tradicionales?.content}
+              loading={loadingTradicionales}
+              error={errorTradicionales}
+            />
+            <Slider
+              category="Pastas"
+              recetas={pastas?.content}
+              loading={loadingPastas}
+              error={errorPastas}
+            />
+            <Slider
+              category="Carnes"
+              recetas={carnes?.content}
+              loading={loadingCarnes}
+              error={errorCarnes}
+            />
           </>
         ) : (
           <DisplayCategories

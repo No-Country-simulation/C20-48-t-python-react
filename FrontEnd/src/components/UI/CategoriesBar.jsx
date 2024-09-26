@@ -14,6 +14,7 @@ export default function CategoriesBar({
   function handleClick(category) {
     setSelectedCategory({ ...selectedCategory, categoriaNombres: category });
   }
+
   const { categorias, categoriasLoading, categoriasError } = useAppData();
 
   return (

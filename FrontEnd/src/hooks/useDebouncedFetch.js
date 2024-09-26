@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import useDebounce from "./useDebounce"; // tu hook de debounce
 import useFetch from "./useFetch"; // tu hook de fetch
-import { recetas } from "../assets/recetas";
 
 function useDebouncedFetch(query, options = {}, delay = 500) {
   // const deb = useDebounce(query);
