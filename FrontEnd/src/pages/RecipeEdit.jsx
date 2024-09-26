@@ -10,7 +10,7 @@ import DeleteRecipeFAB from "../components/DeleteRecipeFAB";
 import { Alert, Button, Container, Snackbar, Stack } from "@mui/material";
 import { Helmet } from "react-helmet-async";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useAppData } from "../context/AppDataContext";
+import { useAppData } from "../Context/AppDataContext";
 
 function RecipeSteps() {
   const { update, setUpdate } = useAppData();
