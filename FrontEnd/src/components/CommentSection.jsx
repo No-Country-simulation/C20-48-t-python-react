@@ -39,7 +39,8 @@ export default function CommentSection() {
   const [comments, setComments] = useState(hardcodedComments);
   const [comment, setComment] = useState({
     id: comments.length + 1,
-    id_user: comments.length + 1,
+    // id_user: comments.length + 1,
+    id_user: userInfo?.id || comments.length + 1,
     name: userInfo?.nombreusuario || "",
     comment: "",
   });
@@ -50,8 +51,9 @@ export default function CommentSection() {
 
     setComments([...comments, comment]);
     setComment({
-      id_user: comments.length + 1,
       id: comments.length + 1,
+      // id_user: comments.length + 1,
+      id_user: userInfo?.id || comments.length + 1,
       name: userInfo?.nombreusuario || "",
       comment: "",
     });

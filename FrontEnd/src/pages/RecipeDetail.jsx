@@ -28,8 +28,8 @@ import { Helmet } from "react-helmet-async";
 function RecipeDetail() {
   const { userInfo, setUserInfo, isLogin } = useContext(UserContext);
   const location = useLocation();
-  const receta = location?.state || {};
-  // const [receta, setReceta] = useState(location?.state || {});
+  // const receta = location?.state || {};
+  const [receta, setReceta] = useState(location?.state || {});
 
   const [isFavorite, setIsFavorite] = useState( false);
 
@@ -62,12 +62,12 @@ function RecipeDetail() {
       // Update the isFavorite state based on the response from the server
       setIsFavorite(data.isFavorite);
       if (data.isFavorite) {
-        //   setReceta(prevReceta => ({ ...prevReceta, cantidadLikes: prevReceta.cantidadLikes + 1 }));
-        // } else {
-          //   setReceta(prevReceta => ({ ...prevReceta, cantidadLikes: prevReceta.cantidadLikes - 1 }));
-          receta.cantidadLikes++;
+          setReceta(prevReceta => ({ ...prevReceta, cantidadLikes: prevReceta.cantidadLikes + 1 }));
         } else {
-          receta.cantidadLikes--;
+            setReceta(prevReceta => ({ ...prevReceta, cantidadLikes: prevReceta.cantidadLikes - 1 }));
+        //   receta.cantidadLikes++;
+        // } else {
+        //   receta.cantidadLikes--;
         }
         setUpdate(!update);
     } catch (error) {
@@ -75,6 +75,13 @@ function RecipeDetail() {
     }
   };
   console.log(receta);
+
+  const handleRatingChange = (newRating) => {
+    setReceta(prevReceta => ({
+      ...prevReceta,
+      promedioPuntuacion: newRating 
+    }));
+  };
   const handleDoneStep = (e, i) => {
     const el = e.currentTarget;
     el.style.textDecoration =
@@ -170,7 +177,9 @@ function RecipeDetail() {
                 justifyContent: "end",
               }}
             >
-              <UserRating />
+              <UserRating defaultRating={receta.promedioPuntuacion} 
+              onRatingChange={handleRatingChange}
+              />
               <Typography variant="h5">{receta.promedioPuntuacion}</Typography>
               <IconButton
                 aria-label="fingerprint"
