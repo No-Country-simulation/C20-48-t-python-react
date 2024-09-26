@@ -8,21 +8,11 @@ import { useAppData } from "../Context/AppDataContext";
 import FloatingAB from "../components/FloatingAB";
 
 export default function Favourites() {
-  const { userInfo } = useUser();
-
   const {
-    data: recetas,
-    loading,
-    error,
-  } = useFetch(
-    "https://recetapp-ggh9.onrender.com/user/mis-recetas?page=0&size=20",
-    {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    },
-  );
+    misRecetas: recetas,
+    loadingMisRecetas: loading,
+    errorMisRecetas: error,
+  } = useAppData();
 
   return (
     <>
@@ -40,10 +30,10 @@ export default function Favourites() {
         category={"Mis Recetas"}
       />
 
-      <Snackbar open={loading} onClose={() => setLoading(false)}>
+      <Snackbar open={loading}>
         <Alert severity="info">Cargando...</Alert>
       </Snackbar>
-      <Snackbar open={error} onClose={() => setError(false)}>
+      <Snackbar open={error}>
         <Alert severity="error">Error al cargar los datos</Alert>
       </Snackbar>
       <FloatingAB />

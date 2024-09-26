@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAppData } from "./AppDataContext";
 
 export const UserContext = createContext();
 
@@ -16,6 +17,7 @@ export const UserProvider = ({ children }) => {
   const [isLogin, setIsLogin] = useState(
     localStorage.getItem("token") !== null,
   );
+  const { update, setUpdate } = useAppData();
 
   const navigate = useNavigate();
 
@@ -64,6 +66,7 @@ export const UserProvider = ({ children }) => {
           userId: data.userId,
         });
         setIsLogin(true);
+        setUpdate(!update);
         navigate("/");
       }
     } catch (error) {

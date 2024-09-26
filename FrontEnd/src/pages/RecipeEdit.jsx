@@ -10,8 +10,10 @@ import DeleteRecipeFAB from "../components/DeleteRecipeFAB";
 import { Alert, Button, Container, Snackbar, Stack } from "@mui/material";
 import { Helmet } from "react-helmet-async";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useAppData } from "../context/AppDataContext";
 
 function RecipeSteps() {
+  const { update, setUpdate } = useAppData();
   const navigate = useNavigate();
   const location = useLocation();
   const receta = location.state || {};
@@ -44,6 +46,7 @@ function RecipeSteps() {
         throw new Error("Error al eliminar la receta");
       }
       console.log("Receta eliminada");
+      setUpdate(!update);
     } catch (error) {
       console.log(error);
     }
@@ -146,6 +149,7 @@ function RecipeSteps() {
         throw new Error("Error al enviar la receta");
       }
       setExito(true);
+      setUpdate(!update);
       setTimeout(() => {
         navigate("/mis-recetas");
       }, 2000);

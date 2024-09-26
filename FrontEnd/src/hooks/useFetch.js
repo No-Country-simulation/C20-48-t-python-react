@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 
-function useFetch(url, options = {}) {
+function useFetch(url, options = {}, dependencies = []) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -23,7 +23,7 @@ function useFetch(url, options = {}) {
     if (url) {
       fetchData();
     }
-  }, [url, memoizedOptions]);
+  }, [url, memoizedOptions, ...dependencies]);
 
   return { data, loading, error };
 }
