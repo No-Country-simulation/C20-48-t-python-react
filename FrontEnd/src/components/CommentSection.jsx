@@ -1,5 +1,6 @@
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import RestaurantIcon from "@mui/icons-material/Restaurant";
 import { Container } from "@mui/material";
 import { Typography, Stack, Avatar } from "@mui/material";
 import Collapse from "@mui/material/Collapse";
@@ -11,49 +12,68 @@ import lemon from "../assets/profile-icons/lemon-avatar.svg";
 import pepper from "../assets/profile-icons/pepper-avatar.svg";
 import radish from "../assets/profile-icons/radish-avatar.svg";
 
+const avatars = {
+  lemon: lemon,
+  cucumber: cucumber,
+  pepper: pepper,
+  radish: radish,
+};
 const hardcodedComments = [
   {
     id: 0,
-    id_user: 1,
-    name: "Jane Doe",
-    comment: "Wow! que buena receta! La recomiendo! 😍",
+    usuarioemail: "Jane Doe",
+    comentario: "Wow! que buena receta! La recomiendo! 😍",
   },
   {
     id: 1,
-    id_user: 2,
-    name: "Natalia Natalia",
-    comment: "La voy a probar el fin de semana!",
+    usuarioemail: "Natalia Natalia",
+    comentario: "La voy a probar el fin de semana!",
   },
   {
     id: 2,
-    id_user: 3,
-    name: "John Doe",
-    comment: "Esta es una receta muy buena, no tuve que hacer nungun ajuste",
+    usuarioemail: "John Doe",
+    comentario: "Esta es una receta muy buena, no tuve que hacer nungun ajuste",
   },
 ];
 
-export default function CommentSection() {
+export default function CommentSection({ receta }) {
   const { userInfo, isLogin } = useUser();
   const [expanded, setExpanded] = useState({ id: -1 });
   const [showComments, setShowComments] = useState(false);
-  const [comments, setComments] = useState(hardcodedComments);
+  const [comments, setComments] = useState(
+    receta.comentarios.length > 0 ? receta.comentarios : hardcodedComments,
+  );
   const [comment, setComment] = useState({
-    id: comments.length + 1,
-    id_user: comments.length + 1,
-    name: userInfo?.nombreusuario || "",
-    comment: "",
+    usuarioemail: userInfo?.username || "",
+    comentario: "",
   });
 
-  function onSubmit(event) {
+  async function onSubmit(event) {
     event.preventDefault();
-    if (comment.comment === "") return;
+    if (comment.comentario === "") return;
+
+    try {
+      const response = await fetch(
+        `https://recetapp-ggh9.onrender.com/recetas/${receta.id}/comentario`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          body: JSON.stringify({
+            comentario: comment.comentario,
+          }),
+        },
+      );
+      const data = await response.json();
+    } catch (error) {
+      console.log(error);
+    }
 
     setComments([...comments, comment]);
     setComment({
-      id_user: comments.length + 1,
-      id: comments.length + 1,
-      name: userInfo?.nombreusuario || "",
-      comment: "",
+      comentario: "",
     });
     setShowComments(true);
   }
@@ -108,11 +128,11 @@ export default function CommentSection() {
             rows={2}
             disabled={!isLogin}
             label={`Deja tu comentario`}
-            value={comment?.comment}
+            value={comment?.comentario}
             onChange={(event) =>
               setComment({
                 ...comment,
-                comment: event.target.value,
+                comentario: event.target.value,
               })
             }
             variant="outlined"
@@ -129,85 +149,100 @@ export default function CommentSection() {
       </form>
       <Collapse in={showComments} sx={{ padding: 2 }}>
         {comments?.length > 0 ? (
-          comments
-            .slice()
-            .reverse()
-            .map((comment) => (
-              <Container
+          comments.slice().map((comment) => (
+            <Container
+              sx={{
+                padding: 2,
+                display: "flex",
+                flexDirection: "column",
+              }}
+              key={comment.id}
+            >
+              <Stack
                 sx={{
-                  padding: 2,
                   display: "flex",
-                  flexDirection: "column",
+                  flexDirection: "row",
+                  alignItems: "center",
+                  gap: 1,
+                  paddingBottom: 2,
                 }}
-                key={comment.id}
               >
-                <Stack
+                <Avatar
+                  alt="Cindy Baker"
+                  src={
+                    receta.usuarioEmail === comment.usuarioemail
+                      ? avatars[userInfo?.avatar]
+                      : [lemon, cucumber, pepper, radish][
+                          Math.floor(Math.random() * 4)
+                        ]
+                  }
                   sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    alignItems: "center",
-                    gap: 2,
-                    paddingBottom: 2,
+                    width: 35,
+                    height: 35,
+                    border: "1px solid ",
+                    backgroundColor: "secondary.light",
+                    borderColor: "secondary.main",
                   }}
                 >
-                  <Avatar
-                    alt="Cindy Baker"
-                    src={isLogin && userInfo?.avatar === "tomate" ? lemon : ""}
-                    sx={{
-                      width: 35,
-                      height: 35,
-                      border: "1px solid ",
-                      backgroundColor: "secondary.light",
-                      borderColor: "secondary.main",
-                    }}
-                  >
-                    {comment.name.charAt(0)}
-                  </Avatar>
-                  <Typography
-                    variant="boydy2"
-                    fontWeight="bold"
-                    sx={{
-                      backgroundColor:
-                        userInfo?.nombreusuario === comment.name &&
-                        "secondary.main",
-                      paddingInline: 1,
-                      borderRadius: 10,
-                    }}
-                  >
-                    {comment.name}
-                  </Typography>
-                </Stack>
-                <Collapse
-                  in={expanded.id === comment.id}
-                  timeout="auto"
-                  collapsedSize={40}
-                >
-                  <Typography
-                    sx={{
-                      opacity: 0.7,
-                      whiteSpace: "pre-line",
-                    }}
-                  >
-                    {comment.comment}
-                  </Typography>
-                </Collapse>
-                <Button
-                  variant="outlined"
+                  {comment.usuarioemail.charAt(0)}
+                </Avatar>
+                <Typography
+                  variant="boydy2"
+                  fontWeight="bold"
                   sx={{
+                    backgroundColor:
+                      userInfo?.username === comment.usuarioemail &&
+                      "secondary.main",
+                    paddingInline: 1,
                     borderRadius: 10,
-                    p: 0,
-                    marginTop: 1,
-                    lineHeight: 1,
-                    // maxWidth: "17px",
-                    alignSelf: "flex-end",
                   }}
-                  onClick={() => expandComent(comment.id)}
                 >
-                  &#x22EF;
-                </Button>
-                <Divider sx={{ marginTop: 2 }} />
-              </Container>
-            ))
+                  {comment.usuarioemail.split("@")[0]}
+                </Typography>
+                {receta?.usuarioEmail === comment.usuarioemail && (
+                  <RestaurantIcon
+                    sx={{
+                      backgroundColor: "info.main",
+                      borderRadius: 10,
+                      padding: "5px",
+                    }}
+                  />
+                )}
+                <Typography variant="body2" color="text.disabled">
+                  {new Date(comment?.fechaComentario).toLocaleDateString()}
+                </Typography>
+              </Stack>
+              <Collapse
+                in={expanded.id === comment.id}
+                timeout="auto"
+                collapsedSize={40}
+              >
+                <Typography
+                  sx={{
+                    opacity: 0.7,
+                    whiteSpace: "pre-line",
+                  }}
+                >
+                  {comment.comentario}
+                </Typography>
+              </Collapse>
+              <Button
+                variant="outlined"
+                sx={{
+                  borderRadius: 10,
+                  p: 0,
+                  marginTop: 1,
+                  lineHeight: 1,
+                  // maxWidth: "17px",
+                  alignSelf: "flex-end",
+                }}
+                onClick={() => expandComent(comment.id)}
+              >
+                &#x22EF;
+              </Button>
+              <Divider sx={{ marginTop: 2 }} />
+            </Container>
+          ))
         ) : (
           <Typography variant="h6" gutterBottom fontWeight="bold" p={2} m={0}>
             No hay comentarios

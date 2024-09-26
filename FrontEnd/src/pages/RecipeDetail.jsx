@@ -118,7 +118,7 @@ function RecipeDetail() {
                   alignItems: "center",
                 }}
               >
-                <ClassIcon sx={{ marginRight: 1 }} />
+                <ClassIcon sx={{ marginInline: 1 }} />
                 Categorias:
               </Typography>
               <Container
@@ -178,7 +178,7 @@ function RecipeDetail() {
               alignItems: "center",
             }}
           >
-            <MenuBookIcon sx={{ marginRight: 1 }} />
+            <MenuBookIcon sx={{ marginInline: 1 }} />
             Ingredientes
           </Typography>
           <IngredientList ingredients={receta.ingredientes} />
@@ -191,7 +191,7 @@ function RecipeDetail() {
                   sm: "row",
                 },
                 gap: 2,
-                padding: 2,
+                padding: 1,
                 alignItems: "center",
                 justifyContent: "space-between",
               }}
@@ -290,7 +290,7 @@ function RecipeDetail() {
             </Typography>
             <Typography variant="body1">{receta.tips}</Typography>
           </Container>
-          <CommentSection />
+          <CommentSection receta={receta} />
         </Stack>
       </Paper>
 
