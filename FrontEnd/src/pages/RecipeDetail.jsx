@@ -17,9 +17,8 @@ import RestaurantIcon from "@mui/icons-material/Restaurant";
 import MicrowaveIcon from "@mui/icons-material/Microwave";
 import ClassIcon from "@mui/icons-material/Class";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
-import FiberManualRecord from "@mui/icons-material/FiberManualRecord";
 import FloatingAB from "../components/FloatingAB";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useAppData } from "../Context/AppDataContext";
 import { useLocation } from "react-router-dom";
 import { UserContext } from "../Context/UserContext";
@@ -29,10 +28,22 @@ import { Helmet } from "react-helmet-async";
 function RecipeDetail() {
   const { userInfo, setUserInfo, isLogin } = useContext(UserContext);
   const location = useLocation();
-  const receta = location?.state || {};
-  const [isFavorite, setIsFavorite] = useState(receta.cantidadLikes || false);
+  const [receta, setReceta] = useState(location?.state || {});
+
+  const [isFavorite, setIsFavorite] = useState( false);
 
   const { update, setUpdate } = useAppData();
+  const { recetasFavoritas, loadingFavoritos } = useAppData();
+
+  useEffect(() => {
+    // setIsFavorite(recetasFavoritas.id.includes(receta.id));
+    if (recetasFavoritas && recetasFavoritas.length > 0) { // Verificar si la lista de favoritos tiene elementos
+    const isRecipeAFavorite = recetasFavoritas.some(
+      (favoriteRecipe) => favoriteRecipe.id === receta.id
+    );
+    setIsFavorite(isRecipeAFavorite);
+  }
+  }, [recetasFavoritas, receta.id]);
 
   const handleToggleFavorite = async () => {
     try {
@@ -44,20 +55,27 @@ function RecipeDetail() {
             "Content-Type": "application/json",
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
-        },
+        }
       );
       const data = await respsonse.json();
-      setUpdate(!update);
+      // Update the isFavorite state based on the response from the server
+      setIsFavorite(data.mensaje === "Like agregado" ? true : false);
+      if (data.mensaje === "Like agregado") {
+          setReceta(prevReceta => ({ ...prevReceta, cantidadLikes: prevReceta.cantidadLikes + 1 }));
+        } else {
+            setReceta(prevReceta => ({ ...prevReceta, cantidadLikes: prevReceta.cantidadLikes - 1 }));
+        }
+        setUpdate(!update);
     } catch (error) {
       console.log(error);
     }
+  };
 
-    // setIsFavorite(!isFavorite);
-    // if (isFavorite) {
-    //   receta.cantidadLikes++;
-    // } else {
-    //   receta.cantidadLikes--;
-    // }
+  const handleRatingChange = (newRating) => {
+    setReceta(prevReceta => ({
+      ...prevReceta,
+      promedioPuntuacion: newRating
+    }));
   };
   const handleDoneStep = (e, i) => {
     const el = e.currentTarget;
@@ -154,7 +172,10 @@ function RecipeDetail() {
                 justifyContent: "end",
               }}
             >
-              <UserRating />
+              <UserRating defaultRating={receta.promedioPuntuacion} 
+              recetaId={receta.id}
+              onRatingChange={handleRatingChange}
+              />
               <Typography variant="h5">{receta.promedioPuntuacion}</Typography>
               <IconButton
                 aria-label="fingerprint"
@@ -162,10 +183,10 @@ function RecipeDetail() {
                 onClick={handleToggleFavorite}
                 disabled={!isLogin}
               >
-                <FavoriteIcon
-                  // color={isFavorite ? "primary" : "default"}
+                {/* <FavoriteIcon
                   sx={{ transition: "all 0.2s ease-in-out" }}
-                />
+                /> */}
+                 {isFavorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
               </IconButton>
               <Typography variant="h5">{receta.cantidadLikes}</Typography>
             </Stack>

@@ -164,7 +164,7 @@ export default function MediaCard({ receta }) {
           </Button>
         </CardActions>
         <UserRating
-          value={receta.promedioPuntuacion}
+          defaultRating={receta.promedioPuntuacion}
           scale={"0.7"}
           mode={"read"}
         />
