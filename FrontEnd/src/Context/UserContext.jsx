@@ -53,6 +53,7 @@ export const UserProvider = ({ children }) => {
           ...userData,
           username: credenciales.username,
           userId: data.userId,
+          avatar: "lemon",
         });
         setIsLogin(true);
         setUpdate(!update);

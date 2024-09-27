@@ -47,7 +47,6 @@ export default function CommentSection({ receta }) {
     usuarioemail: userInfo?.username || "",
     comentario: "",
   });
-
   async function onSubmit(event) {
     event.preventDefault();
     if (comment.comentario === "") return;
@@ -171,7 +170,7 @@ export default function CommentSection({ receta }) {
                   alt="Cindy Baker"
                   src={
                     receta.usuarioEmail === comment.usuarioemail
-                      ? avatars[userInfo?.avatar]
+                      ? avatars[userInfo.avatar]
                       : [lemon, cucumber, pepper, radish][
                           Math.floor(Math.random() * 4)
                         ]
