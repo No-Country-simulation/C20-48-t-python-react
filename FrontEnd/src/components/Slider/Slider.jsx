@@ -9,7 +9,7 @@ import { Pagination, Autoplay } from "swiper/modules";
 import { Suspense } from "react";
 import CardSkeletons from "../skeletons/CardSkeletons";
 
-export default function Slider({ category, recetas }) {
+export default function Slider({ category, recetas, loading, error }) {
   return (
     <Container sx={{ marginTop: 4 }} maxWidth={"xl"} disableGutters>
       <Typography
@@ -36,7 +36,8 @@ export default function Slider({ category, recetas }) {
           boxShadow: 2,
         }}
       >
-        <Suspense fallback={<CardSkeletons />}>
+        {loading && <CardSkeletons />}
+        {recetas?.length > 0 && (
           <Swiper
             style={{ padding: "10px" }}
             breakpoints={{
@@ -65,13 +66,13 @@ export default function Slider({ category, recetas }) {
             }}
             modules={[Pagination, Autoplay]}
           >
-            {recetas.map((receta) => (
+            {recetas?.map((receta) => (
               <SwiperSlide key={receta.id}>
                 <Card receta={receta} />
               </SwiperSlide>
             ))}
           </Swiper>
-        </Suspense>
+        )}
       </Container>
     </Container>
   );

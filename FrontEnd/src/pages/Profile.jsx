@@ -23,7 +23,16 @@ import pepper from "../assets/profile-icons/pepper-avatar.svg";
 import { useState /* useEffect */ } from "react";
 import { Helmet } from "react-helmet-async";
 
+const avatars = {
+  lemon: lemon,
+  cucumber: cucumber,
+  pepper: pepper,
+  radish: radish,
+};
+
 function Profile() {
+  const { userInfo, setUserInfo, isLogin, logout, changesUserInfo } = useUser();
+
   const [editName, setEditName] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [newPasswordError, setNewPasswordError] = useState("");
@@ -31,13 +40,7 @@ function Profile() {
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
   const [isEditable, setIsEditable] = useState(false);
   const [open, setOpen] = useState(false);
-  const [avatarIcon, setAvatarIcon] = useState("");
-
-  const { userInfo, setUserInfo, isLogin, logout, changesUserInfo } = useUser();
-
-  // useEffect(() => {
-  //   changesUserInfo(userInfo);
-  // }, [userInfo]);
+  const [avatarIcon, setAvatarIcon] = useState(userInfo?.avatar || lemon);
 
   function HandleEditProfile() {
     if (isLogin) {
@@ -60,32 +63,25 @@ function Profile() {
 
     // Validaciones
     let valid = true;
-
-    if (!newPassword) {
-      setNewPasswordError("La contraseña es obligatoria.");
-      valid = false;
-    }
-
-    if (!confirmPassword) {
-      setConfirmPasswordError("Debes repetir la contraseña.");
-      valid = false;
-    } else if (confirmPassword !== newPassword) {
-      setConfirmPasswordError("Las contraseñas no coinciden.");
-      valid = false;
-    }
-
+    //
+    // if (!newPassword) {
+    //   setNewPasswordError("La contraseña es obligatoria.");
+    //   valid = false;
+    // }
+    //
+    // if (!confirmPassword) {
+    //   setConfirmPasswordError("Debes repetir la contraseña.");
+    //   valid = false;
+    // } else if (confirmPassword !== newPassword) {
+    //   setConfirmPasswordError("Las contraseñas no coinciden.");
+    //   valid = false;
+    // }
+    //
     if (valid) {
       console.log("cambio exitoso");
-      setUserInfo({ ...userInfo, password: newPassword });
-      // setUserList(
-      //   userList.map((user) =>
-      //     user.email === userInfo.email
-      //       ? { ...user, password: newPassword }
-      //       : user,
-      //   ),
-      // );
-      setNewPassword("");
-      setConfirmPassword("");
+      // setUserInfo({ ...userInfo, password: newPassword });
+      // setNewPassword("");
+      // setConfirmPassword("");
       setIsEditable(false);
     }
   }
@@ -104,29 +100,21 @@ function Profile() {
     if (editName.length > 2) {
       setEditName(editName);
       changesUserInfo({ username: editName });
-
-      // setUserList(
-      //   userList.map((user) =>
-      //     user.email === userInfo.email ? { ...user, name: editName } : user,
-      //   ),
-      // );
     }
     setIsEditable(false);
   }
 
   // funcion cambiar avatars
 
-  function handleAvatarChange(event) {
+  function handleAvatarChange(event, avatar) {
     setAvatarIcon(event.target.src);
-    setUserInfo({ ...userInfo, avatar: event.target.src });
+    setUserInfo({ ...userInfo, avatar: avatar });
     handleClose();
   }
-  // Array avatares
-  const avatarList = [cucumber, lemon, radish, pepper];
 
   function handleLogout() {
-    logout();
     setIsEditable(false);
+    logout();
     // Redirigir al usuario a /login
   }
 
@@ -152,7 +140,7 @@ function Profile() {
           <Box position="relative">
             <Avatar
               sx={{ width: 100, height: 100 }}
-              src={avatarIcon || userInfo.avatar}
+              src={avatars[userInfo.avatar]}
             />
             <Fab
               color="primary"
@@ -181,22 +169,22 @@ function Profile() {
             justifyContent="space-between"
             mt={1}
             px={2}
-            sx={{ borderRadius: 2 }}
+            sx={{ borderRadius: 2, gap: 1 }}
           >
             {!isEditable ? (
               <Typography variant="h5" sx={{ m: 1 }}>
-                {userInfo.nombre || "Nombre de usuario"}
+                {userInfo.username || "Nombre de usuario"}
               </Typography>
             ) : (
               <TextField
                 label={"Nombre de usuario"}
                 type="name"
                 variant="filled"
-                fullWidth
                 margin="normal"
                 value={editName}
                 onChange={(e) => setEditName(e.target.value)}
-                disabled={!isEditable}
+                // disabled={!isEditable}
+                disabled
               />
             )}
             <Fab
@@ -207,9 +195,11 @@ function Profile() {
                 width: 40,
                 height: 40,
                 cursor: "pointer",
+                borderRadius: 10,
               }}
               onClick={handleUserNameEdit}
-              disabled={!isEditable}
+              // disabled={!isEditable}
+              disabled
             >
               <EditIcon sx={{ fontSize: 30 }} />
             </Fab>
@@ -226,7 +216,8 @@ function Profile() {
               error={!!newPasswordError}
               helperText={newPasswordError}
               onChange={(e) => setNewPassword(e.target.value)}
-              disabled={!isEditable}
+              // disabled={!isEditable}
+              disabled
             />
             <TextField
               label="Repetir contraseña"
@@ -238,17 +229,18 @@ function Profile() {
               onChange={(e) => setConfirmPassword(e.target.value)}
               error={!!confirmPasswordError}
               helperText={confirmPasswordError}
-              disabled={!isEditable}
+              // disabled={!isEditable}
+              disabled
             />
           </Paper>
 
-          <Box>
+          <Box sx={{ display: "flex", gap: 1 }}>
             {isEditable ? (
               <Button
                 variant="contained"
                 startIcon={<CancelIcon />}
                 color="primary"
-                sx={{ mt: 1 }}
+                sx={{ mt: 1, minWidth: "125px" }}
                 onClick={HandleEditProfile}
               >
                 Cancelar
@@ -258,7 +250,7 @@ function Profile() {
                 variant="contained"
                 startIcon={<EditIcon />}
                 color="primary"
-                sx={{ mt: 1 }}
+                sx={{ mt: 1, minWidth: "160px" }}
                 onClick={HandleEditProfile}
               >
                 Editar
@@ -270,7 +262,7 @@ function Profile() {
                 variant="contained"
                 startIcon={<SaveIcon />}
                 color="primary"
-                sx={{ mt: 1 }}
+                sx={{ mt: 1, minWidth: "125px" }}
                 onClick={HandleConfirmChanges}
               >
                 Guardar
@@ -280,7 +272,7 @@ function Profile() {
           <Button
             variant="contained"
             color="primary"
-            sx={{ mt: 1 }}
+            sx={{ mt: 1, minWidth: "160px" }}
             onClick={handleLogout}
           >
             Cerrar sesion
@@ -292,12 +284,12 @@ function Profile() {
         <DialogTitle>{"Elige tu avatar"}</DialogTitle>
         <DialogContent>
           <Box display="flex" justifyContent="space-around" flexWrap="wrap">
-            {avatarList.map((avatar, index) => (
+            {Object.entries(avatars).map(([key, avatar], index) => (
               <Avatar
                 src={avatar}
                 key={index}
-                sx={{ width: 60, height: 60, m: 1 }}
-                onClick={handleAvatarChange}
+                sx={{ width: 60, height: 60, m: 1, cursor: "pointer" }}
+                onClick={() => handleAvatarChange(event, key)}
               />
             ))}
           </Box>

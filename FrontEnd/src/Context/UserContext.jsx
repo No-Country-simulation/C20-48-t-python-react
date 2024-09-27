@@ -21,17 +21,6 @@ export const UserProvider = ({ children }) => {
 
   const navigate = useNavigate();
 
-  // ESTE SE USARIA LUEGO PARA HAER UPDATES DEL USER
-  // useEffect(() => {
-  //   const storedUserInfo = localStorage.getItem("userInfo");
-  //   const token = localStorage.getItem("token");
-  //
-  //   if (storedUserInfo && token) {
-  //     setUserInfo(JSON.parse(storedUserInfo));
-  //     setIsLogin(true);
-  //   }
-  // }, []);
-
   async function login(credenciales) {
     try {
       const response = await fetch("https://recetapp-ggh9.onrender.com/login", {
@@ -64,6 +53,7 @@ export const UserProvider = ({ children }) => {
           ...userData,
           username: credenciales.username,
           userId: data.userId,
+          avatar: "lemon",
         });
         setIsLogin(true);
         setUpdate(!update);

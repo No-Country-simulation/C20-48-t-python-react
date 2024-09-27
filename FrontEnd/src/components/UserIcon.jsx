@@ -7,8 +7,16 @@ import lemon from "../assets/profile-icons/lemon-avatar.svg";
 import pepper from "../assets/profile-icons/pepper-avatar.svg";
 import radish from "../assets/profile-icons/radish-avatar.svg";
 
+const avatars = {
+  lemon: lemon,
+  cucumber: cucumber,
+  pepper: pepper,
+  radish: radish,
+};
+
 function UserIcon() {
   const { isLogin, userInfo } = useUser();
+
   return (
     <>
       <Box
@@ -28,7 +36,7 @@ function UserIcon() {
           style={{ textDecoration: "none" }}
         >
           <Avatar
-            src={isLogin && userInfo.avatar === "tomate" ? lemon : ""}
+            src={isLogin ? avatars[userInfo?.avatar] || lemon : ""}
             size="sm"
             sx={{
               cursor: "pointer",

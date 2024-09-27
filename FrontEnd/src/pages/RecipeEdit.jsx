@@ -29,7 +29,7 @@ function RecipeSteps() {
   const [note, setNote] = useState(receta?.tips || "");
   const [categories, setCategories] = useState(receta?.recetaCategorias || []);
   const [ingredients, setIngredients] = useState(receta?.ingredientes || []);
-  console.log();
+
   const handleDeleteRecipe = async () => {
     try {
       const response = await fetch(
