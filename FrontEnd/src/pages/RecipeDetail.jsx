@@ -28,7 +28,6 @@ import { Helmet } from "react-helmet-async";
 function RecipeDetail() {
   const { userInfo, setUserInfo, isLogin } = useContext(UserContext);
   const location = useLocation();
-  // const receta = location?.state || {};
   const [receta, setReceta] = useState(location?.state || {});
 
   const [isFavorite, setIsFavorite] = useState( false);
@@ -60,26 +59,22 @@ function RecipeDetail() {
       );
       const data = await respsonse.json();
       // Update the isFavorite state based on the response from the server
-      setIsFavorite(data.isFavorite);
-      if (data.isFavorite) {
+      setIsFavorite(data.mensaje === "Like agregado" ? true : false);
+      if (data.mensaje === "Like agregado") {
           setReceta(prevReceta => ({ ...prevReceta, cantidadLikes: prevReceta.cantidadLikes + 1 }));
         } else {
             setReceta(prevReceta => ({ ...prevReceta, cantidadLikes: prevReceta.cantidadLikes - 1 }));
-        //   receta.cantidadLikes++;
-        // } else {
-        //   receta.cantidadLikes--;
         }
         setUpdate(!update);
     } catch (error) {
       console.log(error);
     }
   };
-  console.log(receta);
 
   const handleRatingChange = (newRating) => {
     setReceta(prevReceta => ({
       ...prevReceta,
-      promedioPuntuacion: newRating 
+      promedioPuntuacion: newRating
     }));
   };
   const handleDoneStep = (e, i) => {
@@ -178,6 +173,7 @@ function RecipeDetail() {
               }}
             >
               <UserRating defaultRating={receta.promedioPuntuacion} 
+              recetaId={receta.id}
               onRatingChange={handleRatingChange}
               />
               <Typography variant="h5">{receta.promedioPuntuacion}</Typography>
