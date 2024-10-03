@@ -1,3 +1,5 @@
+package C20_48_t_Python_React.demo;
+
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
