@@ -8,7 +8,7 @@ import org.springframework.web.client.RestTemplate;
 public class KeepAliveTask {
 
     private final RestTemplate restTemplate = new RestTemplate();
-    private final String url = "https://recetapp-no-country.onrender.com/";
+    private final String url = "https://recetapp-ggh9.onrender.com/";
 
     @Scheduled(fixedRate = 10 * 60 * 1000) // Cada 10 minutos
     public void pingSelf() {
