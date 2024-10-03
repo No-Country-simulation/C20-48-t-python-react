@@ -25,17 +25,22 @@ export default function CardSkeletons() {
           >
             <Skeleton
               variant="rectangular"
+              animation="wave"
               height={350}
               sx={{ borderRadius: 2 }}
             />
             <Box sx={{ pt: 0.5 }}>
-              <Skeleton />
-              <Skeleton width="60%" />
+              <Skeleton animation="wave" />
+              <Skeleton animation="wave" width="60%" />
             </Box>
           </Grid>
         ))}
       </Grid>
-      <Skeleton width="40%" sx={{ marginInline: "auto", mt: -2, mb: 2 }} />
+      <Skeleton
+        animation="wave"
+        width="40%"
+        sx={{ marginInline: "auto", mt: -2, mb: 2 }}
+      />
     </>
   );
 }
