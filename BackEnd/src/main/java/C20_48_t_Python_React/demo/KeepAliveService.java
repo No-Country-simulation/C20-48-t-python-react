@@ -14,7 +14,7 @@ public class KeepAliveService {
     @Autowired
     private DataSource dataSource;
 
-    @Scheduled(fixedRate = 15 * 60 * 1000)
+    @Scheduled(fixedRate = 10 * 60 * 1000)
     public void keepDatabaseAlive() {
         try (Connection connection = dataSource.getConnection()) {
             connection.prepareStatement("SELECT 1").executeQuery();
