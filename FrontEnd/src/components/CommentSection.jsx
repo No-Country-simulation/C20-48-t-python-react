@@ -169,7 +169,7 @@ export default function CommentSection({ receta }) {
                 <Avatar
                   alt="Cindy Baker"
                   src={
-                    receta.usuarioEmail === comment.usuarioemail
+                    receta?.usuarioEmail === comment.usuarioemail
                       ? avatars[userInfo.avatar]
                       : [lemon, cucumber, pepper, radish][
                           Math.floor(Math.random() * 4)
